@@ -1,0 +1,6 @@
+<!-- FOOTER -->
+<footer>
+  <div class="inner">
+    Daniel's Tech Log
+  </div>
+</footer>

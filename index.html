@@ -1,0 +1,185 @@
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Daniel's Tech Log</title>
+
+  <!-- 오픈 그래프 -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Starbucks">
+  <meta property="og:title" content="Starbucks Coffee Korea">
+  <meta property="og:description" content="스타벅스는 세계에서...">
+  <meta property="og:image" content="./images/starbucks_seo.jpg">
+  <meta property="og:url" content="https://starbucks.co.kr">
+
+  <!-- 트위터 카드 -->
+  <meta property="twitter:card" content="summary">
+  <meta property="twitter:site" content="Starbucks">
+  <meta property="twitter:title" content="Starbucks Coffee Korea">
+  <meta property="twitter:description" content="스타벅스는 세계에서...">
+  <meta property="twitter:image" content="./images/starbucks_seo.jpg">
+  <meta property="twitter:url" content="https://starbucks.co.kr">
+
+  <!-- LOGO -->
+  <link rel="icon" href="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/Title_Logo.png?raw=true">
+
+  <!-- CSS 설정 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+
+  <!-- 폰트 -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+    integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+
+  <!-- GOOGLE MATERIAL ICONS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/main.css">
+
+  <!-- JS -->
+  <script defer src="./js/main.js"></script>
+
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="inner">
+      <!-- LOGO -->
+      <a href="./index.html" class="logo">
+        <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/Logo.png?raw=true" alt="Daniel's Tech Blog">
+      </a>
+
+      <!-- SEARCH BAR -->
+      <input type="text" id="search-bar" placeholder="Search...">
+
+      <!-- MAIN MENU -->
+      <ul class="main-menu" id="main-menu">
+
+        <!-- 1st Item of Menu (Search Button) -->
+        <li class="item" id="search">
+          <i class="fas fa-search"></i>
+        </li>
+
+        <!-- 2nd Item of Menu (Github Link) -->
+        <li class="item" id="github" onclick="window.open('https://github.com/JeongMyeonghoon1105')">
+          <i class="fab fa-github"></i>
+        </li>
+
+        <!-- 3rd Item of Menu (Facebook Link) -->
+        <li class="item" id="facebook" onclick="window.open('https://www.facebook.com/JeongMyeonghoon')">
+          <i class="fab fa-facebook"></i>
+        </li>
+
+        <!-- 4th Item of Menu (Instagram) -->
+        <li class="item" id="instagram">
+          <i class="fab fa-instagram" onclick="window.open('https://www.instagram.com/myeonghoon._.1105')"></i>
+        </li>
+
+      </ul>
+    </div>
+  </header>
+
+  <!-- WRAP -->
+  <div class="wrap">
+    <div class="inner">
+
+      <!-- CARD -->
+      <div class="card">
+
+        <!-- 1st item -->
+        <div class="card-items" style="position: relative; left: 0; right: 0; margin: 20px; display: flex">
+          <div class="image-area" style="width: 360px; height: 300px; border: 1px solid lightgray; border-right: none;">
+            <div class="image-container" style="width: 300px; height: 190px; margin: 40px 30px 70px 30px; border: 1px solid lightgray">
+
+            </div>
+          </div>
+          <div class="text-area" style="width: 500px; height: 300px; border: 1px solid lightgray;"></div>
+        </div>
+
+        <!-- Between items -->
+        <div class="between-items"></div>
+
+        <!-- 2nd item -->
+        <div class="card-items" style="position: relative; left: 0; right: 0; margin: 20px; display: flex">
+          <div class="image-area" style="width: 360px; height: 300px; border: 1px solid lightgray; border-right: none;">
+            <div class="image-container" style="width: 300px; height: 190px; margin: 40px 30px 70px 30px; border: 1px solid lightgray">
+
+            </div>
+          </div>
+          <div class="text-area" style="width: 500px; height: 300px; border: 1px solid lightgray;"></div>
+        </div>
+
+        <!-- Between items -->
+
+        <!-- 3rd item -->
+        <div class="card-items" style="position: relative; left: 0; right: 0; margin: 20px; display: flex">
+          <div class="image-area" style="width: 360px; height: 300px; border: 1px solid lightgray; border-right: none;">
+            <div class="image-container" style="width: 300px; height: 190px; margin: 40px 30px 70px 30px; border: 1px solid lightgray">
+
+            </div>
+          </div>
+          <div class="text-area" style="width: 500px; height: 300px; border: 1px solid lightgray;"></div>
+        </div>
+
+      </div>
+
+      <!-- MENU -->
+      <div class="menu">
+        <div class="contents">
+
+          <h1>Index</h1><br>
+
+          <h2 style="font-weight: bold;">Frontend</h2>
+          <ul style="list-style-type: none; font-size: 15px;">
+            <li><a>CSS</a></li>
+            <li><a>JavaScript</a></li>
+            <li><a>React</a></li>
+            <li><a>Redux</a></li>
+          </ul><br>
+
+          <h2 style="font-weight: bold;">Backend</h2>
+          <ul style="list-style-type: none; font-size: 15px;">
+            <li><a>Node.js</a></li>
+            <li><a>MongoDB</a></li>
+            <li><a>Python</a></li>
+            <li><a>Ruby</a></li>
+          </ul><br>
+
+          <h2 style="font-weight: bold;">Git</h2>
+          <ul style="list-style-type: none; font-size: 15px;">
+            <li><a>Basics</a></li>
+            <li><a>Push</a></li>
+            <li><a>Pull & Clone</a></li>
+            <li><a>Merge</a></li>
+          </ul><br>
+
+          <h2 style="font-weight: bold; cursor: pointer;" onclick="location.href='./post.html'">Post</h2>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="inner">
+      Daniel's Tech Log
+    </div>
+  </footer>
+
+  <!-- React -->
+  <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+
+</body>
+
+</html>

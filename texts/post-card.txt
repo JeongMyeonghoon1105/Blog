@@ -1,0 +1,45 @@
+<!-- CARD -->
+<div class="card">
+
+  <!-- Writing Area -->
+  <div class="writing-area">
+
+    <!-- Form for New Contents -->
+    <form action="http://localhost:3000/post_process" method="post" style="width: 800px;">
+      <!-- Title -->
+      <div class="title">
+        <textarea name="title" id="title-input" rows="1" cols="55" placeholder="Title" maxlength="100"
+          required></textarea>
+      </div>
+
+      <br>
+
+      <!-- Contents -->
+      <div>
+        <textarea name="content" id="contents-input" placeholder="Contents" required></textarea>
+      </div>
+
+      <!-- File Selection
+      <div class="file-selection">
+        <input class="file-name" id="file-name" value="첨부파일" placeholder="첨부파일">
+        <label for="file" class="file-label" id="file-label">
+          <i class="fas fa-file-upload" style="line-height: 30px;"></i>
+        </label>
+        <input type="file" id="file" class="file-style-reset">
+      </div>
+      -->
+
+      <br>
+
+      <!-- Post Button -->
+      <div class="post-button-container">
+        <button type="submit" class="post-button">
+          Post
+        </button>
+      </div>
+
+    </form>
+    
+  </div>
+
+</div>

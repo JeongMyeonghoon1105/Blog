@@ -1,0 +1,39 @@
+<!-- CARD -->
+<div class="card">
+  
+  <!-- 1st item -->
+  <div class="card-items" style="position: relative; left: 0; right: 0; margin: 20px; display: flex">
+    <div class="image-area" style="width: 360px; height: 300px; border: 1px solid lightgray; border-right: none;">
+      <div class="image-container" style="width: 300px; height: 190px; margin: 40px 30px 70px 30px; border: 1px solid lightgray">
+
+      </div>
+    </div>
+    <div class="text-area" style="width: 500px; height: 300px; border: 1px solid lightgray;"></div>
+  </div>
+
+  <!-- Between items -->
+  <div class="between-items"></div>
+
+  <!-- 2nd item -->
+  <div class="card-items" style="position: relative; left: 0; right: 0; margin: 20px; display: flex">
+    <div class="image-area" style="width: 360px; height: 300px; border: 1px solid lightgray; border-right: none;">
+      <div class="image-container" style="width: 300px; height: 190px; margin: 40px 30px 70px 30px; border: 1px solid lightgray">
+
+      </div>
+    </div>
+    <div class="text-area" style="width: 500px; height: 300px; border: 1px solid lightgray;"></div>
+  </div>
+
+  <!-- Between items -->
+
+  <!-- 3rd item -->
+  <div class="card-items" style="position: relative; left: 0; right: 0; margin: 20px; display: flex">
+    <div class="image-area" style="width: 360px; height: 300px; border: 1px solid lightgray; border-right: none;">
+      <div class="image-container" style="width: 300px; height: 190px; margin: 40px 30px 70px 30px; border: 1px solid lightgray">
+
+      </div>
+    </div>
+    <div class="text-area" style="width: 500px; height: 300px; border: 1px solid lightgray;"></div>
+  </div>
+  
+</div>

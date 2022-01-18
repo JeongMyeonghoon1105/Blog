@@ -1,0 +1,37 @@
+<!-- HEADER -->
+<header>
+  <div class="inner">
+    <!-- LOGO -->
+    <a href="/" class="logo">
+      <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/Logo.png?raw=true" alt="Daniel's Tech Blog">
+    </a>
+
+    <!-- SEARCH BAR -->
+    <input type="text" id="search-bar" placeholder="Search...">
+
+    <!-- MAIN MENU -->
+    <ul class="main-menu" id="main-menu">
+
+      <!-- 1st Item of Menu (Search Button) -->
+      <li class="item" id="search">
+        <i class="fas fa-search"></i>
+      </li>
+
+      <!-- 2nd Item of Menu (Github Link) -->
+      <li class="item" id="github" onclick="window.open('https://github.com/JeongMyeonghoon1105')">
+        <i class="fab fa-github"></i>
+      </li>
+      
+      <!-- 3rd Item of Menu (Facebook Link) -->
+      <li class="item" id="facebook" onclick="window.open('https://www.facebook.com/JeongMyeonghoon')">
+        <i class="fab fa-facebook"></i>
+      </li>
+
+      <!-- 4th Item of Menu (Instagram) -->
+      <li class="item" id="instagram">
+        <i class="fab fa-instagram" onclick="window.open('https://www.instagram.com/myeonghoon._.1105')"></i>
+      </li>
+
+    </ul>
+  </div>
+</header>
