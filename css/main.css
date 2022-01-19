@@ -43,11 +43,15 @@ header {
   background-color: white;
 
   border-bottom: 2px solid var(--border-color);
+
+  position: relative;
 }
 
 header>.inner {
   height: 60px;
   background-color: white;
+
+  top: 0;
 }
 
 header .logo {
@@ -60,7 +64,7 @@ header .logo {
 }
 
 header .logo img {
-  width: 150px;
+  width: 123px;
   height: 30px;
   position: absolute;
   top: 0;
@@ -80,8 +84,19 @@ header #search-bar {
   bottom: 0;
   right: 240px;
   margin: auto 0;
+  padding-left: 10px;
 
   transition: 1s;
+}
+
+#search:hover~#search-bar {
+  width: 200px;
+  border: 1px solid lightgray;
+}
+
+#search-bar:hover {
+  width: 200px;
+  border: 1px solid lightgray;
 }
 
 header .main-menu {
@@ -103,7 +118,6 @@ header .main-menu .item {
   background-color: white;
 
   text-align: center;
-  line-height: 60px;
   font-size: 23px;
   color: gray;
 
@@ -111,10 +125,12 @@ header .main-menu .item {
   cursor: pointer;
 }
 
+header .main-menu .item i {
+  line-height: 60px;
+}
+
 header .main-menu #search {
   background-color: white;
-  height: 59px;
-  padding-top: 1px;
   font-size: 18px;
 }
 
@@ -164,6 +180,63 @@ header .main-menu #instagram:hover {
 
   position: relative;
   top: 0;
+  margin: 0 auto;
+}
+
+.wrap .inner .card .card-items {
+  width: 860px;
+  height: 300px;
+
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 20px;
+
+  display: flex;
+  cursor: pointer;
+  transition: .1s;
+}
+
+/*
+.wrap .inner .card .card-items:hover {
+  border-left: 1px solid #FFAA0D;
+  border-right: 1px solid #FFAA0D;
+  border-radius: 20px;
+}
+*/
+
+.wrap .inner .card .card-items .image-area {
+  width: 360px;
+  height: 260px;
+
+  margin: 20px 0px 20px 18px;
+
+  border: 2px solid var(--bg-color);
+  border-radius: 10px;
+
+  position: relative;
+}
+
+.wrap .inner .card .card-items .image-area img {
+  width: 360px;
+  height: 216px;
+
+  margin: 22px 0;
+}
+
+.wrap .inner .card .card-items .text-area {
+  width: 480px;
+  height: 260px;
+
+  margin: 20px;
+  overflow: hidden;
+}
+
+.between-items {
+  width: 800px;
+  height: 3px;
+  background-color: var(--bg-color);
+
   margin: 0 auto;
 }
 
@@ -231,7 +304,17 @@ header .main-menu #instagram:hover {
 
 #contents-input {
   width: 800px;
-  height: 420px;
+  height: 380px;
+  background-color: #F4F6FC;
+
+  border: none;
+  font-size: 15px;
+  padding: 10px;
+}
+
+#category-input {
+  width: 800px;
+  height: 40px;
   background-color: #F4F6FC;
 
   border: none;
@@ -284,7 +367,7 @@ header .main-menu #instagram:hover {
   overflow: hidden;
 }
 
-.post-button-container {
+.button-container {
   width: 100%;
   height: 50px;
 
@@ -303,29 +386,39 @@ header .main-menu #instagram:hover {
   left: 0;
   right: 0;
   margin: 0 auto 20px auto;
+
+  cursor: pointer;
 }
 
 
 /* FOOTER */
 footer {
   width: 100%;
-  height: 250px;
+  height: 50px;
   background-color: var(--bg-color);
+
+  position: relative;
 }
 
 footer .inner {
-  display: block;
+  display: inline-block;
 
-  width: 880px;
-  height: 210px;
-  background-color: white;
-
-  border-top: 10px solid var(--bg-color);
-  border-bottom: 10px solid var(--bg-color);
-  padding: 10px;
+  width: 600px;
+  height: 50px;
+  background-color: var(--bg-color);
 
   font-weight: bold;
-  font-size: 20px;
+  font-size: 12px;
+  color: lightgray;
+
+  text-align: center;
+  line-height: 50px;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 @media screen and (max-width: 1200px) {
