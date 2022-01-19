@@ -5,16 +5,16 @@ var url = require('url');
 var qs = require('querystring');
 
 // 각 카테고리의 게시물 수가 저장된 파일을 읽어와서 문자열 형태로 변수에 저장
-var MySQL_Postings_text = fs.readFileSync('./texts/mysql-var.txt', 'utf8');
-var NodeJS_Postings_text = fs.readFileSync('./texts/nodejs-var.txt', 'utf8');
-var Python_Postings_text = fs.readFileSync('./texts/python-var.txt', 'utf8');
-var React_Postings_text = fs.readFileSync('./texts/react-var.txt', 'utf8');
+var study_Postings_text = fs.readFileSync('./texts/study-var.txt', 'utf8');
+var finance_Postings_text = fs.readFileSync('./texts/finance-var.txt', 'utf8');
+var exercise_Postings_text = fs.readFileSync('./texts/exercise-var.txt', 'utf8');
+var career_Postings_text = fs.readFileSync('./texts/career-var.txt', 'utf8');
 
 // 문자열 형태로 변수에 저장된 게시물 수 데이터들을 새로운 변수에 정수 형태로 저장
-var MySQL_Postings = parseInt(MySQL_Postings_text);
-var NodeJS_Postings = parseInt(NodeJS_Postings_text);
-var Python_Postings = parseInt(Python_Postings_text);
-var React_Postings = parseInt(React_Postings_text);
+var study_Postings = parseInt(study_Postings_text);
+var finance_Postings = parseInt(finance_Postings_text);
+var exercise_Postings = parseInt(exercise_Postings_text);
+var career_Postings = parseInt(career_Postings_text);
 
 // 서버 생성
 var app = http.createServer(function (request, response) {
@@ -39,10 +39,10 @@ var app = http.createServer(function (request, response) {
 
       // MENU
       var list = `
-      <li><a href="/?id=MySQL">MySQL(${MySQL_Postings})</a></li>
-      <li><a href="/?id=NodeJS">Node.js(${NodeJS_Postings})</a></li>
-      <li><a href="/?id=Python">Python(${Python_Postings})</a></li>
-      <li><a href="/?id=React">React(${React_Postings})</a></li>
+      <li><a href="/?id=study">Study(${study_Postings})</a></li>
+      <li><a href="/?id=finance">Finance(${finance_Postings})</a></li>
+      <li><a href="/?id=exercise">Exercise(${exercise_Postings})</a></li>
+      <li><a href="/?id=career">Career(${career_Postings})</a></li>
       `;
 
       // FOOTER
@@ -130,7 +130,7 @@ var app = http.createServer(function (request, response) {
       <!-- Item -->
       <a class="card-items" href="/?id=${title}">
         <div class="image-area">
-          <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/react.png?raw=true" alt="github">
+          <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/career.png?raw=true" alt="github">
         </div>
         <div class="text-area">
           <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">${title}</h1>
@@ -144,13 +144,13 @@ var app = http.createServer(function (request, response) {
 
       // 현재 포스팅 중인 게시물이 해당 카테고리의 첫번째 게시물이 아닐 경우
       // 카테고리 페이지의 해당 게시물 링크(아이템) 위에 구분선을 추가
-      if (category == 'MySQL' && MySQL_Postings != 0) {
+      if (category == 'study' && study_Postings != 0) {
         append_contents = `<!-- Between items --> <div class="between-items"></div>` + append_contents;
-      } else if (category == 'NodeJS' && NodeJS_Postings != 0) {
+      } else if (category == 'finance' && finance_Postings != 0) {
         append_contents = `<!-- Between items --> <div class="between-items"></div>` + append_contents;
-      } else if (category == 'Python' && Python_Postings != 0) {
+      } else if (category == 'exercise' && exercise_Postings != 0) {
         append_contents = `<!-- Between items --> <div class="between-items"></div>` + append_contents;
-      } else if (category == 'React' && React_Postings != 0) {
+      } else if (category == 'career' && career_Postings != 0) {
         append_contents = `<!-- Between items --> <div class="between-items"></div>` + append_contents;
       }
 
@@ -159,27 +159,27 @@ var app = http.createServer(function (request, response) {
         if (err) throw err;
 
         // 게시물 포스팅 후 게시물 수 데이터를 1씩 증가
-        if (category == 'MySQL') {
-          MySQL_Postings = MySQL_Postings + 1;
-        } else if (category == 'NodeJS') {
-          NodeJS_Postings = NodeJS_Postings + 1;
-        } else if (category == 'Python') {
-          Python_Postings = Python_Postings + 1;
-        } else if (category == 'React') {
-          React_Postings = React_Postings + 1;
+        if (category == 'study') {
+          study_Postings = study_Postings + 1;
+        } else if (category == 'finance') {
+          finance_Postings = finance_Postings + 1;
+        } else if (category == 'exercise') {
+          exercise_Postings = exercise_Postings + 1;
+        } else if (category == 'career') {
+          career_Postings = career_Postings + 1;
         }
 
         // 정수 형태로 저장된 각 카테고리별 게시물 수 데이터를 문자열 형태로 변수에 저장
-        MySQL_Postings_text = MySQL_Postings.toString(10);
-        NodeJS_Postings_text = NodeJS_Postings.toString(10);
-        Python_Postings_text = Python_Postings.toString(10);
-        React_Postings_text = React_Postings.toString(10);
+        study_Postings_text = study_Postings.toString(10);
+        finance_Postings_text = finance_Postings.toString(10);
+        exercise_Postings_text = exercise_Postings.toString(10);
+        career_Postings_text = career_Postings.toString(10);
 
         // 각 카테고리별 게시물 수를 저장하는 파일에 데이터 덮어쓰기
-        fs.writeFileSync('./texts/mysql-var.txt', MySQL_Postings_text, 'utf8');
-        fs.writeFileSync('./texts/nodejs-var.txt', NodeJS_Postings_text, 'utf8');
-        fs.writeFileSync('./texts/python-var.txt', Python_Postings_text, 'utf8');
-        fs.writeFileSync('./texts/react-var.txt', React_Postings_text, 'utf8');
+        fs.writeFileSync('./texts/study-var.txt', study_Postings_text, 'utf8');
+        fs.writeFileSync('./texts/finance-var.txt', finance_Postings_text, 'utf8');
+        fs.writeFileSync('./texts/exercise-var.txt', exercise_Postings_text, 'utf8');
+        fs.writeFileSync('./texts/career-var.txt', career_Postings_text, 'utf8');
 
         // 게시물 페이지에 해당하는 html 코드 데이터를 텍스트 파일에 저장
         fs.writeFileSync(`texts/${title}-card.txt`,
