@@ -4,7 +4,7 @@
     <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/react.png?raw=true" alt="github">
   </div>
   <div class="text-area">
-    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">React</h1>
+    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Study</h1>
     <div style="width: 440px; height: 2px; background-color: lightgray;"></div>
     <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
@@ -21,7 +21,7 @@
     <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/python.png?raw=true" alt="github">
   </div>
   <div class="text-area">
-    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Python</h1>
+    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Finance</h1>
     <div style="width: 440px; height: 2px; background-color: lightgray;"></div>
     <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
@@ -38,7 +38,7 @@
     <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/js.png?raw=true" alt="github">
   </div>
   <div class="text-area">
-    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">JavaScript</h1>
+    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Exercise</h1>
     <div style="width: 440px; height: 2px; background-color: lightgray;"></div>
     <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
@@ -55,7 +55,7 @@
     <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/github.png?raw=true" alt="github">
   </div>
   <div class="text-area">
-    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Git</h1>
+    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Career</h1>
     <div style="width: 440px; height: 2px; background-color: lightgray;"></div>
     <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
