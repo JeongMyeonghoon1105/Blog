@@ -1,39 +1,64 @@
-<!-- CARD -->
-<div class="card">
-  
-  <!-- 1st item -->
-  <div class="card-items" style="position: relative; left: 0; right: 0; margin: 20px; display: flex">
-    <div class="image-area" style="width: 360px; height: 300px; border: 1px solid lightgray; border-right: none;">
-      <div class="image-container" style="width: 300px; height: 190px; margin: 40px 30px 70px 30px; border: 1px solid lightgray">
-
-      </div>
-    </div>
-    <div class="text-area" style="width: 500px; height: 300px; border: 1px solid lightgray;"></div>
+<!-- 1st item -->
+<div class="card-items">
+  <div class="image-area">
+    <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/react.png?raw=true" alt="github">
   </div>
-
-  <!-- Between items -->
-  <div class="between-items"></div>
-
-  <!-- 2nd item -->
-  <div class="card-items" style="position: relative; left: 0; right: 0; margin: 20px; display: flex">
-    <div class="image-area" style="width: 360px; height: 300px; border: 1px solid lightgray; border-right: none;">
-      <div class="image-container" style="width: 300px; height: 190px; margin: 40px 30px 70px 30px; border: 1px solid lightgray">
-
-      </div>
+  <div class="text-area">
+    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">React</h1>
+    <div style="width: 440px; height: 2px; background-color: lightgray;"></div>
+    <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
     </div>
-    <div class="text-area" style="width: 500px; height: 300px; border: 1px solid lightgray;"></div>
   </div>
+</div>
 
-  <!-- Between items -->
+<!-- Between items -->
+<div class="between-items"></div>
 
-  <!-- 3rd item -->
-  <div class="card-items" style="position: relative; left: 0; right: 0; margin: 20px; display: flex">
-    <div class="image-area" style="width: 360px; height: 300px; border: 1px solid lightgray; border-right: none;">
-      <div class="image-container" style="width: 300px; height: 190px; margin: 40px 30px 70px 30px; border: 1px solid lightgray">
-
-      </div>
+<!-- 2nd item -->
+<div class="card-items">
+  <div class="image-area">
+    <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/python.png?raw=true" alt="github">
+  </div>
+  <div class="text-area">
+    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Python</h1>
+    <div style="width: 440px; height: 2px; background-color: lightgray;"></div>
+    <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
     </div>
-    <div class="text-area" style="width: 500px; height: 300px; border: 1px solid lightgray;"></div>
   </div>
-  
+</div>
+
+<!-- Between items -->
+<div class="between-items"></div>
+
+<!-- 3rd item -->
+<div class="card-items">
+  <div class="image-area">
+    <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/js.png?raw=true" alt="github">
+  </div>
+  <div class="text-area">
+    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">JavaScript</h1>
+    <div style="width: 440px; height: 2px; background-color: lightgray;"></div>
+    <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
+    </div>
+  </div>
+</div>
+
+<!-- Between items -->
+<div class="between-items"></div>
+
+<!-- 4th item -->
+<div class="card-items">
+  <div class="image-area">
+    <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/github.png?raw=true" alt="github">
+  </div>
+  <div class="text-area">
+    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Git</h1>
+    <div style="width: 440px; height: 2px; background-color: lightgray;"></div>
+    <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
+    </div>
+  </div>
 </div>

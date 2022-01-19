@@ -1,6 +1,6 @@
 <!-- FOOTER -->
 <footer>
   <div class="inner">
-    Daniel's Tech Log
+    COPYRIGHTⓒ2022 by 정명훈 All rights reserved. 
   </div>
 </footer>
