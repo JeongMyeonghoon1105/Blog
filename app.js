@@ -4,50 +4,122 @@ var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
 
-// 각 카테고리의 게시물 수가 저장된 파일을 읽어와서 문자열 형태로 변수에 저장
-var study_Postings_text = fs.readFileSync('./texts/study-var.txt', 'utf8');
-var finance_Postings_text = fs.readFileSync('./texts/finance-var.txt', 'utf8');
-var exercise_Postings_text = fs.readFileSync('./texts/exercise-var.txt', 'utf8');
-var career_Postings_text = fs.readFileSync('./texts/career-var.txt', 'utf8');
-
-// 문자열 형태로 변수에 저장된 게시물 수 데이터들을 새로운 변수에 정수 형태로 저장
-var study_Postings = parseInt(study_Postings_text);
-var finance_Postings = parseInt(finance_Postings_text);
-var exercise_Postings = parseInt(exercise_Postings_text);
-var career_Postings = parseInt(career_Postings_text);
-
 // 서버 생성
-var app = http.createServer(function (request, response) {
+var app = http.createServer((request, response) => {
   var url_saver = request.url;
   var queryData = url.parse(url_saver, true).query;
   var pathname = url.parse(url_saver, true).pathname;
+
+  // 각 카테고리의 게시물 수를 변수에 저장
+  var Study_Postings = fs.readdirSync('./texts/Study/').length;
+  var Finance_Postings = fs.readdirSync('./texts/Finance/').length;
+  var Exercise_Postings = fs.readdirSync('./texts/Exercise/').length;
+  var Career_Postings = fs.readdirSync('./texts/Career/').length;
 
   // pathname이 '/'일 때
   if (pathname === '/') {
     fs.readFile('./css/main.css', (err, data) => {
       // HEAD
-      var head = fs.readFileSync('./texts/index-head.txt', 'utf8');
+      var head = fs.readFileSync('./texts/index-head', 'utf8');
 
       // HEADER
-      var header = fs.readFileSync('./texts/index-header.txt', 'utf8');
+      var header = fs.readFileSync('./texts/index-header', 'utf8');
 
       // CARD -> Query String의 ID 값에 따라 CARD에 들어갈 알맞은 파일을 로드
       if (queryData.id === undefined) {
-        var card = fs.readFileSync('./texts/index-card.txt', 'utf8');
+        var card = fs.readFileSync('./texts/index-card', 'utf8');
+      } else if (queryData.id == 'Study') {
+        var filelist = fs.readdirSync('./texts/Study/');
+        var card = '';
+
+        filelist.forEach((element) => {
+          card = card + `
+          <!-- Item -->
+          <a class="card-items" href="/?id=${element}&class=${queryData.id}">
+            <div class="image-area">
+              <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/Career.png?raw=true" alt="github">
+            </div>
+            <div class="text-area">
+              <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
+                ${element}
+              </div>
+            </div>
+          </a>
+          `;
+        });
+      } else if (queryData.id == 'Finance') {
+        var filelist = fs.readdirSync('./texts/Finance/');
+        var card = '';
+
+        filelist.forEach((element) => {
+          card = card + `
+          <!-- Item -->
+          <a class="card-items" href="/?id=${element}&class=${queryData.id}">
+            <div class="image-area">
+              <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/Career.png?raw=true" alt="github">
+            </div>
+            <div class="text-area">
+              <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
+                ${element}
+              </div>
+            </div>
+          </a>
+          `;
+        });
+      } else if (queryData.id == 'Exercise') {
+        var filelist = fs.readdirSync('./texts/Exercise/');
+        var card = '';
+
+        filelist.forEach((element) => {
+          card = card + `
+          <!-- Item -->
+          <a class="card-items" href="/?id=${element}&class=${queryData.id}">
+            <div class="image-area">
+              <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/Career.png?raw=true" alt="github">
+            </div>
+            <div class="text-area">
+              <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
+                ${element}
+              </div>
+            </div>
+          </a>
+          `;
+        });
+      } else if (queryData.id == 'Career') {
+        var filelist = fs.readdirSync('./texts/Career/');
+        var card = '';
+
+        filelist.forEach((element) => {
+          card = card + `
+          <!-- Item -->
+          <a class="card-items" href="/?id=${element}&class=${queryData.id}">
+            <div class="image-area">
+              <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/Career.png?raw=true" alt="github">
+            </div>
+            <div class="text-area">
+              <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
+                ${element}
+              </div>
+            </div>
+          </a>
+          `;
+        });
+      } else if ((queryData.class == 'Study') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Career')){
+        var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
       } else {
-        var card = fs.readFileSync(`./texts/${queryData.id}-card.txt`, 'utf8');
+        var card = fs.readFileSync(`./texts/${queryData.id}`, 'utf8');
       }
 
       // MENU
       var list = `
-      <li><a href="/?id=study">Study(${study_Postings})</a></li>
-      <li><a href="/?id=finance">Finance(${finance_Postings})</a></li>
-      <li><a href="/?id=exercise">Exercise(${exercise_Postings})</a></li>
-      <li><a href="/?id=career">Career(${career_Postings})</a></li>
+      <li><a href="/?id=Study">Study(${Study_Postings})</a></li>
+      <li><a href="/?id=Finance">Finance(${Finance_Postings})</a></li>
+      <li><a href="/?id=Exercise">Exercise(${Exercise_Postings})</a></li>
+      <li><a href="/?id=Career">Career(${Career_Postings})</a></li>
       `;
 
       // FOOTER
-      var footer = fs.readFileSync('./texts/index-footer.txt', 'utf8');
+      var footer = fs.readFileSync('./texts/index-footer', 'utf8');
 
       if (queryData.id == 'post') {
         var hide = 'overflow-y: hidden;'
@@ -125,50 +197,10 @@ var app = http.createServer(function (request, response) {
       var content = post.content;
       var category = post.category;
 
-      // appendFile 함수로 파일에 추가할 데이터를 코드의 간결성을 위해 미리 변수에 저장
-      var append_contents =
-      `
-      <!-- Item -->
-      <a class="card-items" href="/?id=${title}">
-        <div class="image-area">
-          <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/career.png?raw=true" alt="github">
-        </div>
-        <div class="text-area">
-          <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">${title}</h1>
-          <div style="width: 440px; height: 2px; background-color: lightgray;"></div>
-          <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
-            ${content}
-          </div>
-        </div>
-      </a>
-      `
       // 코드의 간결성을 위해 중복되는 내용을 함수에 저장
       function posting_init() {
-        // 게시물 포스팅 후 게시물 수 데이터를 1씩 증가
-        if (category == 'Study') {
-          study_Postings = study_Postings + 1;
-        } else if (category == 'Finance') {
-          finance_Postings = finance_Postings + 1;
-        } else if (category == 'Exercise') {
-          exercise_Postings = exercise_Postings + 1;
-        } else if (category == 'Career') {
-          career_Postings = career_Postings + 1;
-        }
-
-        // 정수 형태로 저장된 각 카테고리별 게시물 수 데이터를 문자열 형태로 변수에 저장
-        study_Postings_text = study_Postings.toString(10);
-        finance_Postings_text = finance_Postings.toString(10);
-        exercise_Postings_text = exercise_Postings.toString(10);
-        career_Postings_text = career_Postings.toString(10);
-
-        // 각 카테고리별 게시물 수를 저장하는 파일에 데이터 덮어쓰기
-        fs.writeFileSync('./texts/study-var.txt', study_Postings_text, 'utf8');
-        fs.writeFileSync('./texts/finance-var.txt', finance_Postings_text, 'utf8');
-        fs.writeFileSync('./texts/exercise-var.txt', exercise_Postings_text, 'utf8');
-        fs.writeFileSync('./texts/career-var.txt', career_Postings_text, 'utf8');
-
         // 게시물 페이지에 해당하는 html 코드 데이터를 텍스트 파일에 저장
-        fs.writeFileSync(`texts/${title}-card.txt`,
+        fs.writeFileSync(`texts/${category}/${title}`,
         `
         <!-- CARD -->
         <div class="card" style="width: 800px; min-height: 100vh; padding: 50px; position: relative;">
@@ -183,28 +215,12 @@ var app = http.createServer(function (request, response) {
 
         // 포스팅 후 게시물로 리다이렉션
         response.writeHead(302, {
-          Location: encodeURI(`/?id=${title}`)
+          Location: encodeURI(`/?id=${title}&class=${category}`)
         });
         response.end();
       }
 
-      // 현재 포스팅 중인 게시물이 해당 카테고리의 첫번째 게시물이 아닐 경우
-      if ((category == 'Study' && study_Postings != 0) || (category == 'Finance' && finance_Postings != 0) || (category == 'Exercise' && exercise_Postings != 0) || (category == 'Career' && career_Postings != 0)) {
-        // 카테고리 페이지의 해당 게시물 링크(아이템) 위에 구분선을 추가
-        append_contents = `<!-- Between items --> <div class="between-items"></div>` + append_contents;
-
-        // 카테고리 페이지에 해당하는 html 코드 데이터를 기존 텍스트 파일에 덧붙이기
-        fs.appendFile(`texts/${category}-card.txt`, append_contents, 'utf8', (err) => {
-          if (err) throw err;
-          posting_init();
-        });
-      } else {    // 현재 포스팅 중인 게시물이 해당 카테고리의 첫번째 게시물일 경우
-        // 카테고리 페이지에 해당하는 html 코드 데이터를 기존 텍스트 파일에 덮어쓰기
-        fs.writeFile(`texts/${category}-card.txt`, append_contents, 'utf8', (err) => {
-          if (err) throw err;
-          posting_init();
-        });
-      }
+      posting_init();
     });
   } else {   // pathname에 잘못된 값이 들어갔을 때 (404 Not Found)
     response.writeHead(404);
