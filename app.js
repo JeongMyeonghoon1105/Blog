@@ -52,11 +52,14 @@ var app = http.createServer((request, response) => {
           <!-- Item -->
           <a class="card-items" href="/?id=${element}&class=${queryData.id}">
             <div class="image-area">
-              <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/Career.png?raw=true" alt="github">
+              <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/js.png?raw=true" alt="github">
             </div>
             <div class="text-area">
-              <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
+              <div style="width: 430px; height: 230px; padding: 5px; text-align: justify; overflow: hidden;">
                 ${element}
+              </div>
+              <div style="width: 430px; height: 20px; font-size: 15px; text-align: right;">
+                Edit
               </div>
             </div>
           </a>
@@ -136,7 +139,7 @@ var app = http.createServer((request, response) => {
       
       </html>
       `
-      
+
       // 로드
       response.writeHead(200);
       response.end(template);
