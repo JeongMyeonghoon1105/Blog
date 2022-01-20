@@ -1,5 +1,5 @@
 <!-- 1st item -->
-<div class="card-items">
+<a class="card-items" href="/?id=Study">
   <div class="image-area">
     <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/react.png?raw=true" alt="github">
   </div>
@@ -10,13 +10,13 @@
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
     </div>
   </div>
-</div>
+</a>
 
 <!-- Between items -->
 <div class="between-items"></div>
 
 <!-- 2nd item -->
-<div class="card-items">
+<a class="card-items" href="/?id=Finance">
   <div class="image-area">
     <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/python.png?raw=true" alt="github">
   </div>
@@ -27,13 +27,13 @@
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
     </div>
   </div>
-</div>
+</a>
 
 <!-- Between items -->
 <div class="between-items"></div>
 
 <!-- 3rd item -->
-<div class="card-items">
+<a class="card-items" href="/?id=Exercise">
   <div class="image-area">
     <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/js.png?raw=true" alt="github">
   </div>
@@ -44,13 +44,13 @@
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
     </div>
   </div>
-</div>
+</a>
 
 <!-- Between items -->
 <div class="between-items"></div>
 
 <!-- 4th item -->
-<div class="card-items">
+<a class="card-items" href="/?id=Career">
   <div class="image-area">
     <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/github.png?raw=true" alt="github">
   </div>
@@ -61,4 +61,4 @@
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
     </div>
   </div>
-</div>
+</a>
