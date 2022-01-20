@@ -22,7 +22,8 @@ var app = http.createServer(function (request, response) {
   var queryData = url.parse(url_saver, true).query;
   var pathname = url.parse(url_saver, true).pathname;
 
-  if (pathname === '/') {   // pathname이 '/'일 때
+  // pathname이 '/'일 때
+  if (pathname === '/') {
     fs.readFile('./css/main.css', (err, data) => {
       // HEAD
       var head = fs.readFileSync('./texts/index-head.txt', 'utf8');
@@ -141,31 +142,16 @@ var app = http.createServer(function (request, response) {
         </div>
       </a>
       `
-
-      // 현재 포스팅 중인 게시물이 해당 카테고리의 첫번째 게시물이 아닐 경우
-      // 카테고리 페이지의 해당 게시물 링크(아이템) 위에 구분선을 추가
-      if (category == 'study' && study_Postings != 0) {
-        append_contents = `<!-- Between items --> <div class="between-items"></div>` + append_contents;
-      } else if (category == 'finance' && finance_Postings != 0) {
-        append_contents = `<!-- Between items --> <div class="between-items"></div>` + append_contents;
-      } else if (category == 'exercise' && exercise_Postings != 0) {
-        append_contents = `<!-- Between items --> <div class="between-items"></div>` + append_contents;
-      } else if (category == 'career' && career_Postings != 0) {
-        append_contents = `<!-- Between items --> <div class="between-items"></div>` + append_contents;
-      }
-
-      // 카테고리 페이지에 해당하는 html 코드 데이터를 텍스트 파일에 저장
-      fs.appendFile(`texts/${category}-card.txt`, append_contents, 'utf8', (err) => {
-        if (err) throw err;
-
+      // 코드의 간결성을 위해 중복되는 내용을 함수에 저장
+      function posting_init() {
         // 게시물 포스팅 후 게시물 수 데이터를 1씩 증가
-        if (category == 'study') {
+        if (category == 'Study') {
           study_Postings = study_Postings + 1;
-        } else if (category == 'finance') {
+        } else if (category == 'Finance') {
           finance_Postings = finance_Postings + 1;
-        } else if (category == 'exercise') {
+        } else if (category == 'Exercise') {
           exercise_Postings = exercise_Postings + 1;
-        } else if (category == 'career') {
+        } else if (category == 'Career') {
           career_Postings = career_Postings + 1;
         }
 
@@ -197,10 +183,28 @@ var app = http.createServer(function (request, response) {
 
         // 포스팅 후 게시물로 리다이렉션
         response.writeHead(302, {
-          Location: `/?id=${title}`
+          Location: encodeURI(`/?id=${title}`)
         });
         response.end();
-      });
+      }
+
+      // 현재 포스팅 중인 게시물이 해당 카테고리의 첫번째 게시물이 아닐 경우
+      if ((category == 'Study' && study_Postings != 0) || (category == 'Finance' && finance_Postings != 0) || (category == 'Exercise' && exercise_Postings != 0) || (category == 'Career' && career_Postings != 0)) {
+        // 카테고리 페이지의 해당 게시물 링크(아이템) 위에 구분선을 추가
+        append_contents = `<!-- Between items --> <div class="between-items"></div>` + append_contents;
+
+        // 카테고리 페이지에 해당하는 html 코드 데이터를 기존 텍스트 파일에 덧붙이기
+        fs.appendFile(`texts/${category}-card.txt`, append_contents, 'utf8', (err) => {
+          if (err) throw err;
+          posting_init();
+        });
+      } else {    // 현재 포스팅 중인 게시물이 해당 카테고리의 첫번째 게시물일 경우
+        // 카테고리 페이지에 해당하는 html 코드 데이터를 기존 텍스트 파일에 덮어쓰기
+        fs.writeFile(`texts/${category}-card.txt`, append_contents, 'utf8', (err) => {
+          if (err) throw err;
+          posting_init();
+        });
+      }
     });
   } else {   // pathname에 잘못된 값이 들어갔을 때 (404 Not Found)
     response.writeHead(404);
