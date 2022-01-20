@@ -1,9 +1,15 @@
-// Create //
-// Read   //
+// Create             //
+// Read               //
 // Update 
-// Delete //
+// Delete             //
 // Search
 // Sort
+// Uploading Photos
+// Sign Up & Sign In
+
+/*
+로그인하지 않았을 경우, 추가, 변경, 삭제 버튼의 display를 none으로 하기
+*/
 
 // 필요한 모듈을 요청하여 변수에 저장
 var http = require('http');
