@@ -25,15 +25,30 @@ var app = http.createServer((request, response) => {
       // HEADER
       var header = fs.readFileSync('./texts/index-header', 'utf8');
 
-      // CARD -> Query String의 ID 값에 따라 CARD에 들어갈 알맞은 파일을 로드
+
+      // CARD(메인 페이지에 위치해 있어 Query String이 없을 경우)
       if (queryData.id === undefined) {
         var card = fs.readFileSync('./texts/index-card', 'utf8');
-      } else if (queryData.id == 'Study') {
-        var filelist = fs.readdirSync('./texts/Study/');
+      }
+      // CARD(카테고리 페이지에 위치해 있을 경우)
+      else if ((queryData.id == 'Study') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Career')) {
+        var filelist = fs.readdirSync(`./texts/${queryData.id}`);
         var card = '';
 
+        // 현재 카테고리에 게시물이 없을 때 안내 메시지 표시
+        if (filelist.length == 0) {
+          card =
+          `
+          <div style="display: inline-block; width: 900px; text-align: center; font: 12px; color: lightgray; padding-top: 15px;">
+            Sorry. No postings in this category yet.
+          </div>
+          `
+        }
+
+        // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
         filelist.forEach((element) => {
-          card = card + `
+          card = card +
+          `
           <!-- Item -->
           <a class="card-items" href="/?id=${element}&class=${queryData.id}">
             <div class="image-area">
@@ -47,71 +62,19 @@ var app = http.createServer((request, response) => {
           </a>
           `;
         });
-      } else if (queryData.id == 'Finance') {
-        var filelist = fs.readdirSync('./texts/Finance/');
-        var card = '';
-
-        filelist.forEach((element) => {
-          card = card + `
-          <!-- Item -->
-          <a class="card-items" href="/?id=${element}&class=${queryData.id}">
-            <div class="image-area">
-              <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/Career.png?raw=true" alt="github">
-            </div>
-            <div class="text-area">
-              <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
-                ${element}
-              </div>
-            </div>
-          </a>
-          `;
-        });
-      } else if (queryData.id == 'Exercise') {
-        var filelist = fs.readdirSync('./texts/Exercise/');
-        var card = '';
-
-        filelist.forEach((element) => {
-          card = card + `
-          <!-- Item -->
-          <a class="card-items" href="/?id=${element}&class=${queryData.id}">
-            <div class="image-area">
-              <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/Career.png?raw=true" alt="github">
-            </div>
-            <div class="text-area">
-              <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
-                ${element}
-              </div>
-            </div>
-          </a>
-          `;
-        });
-      } else if (queryData.id == 'Career') {
-        var filelist = fs.readdirSync('./texts/Career/');
-        var card = '';
-
-        filelist.forEach((element) => {
-          card = card + `
-          <!-- Item -->
-          <a class="card-items" href="/?id=${element}&class=${queryData.id}">
-            <div class="image-area">
-              <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/Career.png?raw=true" alt="github">
-            </div>
-            <div class="text-area">
-              <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
-                ${element}
-              </div>
-            </div>
-          </a>
-          `;
-        });
-      } else if ((queryData.class == 'Study') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Career')){
+      }
+      // CARD(게시물 페이지에 위치해 있을 경우)
+      else if ((queryData.class == 'Study') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Career')){
         var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
-      } else {
+      }
+      // CARD(Post 페이지에 위치해 있을 경우)
+      else {
         var card = fs.readFileSync(`./texts/${queryData.id}`, 'utf8');
       }
 
       // MENU
-      var list = `
+      var list =
+      `
       <li><a href="/?id=Study">Study(${Study_Postings})</a></li>
       <li><a href="/?id=Finance">Finance(${Finance_Postings})</a></li>
       <li><a href="/?id=Exercise">Exercise(${Exercise_Postings})</a></li>
@@ -121,10 +84,11 @@ var app = http.createServer((request, response) => {
       // FOOTER
       var footer = fs.readFileSync('./texts/index-footer', 'utf8');
 
+      // 포스트 페이지에서는 페이지 height를 100vh로 줄이기
       if (queryData.id == 'post') {
-        var hide = 'overflow-y: hidden;'
+       var hide = 'overflow-y: hidden;'
       } else {
-        var hide = '/* */'
+       var hide = '/* */'
       }
 
       // 로드될 HTML 코드를 변수에 저장
@@ -172,12 +136,14 @@ var app = http.createServer((request, response) => {
       
       </html>
       `
-
+      
       // 로드
       response.writeHead(200);
       response.end(template);
     });
-  } else if (pathname === '/post_process') {   // pathname이 '/post_process'일 때(폼에서 데이터를 제출했을 때)
+  }
+  // pathname이 '/post_process'일 때(폼에서 데이터를 제출했을 때)
+  else if (pathname === '/post_process') {
     var body = ""
 
     // 포스팅할 데이터를 요청해 변수에 저장
@@ -197,36 +163,32 @@ var app = http.createServer((request, response) => {
       var content = post.content;
       var category = post.category;
 
-      // 코드의 간결성을 위해 중복되는 내용을 함수에 저장
-      function posting_init() {
-        // 게시물 페이지에 해당하는 html 코드 데이터를 텍스트 파일에 저장
-        fs.writeFileSync(`texts/${category}/${title}`,
-        `
-        <!-- CARD -->
-        <div class="card" style="width: 800px; min-height: 100vh; padding: 50px; position: relative;">
-          <h1 style="font-size: 30px; font-weight: bold;">${title}</h1><br>
-          <div style="width: 800px; height: 2px; background-color: lightgray;"></div><br>
-          <div style="font-size: 20px;">
-            ${content}
-          </div>
+      // 게시물 페이지에 해당하는 html 코드 데이터를 텍스트 파일에 저장
+      fs.writeFileSync(`texts/${category}/${title}`,
+      `
+      <!-- CARD -->
+      <div class="card" style="width: 800px; min-height: 100vh; padding: 50px; position: relative;">
+        <h1 style="font-size: 30px; font-weight: bold;">${title}</h1><br>
+        <div style="width: 800px; height: 2px; background-color: lightgray;"></div><br>
+        <div style="font-size: 20px;">
+          ${content}
         </div>
-        `,
-        'utf8');
+      </div>
+      `,
+      'utf8');
 
-        // 포스팅 후 게시물로 리다이렉션
-        response.writeHead(302, {
-          Location: encodeURI(`/?id=${title}&class=${category}`)
-        });
-        response.end();
-      }
-
-      posting_init();
+      // 포스팅 후 게시물로 리다이렉션
+      response.writeHead(302, {
+        Location: encodeURI(`/?id=${title}&class=${category}`)
+      });
+      response.end();
     });
-  } else {   // pathname에 잘못된 값이 들어갔을 때 (404 Not Found)
+  }
+  // pathname에 잘못된 값이 들어갔을 때 (404 Not Found)
+  else {
     response.writeHead(404);
     response.end('Not Found');
   }
-
 });
 
 // 3000번 포트에서 서버 실행

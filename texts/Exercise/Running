@@ -1,0 +1,10 @@
+
+        <!-- CARD -->
+        <div class="card" style="width: 800px; min-height: 100vh; padding: 50px; position: relative;">
+          <h1 style="font-size: 30px; font-weight: bold;">Running</h1><br>
+          <div style="width: 800px; height: 2px; background-color: lightgray;"></div><br>
+          <div style="font-size: 20px;">
+            alksd fj;
+          </div>
+        </div>
+        
