@@ -1,15 +1,19 @@
-// Create             //
-// Read               //
+// Tasks
+// Create               //
+// Read                 //
 // Update 
-// Delete             //
+// Delete               //
 // Search
 // Sort
 // Uploading Photos
 // Sign Up & Sign In
+// Responsive UI Design
 
-/*
-로그인하지 않았을 경우, 추가, 변경, 삭제 버튼의 display를 none으로 하기
-*/
+// Ideas
+// 강좌 수강 후, 게시물 Update 기능 구현 방법 고민하기
+// 로그인하지 않았을 경우, 추가, 변경, 삭제 버튼의 display를 none으로 하기
+// 반응형 웹 제작법 관련 도서 읽고 CSS에 적용하기
+
 
 // 필요한 모듈을 요청하여 변수에 저장
 var http = require('http');
