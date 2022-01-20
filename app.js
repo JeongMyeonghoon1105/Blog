@@ -1,3 +1,10 @@
+// Create //
+// Read   //
+// Update 
+// Delete //
+// Search
+// Sort
+
 // 필요한 모듈을 요청하여 변수에 저장
 var http = require('http');
 var fs = require('fs');
@@ -38,7 +45,7 @@ var app = http.createServer((request, response) => {
         // 현재 카테고리에 게시물이 없을 때 안내 메시지 표시
         if (filelist.length == 0) {
           card =
-          `
+            `
           <div style="display: inline-block; width: 900px; text-align: center; font: 12px; color: lightgray; padding-top: 15px;">
             Sorry. No postings in this category yet.
           </div>
@@ -48,26 +55,33 @@ var app = http.createServer((request, response) => {
         // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
         filelist.forEach((element) => {
           card = card +
-          `
+            `
           <!-- Item -->
-          <a class="card-items" href="/?id=${element}&class=${queryData.id}">
-            <div class="image-area">
+          <div class="card-items">
+            <a class="image-area" href="/?id=${element}&class=${queryData.id}">
               <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/js.png?raw=true" alt="github">
-            </div>
+            </a>
             <div class="text-area">
-              <div style="width: 430px; height: 230px; padding: 5px; text-align: justify; overflow: hidden;">
+              <a href="/?id=${element}&class=${queryData.id}"
+                style="display: block; width: 430px; height: 230px; padding: 5px; text-align: justify; overflow: hidden;">
                 ${element}
-              </div>
-              <div style="width: 430px; height: 20px; font-size: 15px; text-align: right;">
-                Edit
+              </a>
+              <div style="width: 430px; height: 20px; display: flex;">
+                <a href="http://localhost:3000/delete_process?id=${queryData.id}&class=${element}"
+                  style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
+                  <i class="fas fa-trash"></i>
+                </a>
+                <a style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
+                  <i class="fas fa-edit"></i>
+                </a>
               </div>
             </div>
-          </a>
+          </div>
           `;
         });
       }
       // CARD(게시물 페이지에 위치해 있을 경우)
-      else if ((queryData.class == 'Study') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Career')){
+      else if ((queryData.class == 'Study') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Career')) {
         var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
       }
       // CARD(Post 페이지에 위치해 있을 경우)
@@ -77,7 +91,7 @@ var app = http.createServer((request, response) => {
 
       // MENU
       var list =
-      `
+        `
       <li><a href="/?id=Study">Study(${Study_Postings})</a></li>
       <li><a href="/?id=Finance">Finance(${Finance_Postings})</a></li>
       <li><a href="/?id=Exercise">Exercise(${Exercise_Postings})</a></li>
@@ -89,14 +103,14 @@ var app = http.createServer((request, response) => {
 
       // 포스트 페이지에서는 페이지 height를 100vh로 줄이기
       if (queryData.id == 'post') {
-       var hide = 'overflow-y: hidden;'
+        var hide = 'overflow-y: hidden;'
       } else {
-       var hide = '/* */'
+        var hide = '/* */'
       }
 
       // 로드될 HTML 코드를 변수에 저장
       var template =
-      `
+        `
       <html lang="ko">
   
       <head>
@@ -168,7 +182,7 @@ var app = http.createServer((request, response) => {
 
       // 게시물 페이지에 해당하는 html 코드 데이터를 텍스트 파일에 저장
       fs.writeFileSync(`texts/${category}/${title}`,
-      `
+        `
       <!-- CARD -->
       <div class="card" style="width: 800px; min-height: 100vh; padding: 50px; position: relative;">
         <h1 style="font-size: 30px; font-weight: bold;">${title}</h1><br>
@@ -176,9 +190,18 @@ var app = http.createServer((request, response) => {
         <div style="font-size: 20px;">
           ${content}
         </div>
+        <!-- 업데이트 & 삭제 버튼 -->
+        <div style="width: 800px; height: 20px; display: flex; position: absolute; left: 0; bottom: 0;">
+          <a href="http://localhost:3000/delete_process?id=${category}&class=${title}" style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
+            <i class="fas fa-trash"></i>
+          </a>
+          <a style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
+            <i class="fas fa-edit"></i>
+          </a>
+        </div>
       </div>
       `,
-      'utf8');
+        'utf8');
 
       // 포스팅 후 게시물로 리다이렉션
       response.writeHead(302, {
@@ -186,6 +209,15 @@ var app = http.createServer((request, response) => {
       });
       response.end();
     });
+  }
+  // pathname이 '/delete_process'일 때(게시물 삭제 버튼을 눌렀을 때)
+  else if (pathname === '/delete_process') {
+    fs.unlinkSync(`./texts/${queryData.id}/${queryData.class}`);
+
+    response.writeHead(302, {
+      Location: encodeURI(`/?id=${queryData.id}`)
+    });
+    response.end();
   }
   // pathname에 잘못된 값이 들어갔을 때 (404 Not Found)
   else {
