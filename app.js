@@ -48,7 +48,7 @@ var app = http.createServer((request, response) => {
       if (queryData.id === undefined) {
         var card = fs.readFileSync('./texts/index-card', 'utf8');
       }
-      // CARD(카테고리 페이지에 위치해 있을 경우)
+      // CARD(카테고리 페이지에 위치해 있을 경우. 카테고리 페이지에서는 id가 카테고리명, class가 게시물 제목)
       else if ((queryData.id == 'Study') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Career')) {
         var filelist = fs.readdirSync(`./texts/${queryData.id}`);
         var card = '';
@@ -56,42 +56,138 @@ var app = http.createServer((request, response) => {
         // 현재 카테고리에 게시물이 없을 때 안내 메시지 표시
         if (filelist.length == 0) {
           card =
-            `
+          `
           <div style="display: inline-block; width: 900px; text-align: center; font: 12px; color: lightgray; padding-top: 15px;">
             Sorry. No postings in this category yet.
           </div>
           `
         }
+        // 현재 카테고리에 이미 게시물이 존재할 때
+        else {
+          // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
+          filelist.forEach((element) => {
+            card = card +
+            `
+            <!-- Item -->
+            <div class="card-items">
+
+              <!-- 이미지 -->
+              <a class="image-area" href="/?id=Trash&class=${queryData.id}&title=${element}"s>
+                <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/js.png?raw=true" alt="github">
+              </a>
+
+              <!-- 텍스트 & 삭제 버튼 & 편집 버튼 -->
+              <div class="text-area">
+
+                <!-- 텍스트 -->
+                <a href="/?id=${element}&class=${queryData.id}"
+                  style="display: block; width: 430px; height: 230px; padding: 5px; text-align: justify; overflow: hidden;">
+                  ${element}
+                </a>
+
+                <!-- 삭제 & 편집 버튼 -->
+                <div style="width: 430px; height: 20px; display: flex;">
+
+                  <!-- 삭제 버튼 -->
+                  <a href="http://localhost:3000/delete_process?id=${queryData.id}&class=${element}"
+                    style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
+                    <i class="fas fa-trash"></i>
+                  </a>
+
+                  <!-- 편집 버튼 -->
+                  <a style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
+                    <i class="fas fa-edit"></i>
+                  </a>
+
+                </div>
+
+              </div>
+
+            </div>
+            `;
+          });
+        }
+      }
+      // CARD(휴지통 내 전체 카테고리를 보여주는 페이지)
+      else if (queryData.id == 'Trash' && queryData.class === undefined && queryData.title === undefined) {
+        // ./texts/Trash 디렉토리를 읽어와 전체 리스트 출력
+
+        var filelist = fs.readdirSync(`./texts/Trash`);
+        var card = '';
 
         // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
         filelist.forEach((element) => {
           card = card +
-            `
+          `
           <!-- Item -->
           <div class="card-items">
-            <a class="image-area" href="/?id=${element}&class=${queryData.id}">
+
+            <!-- 이미지 -->
+            <a class="image-area" href="/?id=Trash&class=${element}">
               <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/js.png?raw=true" alt="github">
             </a>
+
+            <!-- 텍스트 -->
             <div class="text-area">
-              <a href="/?id=${element}&class=${queryData.id}"
+              <a href="/?id=Trash&class=${element}"
                 style="display: block; width: 430px; height: 230px; padding: 5px; text-align: justify; overflow: hidden;">
                 ${element}
               </a>
-              <div style="width: 430px; height: 20px; display: flex;">
-                <a href="http://localhost:3000/delete_process?id=${queryData.id}&class=${element}"
-                  style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
-                  <i class="fas fa-trash"></i>
-                </a>
-                <a style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
-                  <i class="fas fa-edit"></i>
-                </a>
-              </div>
             </div>
+
           </div>
           `;
         });
       }
-      // CARD(게시물 페이지에 위치해 있을 경우)
+      // CARD(휴지통 내 특정 카테고리의 페이지. 게시물들의 리스트가 표출되는 페이지)
+      else if (queryData.id == 'Trash' && queryData.title === undefined) {
+        // id = Trash, class = Category_Name
+        // ./texts/Trash/Category_Name 디렉토리를 읽어와 전체 리스트 출력
+
+        var filelist = fs.readdirSync(`./texts/Trash/${queryData.class}`);
+        var card = '';
+
+        // 현재 카테고리에 게시물이 없을 때 안내 메시지 표시
+        if (filelist.length == 0) {
+          card =
+          `
+          <div style="display: inline-block; width: 900px; text-align: center; font: 12px; color: lightgray; padding-top: 15px;">
+            Sorry. No postings in trash for ${queryData.class} category yet.
+          </div>
+          `
+        }
+        // 현재 카테고리에 이미 게시물이 존재할 때, 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
+        else {
+          filelist.forEach((element) => {
+            card = card +
+            `
+            <!-- Item -->
+            <div class="card-items">
+
+              <!-- 이미지 -->
+              <a class="image-area" href="/?id=Trash&class=${queryData.class}&title=${element}">
+                <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/js.png?raw=true" alt="github">
+              </a>
+
+              <!-- 텍스트 -->
+              <div class="text-area">
+                <a href="/?id=Trash&class=${queryData.class}&title=${element}"
+                  style="display: block; width: 430px; height: 230px; padding: 5px; text-align: justify; overflow: hidden;">
+                  ${element}
+                </a>
+              </div>
+
+            </div>
+            `;
+          });
+        }
+      }
+      // CARD(휴지통 내 게시물 페이지에 위치해 있을 경우)
+      else if (queryData.id == 'Trash'){
+        // ./texts/Trash/Category_Name/Posting_title 파일을 읽어와 출력
+        var card = fs.readFileSync(`./texts/Trash/${queryData.class}/${queryData.title}`, 'utf8');
+      }
+      // CARD(게시물 페이지에 위치해 있을 경우. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
       else if ((queryData.class == 'Study') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Career')) {
         var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
       }
@@ -102,11 +198,12 @@ var app = http.createServer((request, response) => {
 
       // MENU
       var list =
-        `
+      `
       <li><a href="/?id=Study">Study(${Study_Postings})</a></li>
       <li><a href="/?id=Finance">Finance(${Finance_Postings})</a></li>
       <li><a href="/?id=Exercise">Exercise(${Exercise_Postings})</a></li>
       <li><a href="/?id=Career">Career(${Career_Postings})</a></li>
+      <li><a href="/?id=Trash">Trash</a></li>
       `;
 
       // FOOTER
@@ -121,7 +218,7 @@ var app = http.createServer((request, response) => {
 
       // 로드될 HTML 코드를 변수에 저장
       var template =
-        `
+      `
       <html lang="ko">
   
       <head>
@@ -134,6 +231,8 @@ var app = http.createServer((request, response) => {
       </head>
       
       <body style="${hide}">
+
+        <!-- HEADER -->
         ${header}
         
         <!-- WRAP -->
@@ -146,20 +245,19 @@ var app = http.createServer((request, response) => {
             <!-- MENU -->
             <div class="menu">
               <div class="contents">
-
                 <h1>Menu</h1><br>
-                
                 <ul style="list-style-type: none; font-size: 15px;">
                   ${list}
                 </ul><br>
-
                 <h2 style="font-weight: bold; cursor: pointer;" onclick="location.href='/?id=post'">Post</h2>
-
               </div>
             </div>
           </div>
         </div>
+
+        <!-- FOOTER -->
         ${footer}
+
       </body>
       
       </html>
@@ -191,28 +289,41 @@ var app = http.createServer((request, response) => {
       var content = post.content;
       var category = post.category;
 
-      // 게시물 페이지에 해당하는 html 코드 데이터를 텍스트 파일에 저장
+      // 게시물 페이지에 해당하는 html 코드 데이터를 텍스트 파일로 저장
       fs.writeFileSync(`texts/${category}/${title}`,
-        `
+      `
       <!-- CARD -->
       <div class="card" style="width: 800px; min-height: 100vh; padding: 50px; position: relative;">
+
+        <!-- 게시물 제목 -->
         <h1 style="font-size: 30px; font-weight: bold;">${title}</h1><br>
+
+        <!-- 구분선 -->
         <div style="width: 800px; height: 2px; background-color: lightgray;"></div><br>
+
+        <!-- 내용 -->
         <div style="font-size: 20px;">
           ${content}
         </div>
-        <!-- 업데이트 & 삭제 버튼 -->
+
+        <!-- 삭제 & 편집 버튼 -->
         <div style="width: 800px; height: 20px; display: flex; position: absolute; left: 0; bottom: 0;">
+
+          <!-- 삭제 버튼 -->
           <a href="http://localhost:3000/delete_process?id=${category}&class=${title}" style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
             <i class="fas fa-trash"></i>
           </a>
+
+          <!-- 편집 버튼 -->
           <a style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
             <i class="fas fa-edit"></i>
           </a>
+
         </div>
+
       </div>
       `,
-        'utf8');
+      'utf8');
 
       // 포스팅 후 게시물로 리다이렉션
       response.writeHead(302, {
@@ -223,8 +334,10 @@ var app = http.createServer((request, response) => {
   }
   // pathname이 '/delete_process'일 때(게시물 삭제 버튼을 눌렀을 때)
   else if (pathname === '/delete_process') {
-    fs.unlinkSync(`./texts/${queryData.id}/${queryData.class}`);
+    // 파일 삭제 (id == 카테고리명, class == 게시물 제목)
+    fs.renameSync(`./texts/${queryData.id}/${queryData.class}`, `./texts/Trash/${queryData.id}/${queryData.class}`);
 
+    // 카테고리 페이지로 리다이렉트
     response.writeHead(302, {
       Location: encodeURI(`/?id=${queryData.id}`)
     });
