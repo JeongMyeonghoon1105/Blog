@@ -95,12 +95,14 @@ header #search-bar {
 
 #search:hover~#search-bar {
   width: 200px;
-  border: 1px solid lightgray;
+  border: 2px solid lightgray;
+  border-radius: 50px;
 }
 
 #search-bar:hover {
   width: 200px;
-  border: 1px solid lightgray;
+  border: 2px solid lightgray;
+  border-radius: 50px;
 }
 
 header .main-menu {

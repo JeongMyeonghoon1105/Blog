@@ -108,10 +108,21 @@ var app = http.createServer((request, response) => {
           });
         }
       }
-      // 휴지통 내 삭제된 게시물 리스트 표출 페이지
+      // CARD(휴지통 내에 보관된 삭제 게시물의 리스트를 표출하는 페이지에 위치해 있을 경우)
       else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
         var directorylist = fs.readdirSync(`texts/Trash`);
         var card = '';
+        /*
+        // 휴지통 비우기 버튼
+        `
+        <a href="http://localhost:3000/clear_all_process?id=Trash&class=${elem}"
+          style="display: block; width: 800px; height: 40px; background-color: lightgray;
+          margin: 40px 50px; text-align: center; cursor: pointer;">
+          <!-- <i class="fas fa-trash" style="color: white; font-size: 15px; line-height: 40px;"></i> -->
+          <text style="color: white; font-size: 15px; line-height: 40px;">Delete All</text>
+        </a>
+        `;
+        */
         
         directorylist.forEach((elem) => {
           var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
@@ -134,6 +145,22 @@ var app = http.createServer((request, response) => {
                   style="display: block; width: 430px; height: 230px; padding: 5px; text-align: justify; overflow: hidden;">
                   ${element}
                 </a>
+
+                <!-- 삭제 & 편집 버튼 -->
+                <div style="width: 430px; height: 20px; display: flex;">
+
+                  <!-- 삭제 버튼 -->
+                  <a href="http://localhost:3000/clear_process?id=Trash&class=${elem}&title=${element}"
+                    style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
+                    <i class="fas fa-trash"></i>
+                  </a>
+
+                  <!-- 편집 버튼 -->
+                  <a style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
+                    <i class="fas fa-edit"></i>
+                  </a>
+
+                </div>
               </div>
 
             </div>
@@ -300,7 +327,7 @@ var app = http.createServer((request, response) => {
       response.end();
     });
   }
-  // pathname이 '/delete_process'일 때(게시물 삭제 버튼을 눌렀을 때)
+  // pathname이 '/delete_process'일 때(일반 게시물 삭제 버튼을 눌렀을 때)
   else if (pathname === '/delete_process') {
     // 파일 삭제 (id == 카테고리명, class == 게시물 제목)
     fs.renameSync(`./texts/${queryData.id}/${queryData.class}`, `./texts/Trash/${queryData.id}/${queryData.class}`);
@@ -308,6 +335,35 @@ var app = http.createServer((request, response) => {
     // 카테고리 페이지로 리다이렉트
     response.writeHead(302, {
       Location: encodeURI(`/?id=${queryData.id}`)
+    });
+    response.end();
+  }
+  // pathname이 '/clear_process'일 때(휴지통에 담긴 게시물의 삭제 버튼을 눌렀을 때)
+  else if (pathname === '/clear_process') {
+    // 파일 영구 삭제
+    fs.unlinkSync(`./texts/Trash/${queryData.class}/${queryData.title}`);
+
+    // 카테고리 페이지로 리다이렉트
+    response.writeHead(302, {
+      Location: encodeURI(`/?id=Trash`)
+    });
+    response.end();
+  }
+  // pathname이 '/clear_all_process'일 때(휴지통 비우기 버튼을 눌렀을 때)
+  else if (pathname ==='/clear_all_process') {
+    var directorylist = fs.readdirSync(`texts/Trash`);
+    
+    directorylist.forEach((elem) => {
+      var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
+
+      // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
+      filelist.forEach((element) => {
+        fs.unlinkSync(`./texts/Trash/${elem}/${element}`);
+      });
+    });
+    // 카테고리 페이지로 리다이렉트
+    response.writeHead(302, {
+      Location: encodeURI(`/?id=Trash`)
     });
     response.end();
   }
