@@ -108,56 +108,15 @@ var app = http.createServer((request, response) => {
           });
         }
       }
-      // CARD(휴지통 내 전체 카테고리를 보여주는 페이지)
-      else if (queryData.id == 'Trash' && queryData.class === undefined && queryData.title === undefined) {
-        // ./texts/Trash 디렉토리를 읽어와 전체 리스트 출력
-
-        var filelist = fs.readdirSync(`./texts/Trash`);
+      // 휴지통 내 삭제된 게시물 리스트 표출 페이지
+      else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
+        var directorylist = fs.readdirSync(`texts/Trash`);
         var card = '';
+        
+        directorylist.forEach((elem) => {
+          var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
 
-        // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
-        filelist.forEach((element) => {
-          card = card +
-          `
-          <!-- Item -->
-          <div class="card-items">
-
-            <!-- 이미지 -->
-            <a class="image-area" href="/?id=Trash&class=${element}">
-              <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/js.png?raw=true" alt="github">
-            </a>
-
-            <!-- 텍스트 -->
-            <div class="text-area">
-              <a href="/?id=Trash&class=${element}"
-                style="display: block; width: 430px; height: 230px; padding: 5px; text-align: justify; overflow: hidden;">
-                ${element}
-              </a>
-            </div>
-
-          </div>
-          `;
-        });
-      }
-      // CARD(휴지통 내 특정 카테고리의 페이지. 게시물들의 리스트가 표출되는 페이지)
-      else if (queryData.id == 'Trash' && queryData.title === undefined) {
-        // id = Trash, class = Category_Name
-        // ./texts/Trash/Category_Name 디렉토리를 읽어와 전체 리스트 출력
-
-        var filelist = fs.readdirSync(`./texts/Trash/${queryData.class}`);
-        var card = '';
-
-        // 현재 카테고리에 게시물이 없을 때 안내 메시지 표시
-        if (filelist.length == 0) {
-          card =
-          `
-          <div style="display: inline-block; width: 900px; text-align: center; font: 12px; color: lightgray; padding-top: 15px;">
-            Sorry. No postings in trash for ${queryData.class} category yet.
-          </div>
-          `
-        }
-        // 현재 카테고리에 이미 게시물이 존재할 때, 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
-        else {
+          // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
           filelist.forEach((element) => {
             card = card +
             `
@@ -165,13 +124,13 @@ var app = http.createServer((request, response) => {
             <div class="card-items">
 
               <!-- 이미지 -->
-              <a class="image-area" href="/?id=Trash&class=${queryData.class}&title=${element}">
+              <a class="image-area" href="/?id=Trash&class=${elem}&title=${element}">
                 <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/js.png?raw=true" alt="github">
               </a>
 
               <!-- 텍스트 -->
               <div class="text-area">
-                <a href="/?id=Trash&class=${queryData.class}&title=${element}"
+                <a href="/?id=Trash&class=${elem}&title=${element}"
                   style="display: block; width: 430px; height: 230px; padding: 5px; text-align: justify; overflow: hidden;">
                   ${element}
                 </a>
@@ -180,11 +139,20 @@ var app = http.createServer((request, response) => {
             </div>
             `;
           });
+        });
+
+        // 휴지통이 비었을 때, 안내 메시지를 출력
+        if (card == '') {
+          card =
+          `
+          <div style="display: inline-block; width: 900px; text-align: center; font: 12px; color: lightgray; padding-top: 15px;">
+            Sorry. No postings in trash for this category yet.
+          </div>
+          `
         }
       }
       // CARD(휴지통 내 게시물 페이지에 위치해 있을 경우)
       else if (queryData.id == 'Trash'){
-        // ./texts/Trash/Category_Name/Posting_title 파일을 읽어와 출력
         var card = fs.readFileSync(`./texts/Trash/${queryData.class}/${queryData.title}`, 'utf8');
       }
       // CARD(게시물 페이지에 위치해 있을 경우. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
