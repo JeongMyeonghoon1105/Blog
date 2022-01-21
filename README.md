@@ -1,6 +1,6 @@
 ## Story Mate
 
-### Welcome to the source of my web page for diary.
+### Welcome to the source of my diary web page.
 
 Story Mate is categorized diary for diligent people.
 
