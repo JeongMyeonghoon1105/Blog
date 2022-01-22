@@ -21,10 +21,10 @@
     <!-- Categoties -->
     <div class="category">
       <select name="category" id="category-input" required>
-        <option value="Study">Study</option>
+        <option value="Life">Life</option>
         <option value="Finance">Finance</option>
         <option value="Exercise">Exercise</option>
-        <option value="Career">Career</option>
+        <option value="Study">Study</option>
       </select>
     </div>
 

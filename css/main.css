@@ -212,7 +212,11 @@ header .main-menu #instagram:hover {
   border: 2px solid var(--bg-color);
   border-radius: 10px;
 
+  text-align: center;
+  font-size: 80px;
+
   position: relative;
+  color: #e5ebfa;
 }
 
 .wrap .inner .card .card-items .image-area img {

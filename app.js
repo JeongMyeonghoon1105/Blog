@@ -21,6 +21,7 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
+var signIn = 1;
 
 // 서버 생성
 var app = http.createServer((request, response) => {
@@ -29,10 +30,10 @@ var app = http.createServer((request, response) => {
   var pathname = url.parse(url_saver, true).pathname;
 
   // 각 카테고리의 게시물 수를 변수에 저장
-  var Study_Postings = fs.readdirSync('./texts/Study/').length;
+  var Life_Postings = fs.readdirSync('./texts/Life/').length;
   var Finance_Postings = fs.readdirSync('./texts/Finance/').length;
   var Exercise_Postings = fs.readdirSync('./texts/Exercise/').length;
-  var Career_Postings = fs.readdirSync('./texts/Career/').length;
+  var Study_Postings = fs.readdirSync('./texts/Study/').length;
 
   // pathname이 '/'일 때
   if (pathname === '/') {
@@ -49,7 +50,7 @@ var app = http.createServer((request, response) => {
         var card = fs.readFileSync('./texts/index-card', 'utf8');
       }
       // CARD(카테고리 페이지에 위치해 있을 경우. 카테고리 페이지에서는 id가 카테고리명, class가 게시물 제목)
-      else if ((queryData.id == 'Study') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Career')) {
+      else if ((queryData.id == 'Life') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Study')) {
         var filelist = fs.readdirSync(`./texts/${queryData.id}`);
         var card = '';
 
@@ -58,7 +59,7 @@ var app = http.createServer((request, response) => {
           card =
           `
           <div style="display: inline-block; width: 900px; text-align: center; font: 12px; color: lightgray; padding-top: 15px;">
-            Sorry. No postings in this category yet.
+            Sorry. No postings in ${queryData.id} category yet.
           </div>
           `
         }
@@ -89,13 +90,13 @@ var app = http.createServer((request, response) => {
                 <div style="width: 430px; height: 20px; display: flex;">
 
                   <!-- 삭제 버튼 -->
-                  <a href="http://localhost:3000/delete_process?id=${queryData.id}&class=${element}"
-                    style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center; color: lightgray">
+                  <a class="delete_button" href="http://localhost:3000/delete_process?id=${queryData.id}&class=${element}"
+                    style="display: ${display}; width: 50px; height: 20px; font-size: 15px; text-align: center; color: lightgray">
                     <i class="fas fa-trash"></i>
                   </a>
 
                   <!-- 편집 버튼 -->
-                  <a style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center; color: lightgray">
+                  <a class="update_button" style="display: ${display}; width: 50px; height: 20px; font-size: 15px; text-align: center; color: lightgray">
                     <i class="fas fa-edit"></i>
                   </a>
 
@@ -145,13 +146,13 @@ var app = http.createServer((request, response) => {
                 <div style="display: flex; width: 50px; height: 30px;">
 
                   <!-- 삭제 버튼 -->
-                  <a href="http://localhost:3000/clear_process?id=Trash&class=${elem}&title=${element}"
-                    style="display: block; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
+                  <a class="delete_button" href="http://localhost:3000/clear_process?id=Trash&class=${elem}&title=${element}"
+                    style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
                     <i class="fas fa-trash" style="line-height: 30px;"></i>
                   </a>
 
                   <!-- 편집 버튼 -->
-                  <a style="display: block; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
+                  <a class="update_button" style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
                     <i class="fas fa-edit" style="line-height: 30px;"></i>
                   </a>
 
@@ -168,7 +169,7 @@ var app = http.createServer((request, response) => {
           card =
           `
           <div style="display: inline-block; width: 900px; text-align: center; font: 12px; color: lightgray; padding-top: 15px;">
-            Sorry. No postings in trash for this category yet.
+            Trash is empty.
           </div>
           `
         }
@@ -178,22 +179,29 @@ var app = http.createServer((request, response) => {
         var card = fs.readFileSync(`./texts/Trash/${queryData.class}/${queryData.title}`, 'utf8');
       }
       // CARD(게시물 페이지에 위치해 있을 경우. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
-      else if ((queryData.class == 'Study') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Career')) {
+      else if ((queryData.class == 'Life') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Study')) {
         var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
       }
       // CARD(Post 페이지에 위치해 있을 경우)
       else {
         var card = fs.readFileSync(`./texts/${queryData.id}`, 'utf8');
       }
+      
+      // 로그인 되지 않았을 때, 관리자 전용 기능 숨기기
+      if (signIn == 0) {
+        var display = 'none';
+      } else {
+        var display = 'block';
+      }
 
       // MENU
       var list =
       `
-      <li><a href="/?id=Study">Study(${Study_Postings})</a></li>
+      <li><a href="/?id=Life">Life(${Life_Postings})</a></li>
       <li><a href="/?id=Finance">Finance(${Finance_Postings})</a></li>
       <li><a href="/?id=Exercise">Exercise(${Exercise_Postings})</a></li>
-      <li><a href="/?id=Career">Career(${Career_Postings})</a></li>
-      <li><a href="/?id=Trash">Trash</a></li>
+      <li><a href="/?id=Study">Study(${Study_Postings})</a></li>
+      <li><a href="/?id=Trash" style="display: ${display}">Trash</a></li>
       `;
 
       // FOOTER
@@ -227,6 +235,9 @@ var app = http.createServer((request, response) => {
       </head>
       
       <body style="${bodyHeight}">
+        <style>
+          ${display}
+        </style>
 
         <!-- HEADER -->
         ${header}
@@ -245,7 +256,7 @@ var app = http.createServer((request, response) => {
                 <ul style="list-style-type: none; font-size: 15px;">
                   ${list}
                 </ul><br>
-                <h2 style="font-weight: bold; cursor: pointer;" onclick="location.href='/?id=post'">Post</h2>
+                <h2 class="post_button" style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=post'">Post</h2>
               </div>
             </div>
           </div>
@@ -306,12 +317,12 @@ var app = http.createServer((request, response) => {
         <div style="width: 800px; height: 20px; display: flex; position: absolute; left: 0; bottom: 0;">
 
           <!-- 삭제 버튼 -->
-          <a href="http://localhost:3000/delete_process?id=${category}&class=${title}" style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
+          <a href="http://localhost:3000/delete_process?id=${category}&class=${title}" style="display: ${display}; width: 50px; height: 20px; font-size: 15px; text-align: center;">
             <i class="fas fa-trash"></i>
           </a>
 
           <!-- 편집 버튼 -->
-          <a style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
+          <a class="update_button" style="display: ${display}; width: 50px; height: 20px; font-size: 15px; text-align: center;">
             <i class="fas fa-edit"></i>
           </a>
 

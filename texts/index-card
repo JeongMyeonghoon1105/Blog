@@ -1,10 +1,10 @@
 <!-- 1st item -->
-<a class="card-items" href="/?id=Study">
+<a class="card-items" href="/?id=Life">
   <div class="image-area">
-    <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/react.png?raw=true" alt="github">
+    <i class="fas fa-home" style="line-height: 160px;"></i>
   </div>
   <div class="text-area">
-    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Study</h1>
+    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Life</h1>
     <div style="width: 440px; height: 2px; background-color: lightgray;"></div>
     <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
@@ -18,7 +18,7 @@
 <!-- 2nd item -->
 <a class="card-items" href="/?id=Finance">
   <div class="image-area">
-    <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/python.png?raw=true" alt="github">
+    <i class="fas fa-chart-pie" style="line-height: 160px; color: rgb(253, 236, 205);"></i>
   </div>
   <div class="text-area">
     <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Finance</h1>
@@ -35,7 +35,7 @@
 <!-- 3rd item -->
 <a class="card-items" href="/?id=Exercise">
   <div class="image-area">
-    <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/js.png?raw=true" alt="github">
+    <i class="fas fa-running" style="line-height: 160px; color: rgb(205, 253, 211);"></i>
   </div>
   <div class="text-area">
     <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Exercise</h1>
@@ -50,12 +50,12 @@
 <div class="between-items"></div>
 
 <!-- 4th item -->
-<a class="card-items" href="/?id=Career">
+<a class="card-items" href="/?id=Study">
   <div class="image-area">
-    <img src="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/github.png?raw=true" alt="github">
+    <i class="fas fa-book" style="line-height: 160px; color: rgb(255, 223, 242);"></i>
   </div>
   <div class="text-area">
-    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Career</h1>
+    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Study</h1>
     <div style="width: 440px; height: 2px; background-color: lightgray;"></div>
     <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
