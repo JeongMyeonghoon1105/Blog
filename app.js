@@ -1,12 +1,13 @@
-// Tasks
-// Create               //
-// Read                 //
+/* ******* Tasks ******* */
+
+// Create                //
+// Read                  //
 // Update 
-// Delete               //
+// Delete                //
 // Search
 // Sort
 // Uploading Photos
-// Sign Up & Sign In
+// Sign Up & Sign In     //
 // Responsive UI Design
 
 // Ideas
@@ -29,6 +30,13 @@ var app = http.createServer((request, response) => {
   var queryData = url.parse(url_saver, true).query;
   var pathname = url.parse(url_saver, true).pathname;
 
+  // 로그인 되지 않았을 때, 관리자 전용 기능 숨기기
+  if (signIn == 0) {
+    var display = 'none';
+  } else {
+    var display = 'block';
+  }
+
   // 각 카테고리의 게시물 수를 변수에 저장
   var Life_Postings = fs.readdirSync('./texts/Life/').length;
   var Finance_Postings = fs.readdirSync('./texts/Finance/').length;
@@ -37,10 +45,12 @@ var app = http.createServer((request, response) => {
 
   var login_form = 
   `
+  <!-- 로그인 컨테이너 -->
   <div style="width: 860px; height: 500px; margin: 20px;">
     <!-- 로그인 폼 -->
     <form action="http://localhost:3000/signin_process" method="post" style="width: 800px; height: 100px">
-      <!-- Password -->
+
+      <!-- 암호 입력란 -->
       <div class="title" style="position: absolute; left: 0; right: 0; margin: 50px auto; width: 400px;">
         <textarea name="password" id="title-input" rows="1" cols="55" placeholder="Password" maxlength="100"
           required></textarea>
@@ -48,12 +58,13 @@ var app = http.createServer((request, response) => {
   
       <div class="br"></div>
   
-      <!-- Post Button -->
+      <!-- 로그인 버튼 -->
       <div style="position: absolute; top: 150px; left: 0; right: 0; margin: 0 auto; width: 80px; height: 30px;">
         <button type="submit" class="post-button" style="width: 80px;">
           Sign In
         </button>
       </div>
+
     </form>
   </div>
   `
@@ -73,7 +84,7 @@ var app = http.createServer((request, response) => {
         var card = fs.readFileSync('./texts/index-card', 'utf8');
       }
       // CARD(카테고리 페이지에 위치해 있을 경우. 카테고리 페이지에서는 id가 카테고리명, class가 게시물 제목)
-      else if ((queryData.id == 'Life') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Study')) {
+      else if (((queryData.id == 'Life') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Study')) && (queryData.class === undefined)) {
         var filelist = fs.readdirSync(`./texts/${queryData.id}`);
         var card = '';
 
@@ -88,13 +99,6 @@ var app = http.createServer((request, response) => {
         }
         // 현재 카테고리에 이미 게시물이 존재할 때
         else {
-          // 로그인 되지 않았을 때, 관리자 전용 기능 숨기기
-          if (signIn == 0) {
-            var display = 'none';
-          } else {
-            var display = 'block';
-          }
-
           // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
           filelist.forEach((element) => {
             card = card +
@@ -103,7 +107,7 @@ var app = http.createServer((request, response) => {
             <div class="card-items">
 
               <!-- 이미지 -->
-              <a class="image-area" href="/?id=Trash&class=${queryData.id}&title=${element}"s>
+              <a class="image-area" href="/?id=${element}&class=${queryData.id}"s>
                 <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/js.png?raw=true" alt="github">
               </a>
 
@@ -141,26 +145,8 @@ var app = http.createServer((request, response) => {
       }
       // CARD(휴지통 내에 보관된 삭제 게시물의 리스트를 표출하는 페이지에 위치해 있을 경우)
       else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
-        // 로그인 되지 않았을 때, 관리자 전용 기능 숨기기
-        if (signIn == 0) {
-          var display = 'none';
-        } else {
-          var display = 'block';
-        }
-        
         var directorylist = fs.readdirSync(`texts/Trash`);
         var card = '';
-        /*
-        // 휴지통 비우기 버튼
-        `
-        <a href="http://localhost:3000/clear_all_process?id=Trash&class=${elem}"
-          style="display: block; width: 800px; height: 40px; background-color: lightgray;
-          margin: 40px 50px; text-align: center; cursor: pointer;">
-          <!-- <i class="fas fa-trash" style="color: white; font-size: 15px; line-height: 40px;"></i> -->
-          <text style="color: white; font-size: 15px; line-height: 40px;">Delete All</text>
-        </a>
-        `;
-        */
         
         directorylist.forEach((elem) => {
           var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
@@ -219,10 +205,6 @@ var app = http.createServer((request, response) => {
       else if ((queryData.class == 'Life') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Study')) {
         var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
       }
-      // 로그인 실패 후 재시도할 경우
-      else if (queryData.id == 'SignIn' && signIn == 0 && queryData.class == 'Failed') {
-        var card = login_form;
-      }
       // CARD(로그인 페이지에 위치해 있을 경우)
       else if (queryData.id == 'SignIn' && signIn == 0) {
         var card = login_form;
@@ -241,13 +223,6 @@ var app = http.createServer((request, response) => {
       // CARD(Post 페이지에 위치해 있을 경우)
       else {
         var card = fs.readFileSync(`./texts/${queryData.id}`, 'utf8');
-      }
-      
-      // 로그인 되지 않았을 때, 관리자 전용 기능 숨기기
-      if (signIn == 0) {
-        var display = 'none';
-      } else {
-        var display = 'block';
       }
 
       // MENU
@@ -333,13 +308,6 @@ var app = http.createServer((request, response) => {
   }
   // pathname이 '/post_process'일 때(폼에서 데이터를 제출했을 때)
   else if (pathname === '/post_process') {
-    // 로그인 되지 않았을 때, 관리자 전용 기능 숨기기
-    if (signIn == 0) {
-      var display = 'none';
-    } else {
-      var display = 'block';
-    }
-    
     var body = ""
 
     // 포스팅할 데이터를 요청해 변수에 저장
@@ -424,26 +392,6 @@ var app = http.createServer((request, response) => {
     });
     response.end();
   }
-  /*
-  // pathname이 '/clear_all_process'일 때(휴지통 비우기 버튼을 눌렀을 때)
-  else if (pathname ==='/clear_all_process') {
-    var directorylist = fs.readdirSync(`texts/Trash`);
-    
-    directorylist.forEach((elem) => {
-      var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
-
-      // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
-      filelist.forEach((element) => {
-        fs.unlinkSync(`./texts/Trash/${elem}/${element}`);
-      });
-    });
-    // 카테고리 페이지로 리다이렉트
-    response.writeHead(302, {
-      Location: encodeURI(`/?id=Trash`)
-    });
-    response.end();
-  }
-  */
   // 비밀번호 제출받은 후
   else if (pathname == '/signin_process' && signIn == 0) {
     var password = fs.readFileSync('./password', 'utf8');
