@@ -21,7 +21,7 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
-var signIn = 1;
+var signIn = 0;
 
 // 서버 생성
 var app = http.createServer((request, response) => {
@@ -34,6 +34,29 @@ var app = http.createServer((request, response) => {
   var Finance_Postings = fs.readdirSync('./texts/Finance/').length;
   var Exercise_Postings = fs.readdirSync('./texts/Exercise/').length;
   var Study_Postings = fs.readdirSync('./texts/Study/').length;
+
+  var login_form = 
+  `
+  <div style="width: 860px; height: 500px; margin: 20px;">
+    <!-- 로그인 폼 -->
+    <form action="http://localhost:3000/signin_process" method="post" style="width: 800px; height: 100px">
+      <!-- Password -->
+      <div class="title" style="position: absolute; left: 0; right: 0; margin: 50px auto; width: 400px;">
+        <textarea name="password" id="title-input" rows="1" cols="55" placeholder="Password" maxlength="100"
+          required></textarea>
+      </div>
+  
+      <div class="br"></div>
+  
+      <!-- Post Button -->
+      <div style="position: absolute; top: 150px; left: 0; right: 0; margin: 0 auto; width: 80px; height: 30px;">
+        <button type="submit" class="post-button" style="width: 80px;">
+          Sign In
+        </button>
+      </div>
+    </form>
+  </div>
+  `
 
   // pathname이 '/'일 때
   if (pathname === '/') {
@@ -65,6 +88,13 @@ var app = http.createServer((request, response) => {
         }
         // 현재 카테고리에 이미 게시물이 존재할 때
         else {
+          // 로그인 되지 않았을 때, 관리자 전용 기능 숨기기
+          if (signIn == 0) {
+            var display = 'none';
+          } else {
+            var display = 'block';
+          }
+
           // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
           filelist.forEach((element) => {
             card = card +
@@ -111,6 +141,13 @@ var app = http.createServer((request, response) => {
       }
       // CARD(휴지통 내에 보관된 삭제 게시물의 리스트를 표출하는 페이지에 위치해 있을 경우)
       else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
+        // 로그인 되지 않았을 때, 관리자 전용 기능 숨기기
+        if (signIn == 0) {
+          var display = 'none';
+        } else {
+          var display = 'block';
+        }
+        
         var directorylist = fs.readdirSync(`texts/Trash`);
         var card = '';
         /*
@@ -181,6 +218,25 @@ var app = http.createServer((request, response) => {
       // CARD(게시물 페이지에 위치해 있을 경우. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
       else if ((queryData.class == 'Life') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Study')) {
         var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
+      }
+      // 로그인 실패 후 재시도할 경우
+      else if (queryData.id == 'SignIn' && signIn == 0 && queryData.class == 'Failed') {
+        var card = login_form;
+      }
+      // CARD(로그인 페이지에 위치해 있을 경우)
+      else if (queryData.id == 'SignIn' && signIn == 0) {
+        var card = login_form;
+      }
+      // CARD(로그아웃 페이지에 위치해 있을 경우)
+      else if (queryData.id == 'SignIn') {
+        var card = 
+        `
+        <div style="position: absolute; top: 100px; left: 0; right: 0; margin: 0 auto; width: 80px; height: 30px;">
+          <button type="submit" class="post-button" onclick="location.href='/signin_process'" style="width: 80px;">
+            Sign Out
+          </button>
+        </div>
+        `
       }
       // CARD(Post 페이지에 위치해 있을 경우)
       else {
@@ -277,6 +333,13 @@ var app = http.createServer((request, response) => {
   }
   // pathname이 '/post_process'일 때(폼에서 데이터를 제출했을 때)
   else if (pathname === '/post_process') {
+    // 로그인 되지 않았을 때, 관리자 전용 기능 숨기기
+    if (signIn == 0) {
+      var display = 'none';
+    } else {
+      var display = 'block';
+    }
+    
     var body = ""
 
     // 포스팅할 데이터를 요청해 변수에 저장
@@ -361,6 +424,7 @@ var app = http.createServer((request, response) => {
     });
     response.end();
   }
+  /*
   // pathname이 '/clear_all_process'일 때(휴지통 비우기 버튼을 눌렀을 때)
   else if (pathname ==='/clear_all_process') {
     var directorylist = fs.readdirSync(`texts/Trash`);
@@ -376,6 +440,55 @@ var app = http.createServer((request, response) => {
     // 카테고리 페이지로 리다이렉트
     response.writeHead(302, {
       Location: encodeURI(`/?id=Trash`)
+    });
+    response.end();
+  }
+  */
+  // 비밀번호 제출받은 후
+  else if (pathname == '/signin_process' && signIn == 0) {
+    var password = fs.readFileSync('./password', 'utf8');
+
+    var body = ""
+
+    // 포스팅할 데이터를 요청해 변수에 저장
+    request.on('data', (data) => {
+      body = body + data;
+
+      // 포스팅할 게시물 길이가 너무 길어질 경우 커넥션 파괴
+      if (body.length > 1e6) {
+        request.connection.destroy();
+      }
+    });
+    
+    request.on('end', () => {
+      var post = qs.parse(body);
+      var input_password = post.password;
+
+      if (password == input_password) {
+        signIn = 1;
+        response.writeHead(302, {
+          Location: encodeURI('/')
+        });
+        response.end();
+      } else {
+        if (queryData.class === undefined) {
+          response.writeHead(302, {
+            Location: encodeURI('/?id=SignIn&class=Failed')
+          });
+          response.end();
+        } else {
+          response.writeHead(302, {
+            Location: encodeURI('/?id=SignIn')
+          });
+          response.end();
+        }
+      }
+    });
+  }
+  else if (pathname == '/signin_process' && signIn == 1) {
+    signIn = 0;
+    response.writeHead(302, {
+      Location: encodeURI('/')
     });
     response.end();
   }

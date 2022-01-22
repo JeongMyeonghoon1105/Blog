@@ -31,6 +31,11 @@
         <i class="fab fa-instagram" onclick="window.open('https://www.instagram.com/myeonghoon._.1105')"></i>
       </div>
 
+      <!-- 5th Item of Menu (Instagram) -->
+      <div class="item" id="sign-in">
+        <i class="fas fa-user-circle" onclick="location.href='/?id=SignIn'"></i>
+      </div>
+
       <!-- SEARCH BAR -->
       <input type="text" id="search-bar" placeholder="Search...">
       
