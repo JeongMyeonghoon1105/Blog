@@ -1,22 +1,31 @@
-<!-- Writing Area -->
-<div class="writing-area">
+<!-- Writting Area -->
+<div class="writting-area">
 
   <!-- Form for New Contents -->
-  <form action="http://localhost:3000/post_process" method="post" style="width: 800px;">
+  <form action="http://localhost:3000/post_process" method="post" style="width: 800px; height: 510px">
     <!-- Title -->
     <div class="title">
       <textarea name="title" id="title-input" rows="1" cols="55" placeholder="Title" maxlength="100"
         required></textarea>
-    </div><br>
+    </div>
+
+    <div class="br"></div>
 
     <!-- Contents -->
     <div>
       <textarea name="content" id="contents-input" placeholder="Contents" required></textarea>
-    </div><br>
+    </div>
 
-    <!-- Categoty -->
-    <div>
-      <textarea name="category" id="category-input" placeholder="Category" required></textarea>
+    <div class="br"></div>
+
+    <!-- Categoties -->
+    <div class="category">
+      <select name="category" id="category-input" required>
+        <option value="Study">Study</option>
+        <option value="Finance">Finance</option>
+        <option value="Exercise">Exercise</option>
+        <option value="Career">Career</option>
+      </select>
     </div>
 
     <!-- File Selection
@@ -29,15 +38,14 @@
     </div>
     -->
 
-    <br>
+    <div class="br"></div>
 
     <!-- Post Button -->
-    <div class="post-button-container">
+    <div style="position: relative; height: 30px;">
       <button type="submit" class="post-button">
         Post
       </button>
     </div>
-
   </form>
   
 </div>

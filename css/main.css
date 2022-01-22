@@ -191,7 +191,7 @@ header .main-menu #instagram:hover {
 
 .wrap .inner .card .card-items {
   width: 860px;
-  height: 300px;
+  height: 200px;
 
   position: relative;
   left: 0;
@@ -203,19 +203,11 @@ header .main-menu #instagram:hover {
   transition: .1s;
 }
 
-/*
-.wrap .inner .card .card-items:hover {
-  border-left: 1px solid #FFAA0D;
-  border-right: 1px solid #FFAA0D;
-  border-radius: 20px;
-}
-*/
-
 .wrap .inner .card .card-items .image-area {
-  width: 360px;
-  height: 260px;
+  width: 250px;
+  height: 160px;
 
-  margin: 20px 0px 20px 18px;
+  margin: 20px 40px;
 
   border: 2px solid var(--bg-color);
   border-radius: 10px;
@@ -224,17 +216,23 @@ header .main-menu #instagram:hover {
 }
 
 .wrap .inner .card .card-items .image-area img {
-  width: 360px;
-  height: 216px;
+  width: 200px;
+  height: 116px;
 
-  margin: 22px 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .wrap .inner .card .card-items .text-area {
-  width: 480px;
-  height: 260px;
+  width: 490px;
+  height: 160px;
 
-  margin: 20px;
+  margin: 20px 40px 20px 0;
+
   overflow: hidden;
 }
 
@@ -285,9 +283,9 @@ header .main-menu #instagram:hover {
   font-weight: bold;
 }
 
-.writing-area {
+.writting-area {
   width: 800px;
-  height: 9970px;
+  height: 530px;
 
   margin: 30px 50px 0 50px;
 }
@@ -295,6 +293,13 @@ header .main-menu #instagram:hover {
 .title {
   display: flex;
   justify-content: space-between;
+
+  border-radius: 50px;
+}
+
+.br {
+  width: 800px;
+  height: 20px;
 }
 
 #title-input {
@@ -303,6 +308,8 @@ header .main-menu #instagram:hover {
   background-color: #F4F6FC;
 
   border: none;
+  border-radius: 50px;
+
   font-size: 20px;
   line-height: 50px;
   padding: 0 10px;
@@ -310,24 +317,43 @@ header .main-menu #instagram:hover {
 
 #contents-input {
   width: 800px;
-  height: 380px;
+  height: 330px;
   background-color: #F4F6FC;
 
+  border-radius: 10px;
   border: none;
+
   font-size: 15px;
   padding: 10px;
 }
 
-#category-input {
-  width: 800px;
+.category {
+  width: 780px;
   height: 40px;
   background-color: #F4F6FC;
 
   border: none;
+  border-radius: 50px;
+
+  padding: 0 10px;
+
   font-size: 15px;
-  padding: 10px;
+  color: gray;
 }
 
+#category-input {
+  width: 780px;
+  height: 40px;
+  background-color: #F4F6FC;
+
+  border: none;
+  border-radius: 50px;
+
+  font-size: 15px;
+  color: gray;
+}
+
+/*
 .file-selection {
   width: 800px;
   height: 30px;
@@ -372,13 +398,7 @@ header .main-menu #instagram:hover {
   border: none;
   overflow: hidden;
 }
-
-.button-container {
-  width: 100%;
-  height: 50px;
-
-  position: relative;
-}
+*/
 
 .post-button {
   width: 50px;
@@ -391,8 +411,9 @@ header .main-menu #instagram:hover {
   position: absolute;
   left: 0;
   right: 0;
-  margin: 0 auto 20px auto;
+  margin: 0 auto;
 
+  color: gray;
   cursor: pointer;
 }
 

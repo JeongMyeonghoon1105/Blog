@@ -81,7 +81,7 @@ var app = http.createServer((request, response) => {
 
                 <!-- 텍스트 -->
                 <a href="/?id=${element}&class=${queryData.id}"
-                  style="display: block; width: 430px; height: 230px; padding: 5px; text-align: justify; overflow: hidden;">
+                  style="display: block; width: 430px; height: 135px; padding: 5px; text-align: justify; overflow: hidden;">
                   ${element}
                 </a>
 
@@ -90,12 +90,12 @@ var app = http.createServer((request, response) => {
 
                   <!-- 삭제 버튼 -->
                   <a href="http://localhost:3000/delete_process?id=${queryData.id}&class=${element}"
-                    style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
+                    style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center; color: lightgray">
                     <i class="fas fa-trash"></i>
                   </a>
 
                   <!-- 편집 버튼 -->
-                  <a style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
+                  <a style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center; color: lightgray">
                     <i class="fas fa-edit"></i>
                   </a>
 
@@ -132,32 +132,27 @@ var app = http.createServer((request, response) => {
             card = card +
             `
             <!-- Item -->
-            <div class="card-items">
-
-              <!-- 이미지 -->
-              <a class="image-area" href="/?id=Trash&class=${elem}&title=${element}">
-                <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/js.png?raw=true" alt="github">
-              </a>
+            <div style="width: 800px; height: 50px; margin: 20px 50px; border-bottom: 2px solid lightgray;">
 
               <!-- 텍스트 -->
-              <div class="text-area">
+              <div style="display: flex; width: 800px; height: 30px; padding: 10px 0;">
                 <a href="/?id=Trash&class=${elem}&title=${element}"
-                  style="display: block; width: 430px; height: 230px; padding: 5px; text-align: justify; overflow: hidden;">
+                  style="display: block; width: 750px; height: 30px; text-align: justify; overflow: hidden; line-height: 30px;">
                   ${element}
                 </a>
 
                 <!-- 삭제 & 편집 버튼 -->
-                <div style="width: 430px; height: 20px; display: flex;">
+                <div style="display: flex; width: 50px; height: 30px;">
 
                   <!-- 삭제 버튼 -->
                   <a href="http://localhost:3000/clear_process?id=Trash&class=${elem}&title=${element}"
-                    style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
-                    <i class="fas fa-trash"></i>
+                    style="display: block; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
+                    <i class="fas fa-trash" style="line-height: 30px;"></i>
                   </a>
 
                   <!-- 편집 버튼 -->
-                  <a style="display: block; width: 50px; height: 20px; font-size: 15px; text-align: center;">
-                    <i class="fas fa-edit"></i>
+                  <a style="display: block; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
+                    <i class="fas fa-edit" style="line-height: 30px;"></i>
                   </a>
 
                 </div>
@@ -206,9 +201,15 @@ var app = http.createServer((request, response) => {
 
       // 포스트 페이지에서는 페이지 height를 100vh로 줄이기
       if (queryData.id == 'post') {
-        var hide = 'overflow-y: hidden;'
+        var bodyHeight = 'height: 610px;';
+        var wrapHeight = 'height: 560px;';
+        var innerHeight = 'height: 560px;';
+        var cardHeight = 'height: 560px;';
       } else {
-        var hide = '/* */'
+        var bodyHeight = '/* */';
+        var wrapHeight = '/* */';
+        var innerHeight = '/* */';
+        var cardHeight = '/* */';
       }
 
       // 로드될 HTML 코드를 변수에 저장
@@ -225,16 +226,16 @@ var app = http.createServer((request, response) => {
 
       </head>
       
-      <body style="${hide}">
+      <body style="${bodyHeight}">
 
         <!-- HEADER -->
         ${header}
         
         <!-- WRAP -->
-        <div class="wrap">
-          <div class="inner">
+        <div class="wrap" style="${wrapHeight}">
+          <div class="inner" style="${innerHeight}">
             <!-- CARD -->
-            <div class="card">
+            <div class="card" style="${cardHeight}">
               ${card}
             </div>
             <!-- MENU -->
