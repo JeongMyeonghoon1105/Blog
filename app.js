@@ -437,20 +437,12 @@ var app = http.createServer((request, response) => {
         response.writeHead(302, {
           Location: encodeURI('/')
         });
-        response.end();
-      } else {
-        if (queryData.class === undefined) {
-          response.writeHead(302, {
-            Location: encodeURI('/?id=SignIn&class=Failed')
-          });
-          response.end();
-        } else {
-          response.writeHead(302, {
-            Location: encodeURI('/?id=SignIn')
-          });
-          response.end();
-        }
+      } else if (queryData.class === undefined) {
+        response.writeHead(302, {
+          Location: encodeURI('/?id=SignIn&class=Failed')
+        });
       }
+      response.end();
     });
   }
   else if (pathname == '/signin_process' && signIn == 1) {
