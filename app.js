@@ -9,6 +9,7 @@
 // Uploading Photos
 // Sign Up & Sign In     //
 // Responsive UI Design
+// 로그인 하지 않았을 시, 관리자 전용 기능을 수행하는 페이지의 url 접속을 막기
 
 // Ideas
 // 강좌 수강 후, 게시물 Update 기능 구현 방법 고민하기
@@ -31,11 +32,10 @@ var app = http.createServer((request, response) => {
   var pathname = url.parse(url_saver, true).pathname;
 
   // 로그인 되지 않았을 때, 관리자 전용 기능 숨기기
-  if (signIn == 0) {
+  if (signIn == 0)
     var display = 'none';
-  } else {
+  else
     var display = 'block';
-  }
 
   // 각 카테고리의 게시물 수를 변수에 저장
   var Life_Postings = fs.readdirSync('./texts/Life/').length;
@@ -78,13 +78,12 @@ var app = http.createServer((request, response) => {
       // HEADER
       var header = fs.readFileSync('./texts/index-header', 'utf8');
 
-
       // CARD(메인 페이지에 위치해 있어 Query String이 없을 경우)
       if (queryData.id === undefined) {
         var card = fs.readFileSync('./texts/index-card', 'utf8');
       }
       // CARD(카테고리 페이지에 위치해 있을 경우. 카테고리 페이지에서는 id가 카테고리명, class가 게시물 제목)
-      else if (((queryData.id == 'Life') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Study')) && (queryData.class === undefined)) {
+      else if ((queryData.id == 'Life') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Study')) {
         var filelist = fs.readdirSync(`./texts/${queryData.id}`);
         var card = '';
 
@@ -145,6 +144,13 @@ var app = http.createServer((request, response) => {
       }
       // CARD(휴지통 내에 보관된 삭제 게시물의 리스트를 표출하는 페이지에 위치해 있을 경우)
       else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
+        if (signIn == 0) {
+          response.writeHead(302, {
+            Location: encodeURI('/')
+          });
+          response.end();
+        }
+        
         var directorylist = fs.readdirSync(`texts/Trash`);
         var card = '';
         
@@ -199,6 +205,13 @@ var app = http.createServer((request, response) => {
       }
       // CARD(휴지통 내 게시물 페이지에 위치해 있을 경우)
       else if (queryData.id == 'Trash'){
+        if (signIn == 0) {
+          response.writeHead(302, {
+            Location: encodeURI('/')
+          });
+          response.end();
+        }
+
         var card = fs.readFileSync(`./texts/Trash/${queryData.class}/${queryData.title}`, 'utf8');
       }
       // CARD(게시물 페이지에 위치해 있을 경우. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
@@ -222,6 +235,13 @@ var app = http.createServer((request, response) => {
       }
       // CARD(Post 페이지에 위치해 있을 경우)
       else {
+        if (signIn == 0) {
+          response.writeHead(302, {
+            Location: encodeURI('/')
+          });
+          response.end();
+        }
+        
         var card = fs.readFileSync(`./texts/${queryData.id}`, 'utf8');
       }
 
