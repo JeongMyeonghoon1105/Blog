@@ -98,38 +98,30 @@ var app = http.createServer((request, response) => {
             card = card +
             `
             <!-- Item -->
-            <div class="card-items">
+            <div style="width: 800px; height: 50px; margin: 20px 50px; border-bottom: 2px solid lightgray;">
 
-              <!-- 이미지 -->
-              <a class="image-area" href="/?id=${element}&class=${queryData.id}"s>
-                <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/js.png?raw=true" alt="github">
-              </a>
-
-              <!-- 텍스트 & 삭제 버튼 & 편집 버튼 -->
-              <div class="text-area">
-
-                <!-- 텍스트 -->
+              <!-- 텍스트 -->
+              <div style="display: flex; width: 800px; height: 30px; padding: 10px 0;">
                 <a href="/?id=${element}&class=${queryData.id}"
-                  style="display: block; width: 430px; height: 135px; padding: 5px; text-align: justify; overflow: hidden;">
+                  style="display: block; width: 750px; height: 30px; text-align: justify; overflow: hidden; line-height: 30px;">
                   ${element}
                 </a>
 
                 <!-- 삭제 & 편집 버튼 -->
-                <div style="width: 430px; height: 20px; display: flex;">
+                <div style="display: flex; width: 50px; height: 30px;">
 
                   <!-- 삭제 버튼 -->
                   <a class="delete_button" href="http://localhost:3000/delete_process?id=${queryData.id}&class=${element}"
-                    style="display: ${display}; width: 50px; height: 20px; font-size: 15px; text-align: center; color: lightgray">
-                    <i class="fas fa-trash"></i>
+                    style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
+                    <i class="fas fa-trash" style="line-height: 30px;"></i>
                   </a>
 
                   <!-- 편집 버튼 -->
-                  <a class="update_button" style="display: ${display}; width: 50px; height: 20px; font-size: 15px; text-align: center; color: lightgray">
-                    <i class="fas fa-edit"></i>
+                  <a class="update_button" style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
+                    <i class="fas fa-edit" style="line-height: 30px;"></i>
                   </a>
 
                 </div>
-
               </div>
 
             </div>
