@@ -579,7 +579,7 @@ header .inner .main-menu #sign-in:hover {
 }
 */
 
-.wrap .inner .card .writting-area form .post-button {
+.post-button {
   /* 기본 */
   width: 50px;
   height: 30px;
