@@ -6,8 +6,10 @@
 // Delete                //
 // Search
 // Sort
+// Add Date of Posting
 // Uploading Photos
-// Sign Up & Sign In     //
+// Sign Up
+// Sign In               //
 // Responsive UI Design
 // 로그인 하지 않았을 시, 관리자 전용 기능을 수행하는 페이지의 url 접속을 막기
 
@@ -27,9 +29,9 @@ var signIn = 0;
 
 // 서버 생성
 var app = http.createServer((request, response) => {
-  var url_saver = request.url;
-  var queryData = url.parse(url_saver, true).query;
-  var pathname = url.parse(url_saver, true).pathname;
+  var requestedURL = request.url;
+  var queryData = url.parse(requestedURL, true).query;
+  var pathname = url.parse(requestedURL, true).pathname;
 
   // 로그인 되지 않았을 때, 관리자 전용 기능 숨기기
   if (signIn == 0)
@@ -46,27 +48,22 @@ var app = http.createServer((request, response) => {
   var login_form = 
   `
   <!-- 로그인 컨테이너 -->
-  <div style="width: 860px; height: 500px; margin: 20px;">
-    <!-- 로그인 폼 -->
-    <form action="http://localhost:3000/signin_process" method="post" style="width: 800px; height: 100px">
+  <!-- 로그인 폼 -->
+  <form action="http://localhost:3000/signin_process" method="post" style="background-color: #F4F6FC; width: 460px; height: 300px; border-radius: 10px; margin: 150px 220px; position: relative; padding-top: 50px;">
 
-      <!-- 암호 입력란 -->
-      <div class="title" style="position: absolute; left: 0; right: 0; margin: 50px auto; width: 400px;">
-        <textarea name="password" id="title-input" rows="1" cols="55" placeholder="Password" maxlength="100"
-          required></textarea>
-      </div>
-  
-      <div class="br"></div>
-  
-      <!-- 로그인 버튼 -->
-      <div style="position: absolute; top: 150px; left: 0; right: 0; margin: 0 auto; width: 80px; height: 30px;">
-        <button type="submit" class="post-button" style="width: 80px;">
-          Sign In
-        </button>
-      </div>
+    <!-- 암호 입력란 -->
+    <div style="background-color: white; width: 360px; height: 50px; border: none; border-radius: 50px; margin: 50px;">
+      <textarea name="password" rows="1" cols="55" placeholder="Password" maxlength="100" style="width: 330px; height: 50px; line-height: 50px; border: none; border-radius: 50px; margin: 0 15px;" required></textarea>
+    </div>
 
-    </form>
-  </div>
+    <!-- 로그인 버튼 -->
+    <div style="width: 460px; height: 30px;">
+      <button type="submit" style="width: 80px; height: 30px; background-color: white; border: none; border-radius: 50px; margin: 0 190px; cursor: pointer;">
+        Sign In
+      </button>
+    </div>
+
+  </form>
   `
 
   // pathname이 '/'일 때
@@ -226,8 +223,8 @@ var app = http.createServer((request, response) => {
       else if (queryData.id == 'SignIn') {
         var card = 
         `
-        <div style="position: absolute; top: 100px; left: 0; right: 0; margin: 0 auto; width: 80px; height: 30px;">
-          <button type="submit" class="post-button" onclick="location.href='/signin_process'" style="width: 80px;">
+        <div style="background-color: #F4F6FC; width: 460px; height: 300px; border-radius: 10px; margin: 150px 220px; position: relative;">
+          <button type="submit" class="post-button" onclick="location.href='/signin_process'" style="width: 80px; height: 40px; background-color: white; position: absolute; top: 130px;">
             Sign Out
           </button>
         </div>
@@ -412,7 +409,7 @@ var app = http.createServer((request, response) => {
     });
     response.end();
   }
-  // 비밀번호 제출받은 후
+  // pathname이 '/signin_process'일 때(비밀번호를 입력받았을 때)
   else if (pathname == '/signin_process' && signIn == 0) {
     var password = fs.readFileSync('./password', 'utf8');
 
@@ -445,6 +442,7 @@ var app = http.createServer((request, response) => {
       response.end();
     });
   }
+  // pathname이 '/signin_process'일 때(로그아웃 버튼을 눌렀을 때)
   else if (pathname == '/signin_process' && signIn == 1) {
     signIn = 0;
     response.writeHead(302, {
