@@ -11,7 +11,6 @@
 // Sign Up
 // Sign In               //
 // Responsive UI Design
-// 로그인 하지 않았을 시, 관리자 전용 기능을 수행하는 페이지의 url 접속을 막기
 
 // Ideas
 // 강좌 수강 후, 게시물 Update 기능 구현 방법 고민하기
