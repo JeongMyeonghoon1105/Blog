@@ -71,7 +71,11 @@ var app = http.createServer((request, response) => {
       var head = fs.readFileSync('./texts/index-head', 'utf8');
 
       // HEADER
-      var header = fs.readFileSync('./texts/index-header', 'utf8');
+      if (signIn == 0) {
+        var header = fs.readFileSync('./texts/index-header-unsigned', 'utf8');
+      } else {
+        var header = fs.readFileSync('./texts/index-header-signed', 'utf8');
+      }
 
       // CARD(메인 페이지에 위치해 있어 Query String이 없을 경우)
       if (queryData.id === undefined) {
