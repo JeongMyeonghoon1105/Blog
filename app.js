@@ -47,18 +47,17 @@ var app = http.createServer((request, response) => {
 
   var login_form = 
   `
-  <!-- 로그인 컨테이너 -->
   <!-- 로그인 폼 -->
-  <form action="http://localhost:3000/signin_process" method="post" style="background-color: #F4F6FC; width: 460px; height: 300px; border-radius: 10px; margin: 150px 220px; position: relative; padding-top: 50px;">
+  <form action="http://localhost:3000/signin_process" method="post" class="sign-in-form">
 
     <!-- 암호 입력란 -->
-    <div style="background-color: white; width: 360px; height: 50px; border: none; border-radius: 50px; margin: 50px;">
-      <textarea name="password" rows="1" cols="55" placeholder="Password" maxlength="100" style="width: 330px; height: 50px; line-height: 50px; border: none; border-radius: 50px; margin: 0 15px;" required></textarea>
+    <div class="password">
+      <textarea class="password-textarea" name="password" rows="1" cols="55" placeholder="Password" maxlength="100" required></textarea>
     </div>
 
     <!-- 로그인 버튼 -->
     <div style="width: 460px; height: 30px;">
-      <button type="submit" style="width: 80px; height: 30px; background-color: white; border: none; border-radius: 50px; margin: 0 190px; cursor: pointer;">
+      <button type="submit" class="sign-in-button">
         Sign In
       </button>
     </div>
@@ -223,8 +222,8 @@ var app = http.createServer((request, response) => {
       else if (queryData.id == 'SignIn') {
         var card = 
         `
-        <div style="background-color: #F4F6FC; width: 460px; height: 300px; border-radius: 10px; margin: 150px 220px; position: relative;">
-          <button type="submit" class="post-button" onclick="location.href='/signin_process'" style="width: 80px; height: 40px; background-color: white; position: absolute; top: 130px;">
+        <div class="sign-in-form" style="padding-top: 0;">
+          <button type="submit" class="post-button" onclick="location.href='/signin_process'" style="width: 80px; height: 30px; background-color: white; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto;">
             Sign Out
           </button>
         </div>
