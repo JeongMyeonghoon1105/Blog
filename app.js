@@ -214,7 +214,7 @@ var app = http.createServer((request, response) => {
         var card = 
         `
         <div class="sign-in-form" style="padding-top: 0;">
-          <button type="submit" class="post-button" onclick="location.href='/signin_process'" style="width: 80px; height: 30px; background-color: white; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto;">
+          <button type="submit" class="post-button" onclick="location.href='/signin_process'">
             Sign Out
           </button>
         </div>
