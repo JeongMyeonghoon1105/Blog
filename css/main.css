@@ -216,7 +216,7 @@ header .inner .main-menu #sign-in:hover {
 }
 
 [data-tooltip-text]:hover:after {
-  background-color: #000000;
+  background-color: black;
   background-color: rgba(0, 0, 0, 0.8);
 
   -webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
@@ -227,7 +227,7 @@ header .inner .main-menu #sign-in:hover {
   -moz-border-radius: 5px;
   border-radius: 5px;
 
-  color: #FFFFFF;
+  color: white;
   font-size: 12px;
   content: attr(data-tooltip-text);
 
@@ -274,29 +274,14 @@ header .inner .main-menu #sign-in:hover {
   margin: 0 auto;
 }
 
-.wrap .inner .card .card-items {
-  /* Display */
+.wrap .inner .card .row {
   display: flex;
-
-  /* 기본 */
-  width: 860px;
-  height: 200px;
-
-  /* 정렬 */
-  position: relative;
-  left: 0;
-  right: 0;
-  margin: 20px;
-
-  /* 기타 */
-  transition: .1s;
-  cursor: pointer;
 }
 
-.wrap .inner .card .card-items .image-area {
+.wrap .inner .card .image-area {
   /* 기본 */
-  width: 250px;
-  height: 160px;
+  width: 401px;
+  height: 280px;
 
   /* 테두리 */
   border: 2px solid var(--bg-color);
@@ -304,44 +289,11 @@ header .inner .main-menu #sign-in:hover {
 
   /* 텍스트 */
   color: #E5EBFA;
-  font-size: 80px;
+  font-size: 100px;
   text-align: center;
 
   /* 정렬 */
   position: relative;
-  margin: 20px 40px;
-}
-
-.wrap .inner .card .card-items .image-area img {
-  /* 기본 */
-  width: 200px;
-  height: 116px;
-
-  /* 정렬 */
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
-.wrap .inner .card .card-items .text-area {
-  /* 기본 */
-  width: 490px;
-  height: 160px;
-
-  /* 정렬 */
-  margin: 20px 40px 20px 0;
-
-  /* 기타 */
-  overflow: hidden;
-}
-
-.wrap .inner .card .card-items .text-area .dividing-line {
-  width: 440px;
-  height: 2px;
-  background-color: lightgray;
 }
 
 .between-items {
@@ -727,12 +679,16 @@ footer .inner {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 800px) {
   header .inner {
     width: 100vw;
   }
 
-  header .main-menu {
+  header .inner #search-bar {
+    display: none;
+  }
+
+  header .inner .main-menu {
     display: none;
   }
 
@@ -746,6 +702,10 @@ footer .inner {
 
   .wrap .inner .card {
     width: 100vw;
+  }
+
+  .wrap .inner .card .row {
+    display: block;
   }
 
   .menu {

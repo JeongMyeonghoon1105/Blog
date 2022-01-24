@@ -90,7 +90,7 @@ var app = http.createServer((request, response) => {
         if (filelist.length == 0) {
           card =
           `
-          <div style="display: inline-block; width: 900px; text-align: center; font: 12px; color: lightgray; padding-top: 15px;">
+          <div style="display: inline-block; text-align: center; font: 12px; color: lightgray; padding-top: 15px; position: absolute; left: 0; right: 0; margin: auto;">
             Sorry. No postings in ${queryData.id} category yet.
           </div>
           `
@@ -208,6 +208,26 @@ var app = http.createServer((request, response) => {
       // CARD(게시물 페이지에 위치해 있을 경우. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
       else if ((queryData.class == 'Life') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Study')) {
         var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
+
+        if (signIn == 1) {
+          card = card + 
+          `
+          <!-- 삭제 & 편집 버튼 -->
+          <div style="width: 800px; height: 20px; display: flex; position: absolute; left: 0; bottom: 0;">
+    
+            <!-- 삭제 버튼 -->
+            <a href="http://localhost:3000/delete_process?id=${queryData.class}&class=${queryData.id}" style="width: 50px; height: 20px; font-size: 15px; text-align: center;">
+              <i class="fas fa-trash"></i>
+            </a>
+    
+            <!-- 편집 버튼 -->
+            <a class="update_button" style="width: 50px; height: 20px; font-size: 15px; text-align: center;">
+              <i class="fas fa-edit"></i>
+            </a>
+    
+          </div>
+          `
+        }
       }
       // CARD(로그인 페이지에 위치해 있을 경우)
       else if (queryData.id == 'SignIn' && signIn == 0) {
@@ -341,35 +361,15 @@ var app = http.createServer((request, response) => {
       // 게시물 페이지에 해당하는 html 코드 데이터를 텍스트 파일로 저장
       fs.writeFileSync(`texts/${category}/${title}`,
       `
-      <!-- CARD -->
-      <div class="card" style="width: 800px; min-height: 100vh; padding: 50px; position: relative;">
+      <!-- 게시물 제목 -->
+      <h1 style="font-size: 30px; font-weight: bold;">${title}</h1><br>
 
-        <!-- 게시물 제목 -->
-        <h1 style="font-size: 30px; font-weight: bold;">${title}</h1><br>
+      <!-- 구분선 -->
+      <div style="width: 800px; height: 2px; background-color: lightgray;"></div><br>
 
-        <!-- 구분선 -->
-        <div style="width: 800px; height: 2px; background-color: lightgray;"></div><br>
-
-        <!-- 내용 -->
-        <div style="font-size: 20px;">
-          ${content}
-        </div>
-
-        <!-- 삭제 & 편집 버튼 -->
-        <div style="width: 800px; height: 20px; display: flex; position: absolute; left: 0; bottom: 0;">
-
-          <!-- 삭제 버튼 -->
-          <a href="http://localhost:3000/delete_process?id=${category}&class=${title}" style="display: ${display}; width: 50px; height: 20px; font-size: 15px; text-align: center;">
-            <i class="fas fa-trash"></i>
-          </a>
-
-          <!-- 편집 버튼 -->
-          <a class="update_button" style="display: ${display}; width: 50px; height: 20px; font-size: 15px; text-align: center;">
-            <i class="fas fa-edit"></i>
-          </a>
-
-        </div>
-
+      <!-- 내용 -->
+      <div style="font-size: 20px;">
+        ${content}
       </div>
       `,
       'utf8');

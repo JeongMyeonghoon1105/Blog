@@ -1,64 +1,37 @@
-<!-- 1st item -->
-<a class="card-items" href="/?id=Life">
-  <div class="image-area">
-    <i class="fas fa-home" style="line-height: 160px;"></i>
-  </div>
-  <div class="text-area">
-    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Life</h1>
-    <div class="dividing-line"></div>
-    <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
-    </div>
-  </div>
-</a>
+<!-- 1st Row -->
+<div class="row">
 
-<!-- Between items -->
-<div class="between-items"></div>
+  <!-- 1st Item -->
+  <a class="image-area" href="/?id=Life" style="margin: 30px 15px 15px 30px;">
+    <i class="fas fa-home" style="line-height: 230px; font-size: 100px;"></i>
+    <div style="width: 401px; height: 2px; background-color: #F4F6FC;"></div>
+    <div style="width: 401px; height: 48px; text-align: center; font-size: 20px; line-height: 48px;">Life</div>
+  </a>
 
-<!-- 2nd item -->
-<a class="card-items" href="/?id=Finance">
-  <div class="image-area">
-    <i class="fas fa-chart-pie" style="line-height: 160px; color: rgb(253, 236, 205);"></i>
-  </div>
-  <div class="text-area">
-    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Finance</h1>
-    <div class="dividing-line"></div>
-    <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
-    </div>
-  </div>
-</a>
+  <!-- 2nd Item -->
+  <a class="image-area" href="/?id=Finance" style="margin: 30px 30px 15px 15px;">
+    <i class="fas fa-chart-pie" style="line-height: 230px; color: #DFFCDF; font-size: 100px;"></i>
+    <div style="width: 401px; height: 2px; background-color: #F4F6FC;"></div>
+    <div style="width: 401px; height: 48px; text-align: center; font-size: 20px; line-height: 48px;">Finance</div>
+  </a>
+  
+</div>
 
-<!-- Between items -->
-<div class="between-items"></div>
+<!-- 2nd Row -->
+<div class="row">
 
-<!-- 3rd item -->
-<a class="card-items" href="/?id=Exercise">
-  <div class="image-area">
-    <i class="fas fa-running" style="line-height: 160px; color: rgb(205, 253, 211);"></i>
-  </div>
-  <div class="text-area">
-    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Exercise</h1>
-    <div class="dividing-line"></div>
-    <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
-    </div>
-  </div>
-</a>
+  <!-- 3rd Item -->
+  <a class="image-area" href="/?id=Exercise" style="margin: 15px 15px 30px 30px;">
+    <i class="fas fa-home" style="line-height: 230px; color: #FDECCD; font-size: 100px;"></i>
+    <div style="width: 401px; height: 2px; background-color: #F4F6FC;"></div>
+    <div style="width: 401px; height: 48px; text-align: center; font-size: 20px; line-height: 48px;">Exercise</div>
+  </a>
 
-<!-- Between items -->
-<div class="between-items"></div>
+  <!-- 4th Item -->
+  <a class="image-area" href="/?id=Study" style="margin: 15px 30px 30px 15px;">
+    <i class="fas fa-chart-pie" style="line-height: 230px; color: #FDCDF7; font-size: 100px;"></i>
+    <div style="width: 401px; height: 2px; background-color: #F4F6FC;"></div>
+    <div style="width: 401px; height: 48px; text-align: center; font-size: 20px; line-height: 48px;">Study</div>
+  </a>
 
-<!-- 4th item -->
-<a class="card-items" href="/?id=Study">
-  <div class="image-area">
-    <i class="fas fa-book" style="line-height: 160px; color: rgb(255, 223, 242);"></i>
-  </div>
-  <div class="text-area">
-    <h1 style="font-size: 20px; font-weight: bold; display: inline-block; padding: 10px 5px;">Study</h1>
-    <div class="dividing-line"></div>
-    <div style="width: 430px; height: 270px; padding: 5px; text-align: justify;">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices tortor eu justo pharetra tempor.
-    </div>
-  </div>
-</a>
+</div>
