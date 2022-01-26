@@ -2,7 +2,7 @@
 <div class="writting-area">
 
   <!-- Form for New Contents -->
-  <form action="http://localhost:3000/post_process" method="post" style="width: 800px; height: 510px">
+  <form action="http://localhost:3000/post_process" method="post">
     <!-- Title -->
     <div class="title">
       <textarea name="title" id="title-input" rows="1" cols="55" placeholder="Title" maxlength="100"
@@ -38,6 +38,8 @@
     </div>
     -->
 
+    <div class="br"></div>
+    <div class="br"></div>
     <div class="br"></div>
 
     <!-- Post Button -->

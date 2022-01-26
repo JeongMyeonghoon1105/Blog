@@ -280,22 +280,23 @@ header .inner .main-menu #sign-in:hover {
 
 .sign-in-form {
   /* 기본 */
-  width: 460px;
-  height: 300px;
+  width: 375px;
+  height: 230px;
   background-color: #F4F6FC;
 
   /* 테두리 */
   border-radius: 10px;
 
   /* 정렬 */
-  position: relative;
-  margin: 150px 220px;
-  padding-top: 50px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 50px auto;
 }
 
 .password {
   /* 기본 */
-  width: 360px;
+  width: 305px;
   height: 50px;
   background-color: white;
 
@@ -304,12 +305,12 @@ header .inner .main-menu #sign-in:hover {
   border-radius: 50px;
 
   /* 정렬 */
-  margin: 50px;
+  margin: 50px 35px;
 }
 
 .password-textarea {
   /* 기본 */
-  width: 330px;
+  width: 305px;
   height: 50px;
 
   /* 테두리 */
@@ -319,13 +320,13 @@ header .inner .main-menu #sign-in:hover {
   /* 텍스트 */
   line-height: 50px;
 
-  /* 정렬 */
-  margin: 0 15px;
+  /* 기타 */
+  overflow: hidden;
 }
 
 .sign-in-button {
   /* 기본 */
-  width: 80px;
+  width: 85px;
   height: 30px;
   background-color: white;
 
@@ -337,7 +338,7 @@ header .inner .main-menu #sign-in:hover {
   color: gray;
 
   /* 정렬 */
-  margin: 0 190px;
+  margin: 0 145px;
 
   /* 기타 */
   cursor: pointer;
@@ -428,7 +429,17 @@ header .inner .main-menu #sign-in:hover {
   height: 530px;
 
   /* 정렬 */
-  margin: 30px 50px 0 50px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 30px auto;
+}
+
+.wrap .inner .card .writting-area form {
+  width: 100%;
+  height: 510px;
+
+  position: relative;
 }
 
 .wrap .inner .card .writting-area form .title {
@@ -494,6 +505,10 @@ header .inner .main-menu #sign-in:hover {
   font-size: 15px;
 
   /* 정렬 */
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   padding: 0 10px;
 }
 
@@ -594,26 +609,46 @@ footer .inner {
     left: 0;
   }
 
-  .wrap .inner .card .description-area {
-    width: 800px;
-
-    margin: 30px auto 0 auto;
-  }
-
-  .wrap .inner .card .row {
-    width: 800px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 30px auto;
-  }
-
   .menu {
     display: none;
   }
 
   footer .inner {
     width: 100vw;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .wrap .inner .card .writting-area {
+    width: 90vw;
+  }
+
+  .wrap .inner .card .writting-area form {
+    width: 90vw;
+  }
+
+  .wrap .inner .card .writting-area form .title {
+    width: 90vw;
+  }
+
+  .wrap .inner .card .writting-area form .title #title-input {
+    width: 90vw;
+  }
+
+  .wrap .inner .card .writting-area form .br {
+    width: 90vw;
+  }
+
+  .wrap .inner .card .writting-area form div #contents-input {
+    width: 90vw;
+  }
+
+  .wrap .inner .card .writting-area form .category {
+    width: 80vw;
+  }
+
+  .wrap .inner .card .writting-area form .category #category-input {
+    width: 80vw;
   }
 }
 
@@ -640,27 +675,6 @@ footer .inner {
 
   .wrap .inner .card {
     width: 100vw;
-  }
-
-  .wrap .inner .card .description-area {
-    width: 375px;
-
-    margin: 30px auto 0 auto;
-  }
-
-  .wrap .inner .card .row {
-    display: block;
-
-    width: 375px;
-
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 30px auto;
-  }
-
-  .wrap .inner .card .row .column .column-right-items {
-    margin: 0 0 50px 0;
   }
 
   .menu {

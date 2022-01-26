@@ -50,11 +50,11 @@ var app = http.createServer((request, response) => {
 
     <!-- 암호 입력란 -->
     <div class="password">
-      <textarea class="password-textarea" name="password" rows="1" cols="55" placeholder="Password" maxlength="100" required></textarea>
+      <input type="password" class="password-textarea" name="password" rows="1" cols="55" placeholder="Password" maxlength="100" required></input>
     </div>
 
     <!-- 로그인 버튼 -->
-    <div style="width: 460px; height: 30px;">
+    <div>
       <button type="submit" class="sign-in-button">
         Sign In
       </button>
@@ -254,7 +254,7 @@ var app = http.createServer((request, response) => {
     // CARD(Post 페이지에 위치해 있을 경우)
     else {
       var style = fs.readFileSync('./css/else.css', 'utf8');
-      
+
       if (signIn == 0) {
         response.writeHead(302, {
           Location: encodeURI('/')
