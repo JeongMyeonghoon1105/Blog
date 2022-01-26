@@ -17,7 +17,7 @@
       </div>
     </div>
     <div style="width: 375px; height: 375px; margin: 0 25px 50px 0;">
-      <img src="" alt="React" style="width: 375px; height: 225px;">
+      <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/JS.jpg?raw=true" alt="React" style="width: 375px; height: 225px;">
       <div style="width: 345px; height: 120px; background-color: white; padding: 15px;">
         <text style="font-size: 19px; line-height: 35px;">JavaScript</text>
         <div style="width: 345px; height: 15px;"></div>

@@ -2,8 +2,8 @@
 
 :root {
   /* #F4F6FC */
-  --bg-color: rgb(245, 245, 253);
-  --card-color: rgb(245, 245, 253);
+  --bg-color: rgb(248, 248, 253);
+  --card-color: white;
   --border-color: #E9E9E9;
   --contents-height: 100vh;
 }
@@ -60,9 +60,8 @@ header {
   height: 60px;
   background-color: white;
 
-  /* 테두리
-  border-bottom: 2px solid var(--border-color);
-  */
+  /* 테두리 */
+  border-bottom: 2px solid var(--bg-color);
 
   /* 정렬 */
   position: relative;

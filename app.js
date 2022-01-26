@@ -274,6 +274,8 @@ var app = http.createServer((request, response) => {
         var wrapHeight = 'height: 560px;';
         var innerHeight = 'height: 560px;';
         var cardHeight = 'height: 560px;';
+      } else if (queryData.id === undefined) {
+        var cardHeight = 'background-color: rgb(248, 248, 253)';
       } else {
         var bodyHeight = '/* */';
         var wrapHeight = '/* */';
