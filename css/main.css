@@ -277,7 +277,45 @@ header .inner .main-menu #sign-in:hover {
 
 .wrap .inner .card .row {
   display: flex;
+
   margin: 30px 50px;
+}
+
+.wrap .inner .card .row .column .column-left-items {
+  width: 375px;
+  height: 375px;
+
+  margin: 0 25px 50px 0;
+}
+
+.wrap .inner .card .row .column .column-right-items {
+  width: 375px;
+  height: 375px;
+
+  margin: 0 0 50px 25px;
+}
+
+.wrap .inner .card .row .column img {
+  width: 375px;
+  height: 225px;
+}
+
+.wrap .inner .card .row .column .item-text {
+  width: 345px;
+  height: 120px;
+  background-color: white;
+
+  padding: 15px;
+}
+
+.wrap .inner .card .row .column .item-text .item-text-title {
+  font-size: 19px;
+  line-height: 35px;
+}
+
+.wrap .inner .card .row .column .item-text .between-padding {
+  width: 345px;
+  height: 15px;
 }
 
 /* WRAP - Sign In */
@@ -680,6 +718,10 @@ footer .inner {
 
   .wrap .inner .card .row {
     display: block;
+  }
+
+  .wrap .inner .card .row .column .column-right-items {
+    margin: 0 0 50px 0;
   }
 
   .menu {
