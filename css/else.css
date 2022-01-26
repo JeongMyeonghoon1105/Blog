@@ -8,6 +8,7 @@
   --contents-height: 100vh;
 }
 
+
 /* COMMON */
 
 body {
@@ -275,53 +276,6 @@ header .inner .main-menu #sign-in:hover {
   margin: 0 auto;
 }
 
-.wrap .inner .card .description-area {
-  margin: 30px 50px 0 50px;
-}
-
-.wrap .inner .card .row {
-  display: flex;
-
-  margin: 30px 50px;
-}
-
-.wrap .inner .card .row .column .column-left-items {
-  width: 375px;
-  height: 375px;
-
-  margin: 0 25px 50px 0;
-}
-
-.wrap .inner .card .row .column .column-right-items {
-  width: 375px;
-  height: 375px;
-
-  margin: 0 0 50px 25px;
-}
-
-.wrap .inner .card .row .column img {
-  width: 375px;
-  height: 225px;
-}
-
-.wrap .inner .card .row .column .item-text {
-  width: 345px;
-  height: 120px;
-  background-color: white;
-
-  padding: 15px;
-}
-
-.wrap .inner .card .row .column .item-text .item-text-title {
-  font-size: 19px;
-  line-height: 35px;
-}
-
-.wrap .inner .card .row .column .item-text .between-padding {
-  width: 345px;
-  height: 15px;
-}
-
 /* WRAP - Sign In */
 
 .sign-in-form {
@@ -557,53 +511,6 @@ header .inner .main-menu #sign-in:hover {
   color: gray;
   font-size: 15px;
 }
-
-/*
-.file-selection {
-  width: 800px;
-  height: 30px;
-
-  top: 0;
-  bottom: 0;
-  margin: 10px 0;
-}
-
-.file-name {
-  display: inline-block;
-
-  width: 300px;
-  height: 30px;
-
-  padding: 0 10px;
-  vertical-align: middle;
-  border: 1px solid var(--bg-color);
-  color: #999999;
-}
-
-.file-label {
-  display: inline-block;
-
-  width: 30px;
-  height: 30px;
-  background-color: var(--bg-color);
-
-  text-align: center;
-  color: lightgray;
-  vertical-align: middle;
-  cursor: pointer;
-  margin-left: 5px;
-}
-
-.file-style-reset {
-  width: 0;
-  height: 0;
-
-  position: absolute;
-  padding: 0;
-  border: none;
-  overflow: hidden;
-}
-*/
 
 .wrap .inner .card .writting-area form .post-button {
   /* 기본 */
