@@ -17,11 +17,11 @@
       </div>
     </div>
     <div style="width: 375px; height: 375px; margin: 0 25px 50px 0;">
-      <img src="https://cdn.pixabay.com/photo/2022/01/17/12/37/venice-6944590_1280.jpg" alt="React" style="width: 375px; height: 225px;">
+      <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/Vue.jpg?raw=true" alt="React" style="width: 375px; height: 225px;">
       <div style="width: 345px; height: 120px; background-color: white; padding: 15px;">
-        <text style="font-size: 19px; line-height: 35px;">React</text>
+        <text style="font-size: 19px; line-height: 35px;">Vue.js</text>
         <div style="width: 345px; height: 15px;"></div>
-        React는 유저 인터페이스 제작에 활용되는 오픈소스 JavaScript 라이브러리이다.
+        Vue.js는 ...
       </div>
     </div>
   </div>
