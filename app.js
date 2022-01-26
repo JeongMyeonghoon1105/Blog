@@ -84,11 +84,18 @@ var app = http.createServer((request, response) => {
     else if ((queryData.id == 'Life') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Study')) {
       var style = fs.readFileSync('./css/else.css', 'utf8');
       var filelist = fs.readdirSync(`./texts/${queryData.id}`);
-      var card = '';
+      var card = 
+      `
+      <div class="description-area">
+        <h1 style="font-size: 20px; font-weight: bold; font-family: 'Nanum Gothic', 'sans-serif';">
+          ${queryData.id}
+        </h1>
+      </div>
+      `;
 
       // 현재 카테고리에 게시물이 없을 때 안내 메시지 표시
       if (filelist.length == 0) {
-        card =
+        card = card +
         `
         <div style="display: inline-block; text-align: center; font: 12px; color: lightgray; padding-top: 15px; position: absolute; left: 0; right: 0; margin: auto;">
           Sorry. No postings in ${queryData.id} category yet.
@@ -137,6 +144,7 @@ var app = http.createServer((request, response) => {
     else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
       var style = fs.readFileSync('./css/else.css', 'utf8');
       
+      // 로그인하지 않았을 시 해당 페이지 접속 차단
       if (signIn == 0) {
         response.writeHead(302, {
           Location: encodeURI('/')
@@ -145,8 +153,18 @@ var app = http.createServer((request, response) => {
       }
       
       var directorylist = fs.readdirSync(`texts/Trash`);
-      var card = '';
+      var card =
+      `
+      <div class="description-area">
+        <h1 style="font-size: 20px; font-weight: bold; font-family: 'Nanum Gothic', 'sans-serif';">
+          Trash
+        </h1>
+      </div>
+      `;
       
+      // 휴지통이 비었는지 확인하는 동시에, 휴지통에 파일이 존재하면 해당 파일의 내용을 변수에 덧붙이기
+      var filesInTrash = 0;
+
       directorylist.forEach((elem) => {
         var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
 
@@ -183,14 +201,18 @@ var app = http.createServer((request, response) => {
 
           </div>
           `;
+
+          if (filelist.length != 0) {
+            filesInTrash = 1;
+          }
         });
       });
 
       // 휴지통이 비었을 때, 안내 메시지를 출력
-      if (card == '') {
-        card =
+      if (filesInTrash == 0) {
+        card = card +
         `
-        <div style="display: inline-block; width: 900px; text-align: center; font: 12px; color: lightgray; padding-top: 15px;">
+        <div style="display: inline-block; text-align: center; font: 12px; color: lightgray; padding-top: 15px; position: absolute; left: 0; right: 0; margin: auto;">
           Trash is empty.
         </div>
         `
@@ -237,19 +259,15 @@ var app = http.createServer((request, response) => {
     // CARD(로그인 페이지에 위치해 있을 경우)
     else if (queryData.id == 'SignIn' && signIn == 0) {
       var style = fs.readFileSync('./css/else.css', 'utf8');
-      var card = login_form;
-    }
-    // CARD(로그아웃 페이지에 위치해 있을 경우)
-    else if (queryData.id == 'SignIn') {
-      var style = fs.readFileSync('./css/else.css', 'utf8');
       var card = 
       `
-      <div class="sign-in-form" style="padding-top: 0;">
-        <button type="submit" class="post-button" onclick="location.href='/signin_process'">
-          Sign Out
-        </button>
+      <div class="description-area">
+        <h1 style="font-size: 20px; font-weight: bold; font-family: 'Nanum Gothic', 'sans-serif';">
+          Sign In
+        </h1>
       </div>
       `
+      + login_form;
     }
     // CARD(Post 페이지에 위치해 있을 경우)
     else {
@@ -262,7 +280,15 @@ var app = http.createServer((request, response) => {
         response.end();
       }
       
-      var card = fs.readFileSync(`./texts/${queryData.id}`, 'utf8');
+      var card =
+      `
+      <div class="description-area">
+        <h1 style="font-size: 20px; font-weight: bold; font-family: 'Nanum Gothic', 'sans-serif';">
+          Post
+        </h1>
+      </div>
+      `
+      + fs.readFileSync(`./texts/${queryData.id}`, 'utf8');
     }
 
     // MENU

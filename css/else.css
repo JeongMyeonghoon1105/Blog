@@ -276,6 +276,12 @@ header .inner .main-menu #sign-in:hover {
   margin: 0 auto;
 }
 
+.wrap .inner .card .description-area {
+  width: 800px;
+
+  margin: 30px auto 0 auto;
+}
+
 /* WRAP - Sign In */
 
 .sign-in-form {
