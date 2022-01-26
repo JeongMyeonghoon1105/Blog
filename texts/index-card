@@ -1,37 +1,49 @@
-<!-- 1st Row -->
-<div class="row">
-
-  <!-- 1st Item -->
-  <a class="image-area" href="/?id=Life" style="margin: 30px 15px 15px 30px;">
-    <i class="fas fa-home" style="line-height: 230px; font-size: 100px;"></i>
-    <div style="width: 401px; height: 2px; background-color: #F4F6FC;"></div>
-    <div style="width: 401px; height: 48px; text-align: center; font-size: 20px; line-height: 48px;">Life</div>
-  </a>
-
-  <!-- 2nd Item -->
-  <a class="image-area" href="/?id=Finance" style="margin: 30px 30px 15px 15px;">
-    <i class="fas fa-chart-pie" style="line-height: 230px; color: #DFFCDF; font-size: 100px;"></i>
-    <div style="width: 401px; height: 2px; background-color: #F4F6FC;"></div>
-    <div style="width: 401px; height: 48px; text-align: center; font-size: 20px; line-height: 48px;">Finance</div>
-  </a>
-  
+<div style="margin: 30px 50px 0 50px;">
+  <h1 style="font-size: 20px; font-weight: bold; font-family: 'Nanum Gothic', 'sans-serif';">
+    Featured Posts
+  </h1>
 </div>
 
-<!-- 2nd Row -->
 <div class="row">
+  
+  <!-- 1st Column -->
+  <div>
+    <div style="width: 375px; height: 375px; margin: 0 25px 50px 0;">
+      <img src="https://cdn.pixabay.com/photo/2022/01/17/12/37/venice-6944590_1280.jpg" alt="React" style="width: 375px; height: 225px;">
+      <div style="width: 345px; height: 120px; background-color: white; padding: 15px;">
+        <text style="font-size: 19px; line-height: 35px;">React</text>
+        <div style="width: 345px; height: 15px;"></div>
+        React는 유저 인터페이스 제작에 활용되는 오픈소스 JavaScript 라이브러리이다.
+      </div>
+    </div>
+    <div style="width: 375px; height: 375px; margin: 0 25px 50px 0;">
+      <img src="https://cdn.pixabay.com/photo/2022/01/17/12/37/venice-6944590_1280.jpg" alt="React" style="width: 375px; height: 225px;">
+      <div style="width: 345px; height: 120px; background-color: white; padding: 15px;">
+        <text style="font-size: 19px; line-height: 35px;">React</text>
+        <div style="width: 345px; height: 15px;"></div>
+        React는 유저 인터페이스 제작에 활용되는 오픈소스 JavaScript 라이브러리이다.
+      </div>
+    </div>
+  </div>
 
-  <!-- 3rd Item -->
-  <a class="image-area" href="/?id=Exercise" style="margin: 15px 15px 30px 30px;">
-    <i class="fas fa-home" style="line-height: 230px; color: #FDECCD; font-size: 100px;"></i>
-    <div style="width: 401px; height: 2px; background-color: #F4F6FC;"></div>
-    <div style="width: 401px; height: 48px; text-align: center; font-size: 20px; line-height: 48px;">Exercise</div>
-  </a>
-
-  <!-- 4th Item -->
-  <a class="image-area" href="/?id=Study" style="margin: 15px 30px 30px 15px;">
-    <i class="fas fa-chart-pie" style="line-height: 230px; color: #FDCDF7; font-size: 100px;"></i>
-    <div style="width: 401px; height: 2px; background-color: #F4F6FC;"></div>
-    <div style="width: 401px; height: 48px; text-align: center; font-size: 20px; line-height: 48px;">Study</div>
-  </a>
-
+  <!-- 2nd Column -->
+  <div>
+    <div style="width: 375px; height: 420px; margin: 0 0 50px 25px;">
+      <img src="https://cdn.pixabay.com/photo/2022/01/17/12/37/venice-6944590_1280.jpg" alt="React" style="width: 375px; height: 225px;">
+      <div style="width: 345px; height: 165px; background-color: white; padding: 15px;">
+        <text style="font-size: 19px; line-height: 35px;">Github</text>
+        <div style="width: 345px; height: 15px;"></div>
+        React는 유저 인터페이스 제작에 활용되는 오픈소스 JavaScript 라이브러리이다. meta에서 개발하였다.
+      </div>
+    </div>
+    <div style="width: 375px; height: 375px; margin: 0 0 50px 25px;">
+      <img src="https://cdn.pixabay.com/photo/2022/01/17/12/37/venice-6944590_1280.jpg" alt="React" style="width: 375px; height: 225px;">
+      <div style="width: 345px; height: 120px; background-color: white; padding: 15px;">
+        <text style="font-size: 19px; line-height: 35px;">React</text>
+        <div style="width: 345px; height: 15px;"></div>
+        React는 유저 인터페이스 제작에 활용되는 오픈소스 JavaScript 라이브러리이다.
+      </div>
+    </div>
+  </div>
+  
 </div>

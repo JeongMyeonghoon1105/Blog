@@ -7,8 +7,7 @@
 // Search
 // Sort
 // Add Date of Posting
-// Uploading Photos
-// Sign Up
+// Uploading Photos      //
 // Sign In               //
 // Responsive UI Design
 

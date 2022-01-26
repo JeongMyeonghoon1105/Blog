@@ -1,11 +1,12 @@
 /* VARIABLES */
 
 :root {
-  --bg-color: #F4F6FC;
+  /* #F4F6FC */
+  --bg-color: rgb(250, 250, 253);
+  --card-color: rgb(250, 250, 253);
   --border-color: #E9E9E9;
   --contents-height: 100vh;
 }
-
 
 /* COMMON */
 
@@ -59,8 +60,9 @@ header {
   height: 60px;
   background-color: white;
 
-  /* 테두리 */
+  /* 테두리
   border-bottom: 2px solid var(--border-color);
+  */
 
   /* 정렬 */
   position: relative;
@@ -266,7 +268,7 @@ header .inner .main-menu #sign-in:hover {
   /* 기본 */
   width: 900px;
   min-height: var(--contents-height);
-  background-color: white;
+  background-color: var(--card-color);
 
   /* 정렬 */
   position: relative;
@@ -276,34 +278,7 @@ header .inner .main-menu #sign-in:hover {
 
 .wrap .inner .card .row {
   display: flex;
-}
-
-.wrap .inner .card .image-area {
-  /* 기본 */
-  width: 401px;
-  height: 280px;
-
-  /* 테두리 */
-  border: 2px solid var(--bg-color);
-  border-radius: 10px;
-
-  /* 텍스트 */
-  color: #E5EBFA;
-  font-size: 100px;
-  text-align: center;
-
-  /* 정렬 */
-  position: relative;
-}
-
-.between-items {
-  /* 기본 */
-  width: 800px;
-  height: 3px;
-  background-color: var(--bg-color);
-
-  /* 정렬 */
-  margin: 0 auto;
+  margin: 30px 50px;
 }
 
 /* WRAP - Sign In */
