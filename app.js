@@ -65,278 +65,290 @@ var app = http.createServer((request, response) => {
 
   // pathname이 '/'일 때
   if (pathname === '/') {
-    fs.readFile('./css/main.css', (err, data) => {
-      // HEAD
-      var head = fs.readFileSync('./texts/index-head', 'utf8');
+    // HEAD
+    var head = fs.readFileSync('./texts/index-head', 'utf8');
 
-      // HEADER
-      if (signIn == 0) {
-        var header = fs.readFileSync('./texts/index-header-unsigned', 'utf8');
-      } else {
-        var header = fs.readFileSync('./texts/index-header-signed', 'utf8');
-      }
+    // HEADER
+    if (signIn == 0) {
+      var header = fs.readFileSync('./texts/index-header-unsigned', 'utf8');
+    } else {
+      var header = fs.readFileSync('./texts/index-header-signed', 'utf8');
+    }
 
-      // CARD(메인 페이지에 위치해 있어 Query String이 없을 경우)
-      if (queryData.id === undefined) {
-        var card = fs.readFileSync('./texts/index-card', 'utf8');
-      }
-      // CARD(카테고리 페이지에 위치해 있을 경우. 카테고리 페이지에서는 id가 카테고리명, class가 게시물 제목)
-      else if ((queryData.id == 'Life') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Study')) {
-        var filelist = fs.readdirSync(`./texts/${queryData.id}`);
-        var card = '';
+    // CARD(메인 페이지에 위치해 있어 Query String이 없을 경우)
+    if (queryData.id === undefined) {
+      var style = fs.readFileSync('./css/main.css', 'utf8');
+      var card = fs.readFileSync('./texts/index-card', 'utf8');
+    }
+    // CARD(카테고리 페이지에 위치해 있을 경우. 카테고리 페이지에서는 id가 카테고리명, class가 게시물 제목)
+    else if ((queryData.id == 'Life') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Study')) {
+      var style = fs.readFileSync('./css/else.css', 'utf8');
+      var filelist = fs.readdirSync(`./texts/${queryData.id}`);
+      var card = '';
 
-        // 현재 카테고리에 게시물이 없을 때 안내 메시지 표시
-        if (filelist.length == 0) {
-          card =
-          `
-          <div style="display: inline-block; text-align: center; font: 12px; color: lightgray; padding-top: 15px; position: absolute; left: 0; right: 0; margin: auto;">
-            Sorry. No postings in ${queryData.id} category yet.
-          </div>
-          `
-        }
-        // 현재 카테고리에 이미 게시물이 존재할 때
-        else {
-          // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
-          filelist.forEach((element) => {
-            card = card +
-            `
-            <!-- Item -->
-            <div style="width: 800px; height: 50px; margin: 20px 50px; border-bottom: 2px solid lightgray;">
-
-              <!-- 텍스트 -->
-              <div style="display: flex; width: 800px; height: 30px; padding: 10px 0;">
-                <a href="/?id=${element}&class=${queryData.id}"
-                  style="display: block; width: 750px; height: 30px; text-align: justify; overflow: hidden; line-height: 30px;">
-                  ${element}
-                </a>
-
-                <!-- 삭제 & 편집 버튼 -->
-                <div style="display: flex; width: 50px; height: 30px;">
-
-                  <!-- 삭제 버튼 -->
-                  <a class="delete_button" href="http://localhost:3000/delete_process?id=${queryData.id}&class=${element}"
-                    style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
-                    <i class="fas fa-trash" style="line-height: 30px;"></i>
-                  </a>
-
-                  <!-- 편집 버튼 -->
-                  <a class="update_button" style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
-                    <i class="fas fa-edit" style="line-height: 30px;"></i>
-                  </a>
-
-                </div>
-              </div>
-
-            </div>
-            `;
-          });
-        }
-      }
-      // CARD(휴지통 내에 보관된 삭제 게시물의 리스트를 표출하는 페이지에 위치해 있을 경우)
-      else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
-        if (signIn == 0) {
-          response.writeHead(302, {
-            Location: encodeURI('/')
-          });
-          response.end();
-        }
-        
-        var directorylist = fs.readdirSync(`texts/Trash`);
-        var card = '';
-        
-        directorylist.forEach((elem) => {
-          var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
-
-          // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
-          filelist.forEach((element) => {
-            card = card +
-            `
-            <!-- Item -->
-            <div style="width: 800px; height: 50px; margin: 20px 50px; border-bottom: 2px solid lightgray;">
-
-              <!-- 텍스트 -->
-              <div style="display: flex; width: 800px; height: 30px; padding: 10px 0;">
-                <a href="/?id=Trash&class=${elem}&title=${element}"
-                  style="display: block; width: 750px; height: 30px; text-align: justify; overflow: hidden; line-height: 30px;">
-                  ${element}
-                </a>
-
-                <!-- 삭제 & 편집 버튼 -->
-                <div style="display: flex; width: 50px; height: 30px;">
-
-                  <!-- 삭제 버튼 -->
-                  <a class="delete_button" href="http://localhost:3000/clear_process?id=Trash&class=${elem}&title=${element}"
-                    style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
-                    <i class="fas fa-trash" style="line-height: 30px;"></i>
-                  </a>
-
-                  <!-- 편집 버튼 -->
-                  <a class="update_button" style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
-                    <i class="fas fa-edit" style="line-height: 30px;"></i>
-                  </a>
-
-                </div>
-              </div>
-
-            </div>
-            `;
-          });
-        });
-
-        // 휴지통이 비었을 때, 안내 메시지를 출력
-        if (card == '') {
-          card =
-          `
-          <div style="display: inline-block; width: 900px; text-align: center; font: 12px; color: lightgray; padding-top: 15px;">
-            Trash is empty.
-          </div>
-          `
-        }
-      }
-      // CARD(휴지통 내 게시물 페이지에 위치해 있을 경우)
-      else if (queryData.id == 'Trash'){
-        if (signIn == 0) {
-          response.writeHead(302, {
-            Location: encodeURI('/')
-          });
-          response.end();
-        }
-
-        var card = fs.readFileSync(`./texts/Trash/${queryData.class}/${queryData.title}`, 'utf8');
-      }
-      // CARD(게시물 페이지에 위치해 있을 경우. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
-      else if ((queryData.class == 'Life') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Study')) {
-        var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
-
-        if (signIn == 1) {
-          card = card + 
-          `
-          <!-- 삭제 & 편집 버튼 -->
-          <div style="width: 800px; height: 20px; display: flex; position: absolute; left: 0; bottom: 0; margin: 50px;">
-    
-            <!-- 삭제 버튼 -->
-            <a href="http://localhost:3000/delete_process?id=${queryData.class}&class=${queryData.id}" style="width: 50px; height: 20px; font-size: 15px; text-align: center;">
-              <i class="fas fa-trash"></i>
-            </a>
-    
-            <!-- 편집 버튼 -->
-            <a class="update_button" style="width: 50px; height: 20px; font-size: 15px; text-align: center;">
-              <i class="fas fa-edit"></i>
-            </a>
-    
-          </div>
-          `
-        }
-      }
-      // CARD(로그인 페이지에 위치해 있을 경우)
-      else if (queryData.id == 'SignIn' && signIn == 0) {
-        var card = login_form;
-      }
-      // CARD(로그아웃 페이지에 위치해 있을 경우)
-      else if (queryData.id == 'SignIn') {
-        var card = 
+      // 현재 카테고리에 게시물이 없을 때 안내 메시지 표시
+      if (filelist.length == 0) {
+        card =
         `
-        <div class="sign-in-form" style="padding-top: 0;">
-          <button type="submit" class="post-button" onclick="location.href='/signin_process'">
-            Sign Out
-          </button>
+        <div style="display: inline-block; text-align: center; font: 12px; color: lightgray; padding-top: 15px; position: absolute; left: 0; right: 0; margin: auto;">
+          Sorry. No postings in ${queryData.id} category yet.
         </div>
         `
       }
-      // CARD(Post 페이지에 위치해 있을 경우)
+      // 현재 카테고리에 이미 게시물이 존재할 때
       else {
-        if (signIn == 0) {
-          response.writeHead(302, {
-            Location: encodeURI('/')
-          });
-          response.end();
-        }
-        
-        var card = fs.readFileSync(`./texts/${queryData.id}`, 'utf8');
-      }
+        // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
+        filelist.forEach((element) => {
+          card = card +
+          `
+          <!-- Item -->
+          <div style="width: 800px; height: 50px; margin: 20px 50px; border-bottom: 2px solid lightgray;">
 
-      // MENU
-      var list =
-      `
-      <li><a href="/?id=Life">Life(${Life_Postings})</a></li>
-      <li><a href="/?id=Finance">Finance(${Finance_Postings})</a></li>
-      <li><a href="/?id=Exercise">Exercise(${Exercise_Postings})</a></li>
-      <li><a href="/?id=Study">Study(${Study_Postings})</a></li>
-      <li><a href="/?id=Trash" style="display: ${display}">Trash</a></li>
-      `;
+            <!-- 텍스트 -->
+            <div style="display: flex; width: 800px; height: 30px; padding: 10px 0;">
+              <a href="/?id=${element}&class=${queryData.id}"
+                style="display: block; width: 750px; height: 30px; text-align: justify; overflow: hidden; line-height: 30px;">
+                ${element}
+              </a>
 
-      // FOOTER
-      var footer = fs.readFileSync('./texts/index-footer', 'utf8');
+              <!-- 삭제 & 편집 버튼 -->
+              <div style="display: flex; width: 50px; height: 30px;">
 
-      // 포스트 페이지에서는 페이지 height를 100vh로 줄이기
-      if (queryData.id == 'post') {
-        var bodyHeight = 'height: 610px;';
-        var wrapHeight = 'height: 560px;';
-        var innerHeight = 'height: 560px;';
-        var cardHeight = 'height: 560px;';
-      } else if (queryData.id === undefined) {
-        var cardHeight = 'background-color: rgb(248, 248, 253)';
-      } else {
-        var bodyHeight = '/* */';
-        var wrapHeight = '/* */';
-        var innerHeight = '/* */';
-        var cardHeight = '/* */';
-      }
+                <!-- 삭제 버튼 -->
+                <a class="delete_button" href="http://localhost:3000/delete_process?id=${queryData.id}&class=${element}"
+                  style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
+                  <i class="fas fa-trash" style="line-height: 30px;"></i>
+                </a>
 
-      // 로드될 HTML 코드를 변수에 저장
-      var template =
-      `
-      <html lang="ko">
-  
-      <head>
-        ${head}
-  
-        <style>
-          ${data}
-        </style>
+                <!-- 편집 버튼 -->
+                <a class="update_button" style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
+                  <i class="fas fa-edit" style="line-height: 30px;"></i>
+                </a>
 
-      </head>
-      
-      <body style="${bodyHeight}">
-        <style>
-          ${display}
-        </style>
-
-        <!-- HEADER -->
-        ${header}
-        
-        <!-- WRAP -->
-        <div class="wrap" style="${wrapHeight}">
-          <div class="inner" style="${innerHeight}">
-            <!-- CARD -->
-            <div class="card" style="${cardHeight}">
-              ${card}
-            </div>
-            <!-- MENU -->
-            <div class="menu">
-              <div class="contents">
-                <h1>Menu</h1><br>
-                <ul style="list-style-type: none; font-size: 15px;">
-                  ${list}
-                </ul><br>
-                <h2 class="post_button" style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=post'">Post</h2>
               </div>
+            </div>
+
+          </div>
+          `;
+        });
+      }
+    }
+    // CARD(휴지통 내에 보관된 삭제 게시물의 리스트를 표출하는 페이지에 위치해 있을 경우)
+    else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
+      var style = fs.readFileSync('./css/else.css', 'utf8');
+      
+      if (signIn == 0) {
+        response.writeHead(302, {
+          Location: encodeURI('/')
+        });
+        response.end();
+      }
+      
+      var directorylist = fs.readdirSync(`texts/Trash`);
+      var card = '';
+      
+      directorylist.forEach((elem) => {
+        var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
+
+        // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
+        filelist.forEach((element) => {
+          card = card +
+          `
+          <!-- Item -->
+          <div style="width: 800px; height: 50px; margin: 20px 50px; border-bottom: 2px solid lightgray;">
+
+            <!-- 텍스트 -->
+            <div style="display: flex; width: 800px; height: 30px; padding: 10px 0;">
+              <a href="/?id=Trash&class=${elem}&title=${element}"
+                style="display: block; width: 750px; height: 30px; text-align: justify; overflow: hidden; line-height: 30px;">
+                ${element}
+              </a>
+
+              <!-- 삭제 & 편집 버튼 -->
+              <div style="display: flex; width: 50px; height: 30px;">
+
+                <!-- 삭제 버튼 -->
+                <a class="delete_button" href="http://localhost:3000/clear_process?id=Trash&class=${elem}&title=${element}"
+                  style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
+                  <i class="fas fa-trash" style="line-height: 30px;"></i>
+                </a>
+
+                <!-- 편집 버튼 -->
+                <a class="update_button" style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
+                  <i class="fas fa-edit" style="line-height: 30px;"></i>
+                </a>
+
+              </div>
+            </div>
+
+          </div>
+          `;
+        });
+      });
+
+      // 휴지통이 비었을 때, 안내 메시지를 출력
+      if (card == '') {
+        card =
+        `
+        <div style="display: inline-block; width: 900px; text-align: center; font: 12px; color: lightgray; padding-top: 15px;">
+          Trash is empty.
+        </div>
+        `
+      }
+    }
+    // CARD(휴지통 내 게시물 페이지에 위치해 있을 경우)
+    else if (queryData.id == 'Trash'){
+      var style = fs.readFileSync('./css/else.css', 'utf8');
+      
+      if (signIn == 0) {
+        response.writeHead(302, {
+          Location: encodeURI('/')
+        });
+        response.end();
+      }
+
+      var card = fs.readFileSync(`./texts/Trash/${queryData.class}/${queryData.title}`, 'utf8');
+    }
+    // CARD(게시물 페이지에 위치해 있을 경우. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
+    else if ((queryData.class == 'Life') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Study')) {
+      var style = fs.readFileSync('./css/else.css', 'utf8');
+      var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
+
+      if (signIn == 1) {
+        card = card + 
+        `
+        <!-- 삭제 & 편집 버튼 -->
+        <div style="width: 800px; height: 20px; display: flex; position: absolute; left: 0; bottom: 0; margin: 50px;">
+  
+          <!-- 삭제 버튼 -->
+          <a href="http://localhost:3000/delete_process?id=${queryData.class}&class=${queryData.id}" style="width: 50px; height: 20px; font-size: 15px; text-align: center;">
+            <i class="fas fa-trash"></i>
+          </a>
+  
+          <!-- 편집 버튼 -->
+          <a class="update_button" style="width: 50px; height: 20px; font-size: 15px; text-align: center;">
+            <i class="fas fa-edit"></i>
+          </a>
+  
+        </div>
+        `
+      }
+    }
+    // CARD(로그인 페이지에 위치해 있을 경우)
+    else if (queryData.id == 'SignIn' && signIn == 0) {
+      var style = fs.readFileSync('./css/else.css', 'utf8');
+      var card = login_form;
+    }
+    // CARD(로그아웃 페이지에 위치해 있을 경우)
+    else if (queryData.id == 'SignIn') {
+      var style = fs.readFileSync('./css/else.css', 'utf8');
+      var card = 
+      `
+      <div class="sign-in-form" style="padding-top: 0;">
+        <button type="submit" class="post-button" onclick="location.href='/signin_process'">
+          Sign Out
+        </button>
+      </div>
+      `
+    }
+    // CARD(Post 페이지에 위치해 있을 경우)
+    else {
+      var style = fs.readFileSync('./css/else.css', 'utf8');
+      
+      if (signIn == 0) {
+        response.writeHead(302, {
+          Location: encodeURI('/')
+        });
+        response.end();
+      }
+      
+      var card = fs.readFileSync(`./texts/${queryData.id}`, 'utf8');
+    }
+
+    // MENU
+    var list =
+    `
+    <li><a href="/?id=Life">Life(${Life_Postings})</a></li>
+    <li><a href="/?id=Finance">Finance(${Finance_Postings})</a></li>
+    <li><a href="/?id=Exercise">Exercise(${Exercise_Postings})</a></li>
+    <li><a href="/?id=Study">Study(${Study_Postings})</a></li>
+    <li><a href="/?id=Trash" style="display: ${display}">Trash</a></li>
+    `;
+
+    // FOOTER
+    var footer = fs.readFileSync('./texts/index-footer', 'utf8');
+
+    // 포스트 페이지에서는 페이지 height를 100vh로 줄이기
+    if (queryData.id == 'post') {
+      var bodyHeight = 'height: 610px;';
+      var wrapHeight = 'height: 560px;';
+      var innerHeight = 'height: 560px;';
+      var cardHeight = 'height: 560px;';
+    } else if (queryData.id === undefined) {
+      var bodyHeight = '/* */';
+      var wrapHeight = '/* */';
+      var innerHeight = '/* */';
+      var cardHeight = 'background-color: rgb(248, 248, 253);';
+    } else {
+      var bodyHeight = '/* */';
+      var wrapHeight = '/* */';
+      var innerHeight = '/* */';
+      var cardHeight = '/* */';
+    }
+
+    // 로드될 HTML 코드를 변수에 저장
+    var template =
+    `
+    <html lang="ko">
+
+    <head>
+      ${head}
+
+      <style>
+        ${style}
+      </style>
+
+    </head>
+    
+    <body style="${bodyHeight}">
+      <style>
+        ${display}
+      </style>
+
+      <!-- HEADER -->
+      ${header}
+      
+      <!-- WRAP -->
+      <div class="wrap" style="${wrapHeight}">
+        <div class="inner" style="${innerHeight}">
+          <!-- CARD -->
+          <div class="card" style="${cardHeight}">
+            ${card}
+          </div>
+          <!-- MENU -->
+          <div class="menu">
+            <div class="contents">
+              <h1>Menu</h1><br>
+              <ul style="list-style-type: none; font-size: 15px;">
+                ${list}
+              </ul><br>
+              <h2 class="post_button" style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=post'">Post</h2>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- FOOTER -->
-        ${footer}
+      <!-- FOOTER -->
+      ${footer}
 
-      </body>
-      
-      </html>
-      `
+    </body>
+    
+    </html>
+    `
 
-      // 로드
-      response.writeHead(200);
-      response.end(template);
-    });
+    // 로드
+    response.writeHead(200);
+    response.end(template);
   }
   // pathname이 '/post_process'일 때(폼에서 데이터를 제출했을 때)
   else if (pathname === '/post_process') {
