@@ -75,14 +75,21 @@ var app = http.createServer((request, response) => {
       var header = fs.readFileSync('./texts/index-header-signed', 'utf8');
     }
 
+    // STYLE
+    var style = fs.readFileSync('./css/variables.css', 'utf8');
+    style = style + fs.readFileSync('./css/common.css', 'utf8');
+    style = style + fs.readFileSync('./css/header.css', 'utf8');
+    style = style + fs.readFileSync('./css/menu.css', 'utf8');
+    style = style + fs.readFileSync('./css/footer.css', 'utf8');
+
     // CARD(메인 페이지에 위치해 있어 Query String이 없을 경우)
     if (queryData.id === undefined) {
-      var style = fs.readFileSync('./css/main.css', 'utf8');
+      style = style + fs.readFileSync('./css/main.css', 'utf8');
       var card = fs.readFileSync('./texts/index-card', 'utf8');
     }
     // CARD(카테고리 페이지에 위치해 있을 경우. 카테고리 페이지에서는 id가 카테고리명, class가 게시물 제목)
     else if ((queryData.id == 'Life') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Study')) {
-      var style = fs.readFileSync('./css/else.css', 'utf8');
+      style = style + fs.readFileSync('./css/else.css', 'utf8');
       var filelist = fs.readdirSync(`./texts/${queryData.id}`);
       var card = 
       `
@@ -142,7 +149,7 @@ var app = http.createServer((request, response) => {
     }
     // CARD(휴지통 내에 보관된 삭제 게시물의 리스트를 표출하는 페이지에 위치해 있을 경우)
     else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
-      var style = fs.readFileSync('./css/else.css', 'utf8');
+      style = style + fs.readFileSync('./css/else.css', 'utf8');
       
       // 로그인하지 않았을 시 해당 페이지 접속 차단
       if (signIn == 0) {
@@ -220,7 +227,7 @@ var app = http.createServer((request, response) => {
     }
     // CARD(휴지통 내 게시물 페이지에 위치해 있을 경우)
     else if (queryData.id == 'Trash'){
-      var style = fs.readFileSync('./css/else.css', 'utf8');
+      style = style + fs.readFileSync('./css/else.css', 'utf8');
       
       if (signIn == 0) {
         response.writeHead(302, {
@@ -233,7 +240,7 @@ var app = http.createServer((request, response) => {
     }
     // CARD(게시물 페이지에 위치해 있을 경우. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
     else if ((queryData.class == 'Life') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Study')) {
-      var style = fs.readFileSync('./css/else.css', 'utf8');
+      style = style + fs.readFileSync('./css/else.css', 'utf8');
       var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
 
       if (signIn == 1) {
@@ -258,7 +265,7 @@ var app = http.createServer((request, response) => {
     }
     // CARD(로그인 페이지에 위치해 있을 경우)
     else if (queryData.id == 'SignIn' && signIn == 0) {
-      var style = fs.readFileSync('./css/else.css', 'utf8');
+      style = style + fs.readFileSync('./css/else.css', 'utf8');
       var card = 
       `
       <div class="sign-in-description-area">
@@ -271,7 +278,7 @@ var app = http.createServer((request, response) => {
     }
     // CARD(Post 페이지에 위치해 있을 경우)
     else {
-      var style = fs.readFileSync('./css/else.css', 'utf8');
+      style = style + fs.readFileSync('./css/else.css', 'utf8');
 
       if (signIn == 0) {
         response.writeHead(302, {
@@ -304,17 +311,17 @@ var app = http.createServer((request, response) => {
     // FOOTER
     var footer = fs.readFileSync('./texts/index-footer', 'utf8');
 
-    // 포스트 페이지에서는 페이지 height를 100vh로 줄이기
-    if (queryData.id == 'post') {
-      var bodyStyle = 'height: 610px;';
-      var wrapStyle = 'height: 560px;';
-      var innerStyle = 'height: 560px;';
-      var cardStyle = 'height: 560px; background-color: rgb(248, 248, 255);';
-    } else if (queryData.id === undefined) {
+    // 페이지에 따라 스타일을 달리 적용
+    if (queryData.id === undefined) {
       var bodyStyle = '/* */';
       var wrapStyle = '/* */';
       var innerStyle = '/* */';
       var cardStyle = 'background-color: rgb(248, 248, 255);';
+    } else if (queryData.id == 'post') {
+      var bodyStyle = 'height: 610px;';
+      var wrapStyle = 'height: 560px;';
+      var innerStyle = 'height: 560px;';
+      var cardStyle = 'height: 560px; background-color: rgb(248, 248, 255);';
     } else if (queryData.id == 'SignIn') {
       var bodyStyle = '/* */';
       var wrapStyle = '/* */';

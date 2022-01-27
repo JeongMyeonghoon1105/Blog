@@ -1,0 +1,216 @@
+header {
+  /* 기본 */
+  width: 100vw;
+  height: 60px;
+  background-color: white;
+
+  /* 테두리 */
+  border-bottom: 2px solid var(--bg-color);
+
+  /* 정렬 */
+  position: relative;
+}
+
+header .inner {
+  /* 기본 */
+  height: 60px;
+  background-color: white;
+
+  /* 정렬 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+header .inner .logo {
+  /* 기본 */
+  height: 60px;
+
+  /* 텍스트 */
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 60px;
+}
+
+header .inner .logo img {
+  /* 기본 */
+  width: 150px;
+  height: 30px;
+
+  /* 정렬 */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 18px;
+  margin: auto;
+}
+
+/* HEADER - Search bar */
+
+#search-bar {
+  /* 기본 */
+  width: 0px;
+  height: 40px;
+
+  /* 테두리 */
+  border: 2px solid white;
+  border-radius: 50px;
+
+  /* 정렬 */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 240px;
+  margin: auto 0;
+  padding-left: 10px;
+
+  /* 기타 */
+  transition: 1s;
+}
+
+#search:hover~#search-bar {
+  /* 기본 */
+  width: 200px;
+
+  /* 테두리 */
+  border: 2px solid lightgray;
+  border-radius: 50px;
+}
+
+#search-bar:hover {
+  /* 기본 */
+  width: 200px;
+
+  /* 테두리 */
+  border: 2px solid lightgray;
+  border-radius: 50px;
+}
+
+/* HEADER - Main Menu */
+
+header .inner .main-menu {
+  /* Display */
+  display: flex;
+
+  /* 기본 */
+  width: 300px;
+  height: 60px;
+
+  /* 정렬 */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto 0;
+}
+
+header .inner .main-menu .item {
+  /* 기본 */
+  width: 60px;
+  height: 60px;
+  background-color: white;
+
+  /* 텍스트 */
+  color: gray;
+  font-size: 23px;
+  text-align: center;
+
+  /* 기타 */
+  transition: 0.05s;
+  cursor: pointer;
+}
+
+header .inner .main-menu .item i {
+  line-height: 60px;
+}
+
+header .inner .main-menu #search {
+  /* 기본 */
+  background-color: white;
+
+  /* 텍스트 */
+  font-size: 16px;
+}
+
+header .inner .main-menu #github:hover {
+  color: black;
+  font-size: 26px;
+}
+
+header .inner .main-menu #facebook:hover {
+  color: #4267B2;
+  font-size: 26px;
+}
+
+header .inner .main-menu #instagram:hover {
+  color: #CD486B;
+  font-size: 26px;
+}
+
+header .inner .main-menu #sign-in:hover {
+  color: black;
+  font-size: 26px;
+}
+
+[data-tooltip-text]:hover {
+  position: relative;
+}
+
+[data-tooltip-text]:hover:after {
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  -webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+  -moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+  box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+
+  color: white;
+  font-size: 12px;
+  content: attr(data-tooltip-text);
+
+  margin-bottom: 10px;
+  top: 130%;
+  left: 0;
+  padding: 7px 12px;
+  position: absolute;
+  width: auto;
+  min-width: 50px;
+  max-width: 300px;
+  word-wrap: break-word;
+
+  z-index: 9999;
+}
+
+@media screen and (max-width: 1200px) {
+  header .inner {
+    width: 100vw;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  header .inner {
+    width: 100vw;
+  }
+
+  header .inner #search-bar {
+    display: none;
+  }
+
+  header .inner .main-menu {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  header .inner .logo img {
+    left: 0;
+  }
+}

@@ -1,254 +1,3 @@
-/* VARIABLES */
-
-:root {
-  /* #F4F6FC */
-  --bg-color: rgb(248, 248, 255);
-  --card-color: white;
-  --border-color: #E9E9E9;
-  --contents-height: 100vh;
-}
-
-
-/* COMMON */
-
-body {
-  /* 기본 */
-  width: 100vw;
-
-  /* 텍스트 */
-  color: #333;
-  font-size: 16px;
-  font-weight: 400;
-  font-family: "Nanum Gothic", sans-serif;
-  line-height: 1.4;
-
-  /* 기타 */
-  overflow-x: hidden;
-}
-
-img {
-  display: block;
-}
-
-a {
-  /* 텍스트 */
-  color: #5C5B5B;
-  text-decoration: none;
-
-  /* 기타 */
-  cursor: pointer;
-}
-
-i {
-  cursor: pointer;
-}
-
-.inner {
-  /* 기본 */
-  width: 1100px;
-
-  /* 정렬 */
-  position: relative;
-  margin: 0 auto;
-}
-
-
-/* HEADER */
-
-header {
-  /* 기본 */
-  width: 100vw;
-  height: 60px;
-  background-color: white;
-
-  /* 테두리 */
-  border-bottom: 2px solid var(--bg-color);
-
-  /* 정렬 */
-  position: relative;
-}
-
-header .inner {
-  /* 기본 */
-  height: 60px;
-  background-color: white;
-
-  /* 정렬 */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-}
-
-header .inner .logo {
-  /* 기본 */
-  height: 60px;
-
-  /* 텍스트 */
-  color: black;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  line-height: 60px;
-}
-
-header .inner .logo img {
-  /* 기본 */
-  width: 150px;
-  height: 30px;
-
-  /* 정렬 */
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 18px;
-  margin: auto;
-}
-
-/* HEADER - Search bar */
-
-#search-bar {
-  /* 기본 */
-  width: 0px;
-  height: 40px;
-
-  /* 테두리 */
-  border: 2px solid white;
-  border-radius: 50px;
-
-  /* 정렬 */
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 240px;
-  margin: auto 0;
-  padding-left: 10px;
-
-  /* 기타 */
-  transition: 1s;
-}
-
-#search:hover~#search-bar {
-  /* 기본 */
-  width: 200px;
-
-  /* 테두리 */
-  border: 2px solid lightgray;
-  border-radius: 50px;
-}
-
-#search-bar:hover {
-  /* 기본 */
-  width: 200px;
-
-  /* 테두리 */
-  border: 2px solid lightgray;
-  border-radius: 50px;
-}
-
-/* HEADER - Main Menu */
-
-header .inner .main-menu {
-  /* Display */
-  display: flex;
-
-  /* 기본 */
-  width: 300px;
-  height: 60px;
-
-  /* 정렬 */
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto 0;
-}
-
-header .inner .main-menu .item {
-  /* 기본 */
-  width: 60px;
-  height: 60px;
-  background-color: white;
-
-  /* 텍스트 */
-  color: gray;
-  font-size: 23px;
-  text-align: center;
-
-  /* 기타 */
-  transition: 0.05s;
-  cursor: pointer;
-}
-
-header .inner .main-menu .item i {
-  line-height: 60px;
-}
-
-header .inner .main-menu #search {
-  /* 기본 */
-  background-color: white;
-
-  /* 텍스트 */
-  font-size: 16px;
-}
-
-header .inner .main-menu #github:hover {
-  color: black;
-  font-size: 26px;
-}
-
-header .inner .main-menu #facebook:hover {
-  color: #4267B2;
-  font-size: 26px;
-}
-
-header .inner .main-menu #instagram:hover {
-  color: #CD486B;
-  font-size: 26px;
-}
-
-header .inner .main-menu #sign-in:hover {
-  color: black;
-  font-size: 26px;
-}
-
-[data-tooltip-text]:hover {
-  position: relative;
-}
-
-[data-tooltip-text]:hover:after {
-  background-color: black;
-  background-color: rgba(0, 0, 0, 0.8);
-
-  -webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
-  -moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
-  box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
-
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-
-  color: white;
-  font-size: 12px;
-  content: attr(data-tooltip-text);
-
-  margin-bottom: 10px;
-  top: 130%;
-  left: 0;
-  padding: 7px 12px;
-  position: absolute;
-  width: auto;
-  min-width: 50px;
-  max-width: 300px;
-  word-wrap: break-word;
-
-  z-index: 9999;
-}
-
-
-/* WRAP */
-
 .wrap {
   min-height: var(--contents-height);
   background-color: var(--bg-color);
@@ -310,8 +59,12 @@ header .inner .main-menu #sign-in:hover {
 }
 
 .post-title {
+  /* 텍스트 */
   font-size: 30px;
   font-weight: bold;
+
+  /* 기타 */
+  overflow-x: hidden;
 }
 
 .post-line {
@@ -321,7 +74,11 @@ header .inner .main-menu #sign-in:hover {
 }
 
 .post-contents {
+  /* 텍스트 */
   font-size: 20px;
+
+  /* 기타 */
+  overflow-x: hidden;
 }
 
 /* WRAP - Sign In */
@@ -437,58 +194,6 @@ header .inner .main-menu #sign-in:hover {
   /* 텍스트 */
   font-size: 15px;
   text-align: center;
-}
-
-/* WRAP - Side Menu */
-
-.menu {
-  /* 기본 */
-  width: 150px;
-  height: var(--contents-height);
-  background-color: var(--bg-color);
-
-  /* 정렬 */
-  position: absolute;
-  top: 40px;
-  left: 1050px;
-}
-
-.menu .contents {
-  /* 기본 */
-  width: 100px;
-  height: 500px;
-  background-color: var(--bg-color);
-
-  /* 정렬 */
-  margin: 10px 50px 10px 10px;
-  padding: 10px;
-}
-
-.menu .contents h1 {
-  /* Display */
-  display: block;
-
-  /* 기본 */
-  width: 100%;
-  height: 30px;
-
-  /* 테두리 */
-  border-bottom: 2px solid var(--border-color);
-
-  /* 텍스트 */
-  font-weight: bold;
-}
-
-.menu .contents h2 {
-  /* Display */
-  display: block;
-
-  /* 기본 */
-  width: 100%;
-  height: 30px;
-
-  /* 텍스트 */
-  font-weight: bold;
 }
 
 /* WRAP - Posting */
@@ -659,16 +364,6 @@ footer .inner {
 /* MEDIA QUERY */
 
 @media screen and (max-width: 1200px) {
-
-  /* HEADER */
-
-  header .inner {
-    width: 100vw;
-  }
-
-
-  /* WRAP */
-
   .wrap {
     width: 100vw;
   }
@@ -736,39 +431,9 @@ footer .inner {
   .button-container {
     width: 80vw;
   }
-
-  /* WRAP - Menu */
-
-  .menu {
-    display: none;
-  }
-
-
-  /* FOOTER */
-
-  footer .inner {
-    width: 100vw;
-  }
-
 }
 
 @media screen and (max-width: 850px) {
-
-  /* HEADER */
-
-  header .inner {
-    width: 100vw;
-  }
-
-  header .inner #search-bar {
-    display: none;
-  }
-
-  header .inner .main-menu {
-    display: none;
-  }
-
-
   /* WRAP */
 
   .wrap {
@@ -841,25 +506,5 @@ footer .inner {
 
   .notice {
     width: 100vw;
-  }
-
-  /* WRAP - Menu */
-
-  .menu {
-    display: none;
-  }
-
-
-  /* FOOTER */
-
-  footer .inner {
-    width: 100vw;
-  }
-
-}
-
-@media screen and (max-width: 430px) {
-  header .inner .logo img {
-    left: 0;
   }
 }
