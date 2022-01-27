@@ -188,3 +188,29 @@ header .inner .main-menu #sign-in:hover {
 
   z-index: 9999;
 }
+
+@media screen and (max-width: 1200px) {
+  header .inner {
+    width: 100vw;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  header .inner {
+    width: 100vw;
+  }
+
+  header .inner #search-bar {
+    display: none;
+  }
+
+  header .inner .main-menu {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  header .inner .logo img {
+    left: 0;
+  }
+}

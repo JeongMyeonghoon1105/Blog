@@ -49,3 +49,15 @@
   /* 텍스트 */
   font-weight: bold;
 }
+
+@media screen and (max-width: 1200px) {
+  .menu {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .menu {
+    display: none;
+  }
+}

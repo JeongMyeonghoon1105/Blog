@@ -86,10 +86,6 @@
 /* MEDIA QUERY */
 
 @media screen and (max-width: 1200px) {
-  header .inner {
-    width: 100vw;
-  }
-
   .wrap {
     width: 100vw;
     min-height: 1950px;
@@ -121,29 +117,9 @@
     right: 0;
     margin: 30px auto;
   }
-
-  .menu {
-    display: none;
-  }
-
-  footer .inner {
-    width: 100vw;
-  }
 }
 
 @media screen and (max-width: 850px) {
-  header .inner {
-    width: 100vw;
-  }
-
-  header .inner #search-bar {
-    display: none;
-  }
-
-  header .inner .main-menu {
-    display: none;
-  }
-
   .wrap {
     width: 100vw;
     min-height: 3600px;
@@ -178,19 +154,5 @@
 
   .wrap .inner .card .row .column .column-right-items {
     margin: 0 0 50px 0;
-  }
-
-  .menu {
-    display: none;
-  }
-
-  footer .inner {
-    width: 100vw;
-  }
-}
-
-@media screen and (max-width: 430px) {
-  header .inner .logo img {
-    left: 0;
   }
 }
