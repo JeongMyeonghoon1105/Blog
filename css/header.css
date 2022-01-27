@@ -189,11 +189,8 @@ header .inner .main-menu #sign-in:hover {
   z-index: 9999;
 }
 
-<<<<<<< HEAD
 /* MEDIA QUERY */
 
-=======
->>>>>>> 6a608de65c6ddf180ff2a3d4c5ba6a3aae4f0ec8
 @media screen and (max-width: 1200px) {
   header .inner {
     width: 100vw;
