@@ -261,7 +261,7 @@ var app = http.createServer((request, response) => {
       var style = fs.readFileSync('./css/else.css', 'utf8');
       var card = 
       `
-      <div class="description-area">
+      <div class="sign-in-description-area">
         <h1 style="font-size: 20px; font-weight: bold; font-family: 'Nanum Gothic', 'sans-serif';">
           Sign In
         </h1>
@@ -306,20 +306,25 @@ var app = http.createServer((request, response) => {
 
     // 포스트 페이지에서는 페이지 height를 100vh로 줄이기
     if (queryData.id == 'post') {
-      var bodyHeight = 'height: 610px;';
-      var wrapHeight = 'height: 560px;';
-      var innerHeight = 'height: 560px;';
-      var cardHeight = 'height: 560px;';
+      var bodyStyle = 'height: 610px;';
+      var wrapStyle = 'height: 560px;';
+      var innerStyle = 'height: 560px;';
+      var cardStyle = 'height: 560px; background-color: rgb(248, 248, 255);';
     } else if (queryData.id === undefined) {
-      var bodyHeight = '/* */';
-      var wrapHeight = '/* */';
-      var innerHeight = '/* */';
-      var cardHeight = 'background-color: rgb(245, 245, 255);';
+      var bodyStyle = '/* */';
+      var wrapStyle = '/* */';
+      var innerStyle = '/* */';
+      var cardStyle = 'background-color: rgb(248, 248, 255);';
+    } else if (queryData.id == 'SignIn') {
+      var bodyStyle = '/* */';
+      var wrapStyle = '/* */';
+      var innerStyle = '/* */';
+      var cardStyle = 'background-color: rgb(248, 248, 255);';
     } else {
-      var bodyHeight = '/* */';
-      var wrapHeight = '/* */';
-      var innerHeight = '/* */';
-      var cardHeight = '/* */';
+      var bodyStyle = '/* */';
+      var wrapStyle = '/* */';
+      var innerStyle = '/* */';
+      var cardStyle = '/* */';
     }
 
     // 로드될 HTML 코드를 변수에 저장
@@ -336,7 +341,7 @@ var app = http.createServer((request, response) => {
 
     </head>
     
-    <body style="${bodyHeight}">
+    <body style="${bodyStyle}">
       <style>
         ${display}
       </style>
@@ -345,10 +350,10 @@ var app = http.createServer((request, response) => {
       ${header}
       
       <!-- WRAP -->
-      <div class="wrap" style="${wrapHeight}">
-        <div class="inner" style="${innerHeight}">
+      <div class="wrap" style="${wrapStyle}">
+        <div class="inner" style="${innerStyle}">
           <!-- CARD -->
-          <div class="card" style="${cardHeight}">
+          <div class="card" style="${cardStyle}">
             ${card}
           </div>
           <!-- MENU -->

@@ -2,7 +2,7 @@
 
 :root {
   /* #F4F6FC */
-  --bg-color: rgb(245, 245, 255);
+  --bg-color: rgb(248, 248, 255);
   --card-color: white;
   --border-color: #E9E9E9;
   --contents-height: 100vh;
@@ -278,24 +278,31 @@ header .inner .main-menu #sign-in:hover {
 }
 
 .wrap .inner .card .row {
+  /* Display */
   display: flex;
 
+  /* 기본 */
   height: 1900px;
 
+  /* 정렬 */
   margin: 30px 50px;
 }
 
 .wrap .inner .card .row .column .column-left-items {
+  /* 기본 */
   width: 375px;
   height: 375px;
 
+  /* 정렬 */
   margin: 0 25px 50px 0;
 }
 
 .wrap .inner .card .row .column .column-right-items {
+  /* 기본 */
   width: 375px;
   height: 375px;
 
+  /* 정렬 */
   margin: 0 0 50px 25px;
 }
 
@@ -305,10 +312,12 @@ header .inner .main-menu #sign-in:hover {
 }
 
 .wrap .inner .card .row .column .item-text {
+  /* 기본 */
   width: 345px;
   height: 120px;
   background-color: white;
 
+  /* 정렬 */
   padding: 15px;
 }
 
@@ -321,7 +330,6 @@ header .inner .main-menu #sign-in:hover {
   width: 345px;
   height: 15px;
 }
-
 
 /* WRAP - Side Menu */
 

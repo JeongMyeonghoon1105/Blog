@@ -9,14 +9,10 @@
         required></textarea>
     </div>
 
-    <div class="br"></div>
-
     <!-- Contents -->
     <div>
       <textarea name="content" id="contents-input" placeholder="Contents" style="white-space: pre-wrap;" required></textarea>
     </div>
-
-    <div class="br"></div>
 
     <!-- Categoties -->
     <div class="category">

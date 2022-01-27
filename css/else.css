@@ -2,7 +2,7 @@
 
 :root {
   /* #F4F6FC */
-  --bg-color: rgb(248, 248, 253);
+  --bg-color: rgb(248, 248, 255);
   --card-color: white;
   --border-color: #E9E9E9;
   --contents-height: 100vh;
@@ -280,15 +280,23 @@ header .inner .main-menu #sign-in:hover {
   margin: 30px 50px 0 50px;
 }
 
+.wrap .inner .card .sign-in-description-area {
+  width: 375px;
+  margin: 30px auto 0 auto;
+}
+
 .notice {
+  /* 기본 */
   display: block;
   width: 900px;
   height: 50px;
 
+  /* 텍스트 */
   font: 12px;
   color: lightgray;
   text-align: center;
 
+  /* 정렬 */
   position: absolute;
   top: 0;
   bottom: 0;
@@ -316,18 +324,13 @@ header .inner .main-menu #sign-in:hover {
   font-size: 20px;
 }
 
-
-
 /* WRAP - Sign In */
 
 .sign-in-form {
   /* 기본 */
   width: 375px;
   height: 230px;
-  background-color: #F4F6FC;
-
-  /* 테두리 */
-  border-radius: 10px;
+  background-color: white;
 
   /* 정렬 */
   position: absolute;
@@ -343,7 +346,7 @@ header .inner .main-menu #sign-in:hover {
   background-color: white;
 
   /* 테두리 */
-  border: none;
+  border: 2px solid gray;
   border-radius: 50px;
 
   /* 정렬 */
@@ -373,7 +376,7 @@ header .inner .main-menu #sign-in:hover {
   background-color: white;
 
   /* 테두리 */
-  border: none;
+  border: 2px solid gray;
   border-radius: 50px;
 
   /* 텍스트 */
@@ -412,11 +415,14 @@ header .inner .main-menu #sign-in:hover {
 }
 
 .button-container {
+  /* Display */
   display: flex;
 
+  /* 기본 */
   width: 800px;
   height: 20px;
 
+  /* 정렬 */
   position: absolute;
   left: 0;
   bottom: 0;
@@ -424,9 +430,11 @@ header .inner .main-menu #sign-in:hover {
 }
 
 .update-delete-button {
+  /* 기본 */
   width: 50px;
   height: 20px;
 
+  /* 텍스트 */
   font-size: 15px;
   text-align: center;
 }
@@ -498,29 +506,28 @@ header .inner .main-menu #sign-in:hover {
 }
 
 .wrap .inner .card .writting-area form {
+  /* 기본 */
   width: 100%;
   height: 510px;
 
+  /* 정렬 */
   position: relative;
 }
 
 .wrap .inner .card .writting-area form .title {
   /* Display */
   display: flex;
-
-  /* 테두리 */
-  border-radius: 50px;
 }
 
 .wrap .inner .card .writting-area form .title #title-input {
   /* 기본 */
   width: 800px;
   height: 50px;
-  background-color: #F4F6FC;
+  background-color: white;
 
   /* 테두리 */
   border: none;
-  border-radius: 50px;
+  border-bottom: 3px solid var(--bg-color);
 
   /* 텍스트 */
   font-size: 20px;
@@ -539,11 +546,11 @@ header .inner .main-menu #sign-in:hover {
   /* 기본 */
   width: 800px;
   height: 330px;
-  background-color: #F4F6FC;
+  background-color: white;
 
   /* 테두리 */
-  border-radius: 10px;
   border: none;
+  border-bottom: 3px solid var(--bg-color);
 
   /* 텍스트 */
   font-size: 15px;
@@ -554,13 +561,12 @@ header .inner .main-menu #sign-in:hover {
 
 .wrap .inner .card .writting-area form .category {
   /* 기본 */
-  width: 780px;
+  width: 800px;
   height: 40px;
-  background-color: #F4F6FC;
+  background-color: white;
 
   /* 테두리 */
   border: none;
-  border-radius: 50px;
 
   /* 텍스트 */
   color: gray;
@@ -571,33 +577,33 @@ header .inner .main-menu #sign-in:hover {
   left: 0;
   right: 0;
   margin: 0 auto;
-  padding: 0 10px;
 }
 
 .wrap .inner .card .writting-area form .category #category-input {
   /* 기본 */
-  width: 780px;
+  width: 800px;
   height: 40px;
-  background-color: #F4F6FC;
+  background-color: white;
 
   /* 테두리 */
   border: none;
-  border-radius: 50px;
 
   /* 텍스트 */
   color: gray;
   font-size: 15px;
+
+  /* 정렬 */
+  padding: 0 10px;
 }
 
 .wrap .inner .card .writting-area form .post-button {
   /* 기본 */
   width: 50px;
   height: 30px;
-  background-color: #F4F6FC;
+  background-color: white;
 
   /* 테두리 */
   border: none;
-  border-radius: 50px;
 
   /* 정렬 */
   position: absolute;
@@ -653,9 +659,15 @@ footer .inner {
 /* MEDIA QUERY */
 
 @media screen and (max-width: 1200px) {
+
+  /* HEADER */
+
   header .inner {
     width: 100vw;
   }
+
+
+  /* WRAP */
 
   .wrap {
     width: 100vw;
@@ -671,6 +683,52 @@ footer .inner {
     left: 0;
   }
 
+  .wrap .inner .card .description-area {
+    width: 800px;
+
+    margin: 30px auto 0 auto;
+  }
+
+  .wrap .inner .card .sign-in-description-area {
+    margin: 30px auto 0 auto;
+  }
+
+  /* WRAP - Writting Area */
+
+  .wrap .inner .card .writting-area {
+    width: 800px;
+  }
+
+  .wrap .inner .card .writting-area form {
+    width: 800px;
+  }
+
+  .wrap .inner .card .writting-area form .title {
+    width: 800px;
+  }
+
+  .wrap .inner .card .writting-area form .title #title-input {
+    width: 800px;
+  }
+
+  .wrap .inner .card .writting-area form .br {
+    width: 800px;
+  }
+
+  .wrap .inner .card .writting-area form div #contents-input {
+    width: 800px;
+  }
+
+  .wrap .inner .card .writting-area form .category {
+    width: 800px;
+  }
+
+  .wrap .inner .card .writting-area form .category #category-input {
+    width: 800px;
+  }
+
+  /* WRAP - Post */
+
   .post-line {
     width: 100vw;
   }
@@ -679,50 +737,25 @@ footer .inner {
     width: 80vw;
   }
 
+  /* WRAP - Menu */
+
   .menu {
     display: none;
   }
 
+
+  /* FOOTER */
+
   footer .inner {
     width: 100vw;
   }
-}
 
-@media screen and (max-width: 900px) {
-  .wrap .inner .card .writting-area {
-    width: 90vw;
-  }
-
-  .wrap .inner .card .writting-area form {
-    width: 90vw;
-  }
-
-  .wrap .inner .card .writting-area form .title {
-    width: 90vw;
-  }
-
-  .wrap .inner .card .writting-area form .title #title-input {
-    width: 90vw;
-  }
-
-  .wrap .inner .card .writting-area form .br {
-    width: 90vw;
-  }
-
-  .wrap .inner .card .writting-area form div #contents-input {
-    width: 90vw;
-  }
-
-  .wrap .inner .card .writting-area form .category {
-    width: 80vw;
-  }
-
-  .wrap .inner .card .writting-area form .category #category-input {
-    width: 80vw;
-  }
 }
 
 @media screen and (max-width: 850px) {
+
+  /* HEADER */
+
   header .inner {
     width: 100vw;
   }
@@ -735,6 +768,9 @@ footer .inner {
     display: none;
   }
 
+
+  /* WRAP */
+
   .wrap {
     width: 100vw;
   }
@@ -746,6 +782,52 @@ footer .inner {
   .wrap .inner .card {
     width: 100vw;
   }
+
+  .wrap .inner .card .description-area {
+    width: 375px;
+
+    margin: 30px auto 0 auto;
+  }
+
+  .wrap .inner .card .sign-in-description-area {
+    margin: 30px auto 0 auto;
+  }
+
+  /* WRAP - Writting Area */
+
+  .wrap .inner .card .writting-area {
+    width: 375px;
+  }
+
+  .wrap .inner .card .writting-area form {
+    width: 375px;
+  }
+
+  .wrap .inner .card .writting-area form .title {
+    width: 375px;
+  }
+
+  .wrap .inner .card .writting-area form .title #title-input {
+    width: 375px;
+  }
+
+  .wrap .inner .card .writting-area form .br {
+    width: 375px;
+  }
+
+  .wrap .inner .card .writting-area form div #contents-input {
+    width: 375px;
+  }
+
+  .wrap .inner .card .writting-area form .category {
+    width: 375px;
+  }
+
+  .wrap .inner .card .writting-area form .category #category-input {
+    width: 375px;
+  }
+
+  /* WRAP - Post */
 
   .post-line {
     width: 100vw;
@@ -761,13 +843,19 @@ footer .inner {
     width: 100vw;
   }
 
+  /* WRAP - Menu */
+
   .menu {
     display: none;
   }
 
+
+  /* FOOTER */
+
   footer .inner {
     width: 100vw;
   }
+
 }
 
 @media screen and (max-width: 430px) {
