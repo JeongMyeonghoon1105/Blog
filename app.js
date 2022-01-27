@@ -240,15 +240,15 @@ var app = http.createServer((request, response) => {
         card = card + 
         `
         <!-- 삭제 & 편집 버튼 -->
-        <div style="width: 800px; height: 20px; display: flex; position: absolute; left: 0; bottom: 0; margin: 50px;">
+        <div class="button-container">
   
           <!-- 삭제 버튼 -->
-          <a href="http://localhost:3000/delete_process?id=${queryData.class}&class=${queryData.id}" style="width: 50px; height: 20px; font-size: 15px; text-align: center;">
+          <a href="http://localhost:3000/delete_process?id=${queryData.class}&class=${queryData.id}" class="update-delete-button">
             <i class="fas fa-trash"></i>
           </a>
   
           <!-- 편집 버튼 -->
-          <a class="update_button" style="width: 50px; height: 20px; font-size: 15px; text-align: center;">
+          <a class="update-delete-button">
             <i class="fas fa-edit"></i>
           </a>
   
@@ -400,16 +400,13 @@ var app = http.createServer((request, response) => {
       // 게시물 페이지에 해당하는 html 코드 데이터를 텍스트 파일로 저장
       fs.writeFileSync(`texts/${category}/${title}`,
       `
-      <div style="margin: 50px;">
+      <div class="post-container">
 
         <!-- 게시물 제목 -->
-        <h1 style="font-size: 30px; font-weight: bold;">${title}</h1><br>
-
-        <!-- 구분선 -->
-        <div style="width: 800px; height: 2px; background-color: lightgray;"></div><br>
+        <h1 class="post-title">${title}</h1><br>
 
         <!-- 내용 -->
-        <div style="font-size: 20px;">
+        <div class="post-contents">
           ${content}
         </div>
 

@@ -277,9 +277,7 @@ header .inner .main-menu #sign-in:hover {
 }
 
 .wrap .inner .card .description-area {
-  width: 800px;
-
-  margin: 30px auto 0 auto;
+  margin: 30px 50px 0 50px;
 }
 
 .notice {
@@ -298,6 +296,27 @@ header .inner .main-menu #sign-in:hover {
   right: 0;
   margin: auto;
 }
+
+.post-container {
+  margin: 50px;
+}
+
+.post-title {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.post-line {
+  width: 800px;
+  height: 2px;
+  background-color: lightgray;
+}
+
+.post-contents {
+  font-size: 20px;
+}
+
+
 
 /* WRAP - Sign In */
 
@@ -390,6 +409,26 @@ header .inner .main-menu #sign-in:hover {
 
   /* 기타 */
   cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+
+  width: 800px;
+  height: 20px;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 50px;
+}
+
+.update-delete-button {
+  width: 50px;
+  height: 20px;
+
+  font-size: 15px;
+  text-align: center;
 }
 
 /* WRAP - Side Menu */
@@ -632,6 +671,14 @@ footer .inner {
     left: 0;
   }
 
+  .post-line {
+    width: 100vw;
+  }
+
+  .button-container {
+    width: 80vw;
+  }
+
   .menu {
     display: none;
   }
@@ -641,7 +688,7 @@ footer .inner {
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .wrap .inner .card .writting-area {
     width: 90vw;
   }
@@ -675,7 +722,7 @@ footer .inner {
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 850px) {
   header .inner {
     width: 100vw;
   }
@@ -700,6 +747,20 @@ footer .inner {
     width: 100vw;
   }
 
+  .post-line {
+    width: 100vw;
+  }
+
+  .button-container {
+    width: 80vw;
+
+    margin: 30px;
+  }
+
+  .notice {
+    width: 100vw;
+  }
+
   .menu {
     display: none;
   }
@@ -709,4 +770,8 @@ footer .inner {
   }
 }
 
-@media screen and (max-width: 375px) {}
+@media screen and (max-width: 430px) {
+  header .inner .logo img {
+    left: 0;
+  }
+}

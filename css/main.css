@@ -461,7 +461,7 @@ footer .inner {
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 850px) {
   header .inner {
     width: 100vw;
   }
@@ -519,4 +519,8 @@ footer .inner {
   }
 }
 
-@media screen and (max-width: 430px) {}
+@media screen and (max-width: 430px) {
+  header .inner .logo img {
+    left: 0;
+  }
+}
