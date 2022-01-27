@@ -97,8 +97,8 @@ var app = http.createServer((request, response) => {
       if (filelist.length == 0) {
         card = card +
         `
-        <div style="display: inline-block; text-align: center; font: 12px; color: lightgray; padding-top: 15px; position: absolute; left: 0; right: 0; margin: auto;">
-          Sorry. No postings in ${queryData.id} category yet.
+        <div class="notice">
+          <text style="line-height: 0px;">Sorry. No postings in ${queryData.id} category yet.</text>
         </div>
         `
       }
@@ -212,8 +212,8 @@ var app = http.createServer((request, response) => {
       if (filesInTrash == 0) {
         card = card +
         `
-        <div style="display: inline-block; text-align: center; font: 12px; color: lightgray; padding-top: 15px; position: absolute; left: 0; right: 0; margin: auto;">
-          Trash is empty.
+        <div class="notice">
+        <text style="line-height: 0px;">Trash is empty.</text>
         </div>
         `
       }
@@ -314,7 +314,7 @@ var app = http.createServer((request, response) => {
       var bodyHeight = '/* */';
       var wrapHeight = '/* */';
       var innerHeight = '/* */';
-      var cardHeight = 'background-color: rgb(248, 248, 253);';
+      var cardHeight = 'background-color: rgb(245, 245, 255);';
     } else {
       var bodyHeight = '/* */';
       var wrapHeight = '/* */';
