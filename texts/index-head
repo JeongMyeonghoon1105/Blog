@@ -22,7 +22,7 @@
 <!-- LOGO -->
 <link rel="icon" href="https://github.com/JeongMyeonghoon1105/Tech-Log/blob/master/images/Title_Logo.png?raw=true">
 
-<!-- CSS 설정 초기화 -->
+<!-- CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
 <!-- 폰트 -->

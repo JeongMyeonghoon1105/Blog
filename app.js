@@ -311,17 +311,17 @@ var app = http.createServer((request, response) => {
     // FOOTER
     var footer = fs.readFileSync('./texts/index-footer', 'utf8');
 
-    // 포스트 페이지에서는 페이지 height를 100vh로 줄이기
-    if (queryData.id == 'post') {
-      var bodyStyle = 'height: 610px;';
-      var wrapStyle = 'height: 560px;';
-      var innerStyle = 'height: 560px;';
-      var cardStyle = 'height: 560px; background-color: rgb(248, 248, 255);';
-    } else if (queryData.id === undefined) {
+    // 페이지에 따라 스타일을 달리 적용
+    if (queryData.id === undefined) {
       var bodyStyle = '/* */';
       var wrapStyle = '/* */';
       var innerStyle = '/* */';
       var cardStyle = 'background-color: rgb(248, 248, 255);';
+    } else if (queryData.id == 'post') {
+      var bodyStyle = 'height: 610px;';
+      var wrapStyle = 'height: 560px;';
+      var innerStyle = 'height: 560px;';
+      var cardStyle = 'height: 560px; background-color: rgb(248, 248, 255);';
     } else if (queryData.id == 'SignIn') {
       var bodyStyle = '/* */';
       var wrapStyle = '/* */';

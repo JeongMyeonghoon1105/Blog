@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+/* WRAP */
+
+>>>>>>> 6a608de65c6ddf180ff2a3d4c5ba6a3aae4f0ec8
 .wrap {
   background-color: var(--bg-color);
 }
@@ -115,10 +120,13 @@
     right: 0;
     margin: 30px auto;
   }
+<<<<<<< HEAD
 
   footer .inner {
     width: 100vw;
   }
+=======
+>>>>>>> 6a608de65c6ddf180ff2a3d4c5ba6a3aae4f0ec8
 }
 
 @media screen and (max-width: 850px) {
