@@ -49,7 +49,7 @@ header .inner .logo img {
   margin: auto;
 }
 
-/* HEADER - Search bar */
+/* HEADER - 검색창 */
 
 #search-bar {
   /* 기본 */
@@ -90,7 +90,7 @@ header .inner .logo img {
   border-radius: 50px;
 }
 
-/* HEADER - Main Menu */
+/* HEADER - 메인 메뉴 */
 
 header .inner .main-menu {
   /* Display */

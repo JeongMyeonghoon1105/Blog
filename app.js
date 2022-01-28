@@ -106,6 +106,7 @@ var app = http.createServer((request, response) => {
 
             <!-- 텍스트 -->
             <div class="posting-container">
+            
               <a href="/?id=${element}&class=${queryData.id}" class="posting-content">
                 ${element}
               </a>
