@@ -257,7 +257,7 @@ var app = http.createServer((request, response) => {
       style = style + fs.readFileSync('./css/signin.css', 'utf8');
       var card = fs.readFileSync('./texts/sign-in', 'utf8');
     }
-    // CARD(Post 페이지에 위치해 있을 경우)
+    // CARD(글쓰기 페이지에 위치해 있을 경우)
     else {
       style = style + fs.readFileSync('./css/write.css', 'utf8');
 
@@ -300,7 +300,7 @@ var app = http.createServer((request, response) => {
       var innerStyle = '/* */';
       var cardStyle = 'background-color: rgb(248, 248, 255);';
       var menuStyle = '/* */';
-    } else if (queryData.id == 'post') {
+    } else if (queryData.id == 'write') {
       var bodyStyle = 'height: 1080px;';
       var headerStyle = '/* */';
       var wrapStyle = 'height: 1030px;';
@@ -361,7 +361,7 @@ var app = http.createServer((request, response) => {
               <ul style="list-style-type: none; font-size: 15px;">
                 ${list}
               </ul><br>
-              <h2 class="post_button" style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=post'">Post</h2>
+              <h2 class="post_button" style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=write'">Post</h2>
             </div>
           </div>
         </div>
