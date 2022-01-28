@@ -1,45 +1,43 @@
 <!-- HEADER -->
-<header>
-  <div class="inner">
-    <!-- LOGO -->
-    <a href="/" class="logo">
-      <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/Logo.png?raw=true" alt="Daniel's Tech Blog">
-    </a>
+<div class="inner">
+  <!-- LOGO -->
+  <a href="/" class="logo">
+    <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/Logo.png?raw=true" alt="Daniel's Tech Blog">
+  </a>
+
+  <!-- SEARCH BAR -->
+  <input type="text" id="search-bar" placeholder="Search...">
+
+  <!-- MAIN MENU -->
+  <div class="main-menu" id="main-menu">
+
+    <!-- 1st Item of Menu (Search Button) -->
+    <div class="item" id="search">
+      <i class="fas fa-search"></i>
+    </div>
+
+    <!-- 2nd Item of Menu (Instagram) -->
+    <div class="item" id="instagram">
+      <i class="fab fa-instagram" onclick="window.open('https://www.instagram.com/myeonghoon._.1105')"></i>
+    </div>
+
+    <!-- 3rd Item of Menu (Facebook Link) -->
+    <div class="item" id="facebook" onclick="window.open('https://www.facebook.com/JeongMyeonghoon')">
+      <i class="fab fa-facebook"></i>
+    </div>
+
+    <!-- 4th Item of Menu (Github Link) -->
+    <div class="item" id="github" onclick="window.open('https://github.com/JeongMyeonghoon1105')">
+      <i class="fab fa-github"></i>
+    </div>
+
+    <!-- 5th Item of Menu (Sign In) -->
+    <div class="item" id="sign-in">
+      <span data-tooltip-text="Sign In" onclick="location.href='/?id=SignIn'"><i class="fas fa-user-circle"></i></span>
+    </div>
 
     <!-- SEARCH BAR -->
     <input type="text" id="search-bar" placeholder="Search...">
-
-    <!-- MAIN MENU -->
-    <div class="main-menu" id="main-menu">
-
-      <!-- 1st Item of Menu (Search Button) -->
-      <div class="item" id="search">
-        <i class="fas fa-search"></i>
-      </div>
-
-      <!-- 2nd Item of Menu (Instagram) -->
-      <div class="item" id="instagram">
-        <i class="fab fa-instagram" onclick="window.open('https://www.instagram.com/myeonghoon._.1105')"></i>
-      </div>
-
-      <!-- 3rd Item of Menu (Facebook Link) -->
-      <div class="item" id="facebook" onclick="window.open('https://www.facebook.com/JeongMyeonghoon')">
-        <i class="fab fa-facebook"></i>
-      </div>
-
-      <!-- 4th Item of Menu (Github Link) -->
-      <div class="item" id="github" onclick="window.open('https://github.com/JeongMyeonghoon1105')">
-        <i class="fab fa-github"></i>
-      </div>
-
-      <!-- 5th Item of Menu (Sign In) -->
-      <div class="item" id="sign-in">
-        <span data-tooltip-text="Sign In" onclick="location.href='/?id=SignIn'"><i class="fas fa-user-circle"></i></span>
-      </div>
-
-      <!-- SEARCH BAR -->
-      <input type="text" id="search-bar" placeholder="Search...">
-      
-    </div>
+    
   </div>
-</header>
+</div>

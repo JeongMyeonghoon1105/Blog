@@ -69,7 +69,7 @@ var app = http.createServer((request, response) => {
     }
     // CARD(카테고리 페이지에 위치해 있을 경우. 카테고리 페이지에서는 id가 카테고리명, class가 게시물 제목)
     else if ((queryData.id == 'Life') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Study')) {
-      style = style + fs.readFileSync('./css/else.css', 'utf8');
+      style = style + fs.readFileSync('./css/category.css', 'utf8');
       var filelist = fs.readdirSync(`./texts/${queryData.id}`);
       var card = 
       `
@@ -138,7 +138,7 @@ var app = http.createServer((request, response) => {
     }
     // CARD(휴지통 내에 보관된 삭제 게시물의 리스트를 표출하는 페이지에 위치해 있을 경우)
     else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
-      style = style + fs.readFileSync('./css/else.css', 'utf8');
+      style = style + fs.readFileSync('./css/trash.css', 'utf8');
       
       // 로그인하지 않았을 시 해당 페이지 접속 차단
       if (signIn == 0) {
@@ -216,7 +216,7 @@ var app = http.createServer((request, response) => {
     }
     // CARD(휴지통 내 게시물 페이지에 위치해 있을 경우)
     else if (queryData.id == 'Trash'){
-      style = style + fs.readFileSync('./css/else.css', 'utf8');
+      style = style + fs.readFileSync('./css/trash.css', 'utf8');
       
       if (signIn == 0) {
         response.writeHead(302, {
@@ -229,7 +229,7 @@ var app = http.createServer((request, response) => {
     }
     // CARD(게시물 페이지에 위치해 있을 경우. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
     else if ((queryData.class == 'Life') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Study')) {
-      style = style + fs.readFileSync('./css/else.css', 'utf8');
+      style = style + fs.readFileSync('./css/post.css', 'utf8');
       var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
 
       if (signIn == 1) {
@@ -254,12 +254,12 @@ var app = http.createServer((request, response) => {
     }
     // CARD(로그인 페이지에 위치해 있을 경우)
     else if (queryData.id == 'SignIn' && signIn == 0) {
-      style = style + fs.readFileSync('./css/else.css', 'utf8');
+      style = style + fs.readFileSync('./css/signin.css', 'utf8');
       var card = fs.readFileSync('./texts/sign-in', 'utf8');
     }
     // CARD(Post 페이지에 위치해 있을 경우)
     else {
-      style = style + fs.readFileSync('./css/else.css', 'utf8');
+      style = style + fs.readFileSync('./css/write.css', 'utf8');
 
       if (signIn == 0) {
         response.writeHead(302, {
@@ -295,24 +295,32 @@ var app = http.createServer((request, response) => {
     // 페이지에 따라 스타일을 달리 적용
     if (queryData.id === undefined) {
       var bodyStyle = '/* */';
+      var headerStyle = '/* */';
       var wrapStyle = '/* */';
       var innerStyle = '/* */';
       var cardStyle = 'background-color: rgb(248, 248, 255);';
+      var menuStyle = '/* */';
     } else if (queryData.id == 'post') {
       var bodyStyle = 'height: 610px;';
+      var headerStyle = '/* */';
       var wrapStyle = 'height: 560px;';
       var innerStyle = 'height: 560px;';
       var cardStyle = 'height: 560px; background-color: rgb(248, 248, 255);';
+      var menuStyle = '/* */';
     } else if (queryData.id == 'SignIn') {
       var bodyStyle = '/* */';
+      var headerStyle = 'display: none;';
       var wrapStyle = '/* */';
       var innerStyle = '/* */';
       var cardStyle = 'background-color: rgb(248, 248, 255);';
+      var menuStyle = 'display: none;';
     } else {
       var bodyStyle = '/* */';
+      var headerStyle = '/* */';
       var wrapStyle = '/* */';
       var innerStyle = '/* */';
       var cardStyle = '/* */';
+      var menuStyle = '/* */';
     }
 
     // 로드될 HTML 코드를 변수에 저장
@@ -335,7 +343,9 @@ var app = http.createServer((request, response) => {
       </style>
 
       <!-- HEADER -->
-      ${header}
+      <header style="${headerStyle}">
+        ${header}
+      </header>
       
       <!-- WRAP -->
       <div class="wrap" style="${wrapStyle}">
@@ -345,7 +355,7 @@ var app = http.createServer((request, response) => {
             ${card}
           </div>
           <!-- MENU -->
-          <div class="menu">
+          <div class="menu" style="${menuStyle}">
             <div class="contents">
               <h1>Menu</h1><br>
               <ul style="list-style-type: none; font-size: 15px;">

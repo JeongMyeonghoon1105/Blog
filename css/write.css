@@ -29,211 +29,6 @@
   margin: 30px 50px 0 50px;
 }
 
-.wrap .inner .card .sign-in-description-area {
-  width: 375px;
-  margin: 30px auto 0 auto;
-}
-
-.notice {
-  /* 기본 */
-  display: block;
-  width: 900px;
-  height: 50px;
-
-  /* 텍스트 */
-  font: 12px;
-  color: lightgray;
-  text-align: center;
-
-  /* 정렬 */
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
-.post-container {
-  margin: 50px;
-}
-
-.post-title {
-  /* 텍스트 */
-  font-size: 30px;
-  font-weight: bold;
-
-  /* 기타 */
-  overflow-x: hidden;
-}
-
-.post-line {
-  width: 800px;
-  height: 2px;
-  background-color: lightgray;
-}
-
-.post-contents {
-  /* 텍스트 */
-  font-size: 20px;
-
-  /* 기타 */
-  overflow-x: hidden;
-}
-
-/* WRAP - 게시물 페이지 */
-
-.posting-item {
-  width: 800px;
-  height: 30px;
-
-  border-bottom: 0.5px solid lightgray;
-
-  font-size: 13px;
-
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-}
-
-.posting-container {
-  display: flex;
-
-  width: 800px;
-  height: 30px;
-}
-
-.posting-content {
-  display: block;
-
-  width: 800px;
-  height: 20px;
-
-  text-align: justify;
-  line-height: 20px;
-
-  padding: 5px 0;
-
-  overflow: hidden;
-}
-
-/* WRAP - Sign In */
-
-.sign-in-form {
-  /* 기본 */
-  width: 375px;
-  height: 230px;
-  background-color: white;
-
-  /* 정렬 */
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 50px auto;
-}
-
-.password {
-  /* 기본 */
-  width: 305px;
-  height: 50px;
-  background-color: white;
-
-  /* 테두리 */
-  border: 2px solid gray;
-  border-radius: 50px;
-
-  /* 정렬 */
-  margin: 50px 35px;
-}
-
-.password-textarea {
-  /* 기본 */
-  width: 305px;
-  height: 50px;
-
-  /* 테두리 */
-  border: none;
-  border-radius: 50px;
-
-  /* 텍스트 */
-  line-height: 50px;
-
-  /* 기타 */
-  overflow: hidden;
-}
-
-.sign-in-button {
-  /* 기본 */
-  width: 85px;
-  height: 30px;
-  background-color: white;
-
-  /* 테두리 */
-  border: 2px solid gray;
-  border-radius: 50px;
-
-  /* 텍스트 */
-  color: gray;
-
-  /* 정렬 */
-  margin: 0 145px;
-
-  /* 기타 */
-  cursor: pointer;
-}
-
-.post-button {
-  /* 기본 */
-  width: 80px;
-  height: 30px;
-  background-color: white;
-
-  /* 테두리 */
-  border: none;
-  border-radius: 50px;
-
-  /* 정렬 */
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-
-  /* 텍스트 */
-  color: gray;
-
-  /* 기타 */
-  cursor: pointer;
-}
-
-.button-container {
-  /* Display */
-  display: flex;
-
-  /* 기본 */
-  width: 800px;
-  height: 20px;
-
-  /* 정렬 */
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  margin: 50px;
-}
-
-.update-delete-button {
-  /* 기본 */
-  width: 50px;
-  height: 20px;
-
-  /* 텍스트 */
-  font-size: 15px;
-  text-align: center;
-}
-
-/* WRAP - Posting */
-
 .wrap .inner .card .writting-area {
   /* 기본 */
   width: 800px;
@@ -359,7 +154,6 @@
   cursor: pointer;
 }
 
-
 /* MEDIA QUERY */
 
 @media screen and (max-width: 1200px) {
@@ -383,12 +177,6 @@
     margin: 30px auto 0 auto;
   }
 
-  .wrap .inner .card .sign-in-description-area {
-    margin: 30px auto 0 auto;
-  }
-
-  /* WRAP - Writting Area */
-
   .wrap .inner .card .writting-area {
     width: 800px;
   }
@@ -419,16 +207,6 @@
 
   .wrap .inner .card .writting-area form .category #category-input {
     width: 800px;
-  }
-
-  /* WRAP - Post */
-
-  .post-line {
-    width: 100vw;
-  }
-
-  .button-container {
-    width: 80vw;
   }
 }
 
@@ -451,26 +229,6 @@
     margin: 30px auto 0 auto;
   }
 
-  .wrap .inner .card .sign-in-description-area {
-    margin: 30px auto 0 auto;
-  }
-
-  /* WRAP - 게시물 페이지 */
-
-  .posting-item {
-    width: 375px;
-  }
-
-  .posting-container {
-    width: 375px;
-  }
-
-  .posting-content {
-    width: 375px;
-  }
-
-  /* WRAP - Writting Area */
-
   .wrap .inner .card .writting-area {
     width: 375px;
   }
@@ -501,21 +259,5 @@
 
   .wrap .inner .card .writting-area form .category #category-input {
     width: 375px;
-  }
-
-  /* WRAP - Post */
-
-  .post-line {
-    width: 100vw;
-  }
-
-  .button-container {
-    width: 80vw;
-
-    margin: 30px;
-  }
-
-  .notice {
-    width: 100vw;
   }
 }
