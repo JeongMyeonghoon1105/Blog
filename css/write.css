@@ -154,10 +154,11 @@
   /* 기본 */
   width: 50px;
   height: 30px;
-  background-color: white;
+  background-color: rgb(100, 100, 220);
 
   /* 테두리 */
   border: none;
+  border-radius: 5px;
 
   /* 정렬 */
   position: absolute;
@@ -166,7 +167,7 @@
   margin: 0 auto;
 
   /* 텍스트 */
-  color: gray;
+  color: white;
 
   /* 기타 */
   cursor: pointer;

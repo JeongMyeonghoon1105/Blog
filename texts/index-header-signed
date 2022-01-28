@@ -32,8 +32,8 @@
     </div>
 
     <!-- 5th Item of Menu (Sign In) -->
-    <div class="item" id="sign-in">
-      <span data-tooltip-text="Sign Out" onclick="location.href='/signin_process'"><i class="fas fa-user-circle"></i></span>
+    <div class="item" id="sign-in" onclick="location.href='/signin_process'">
+      <span data-tooltip-text="Sign Out"><i class="fas fa-user-circle"></i></span>
     </div>
 
     <!-- SEARCH BAR -->

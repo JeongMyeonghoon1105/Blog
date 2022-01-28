@@ -1,0 +1,16 @@
+
+      <div class="post-container">
+
+        <!-- 게시물 제목 -->
+        <h1 class="post-title">React</h1><br>
+
+        <!-- 내용 -->
+        <div class="post-contents">
+          <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/React.png?raw=true" alt="react" style="width: 100%">
+Hello, React!
+<br>
+Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. 
+        </div>
+
+      </div>
+      

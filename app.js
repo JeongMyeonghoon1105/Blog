@@ -298,21 +298,21 @@ var app = http.createServer((request, response) => {
       var headerStyle = '/* */';
       var wrapStyle = '/* */';
       var innerStyle = '/* */';
-      var cardStyle = 'background-color: rgb(248, 248, 255);';
+      var cardStyle = 'background-color: rgb(245, 245, 255);';
       var menuStyle = '/* */';
     } else if (queryData.id == 'write') {
-      var bodyStyle = 'height: 1080px;';
+      var bodyStyle = 'height: 1200px;';
       var headerStyle = '/* */';
-      var wrapStyle = 'height: 1030px;';
-      var innerStyle = 'height: 1030px;';
-      var cardStyle = 'height: 1030px;';
+      var wrapStyle = 'height: 1150px;';
+      var innerStyle = 'height: 1150px;';
+      var cardStyle = 'height: 1150px;';
       var menuStyle = '/* */';
     } else if (queryData.id == 'SignIn') {
       var bodyStyle = '/* */';
       var headerStyle = 'display: none;';
       var wrapStyle = '/* */';
       var innerStyle = '/* */';
-      var cardStyle = 'background-color: rgb(248, 248, 255);';
+      var cardStyle = 'background-color: rgb(245, 245, 255);';
       var menuStyle = 'display: none;';
     } else {
       var bodyStyle = '/* */';
@@ -361,7 +361,9 @@ var app = http.createServer((request, response) => {
               <ul style="list-style-type: none; font-size: 15px;">
                 ${list}
               </ul><br>
-              <h2 class="post_button" style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=write'">Post</h2>
+              <h2 class="post_button" style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=write'">
+                <i class="fas fa-pen"></i> Post
+              </h2>
             </div>
           </div>
         </div>
