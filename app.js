@@ -43,26 +43,6 @@ var app = http.createServer((request, response) => {
   var Exercise_Postings = fs.readdirSync('./texts/Exercise/').length;
   var Study_Postings = fs.readdirSync('./texts/Study/').length;
 
-  var login_form = 
-  `
-  <!-- 로그인 폼 -->
-  <form action="http://localhost:3000/signin_process" method="post" class="sign-in-form">
-
-    <!-- 암호 입력란 -->
-    <div class="password">
-      <input type="password" class="password-textarea" name="password" rows="1" cols="55" placeholder="Password" maxlength="100" required></input>
-    </div>
-
-    <!-- 로그인 버튼 -->
-    <div>
-      <button type="submit" class="sign-in-button">
-        Sign In
-      </button>
-    </div>
-
-  </form>
-  `
-
   // pathname이 '/'일 때
   if (pathname === '/') {
     // HEAD
@@ -111,35 +91,44 @@ var app = http.createServer((request, response) => {
       }
       // 현재 카테고리에 이미 게시물이 존재할 때
       else {
+        card = card +
+        `
+        <div class="posting-item" style="color: gray; border-bottom: 0.5px solid black; margin-top: 30px;">
+          Title
+        </div>
+        `
         // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
         filelist.forEach((element) => {
           card = card +
           `
           <!-- Item -->
-          <div style="width: 800px; height: 50px; margin: 20px 50px; border-bottom: 2px solid lightgray;">
+          <div class="posting-item">
 
             <!-- 텍스트 -->
-            <div style="display: flex; width: 800px; height: 30px; padding: 10px 0;">
-              <a href="/?id=${element}&class=${queryData.id}"
-                style="display: block; width: 750px; height: 30px; text-align: justify; overflow: hidden; line-height: 30px;">
+            <div class="posting-container">
+              <a href="/?id=${element}&class=${queryData.id}" class="posting-content">
                 ${element}
               </a>
 
               <!-- 삭제 & 편집 버튼 -->
-              <div style="display: flex; width: 50px; height: 30px;">
+              <!-- <div style="display: flex; width: 50px; height: 30px;"> -->
 
                 <!-- 삭제 버튼 -->
+                <!-- 
                 <a class="delete_button" href="http://localhost:3000/delete_process?id=${queryData.id}&class=${element}"
                   style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
                   <i class="fas fa-trash" style="line-height: 30px;"></i>
                 </a>
+                -->
 
                 <!-- 편집 버튼 -->
+                <!-- 
                 <a class="update_button" style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
                   <i class="fas fa-edit" style="line-height: 30px;"></i>
                 </a>
+                -->
+              <!-- </div> -->
 
-              </div>
             </div>
 
           </div>
@@ -266,15 +255,7 @@ var app = http.createServer((request, response) => {
     // CARD(로그인 페이지에 위치해 있을 경우)
     else if (queryData.id == 'SignIn' && signIn == 0) {
       style = style + fs.readFileSync('./css/else.css', 'utf8');
-      var card = 
-      `
-      <div class="sign-in-description-area">
-        <h1 style="font-size: 20px; font-weight: bold; font-family: 'Nanum Gothic', 'sans-serif';">
-          Sign In
-        </h1>
-      </div>
-      `
-      + login_form;
+      var card = fs.readFileSync('./texts/sign-in', 'utf8');
     }
     // CARD(Post 페이지에 위치해 있을 경우)
     else {

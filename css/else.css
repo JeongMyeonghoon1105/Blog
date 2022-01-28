@@ -81,6 +81,42 @@
   overflow-x: hidden;
 }
 
+/* WRAP - 게시물 페이지 */
+
+.posting-item {
+  width: 800px;
+  height: 30px;
+
+  border-bottom: 0.5px solid lightgray;
+
+  font-size: 13px;
+
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.posting-container {
+  display: flex;
+
+  width: 800px;
+  height: 30px;
+}
+
+.posting-content {
+  display: block;
+
+  width: 800px;
+  height: 20px;
+
+  text-align: justify;
+  line-height: 20px;
+
+  padding: 5px 0;
+
+  overflow: hidden;
+}
+
 /* WRAP - Sign In */
 
 .sign-in-form {
@@ -417,6 +453,20 @@
 
   .wrap .inner .card .sign-in-description-area {
     margin: 30px auto 0 auto;
+  }
+
+  /* WRAP - 게시물 페이지 */
+
+  .posting-item {
+    width: 375px;
+  }
+
+  .posting-container {
+    width: 375px;
+  }
+
+  .posting-content {
+    width: 375px;
   }
 
   /* WRAP - Writting Area */

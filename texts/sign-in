@@ -1,0 +1,21 @@
+<div class="sign-in-description-area">
+  <h1 style="font-size: 20px; font-weight: bold; font-family: 'Nanum Gothic', 'sans-serif';">
+    Sign In
+  </h1>
+</div>
+
+<form action="http://localhost:3000/signin_process" method="post" class="sign-in-form">
+
+  <!-- 암호 입력란 -->
+  <div class="password">
+    <input type="password" class="password-textarea" name="password" rows="1" cols="55" placeholder="Password" maxlength="100" required></input>
+  </div>
+
+  <!-- 로그인 버튼 -->
+  <div>
+    <button type="submit" class="sign-in-button">
+      Sign In
+    </button>
+  </div>
+
+</form>
