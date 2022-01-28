@@ -106,7 +106,7 @@ var app = http.createServer((request, response) => {
 
             <!-- 텍스트 -->
             <div class="posting-container">
-            
+
               <a href="/?id=${element}&class=${queryData.id}" class="posting-content">
                 ${element}
               </a>
@@ -363,7 +363,7 @@ var app = http.createServer((request, response) => {
                 ${list}
               </ul><br>
               <h2 class="post_button" style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=write'">
-                <i class="fas fa-pen"></i> Post
+                Post
               </h2>
             </div>
           </div>

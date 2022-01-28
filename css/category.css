@@ -160,3 +160,25 @@
     width: 100vw;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .wrap .inner .card .description-area {
+    /* 기본 */
+    width: 250px;
+
+    /* 정렬 */
+    margin: 30px auto 0 auto;
+  }
+
+  .posting-item {
+    width: 250px;
+  }
+
+  .posting-container {
+    width: 250px;
+  }
+
+  .posting-content {
+    width: 250px;
+  }
+}

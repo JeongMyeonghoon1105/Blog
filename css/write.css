@@ -198,18 +198,6 @@
 }
 
 @media screen and (max-width: 850px) {
-  .wrap {
-    width: 100vw;
-  }
-
-  .wrap .inner {
-    width: 100vw;
-  }
-
-  .wrap .inner .card {
-    width: 100vw;
-  }
-
   .wrap .inner .card .description-area {
     width: 375px;
 
@@ -217,14 +205,6 @@
   }
 
   .wrap .inner .card .writting-area {
-    width: 375px;
-  }
-
-  .wrap .inner .card .writting-area form {
-    width: 375px;
-  }
-
-  .wrap .inner .card .writting-area form .title {
     width: 375px;
   }
 
@@ -250,5 +230,41 @@
 
   .wrap .inner .card .writting-area form .category #category-input {
     width: 365px;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .wrap .inner .card .description-area {
+    width: 250px;
+
+    margin: 30px auto 0 auto;
+  }
+
+  .wrap .inner .card .writting-area {
+    width: 250px;
+  }
+
+  .wrap .inner .card .writting-area form .title #title-input {
+    width: 250px;
+  }
+
+  .wrap .inner .card .writting-area form .border {
+    width: 230px;
+  }
+
+  .wrap .inner .card .writting-area form .br {
+    width: 250px;
+  }
+
+  .wrap .inner .card .writting-area form div #contents-input {
+    width: 250px;
+  }
+
+  .wrap .inner .card .writting-area form .category {
+    width: 250px;
+  }
+
+  .wrap .inner .card .writting-area form .category #category-input {
+    width: 240px;
   }
 }

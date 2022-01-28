@@ -156,8 +156,41 @@
 
   .wrap .inner .card .sign-in-description-area {
     margin: 0 auto;
-    padding-top: 30px;
+    padding-top: 60px;
   }
 }
 
-@media screen and (max-width: 450px) {}
+@media screen and (max-width: 470px) {
+  .signin-container {
+    display: block;
+
+    width: 250px;
+  }
+
+  .signin-main {
+    width: 250px;
+  }
+
+  .wrap .inner .card .sign-in-description-area {
+    width: 150px;
+
+    margin: 0 auto;
+    padding-top: 60px;
+  }
+
+  .sign-in-description-area h1 {
+    width: 150px;
+  }
+
+  .sign-in-form {
+    width: 175px;
+  }
+
+  .password {
+    width: 150px;
+  }
+
+  .password .password-textarea {
+    width: 150px;
+  }
+}

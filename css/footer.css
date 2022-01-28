@@ -38,8 +38,8 @@ footer .inner {
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 270px) {
   footer .inner {
-    width: 100vw;
+    display: none;
   }
 }
