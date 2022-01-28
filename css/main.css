@@ -37,6 +37,10 @@
   margin: 30px 50px;
 }
 
+.wrap .inner .card .row .column a {
+  display: block;
+}
+
 .wrap .inner .card .row .column .column-left-items {
   /* 기본 */
   width: 375px;

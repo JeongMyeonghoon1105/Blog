@@ -10,44 +10,44 @@
   <div class="column">
 
     <!-- 1st Item of Column -->
-    <div class="column-left-items">
+    <a class="column-left-items" href="">
       <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/React.png?raw=true" alt="React">
       <div class="item-text">
         <text class="item-text-title">React</text>
         <div class="between-padding"></div>
         React는 유저 인터페이스 제작에 활용되는 오픈소스 JavaScript 라이브러리이다.
       </div>
-    </div>
+    </a>
 
     <!-- 2nd Item of Column -->
-    <div class="column-left-items">
+    <a class="column-left-items" href="">
       <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/JS.jpg?raw=true" alt="JavaScript">
       <div class="item-text">
         <text class="item-text-title">JavaScript</text>
         <div class="between-padding"></div>
         JavaScript는 ...
       </div>
-    </div>
+    </a>
 
     <!-- 3rd Item of Column -->
-    <div class="column-left-items">
+    <a class="column-left-items" href="">
       <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/React.png?raw=true" alt="React">
       <div class="item-text">
         <text class="item-text-title">React</text>
         <div class="between-padding"></div>
         React는 유저 인터페이스 제작에 활용되는 오픈소스 JavaScript 라이브러리이다.
       </div>
-    </div>
+    </a>
 
     <!-- 4th Item of Column -->
-    <div class="column-left-items">
+    <a class="column-left-items" href="">
       <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/JS.jpg?raw=true" alt="JavaScript">
       <div class="item-text">
         <text class="item-text-title">JavaScript</text>
         <div class="between-padding"></div>
         JavaScript는 ...
       </div>
-    </div>
+    </a>
 
   </div>
   
@@ -56,44 +56,44 @@
   <div class="column">
 
     <!-- 1st Item of Column -->
-    <div class="column-right-items" style="height: 420px;">
+    <a class="column-right-items" style="height: 420px;" href="">
       <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/Vue.jpg?raw=true" alt="Vue.js">
       <div class="item-text" style="height: 165px;">
         <text class="item-text-title">Vue.js</text>
         <div class="between-padding"></div>
         Vue.js는 ...
       </div>
-    </div>
+    </a>
 
     <!-- 2nd Item of Column -->
-    <div class="column-right-items">
+    <a class="column-right-items" href="">
       <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/github.png?raw=true" alt="Github">
       <div class="item-text">
         <text class="item-text-title">Github</text>
         <div class="between-padding"></div>
         Github은 ...
       </div>
-    </div>
+    </a>
 
     <!-- 3rd Item of Column -->
-    <div class="column-right-items" style="height: 450px;">
+    <a class="column-right-items" style="height: 450px;" href="">
       <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/Vue.jpg?raw=true" alt="Vue.js">
       <div class="item-text" style="height: 195px;">
         <text class="item-text-title">Vue.js</text>
         <div class="between-padding"></div>
         Vue.js는 ...
       </div>
-    </div>
+    </a>
 
     <!-- 4th Item of Column -->
-    <div class="column-right-items">
+    <a class="column-right-items" href="">
       <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/github.png?raw=true" alt="Github">
       <div class="item-text">
         <text class="item-text-title">Github</text>
         <div class="between-padding"></div>
         Github은 ...
       </div>
-    </div>
+    </a>
 
   </div>
   
