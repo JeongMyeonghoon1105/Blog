@@ -53,24 +53,43 @@
 .wrap .inner .card .writting-area form .title {
   /* Display */
   display: flex;
+
+  /* 기본 */
+  height: 70px;
 }
 
 .wrap .inner .card .writting-area form .title #title-input {
   /* 기본 */
   width: 800px;
-  height: 50px;
+  height: 70px;
   background-color: white;
 
   /* 테두리 */
   border: none;
-  border-bottom: 3px solid var(--bg-color);
 
   /* 텍스트 */
   font-size: 20px;
   line-height: 50px;
 
   /* 정렬 */
-  padding: 0 10px;
+  padding: 10px;
+
+  /* 기타 */
+  overflow: hidden;
+}
+
+.wrap .inner .card .writting-area form textarea {
+  resize: none;
+}
+
+.wrap .inner .card .writting-area form .border {
+  width: 780px;
+  height: 1px;
+  background-color: lightgray;
+
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
 .wrap .inner .card .writting-area form .br {
@@ -81,12 +100,11 @@
 .wrap .inner .card .writting-area form div #contents-input {
   /* 기본 */
   width: 800px;
-  height: 330px;
+  height: 800px;
   background-color: white;
 
   /* 테두리 */
   border: none;
-  border-bottom: 3px solid var(--bg-color);
 
   /* 텍스트 */
   font-size: 15px;
@@ -117,7 +135,7 @@
 
 .wrap .inner .card .writting-area form .category #category-input {
   /* 기본 */
-  width: 800px;
+  width: 790px;
   height: 40px;
   background-color: white;
 
@@ -176,38 +194,6 @@
 
     margin: 30px auto 0 auto;
   }
-
-  .wrap .inner .card .writting-area {
-    width: 800px;
-  }
-
-  .wrap .inner .card .writting-area form {
-    width: 800px;
-  }
-
-  .wrap .inner .card .writting-area form .title {
-    width: 800px;
-  }
-
-  .wrap .inner .card .writting-area form .title #title-input {
-    width: 800px;
-  }
-
-  .wrap .inner .card .writting-area form .br {
-    width: 800px;
-  }
-
-  .wrap .inner .card .writting-area form div #contents-input {
-    width: 800px;
-  }
-
-  .wrap .inner .card .writting-area form .category {
-    width: 800px;
-  }
-
-  .wrap .inner .card .writting-area form .category #category-input {
-    width: 800px;
-  }
 }
 
 @media screen and (max-width: 850px) {
@@ -245,6 +231,10 @@
     width: 375px;
   }
 
+  .wrap .inner .card .writting-area form .border {
+    width: 355px;
+  }
+
   .wrap .inner .card .writting-area form .br {
     width: 375px;
   }
@@ -258,6 +248,6 @@
   }
 
   .wrap .inner .card .writting-area form .category #category-input {
-    width: 375px;
+    width: 365px;
   }
 }

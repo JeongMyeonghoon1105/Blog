@@ -301,11 +301,11 @@ var app = http.createServer((request, response) => {
       var cardStyle = 'background-color: rgb(248, 248, 255);';
       var menuStyle = '/* */';
     } else if (queryData.id == 'post') {
-      var bodyStyle = 'height: 610px;';
+      var bodyStyle = 'height: 1080px;';
       var headerStyle = '/* */';
-      var wrapStyle = 'height: 560px;';
-      var innerStyle = 'height: 560px;';
-      var cardStyle = 'height: 560px; background-color: rgb(248, 248, 255);';
+      var wrapStyle = 'height: 1030px;';
+      var innerStyle = 'height: 1030px;';
+      var cardStyle = 'height: 1030px;';
       var menuStyle = '/* */';
     } else if (queryData.id == 'SignIn') {
       var bodyStyle = '/* */';
