@@ -3,39 +3,19 @@
   background-color: var(--bg-color);
 }
 
-.wrap .wrap-deco {
-  /* 기본 */
-  width: 0px;
-  height: 0px;
-
-  /* 테두리 */
-  border-bottom: 300px solid rgb(220, 220, 245);
-  border-right: 0px solid transparent;
-  border-left: 700px solid transparent;
-
-  /* 정렬 */
-  position: absolute;
-  bottom: 0;
-  right: 0;
-
-  z-index: 100;
-}
-
 .wrap .inner {
   /* Display */
   display: flex;
 
   /* 기본 */
-  width: 1200px;
+  width: 100vw;
   min-height: var(--contents-height);
   background-color: var(--bg-color);
-
-  z-index: 10;
 }
 
 .wrap .inner .card {
   /* 기본 */
-  width: 900px;
+  width: 100vw;
   min-height: var(--contents-height);
   background-color: var(--card-color);
 
@@ -43,6 +23,24 @@
   position: relative;
   top: 0;
   margin: 0 auto;
+}
+
+.wrap .wrap-deco {
+  /* 기본 */
+  width: 0px;
+  height: 0px;
+
+  /* 테두리 */
+  border-bottom: 500px solid rgb(220, 220, 245);
+  border-right: 0px solid transparent;
+  border-left: 1000px solid transparent;
+
+  /* 정렬 */
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  z-index: 100;
 }
 
 .signin-container {
@@ -77,8 +75,6 @@
   background-color: white;
 
   position: relative;
-
-  z-index: 1000;
 }
 
 .wrap .inner .card .sign-in-description-area {
@@ -168,6 +164,12 @@
     width: 100vw;
 
     left: 0;
+  }
+
+  .wrap .wrap-deco {
+    border-bottom: 300px solid rgb(220, 220, 245);
+    border-right: 0px solid transparent;
+    border-left: 600px solid transparent;
   }
 
   .signin-container {

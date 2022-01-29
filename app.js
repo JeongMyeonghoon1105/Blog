@@ -329,8 +329,6 @@ var app = http.createServer((request, response) => {
             </div>
           </div>
         </div>
-
-        <div class="wrap-deco"></div>
       </div>
 
       <!-- FOOTER -->
