@@ -61,7 +61,6 @@
   height: 20px;
 
   /* 정렬 */
-  position: absolute;
   left: 0;
   bottom: 0;
   margin: 50px;
@@ -69,7 +68,7 @@
 
 .update-delete-button {
   /* 기본 */
-  width: 50px;
+  width: 60px;
   height: 20px;
 
   /* 텍스트 */

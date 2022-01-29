@@ -101,17 +101,21 @@
   overflow: hidden;
 }
 
-.delete_button {
+.delete-button {
+  /* Display */
   display: block;
 
+  /* 기본 */
   width: 50px;
   height: 20px;
 
+  /* 텍스트 */
   color: red;
   font-size: 10px;
   text-align: center;
   line-height: 20px;
 
+  /* 정렬 */
   margin-top: 10px;
 }
 

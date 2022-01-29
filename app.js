@@ -140,7 +140,7 @@ var app = http.createServer((request, response) => {
               </a>
 
               <!-- 삭제 버튼 -->
-              <a class="delete_button" href="http://localhost:3000/clear_process?id=Trash&class=${elem}&title=${element}">
+              <a class="delete-button" href="http://localhost:3000/clear_process?id=Trash&class=${elem}&title=${element}">
                 DELETE
               </a>
 
@@ -200,13 +200,13 @@ var app = http.createServer((request, response) => {
         <div class="button-container">
   
           <!-- 삭제 버튼 -->
-          <a href="http://localhost:3000/delete_process?id=${queryData.class}&class=${queryData.id}" class="update-delete-button">
-            <i class="fas fa-trash"></i>
+          <a href="http://localhost:3000/delete_process?id=${queryData.class}&class=${queryData.id}" class="update-delete-button" style="color: red;">
+            DELETE
           </a>
   
           <!-- 편집 버튼 -->
-          <a class="update-delete-button">
-            <i class="fas fa-edit"></i>
+          <a class="update-delete-button" style="color: gray;">
+            UPDATE
           </a>
   
         </div>
