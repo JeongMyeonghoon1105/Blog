@@ -40,4 +40,10 @@
     <input type="text" id="search-bar" placeholder="Search...">
     
   </div>
+
+  <!-- Hidden Item (Menu) -->
+  <div class="item" id="hidden-menu">
+    <i class="fas fa-bars"></i>
+  </div>
+  
 </div>

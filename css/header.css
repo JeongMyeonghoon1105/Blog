@@ -108,7 +108,7 @@ header .inner .main-menu {
   margin: auto 0;
 }
 
-header .inner .main-menu .item {
+header .inner .item {
   /* 기본 */
   width: 60px;
   height: 60px;
@@ -189,15 +189,25 @@ header .inner .main-menu #sign-in:hover {
   z-index: 9999;
 }
 
+header .inner #hidden-menu {
+  /* Display */
+  display: none;
+
+  /* 정렬 */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto 0;
+}
+
+header .inner #hidden-menu i {
+  line-height: 60px;
+}
+
 /* MEDIA QUERY */
 
 @media screen and (max-width: 1200px) {
-  header .inner {
-    width: 100vw;
-  }
-}
-
-@media screen and (max-width: 850px) {
   header .inner {
     width: 100vw;
   }
@@ -208,6 +218,10 @@ header .inner .main-menu #sign-in:hover {
 
   header .inner .main-menu {
     display: none;
+  }
+
+  header .inner #hidden-menu {
+    display: block;
   }
 }
 

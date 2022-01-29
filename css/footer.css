@@ -2,7 +2,7 @@ footer {
   /* 기본 */
   width: 100%;
   height: 50px;
-  background-color: var(--bg-color);
+  background-color: rgb(101, 101, 184);
 
   /* 정렬 */
   position: relative;
@@ -16,10 +16,9 @@ footer .inner {
   /* 기본 */
   width: 600px;
   height: 50px;
-  background-color: var(--bg-color);
 
   /* 텍스트 */
-  color: lightgray;
+  color: white;
   font-weight: bold;
   font-size: 12px;
   text-align: center;
