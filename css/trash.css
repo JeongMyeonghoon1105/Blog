@@ -58,7 +58,7 @@
 
 .posting-item {
   /* 기본 */
-  width: 800px;
+  width: 750px;
   height: 30px;
 
   /* 테두리 */
@@ -78,7 +78,7 @@
   display: flex;
 
   /* 기본 */
-  width: 800px;
+  width: 750px;
   height: 30px;
 }
 
@@ -87,7 +87,7 @@
   display: block;
 
   /* 기본 */
-  width: 800px;
+  width: 750px;
   height: 20px;
 
   /* 텍스트 */
@@ -99,6 +99,20 @@
 
   /* 기타 */
   overflow: hidden;
+}
+
+.delete_button {
+  display: block;
+
+  width: 50px;
+  height: 20px;
+
+  color: red;
+  font-size: 10px;
+  text-align: center;
+  line-height: 20px;
+
+  margin-top: 10px;
 }
 
 
@@ -145,47 +159,55 @@
 
   .wrap .inner .card .description-area {
     /* 기본 */
-    width: 375px;
+    width: 325px;
 
     /* 정렬 */
     margin: 30px auto 0 auto;
   }
 
   .posting-item {
-    width: 375px;
+    width: 325px;
   }
 
   .posting-container {
-    width: 375px;
+    width: 325px;
   }
 
   .posting-content {
-    width: 375px;
+    width: 325px;
   }
 
   .notice {
     width: 100vw;
+  }
+
+  .delete_button {
+    width: 50px;
   }
 }
 
 @media screen and (max-width: 400px) {
   .wrap .inner .card .description-area {
     /* 기본 */
-    width: 250px;
+    width: 200px;
 
     /* 정렬 */
     margin: 30px auto 0 auto;
   }
 
   .posting-item {
-    width: 250px;
+    width: 200px;
   }
 
   .posting-container {
-    width: 250px;
+    width: 200px;
   }
 
   .posting-content {
-    width: 250px;
+    width: 200px;
+  }
+
+  .delete_button {
+    width: 50px;
   }
 }

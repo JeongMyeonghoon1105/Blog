@@ -1,20 +1,12 @@
 /* ******* Tasks ******* */
 
-// Create                //
-// Read                  //
-// Update 
-// Delete                //
+// Update
 // Search
 // Sort
 // Add Date of Posting
-// Uploading Photos      //
-// Sign In               //
-// Responsive UI Design
 
 // Ideas
 // 강좌 수강 후, 게시물 Update 기능 구현 방법 고민하기
-// 로그인하지 않았을 경우, 추가, 변경, 삭제 버튼의 display를 none으로 하기
-// 반응형 웹 제작법 관련 도서 읽고 CSS에 적용하기
 // readdir() 함수 이용한 검색 기능 구현 방법 고민하기
 
 
@@ -62,86 +54,57 @@ var app = http.createServer((request, response) => {
     style = style + fs.readFileSync('./css/menu.css', 'utf8');
     style = style + fs.readFileSync('./css/footer.css', 'utf8');
 
-    // CARD(메인 페이지에 위치해 있어 Query String이 없을 경우)
+    // CARD(메인 페이지)
     if (queryData.id === undefined) {
       style = style + fs.readFileSync('./css/main.css', 'utf8');
       var card = fs.readFileSync('./texts/index-card', 'utf8');
     }
-    // CARD(카테고리 페이지에 위치해 있을 경우. 카테고리 페이지에서는 id가 카테고리명, class가 게시물 제목)
+    // CARD(카테고리별 게시물 목록)
     else if ((queryData.id == 'Life') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Study')) {
       style = style + fs.readFileSync('./css/category.css', 'utf8');
       var filelist = fs.readdirSync(`./texts/${queryData.id}`);
       var card = 
       `
       <div class="description-area">
-        <h1 style="font-size: 20px; font-weight: bold; font-family: 'Nanum Gothic', 'sans-serif';">
+        <h1>
           ${queryData.id}
         </h1>
       </div>
       `;
 
-      // 현재 카테고리에 게시물이 없을 때 안내 메시지 표시
+      // 현재 카테고리에 게시물이 없을 때, 안내 메시지 표시
       if (filelist.length == 0) {
         card = card +
         `
         <div class="notice">
-          <text style="line-height: 0px;">Sorry. No postings in ${queryData.id} category yet.</text>
+          <text style="line-height: 0px;">
+            Sorry. No postings in ${queryData.id} category yet.
+          </text>
         </div>
         `
       }
-      // 현재 카테고리에 이미 게시물이 존재할 때
+      // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
       else {
-        card = card +
-        `
-        <div class="posting-item" style="color: gray; border-bottom: 0.5px solid black; margin-top: 30px;">
-          Title
-        </div>
-        `
-        // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
         filelist.forEach((element) => {
           card = card +
           `
           <!-- Item -->
           <div class="posting-item">
-
-            <!-- 텍스트 -->
             <div class="posting-container">
-
               <a href="/?id=${element}&class=${queryData.id}" class="posting-content">
                 ${element}
               </a>
-
-              <!-- 삭제 & 편집 버튼 -->
-              <!-- <div style="display: flex; width: 50px; height: 30px;"> -->
-
-                <!-- 삭제 버튼 -->
-                <!-- 
-                <a class="delete_button" href="http://localhost:3000/delete_process?id=${queryData.id}&class=${element}"
-                  style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
-                  <i class="fas fa-trash" style="line-height: 30px;"></i>
-                </a>
-                -->
-
-                <!-- 편집 버튼 -->
-                <!-- 
-                <a class="update_button" style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
-                  <i class="fas fa-edit" style="line-height: 30px;"></i>
-                </a>
-                -->
-              <!-- </div> -->
-
             </div>
-
           </div>
           `;
         });
       }
     }
-    // CARD(휴지통 내에 보관된 삭제 게시물의 리스트를 표출하는 페이지에 위치해 있을 경우)
+    // CARD(휴지통 내 게시물 목록)
     else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
-      style = style + fs.readFileSync('./css/category.css', 'utf8');
+      style = style + fs.readFileSync('./css/trash.css', 'utf8');
       
-      // 로그인하지 않았을 시 해당 페이지 접속 차단
+      // 로그인하지 않았을 시 페이지 접속 차단
       if (signIn == 0) {
         response.writeHead(302, {
           Location: encodeURI('/')
@@ -153,7 +116,7 @@ var app = http.createServer((request, response) => {
       var card =
       `
       <div class="description-area">
-        <h1 style="font-size: 20px; font-weight: bold; font-family: 'Nanum Gothic', 'sans-serif';">
+        <h1>
           Trash
         </h1>
       </div>
@@ -165,40 +128,23 @@ var app = http.createServer((request, response) => {
       directorylist.forEach((elem) => {
         var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
 
-        // 현재 카테고리에 저장된 모든 파일의 내용을 변수에 덧붙이기
+        // 현재 카테고리(휴지통)에 저장된 모든 파일의 내용을 변수에 덧붙이기
         filelist.forEach((element) => {
           card = card +
           `
           <div class="posting-item">
-
-            <!-- 텍스트 -->
             <div class="posting-container">
 
               <a href="/?id=Trash&class=${elem}&title=${element}" class="posting-content">
                 ${element}
               </a>
 
-              <!-- 삭제 & 편집 버튼 -->
-              <!-- <div style="display: flex; width: 50px; height: 30px;"> -->
-
-                <!-- 삭제 버튼 -->
-                <!-- 
-                <a class="delete_button" href="http://localhost:3000/clear_process?id=Trash&class=${elem}&title=${element}"
-                  style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
-                  <i class="fas fa-trash" style="line-height: 30px;"></i>
-                </a>
-                -->
-
-                <!-- 편집 버튼 -->
-                <!-- 
-                <a class="update_button" style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
-                  <i class="fas fa-edit" style="line-height: 30px;"></i>
-                </a>
-                -->
-              <!-- </div> -->
+              <!-- 삭제 버튼 -->
+              <a class="delete_button" href="http://localhost:3000/clear_process?id=Trash&class=${elem}&title=${element}">
+                DELETE
+              </a>
 
             </div>
-
           </div>
           `;
 
@@ -213,15 +159,16 @@ var app = http.createServer((request, response) => {
         card = card +
         `
         <div class="notice">
-        <text style="line-height: 0px;">Trash is empty.</text>
+          <text style="line-height: 0px;">Trash is empty.</text>
         </div>
         `
       }
     }
-    // CARD(휴지통 내 게시물 페이지에 위치해 있을 경우)
+    // CARD(휴지통을 통해 접속한 게시물 페이지)
     else if (queryData.id == 'Trash'){
-      style = style + fs.readFileSync('./css/category.css', 'utf8');
+      style = style + fs.readFileSync('./css/post.css', 'utf8');
       
+      // 로그인하지 않았을 시 페이지 접속 차단
       if (signIn == 0) {
         response.writeHead(302, {
           Location: encodeURI('/')
@@ -230,8 +177,18 @@ var app = http.createServer((request, response) => {
       }
 
       var card = fs.readFileSync(`./texts/Trash/${queryData.class}/${queryData.title}`, 'utf8');
+      card = card + 
+        `
+        <!-- 삭제 버튼 -->
+        <div class="button-container">
+          <a href="http://localhost:3000/clear_process?id=Trash&class=${queryData.class}&title=${queryData.title}"
+            class="update-delete-button" style="color: red;">
+            DELETE
+          </a>
+        </div>
+        `
     }
-    // CARD(게시물 페이지에 위치해 있을 경우. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
+    // CARD(게시물 페이지. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
     else if ((queryData.class == 'Life') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Study')) {
       style = style + fs.readFileSync('./css/post.css', 'utf8');
       var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
@@ -256,15 +213,16 @@ var app = http.createServer((request, response) => {
         `
       }
     }
-    // CARD(로그인 페이지에 위치해 있을 경우)
+    // CARD(로그인 페이지)
     else if (queryData.id == 'SignIn' && signIn == 0) {
       style = style + fs.readFileSync('./css/signin.css', 'utf8');
       var card = fs.readFileSync('./texts/sign-in', 'utf8');
     }
-    // CARD(글쓰기 페이지에 위치해 있을 경우)
+    // CARD(글쓰기 페이지)
     else {
       style = style + fs.readFileSync('./css/write.css', 'utf8');
 
+      // 로그인하지 않았을 시 페이지 접속 차단
       if (signIn == 0) {
         response.writeHead(302, {
           Location: encodeURI('/')
@@ -275,7 +233,7 @@ var app = http.createServer((request, response) => {
       var card =
       `
       <div class="description-area">
-        <h1 style="font-size: 20px; font-weight: bold; font-family: 'Nanum Gothic', 'sans-serif';">
+        <h1>
           Post
         </h1>
       </div>
@@ -468,6 +426,7 @@ var app = http.createServer((request, response) => {
       }
     });
     
+    // 입력한 비밀번호를 실제 비밀번호와 대조
     request.on('end', () => {
       var post = qs.parse(body);
       var input_password = post.password;

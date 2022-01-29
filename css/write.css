@@ -29,6 +29,12 @@
   margin: 30px 50px 0 50px;
 }
 
+.wrap .inner .card .description-area h1 {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Nanum Gothic', 'sans-serif';
+}
+
 .wrap .inner .card .writting-area {
   /* 기본 */
   width: 800px;
