@@ -101,9 +101,3 @@
     width: 80vw;
   }
 }
-
-@media screen and (max-width: 850px) {
-  .button-container {
-    margin: 30px;
-  }
-}
