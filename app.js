@@ -30,10 +30,10 @@ var app = http.createServer((request, response) => {
     var display = 'block';
 
   // 각 카테고리의 게시물 수를 변수에 저장
-  var Life_Postings = fs.readdirSync('./texts/Life/').length;
-  var Finance_Postings = fs.readdirSync('./texts/Finance/').length;
-  var Exercise_Postings = fs.readdirSync('./texts/Exercise/').length;
-  var Study_Postings = fs.readdirSync('./texts/Study/').length;
+  var Frontend_Postings = fs.readdirSync('./texts/Frontend/').length;
+  var Backend_Postings = fs.readdirSync('./texts/Backend/').length;
+  var DevOps_Postings = fs.readdirSync('./texts/DevOps/').length;
+  var CS_Postings = fs.readdirSync('./texts/CS/').length;
 
   // pathname이 '/'일 때
   if (pathname === '/') {
@@ -60,7 +60,7 @@ var app = http.createServer((request, response) => {
       var card = fs.readFileSync('./texts/index-card', 'utf8');
     }
     // CARD(카테고리별 게시물 목록)
-    else if ((queryData.id == 'Life') || (queryData.id == 'Finance') || (queryData.id == 'Exercise') || (queryData.id == 'Study')) {
+    else if ((queryData.id == 'Frontend') || (queryData.id == 'Backend') || (queryData.id == 'DevOps') || (queryData.id == 'CS')) {
       style = style + fs.readFileSync('./css/category.css', 'utf8');
       var filelist = fs.readdirSync(`./texts/${queryData.id}`);
       var card = 
@@ -189,7 +189,7 @@ var app = http.createServer((request, response) => {
         `
     }
     // CARD(게시물 페이지. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
-    else if ((queryData.class == 'Life') || (queryData.class == 'Finance') || (queryData.class == 'Exercise') || (queryData.class == 'Study')) {
+    else if ((queryData.class == 'Frontend') || (queryData.class == 'Backend') || (queryData.class == 'DevOps') || (queryData.class == 'CS')) {
       style = style + fs.readFileSync('./css/post.css', 'utf8');
       var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
 
@@ -244,10 +244,10 @@ var app = http.createServer((request, response) => {
     // MENU
     var list =
     `
-    <li><a href="/?id=Life">Life(${Life_Postings})</a></li>
-    <li><a href="/?id=Finance">Finance(${Finance_Postings})</a></li>
-    <li><a href="/?id=Exercise">Exercise(${Exercise_Postings})</a></li>
-    <li><a href="/?id=Study">Study(${Study_Postings})</a></li>
+    <li><a href="/?id=Frontend">Frontend(${Frontend_Postings})</a></li>
+    <li><a href="/?id=Backend">Backend(${Backend_Postings})</a></li>
+    <li><a href="/?id=DevOps">DevOps(${DevOps_Postings})</a></li>
+    <li><a href="/?id=CS">CS(${CS_Postings})</a></li>
     <li><a href="/?id=Trash" style="display: ${display}">Trash</a></li>
     `;
 
