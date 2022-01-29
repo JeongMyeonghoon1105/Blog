@@ -104,25 +104,7 @@
 }
 
 @media screen and (max-width: 850px) {
-  .wrap {
-    width: 100vw;
-  }
-
-  .wrap .inner {
-    width: 100vw;
-  }
-
-  .wrap .inner .card {
-    width: 100vw;
-  }
-
-  .post-line {
-    width: 100vw;
-  }
-
   .button-container {
-    width: 80vw;
-
     margin: 30px;
   }
 }
