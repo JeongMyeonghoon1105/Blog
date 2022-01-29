@@ -139,7 +139,7 @@ var app = http.createServer((request, response) => {
     }
     // CARD(휴지통 내에 보관된 삭제 게시물의 리스트를 표출하는 페이지에 위치해 있을 경우)
     else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
-      style = style + fs.readFileSync('./css/trash.css', 'utf8');
+      style = style + fs.readFileSync('./css/category.css', 'utf8');
       
       // 로그인하지 않았을 시 해당 페이지 접속 차단
       if (signIn == 0) {
@@ -169,31 +169,34 @@ var app = http.createServer((request, response) => {
         filelist.forEach((element) => {
           card = card +
           `
-          <!-- Item -->
-          <div style="width: 800px; height: 50px; margin: 20px 50px; border-bottom: 2px solid lightgray;">
+          <div class="posting-item">
 
             <!-- 텍스트 -->
-            <div style="display: flex; width: 800px; height: 30px; padding: 10px 0;">
-              <a href="/?id=Trash&class=${elem}&title=${element}"
-                style="display: block; width: 750px; height: 30px; text-align: justify; overflow: hidden; line-height: 30px;">
+            <div class="posting-container">
+
+              <a href="/?id=Trash&class=${elem}&title=${element}" class="posting-content">
                 ${element}
               </a>
 
               <!-- 삭제 & 편집 버튼 -->
-              <div style="display: flex; width: 50px; height: 30px;">
+              <!-- <div style="display: flex; width: 50px; height: 30px;"> -->
 
                 <!-- 삭제 버튼 -->
+                <!-- 
                 <a class="delete_button" href="http://localhost:3000/clear_process?id=Trash&class=${elem}&title=${element}"
                   style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
                   <i class="fas fa-trash" style="line-height: 30px;"></i>
                 </a>
+                -->
 
                 <!-- 편집 버튼 -->
+                <!-- 
                 <a class="update_button" style="display: ${display}; width: 50px; height: 30px; font-size: 15px; text-align: center; color: lightgray;">
                   <i class="fas fa-edit" style="line-height: 30px;"></i>
                 </a>
+                -->
+              <!-- </div> -->
 
-              </div>
             </div>
 
           </div>
@@ -217,7 +220,7 @@ var app = http.createServer((request, response) => {
     }
     // CARD(휴지통 내 게시물 페이지에 위치해 있을 경우)
     else if (queryData.id == 'Trash'){
-      style = style + fs.readFileSync('./css/trash.css', 'utf8');
+      style = style + fs.readFileSync('./css/category.css', 'utf8');
       
       if (signIn == 0) {
         response.writeHead(302, {
