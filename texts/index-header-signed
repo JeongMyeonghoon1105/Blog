@@ -46,6 +46,8 @@
     <i class="fas fa-bars"></i>
   </div>
 
-  <div id="tab-down"></div>
+  <div id="tab-down">
+    
+  </div>
   
 </div>

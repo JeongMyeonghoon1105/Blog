@@ -29,16 +29,23 @@ header .inner {
 
   width: 100vw;
   height: 200px;
+  background-color: white;
 
   position: absolute;
   top: 60px;
   left: 0;
 
   transition: 0.5s;
+  z-index: 1;
 }
 
-#hidden-menu:hover~#tab-down {
+#hidden-menu:focus~#tab-down {
   display: block;
+}
+
+.tab-down-inner {
+  width: 100vw;
+  height: 200px;
 }
 
 header .inner .logo {
