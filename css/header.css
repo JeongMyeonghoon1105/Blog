@@ -24,6 +24,23 @@ header .inner {
   margin: 0 auto;
 }
 
+#tab-down {
+  display: none;
+
+  width: 100vw;
+  height: 200px;
+
+  position: absolute;
+  top: 60px;
+  left: 0;
+
+  transition: 0.5s;
+}
+
+#hidden-menu:hover~#tab-down {
+  display: block;
+}
+
 header .inner .logo {
   /* 기본 */
   height: 60px;

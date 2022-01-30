@@ -316,6 +316,7 @@ var app = http.createServer((request, response) => {
           <div class="card" style="${cardStyle}">
             ${card}
           </div>
+
           <!-- MENU -->
           <div class="menu" style="${menuStyle}">
             <div class="contents">
