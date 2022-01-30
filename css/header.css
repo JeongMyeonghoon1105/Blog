@@ -28,19 +28,35 @@ header .inner {
   display: none;
 
   width: 100vw;
-  height: 200px;
+  height: 0;
   background-color: white;
 
   position: absolute;
   top: 60px;
   left: 0;
 
-  transition: 0.5s;
   z-index: 1;
 }
 
-#hidden-menu:focus~#tab-down {
+#hidden-menu:hover~#tab-down {
   display: block;
+
+  height: 300px;
+}
+
+#tab-down:hover {
+  display: block;
+
+  height: 300px;
+}
+
+#hidden-menu:hover i {
+  transform: rotate(90deg);
+  transition: 1s;
+}
+
+#hidden-menu:not(:hover) i {
+  transition: 1s;
 }
 
 .tab-down-inner {
@@ -223,6 +239,9 @@ header .inner #hidden-menu {
   bottom: 0;
   right: 0;
   margin: auto 0;
+
+  /* 기타 */
+  transition: .5s;
 }
 
 header .inner #hidden-menu i {
