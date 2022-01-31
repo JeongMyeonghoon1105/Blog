@@ -224,16 +224,6 @@ header .inner #hidden-menu i {
   z-index: 1;
 }
 
-#hidden-menu:hover~#tab-down {
-  display: block;
-}
-
-#tab-down:hover {
-  display: block;
-
-  height: 230px;
-}
-
 #hidden-menu:hover i {
   transform: rotate(90deg);
   transition: 0.5s;
@@ -289,8 +279,14 @@ header .inner #hidden-menu i {
     display: block;
   }
 
-  #tab-down {
-    display: none;
+  #hidden-menu:hover~#tab-down {
+    display: block;
+  }
+
+  #tab-down:hover {
+    display: block;
+
+    height: 230px;
   }
 }
 

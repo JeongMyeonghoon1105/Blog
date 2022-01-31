@@ -381,7 +381,7 @@ var app = http.createServer((request, response) => {
                 ${list}
               </ul>
 
-              <div style="width: 100%; padding: 20px; height: 22px;">
+              <div style="display: inline-block; padding: 20px; height: 22px;">
                 <h2 style="display: ${display}; color: white; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=write'">
                   Post
                 </h2>
