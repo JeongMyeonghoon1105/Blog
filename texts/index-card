@@ -56,7 +56,7 @@
   <div class="column">
 
     <!-- 1st Item of Column -->
-    <a class="column-right-items" style="height: 420px;" href="">
+    <a class="column-right-items" href="" id="long-1">
       <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/Vue.jpg?raw=true" alt="Vue.js" class="column-img">
       <div class="item-text" style="height: 165px;">
         <text class="item-text-title">Vue.js</text>
@@ -76,7 +76,7 @@
     </a>
 
     <!-- 3rd Item of Column -->
-    <a class="column-right-items" style="height: 450px;" href="">
+    <a class="column-right-items" href="" id="long-2">
       <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/Vue.jpg?raw=true" alt="Vue.js" class="column-img">
       <div class="item-text" style="height: 195px;">
         <text class="item-text-title">Vue.js</text>

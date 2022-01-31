@@ -65,6 +65,14 @@
   margin: 0 0 50px 25px;
 }
 
+#long-1 {
+  height: 420px;
+}
+
+#long-2 {
+  height: 450px;
+}
+
 .wrap .inner .card .row .column img {
   width: 375px;
   height: 225px;
@@ -193,10 +201,20 @@
 
   .wrap .inner .card .row .column .column-left-items {
     width: 250px;
+    height: 300px;
   }
 
   .wrap .inner .card .row .column .column-right-items {
     width: 250px;
+    height: 300px;
+  }
+
+  #long-1 {
+    height: 345px;
+  }
+
+  #long-2 {
+    height: 375px;
   }
 
   .wrap .inner .card .row .column img {

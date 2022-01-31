@@ -24,46 +24,6 @@ header .inner {
   margin: 0 auto;
 }
 
-#tab-down {
-  display: none;
-
-  width: 100vw;
-  height: 0;
-  background-color: white;
-
-  position: absolute;
-  top: 60px;
-  left: 0;
-
-  z-index: 1;
-}
-
-#hidden-menu:hover~#tab-down {
-  display: block;
-
-  height: 300px;
-}
-
-#tab-down:hover {
-  display: block;
-
-  height: 300px;
-}
-
-#hidden-menu:hover i {
-  transform: rotate(90deg);
-  transition: 1s;
-}
-
-#hidden-menu:not(:hover) i {
-  transition: 1s;
-}
-
-.tab-down-inner {
-  width: 100vw;
-  height: 200px;
-}
-
 header .inner .logo {
   /* 기본 */
   height: 60px;
@@ -248,6 +208,51 @@ header .inner #hidden-menu i {
   line-height: 60px;
 }
 
+#tab-down {
+  /* Display */
+  display: none;
+
+  /* 기본 */
+  width: 100vw;
+  height: 0;
+  background-color: white;
+
+  /* 테두리 */
+  border-bottom: 1px solid var(--bg-color);
+
+  /* 정렬 */
+  position: absolute;
+  top: 60px;
+  left: 0;
+  z-index: 1;
+}
+
+#hidden-menu:hover~#tab-down {
+  display: block;
+
+  height: 300px;
+}
+
+#tab-down:hover {
+  display: block;
+
+  height: 300px;
+}
+
+#hidden-menu:hover i {
+  transform: rotate(90deg);
+  transition: 0.5s;
+}
+
+#hidden-menu:not(:hover) i {
+  transition: 0.5s;
+}
+
+.tab-down-inner {
+  width: 100vw;
+  height: 200px;
+}
+
 /* MEDIA QUERY */
 
 @media screen and (max-width: 1200px) {
@@ -265,11 +270,5 @@ header .inner #hidden-menu i {
 
   header .inner #hidden-menu {
     display: block;
-  }
-}
-
-@media screen and (max-width: 430px) {
-  header .inner .logo img {
-    left: 0;
   }
 }
