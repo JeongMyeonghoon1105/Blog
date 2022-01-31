@@ -71,7 +71,7 @@ var app = http.createServer((request, response) => {
         `
         <div class="notice">
           <text style="line-height: 0px;">
-            Sorry. No postings in ${queryData.id} category yet.
+            ${queryData.id} category is empty.
           </text>
         </div>
         `

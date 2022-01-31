@@ -215,3 +215,9 @@
     width: 50px;
   }
 }
+
+@media screen and (max-width: 300px) {
+  .notice {
+    display: none;
+  }
+}
