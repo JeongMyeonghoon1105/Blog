@@ -306,7 +306,21 @@ var app = http.createServer((request, response) => {
 
       <!-- HEADER -->
       <header style="${headerStyle}">
-        ${header}
+        <div class="inner">
+          ${header}
+
+          <div id="tab-down">
+            <div class="tab-down-inner">
+              <ul style="list-style-type: none; font-size: 15px;">
+                ${list}
+              </ul><br>
+
+              <h2 class="post_button" style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=write'">
+                Post
+              </h2>
+            </div>
+          </div>
+        </div>
       </header>
       
       <!-- WRAP -->
