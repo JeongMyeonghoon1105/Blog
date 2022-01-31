@@ -285,7 +285,6 @@ var app = http.createServer((request, response) => {
         <span data-tooltip-text="Sign In"><i class="fas fa-user-circle"></i></span>
       </div>
       `
-
       var tabSignIn =
       `
       <div onclick="location.href='/?id=SignIn'" class="tab-sign">
@@ -299,7 +298,6 @@ var app = http.createServer((request, response) => {
         <span data-tooltip-text="Sign Out"><i class="fas fa-user-circle"></i></span>
       </div>
       `
-
       var tabSignIn =
       `
       <div onclick="location.href='/signin_process'" class="tab-sign">
@@ -381,11 +379,13 @@ var app = http.createServer((request, response) => {
 
               <ul class="tab-items">
                 ${list}
-              </ul><br>
+              </ul>
 
-              <h2 style="display: ${display}; color: white; font-weight: bold; padding: 0 20px; cursor: pointer;" onclick="location.href='/?id=write'">
-                Post
-              </h2>
+              <div style="width: 100%; padding: 20px; height: 22px;">
+                <h2 style="display: ${display}; color: white; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=write'">
+                  Post
+                </h2>
+              </div>
               
             </div>
           </div>

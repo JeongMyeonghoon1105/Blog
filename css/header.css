@@ -214,11 +214,8 @@ header .inner #hidden-menu i {
 
   /* 기본 */
   width: 100vw;
-  height: 250px;
+  height: 230px;
   background-color: rgb(57, 57, 57);
-
-  /* 테두리 */
-  border-bottom: 1px solid var(--bg-color);
 
   /* 정렬 */
   position: absolute;
@@ -234,7 +231,7 @@ header .inner #hidden-menu i {
 #tab-down:hover {
   display: block;
 
-  height: 250px;
+  height: 230px;
 }
 
 #hidden-menu:hover i {
@@ -248,7 +245,7 @@ header .inner #hidden-menu i {
 
 .tab-down-inner {
   width: 100vw;
-  height: 250px;
+  height: 230px;
 
   color: white;
 }
