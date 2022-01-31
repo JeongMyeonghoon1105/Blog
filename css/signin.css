@@ -193,37 +193,52 @@
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 600px) {
   .signin-container {
     display: block;
 
-    width: 250px;
+    width: 70%;
   }
 
   .signin-main {
-    width: 250px;
+    width: 100%;
   }
 
   .wrap .inner .card .sign-in-description-area {
-    width: 150px;
+    width: 70%;
 
     margin: 0 auto;
     padding-top: 60px;
   }
 
   .sign-in-description-area h1 {
-    width: 150px;
+    width: 70%;
   }
 
   .sign-in-form {
-    width: 175px;
+    width: 70%;
   }
 
   .password {
-    width: 150px;
+    width: 100%;
   }
 
   .password .password-textarea {
-    width: 150px;
+    width: 100%;
+  }
+
+  .sign-in-button-container {
+    width: 100%;
+    height: 30px;
+  }
+
+  .sign-in-button {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 225px) {
+  .signin-container {
+    display: none;
   }
 }

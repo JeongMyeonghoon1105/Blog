@@ -17,7 +17,7 @@
       </div>
     
       <!-- 로그인 버튼 -->
-      <div>
+      <div class="sign-in-button-container">
         <button type="submit" class="sign-in-button">
           Sign In
         </button>

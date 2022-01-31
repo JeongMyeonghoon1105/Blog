@@ -26,7 +26,9 @@
 }
 
 .wrap .inner .card .description-area {
-  margin: 30px 50px 0 50px;
+  width: 70%;
+
+  margin: 50px auto 0 auto;
   padding-bottom: 30px;
 }
 
@@ -39,7 +41,7 @@
 .notice {
   /* 기본 */
   display: block;
-  width: 900px;
+  width: 100%;
   height: 50px;
 
   /* 텍스트 */
@@ -58,7 +60,7 @@
 
 .posting-item {
   /* 기본 */
-  width: 800px;
+  width: 70%;
   height: 30px;
 
   /* 테두리 */
@@ -78,8 +80,11 @@
   display: flex;
 
   /* 기본 */
-  width: 800px;
+  width: 100%;
   height: 30px;
+
+  /* 정렬 */
+  justify-content: space-between;
 }
 
 .posting-content {
@@ -87,7 +92,7 @@
   display: block;
 
   /* 기본 */
-  width: 800px;
+  width: 100%;
   height: 20px;
 
   /* 텍스트 */
@@ -120,77 +125,25 @@
     /* 정렬 */
     left: 0;
   }
-
-  .wrap .inner .card .description-area {
-    /* 기본 */
-    width: 800px;
-
-    /* 정렬 */
-    margin: 30px auto 0 auto;
-  }
 }
 
-@media screen and (max-width: 850px) {
-  .wrap {
-    width: 100vw;
-  }
-
-  .wrap .inner {
-    width: 100vw;
-  }
-
-  .wrap .inner .card {
-    width: 100vw;
-  }
-
+@media screen and (max-width: 225px) {
   .wrap .inner .card .description-area {
-    /* 기본 */
-    width: 375px;
-
-    /* 정렬 */
-    margin: 30px auto 0 auto;
+    display: none;
   }
 
   .posting-item {
-    width: 375px;
+    display: none;
   }
 
   .posting-container {
-    width: 375px;
+    display: none;
   }
 
   .posting-content {
-    width: 375px;
+    display: none;
   }
 
-  .notice {
-    width: 100vw;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .wrap .inner .card .description-area {
-    /* 기본 */
-    width: 250px;
-
-    /* 정렬 */
-    margin: 30px auto 0 auto;
-  }
-
-  .posting-item {
-    width: 250px;
-  }
-
-  .posting-container {
-    width: 250px;
-  }
-
-  .posting-content {
-    width: 250px;
-  }
-}
-
-@media screen and (max-width: 300px) {
   .notice {
     display: none;
   }
