@@ -101,3 +101,15 @@
     width: 80vw;
   }
 }
+
+@media screen and (max-width: 250px) {
+  .button-container {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 225px) {
+  .post-container {
+    display: none;
+  }
+}
