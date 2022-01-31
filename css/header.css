@@ -234,25 +234,33 @@ header .inner #hidden-menu i {
 }
 
 .tab-down-inner {
+  /* 기본 */
   width: 100vw;
   height: 230px;
 
+  /* 텍스트 */
   color: white;
 }
 
 .tab-sign {
+  /* 기본 */
   width: 100px;
 
+  /* 텍스트 */
   font-weight: bold;
 
+  /* 정렬 */
   padding: 20px;
 }
 
 .tab-items {
+  /* 텍스트 */
   font-size: 15px;
 
+  /* 정렬 */
   padding: 0 20px;
 
+  /* 기타 */
   list-style-type: none;
 }
 
@@ -284,8 +292,10 @@ header .inner #hidden-menu i {
   }
 
   #tab-down:hover {
+    /* Display */
     display: block;
 
+    /* 기본 */
     height: 230px;
   }
 }

@@ -113,21 +113,27 @@
   }
 
   .wrap .inner .card {
+    /* 기본 */
     width: 100vw;
     min-height: 1950px;
 
+    /* 정렬 */
     left: 0;
   }
 
   .wrap .inner .card .description-area {
+    /* 기본 */
     width: 800px;
 
+    /* 정렬 */
     margin: 30px auto 0 auto;
   }
 
   .wrap .inner .card .row {
+    /* 기본 */
     width: 800px;
 
+    /* 정렬 */
     position: absolute;
     left: 0;
     right: 0;
@@ -156,16 +162,21 @@
   }
 
   .wrap .inner .card .description-area {
+    /* 기본 */
     width: 375px;
 
+    /* 정렬 */
     margin: 30px auto 0 auto;
   }
 
   .wrap .inner .card .row {
+    /* Display */
     display: block;
 
+    /* 기본 */
     width: 375px;
 
+    /* 정렬 */
     position: absolute;
     left: 0;
     right: 0;
@@ -179,16 +190,21 @@
 
 @media screen and (max-width: 425px) {
   .wrap .inner .card .description-area {
+    /* 기본 */
     width: 250px;
 
+    /* 정렬 */
     margin: 30px auto 0 auto;
   }
 
   .wrap .inner .card .row {
+    /* Display */
     display: block;
 
+    /* 기본 */
     width: 250px;
 
+    /* 정렬 */
     position: absolute;
     left: 0;
     right: 0;
@@ -223,7 +239,10 @@
   }
 
   .wrap .inner .card .row .column .item-text {
+    /* 기본 */
     width: 220px;
+
+    /* 기타 */
     overflow: hidden;
   }
 }

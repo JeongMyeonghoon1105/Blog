@@ -88,8 +88,10 @@
   }
 
   .wrap .inner .card {
+    /* 기본 */
     width: 100vw;
 
+    /* 정렬 */
     left: 0;
   }
 
