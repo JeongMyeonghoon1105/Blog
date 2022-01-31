@@ -40,13 +40,6 @@ var app = http.createServer((request, response) => {
     // HEAD
     var head = fs.readFileSync('./texts/index-head', 'utf8');
 
-    // HEADER
-    if (signIn == 0) {
-      var header = fs.readFileSync('./texts/index-header-unsigned', 'utf8');
-    } else {
-      var header = fs.readFileSync('./texts/index-header-signed', 'utf8');
-    }
-
     // STYLE
     var style = fs.readFileSync('./css/variables.css', 'utf8');
     style = style + fs.readFileSync('./css/common.css', 'utf8');
@@ -285,6 +278,36 @@ var app = http.createServer((request, response) => {
       var menuStyle = '/* */';
     }
 
+    if (signIn == 0) {
+      var signInHeader =
+      `
+      <div class="item" id="sign-in" onclick="location.href='/?id=SignIn'">
+        <span data-tooltip-text="Sign In"><i class="fas fa-user-circle"></i></span>
+      </div>
+      `
+
+      var tabSignIn =
+      `
+      <div onclick="location.href='/?id=SignIn'" class="tab-sign">
+        Sign In
+      </div>
+      `
+    } else {
+      var signInHeader =
+      `
+      <div class="item" id="sign-in" onclick="location.href='/signin_process'">
+        <span data-tooltip-text="Sign Out"><i class="fas fa-user-circle"></i></span>
+      </div>
+      `
+
+      var tabSignIn =
+      `
+      <div onclick="location.href='/signin_process'" class="tab-sign">
+        Sign Out
+      </div>
+      `
+    }
+
     // 로드될 HTML 코드를 변수에 저장
     var template =
     `
@@ -307,25 +330,73 @@ var app = http.createServer((request, response) => {
       <!-- HEADER -->
       <header style="${headerStyle}">
         <div class="inner">
-          ${header}
+          <!-- LOGO -->
+          <a href="/" class="logo">
+            <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/Logo.png?raw=true" alt="Daniel's Tech Blog">
+          </a>
+          
+          <!-- SEARCH BAR -->
+          <input type="text" id="search-bar" placeholder="Search...">
+          
+          <!-- MAIN MENU -->
+          <div class="main-menu" id="main-menu">
+          
+            <!-- 1st Item of Menu (Search Button) -->
+            <div class="item" id="search">
+              <i class="fas fa-search"></i>
+            </div>
+          
+            <!-- 2nd Item of Menu (Instagram) -->
+            <div class="item" id="instagram">
+              <i class="fab fa-instagram" onclick="window.open('https://www.instagram.com/myeonghoon._.1105')"></i>
+            </div>
+          
+            <!-- 3rd Item of Menu (Facebook Link) -->
+            <div class="item" id="facebook" onclick="window.open('https://www.facebook.com/JeongMyeonghoon')">
+              <i class="fab fa-facebook"></i>
+            </div>
+          
+            <!-- 4th Item of Menu (Github Link) -->
+            <div class="item" id="github" onclick="window.open('https://github.com/JeongMyeonghoon1105')">
+              <i class="fab fa-github"></i>
+            </div>
+          
+            <!-- 5th Item of Menu (Sign In) -->
+            ${signInHeader}
+          
+            <!-- SEARCH BAR -->
+            <input type="text" id="search-bar" placeholder="Search...">
+            
+          </div>
+        
+          <!-- Hidden Item (Menu) -->
+          <div class="item" id="hidden-menu">
+            <i class="fas fa-bars"></i>
+          </div>
 
           <div id="tab-down">
             <div class="tab-down-inner">
-              <ul style="list-style-type: none; font-size: 15px;">
+
+              ${tabSignIn}
+
+              <ul class="tab-items">
                 ${list}
               </ul><br>
 
-              <h2 class="post_button" style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=write'">
+              <h2 style="display: ${display}; color: white; font-weight: bold; padding: 0 20px; cursor: pointer;" onclick="location.href='/?id=write'">
                 Post
               </h2>
+              
             </div>
           </div>
+
         </div>
       </header>
       
       <!-- WRAP -->
       <div class="wrap" style="${wrapStyle}">
         <div class="inner" style="${innerStyle}">
+
           <!-- CARD -->
           <div class="card" style="${cardStyle}">
             ${card}
@@ -338,11 +409,12 @@ var app = http.createServer((request, response) => {
               <ul style="list-style-type: none; font-size: 15px;">
                 ${list}
               </ul><br>
-              <h2 class="post_button" style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=write'">
+              <h2 style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=write'">
                 Post
               </h2>
             </div>
           </div>
+
         </div>
       </div>
 

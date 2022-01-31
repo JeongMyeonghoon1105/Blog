@@ -214,8 +214,8 @@ header .inner #hidden-menu i {
 
   /* 기본 */
   width: 100vw;
-  height: 0;
-  background-color: white;
+  height: 250px;
+  background-color: rgb(57, 57, 57);
 
   /* 테두리 */
   border-bottom: 1px solid var(--bg-color);
@@ -229,14 +229,12 @@ header .inner #hidden-menu i {
 
 #hidden-menu:hover~#tab-down {
   display: block;
-
-  height: 300px;
 }
 
 #tab-down:hover {
   display: block;
 
-  height: 300px;
+  height: 250px;
 }
 
 #hidden-menu:hover i {
@@ -250,7 +248,29 @@ header .inner #hidden-menu i {
 
 .tab-down-inner {
   width: 100vw;
-  height: 200px;
+  height: 250px;
+
+  color: white;
+}
+
+.tab-sign {
+  width: 100px;
+
+  font-weight: bold;
+
+  padding: 20px;
+}
+
+.tab-items {
+  font-size: 15px;
+
+  padding: 0 20px;
+
+  list-style-type: none;
+}
+
+.tab-items li a {
+  color: white;
 }
 
 /* MEDIA QUERY */
@@ -270,5 +290,9 @@ header .inner #hidden-menu i {
 
   header .inner #hidden-menu {
     display: block;
+  }
+
+  #tab-down {
+    display: none;
   }
 }
