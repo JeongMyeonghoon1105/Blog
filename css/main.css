@@ -26,10 +26,13 @@
 }
 
 .wrap .inner .card .description-area {
+  /* 기본 */
   height: 30px;
 
+  /* 텍스트 */
   line-height: 30px;
 
+  /* 정렬 */
   margin: 30px 50px 0 50px;
 }
 
@@ -131,6 +134,10 @@
   .wrap .inner .card .description-area {
     /* 기본 */
     width: 800px;
+    height: 30px;
+
+    /* 텍스트 */
+    line-height: 30px;
 
     /* 정렬 */
     margin: 30px auto 0 auto;
@@ -172,6 +179,10 @@
   .wrap .inner .card .description-area {
     /* 기본 */
     width: 600px;
+    height: 30px;
+
+    /* 텍스트 */
+    line-height: 30px;
 
     /* 정렬 */
     margin: 30px auto 0 auto;
@@ -245,6 +256,10 @@
   .wrap .inner .card .description-area {
     /* 기본 */
     width: 487.5px;
+    height: 30px;
+
+    /* 텍스트 */
+    line-height: 30px;
 
     /* 정렬 */
     margin: 30px auto 0 auto;
@@ -318,6 +333,10 @@
   .wrap .inner .card .description-area {
     /* 기본 */
     width: 375px;
+    height: 30px;
+
+    /* 텍스트 */
+    line-height: 30px;
 
     /* 정렬 */
     margin: 30px auto 0 auto;
@@ -391,6 +410,10 @@
   .wrap .inner .card .description-area {
     /* 기본 */
     width: 280px;
+    height: 30px;
+
+    /* 텍스트 */
+    line-height: 30px;
 
     /* 정렬 */
     margin: 30px auto 0 auto;
@@ -466,6 +489,7 @@
     width: 250px;
     height: 30px;
 
+    /* 텍스트 */
     line-height: 30px;
 
     /* 정렬 */
