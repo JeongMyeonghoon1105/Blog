@@ -1,5 +1,6 @@
 .wrap {
   background-color: var(--bg-color);
+  height: 1910px;
 }
 
 .wrap .inner {
@@ -8,12 +9,14 @@
 
   /* 기본 */
   width: 1200px;
+  height: 1910px;
   background-color: var(--bg-color);
 }
 
 .wrap .inner .card {
   /* 기본 */
   width: 900px;
+  height: 1910px;
   background-color: var(--card-color);
 
   /* 정렬 */
@@ -23,6 +26,10 @@
 }
 
 .wrap .inner .card .description-area {
+  height: 30px;
+
+  line-height: 30px;
+
   margin: 30px 50px 0 50px;
 }
 
@@ -37,7 +44,7 @@
   display: flex;
 
   /* 기본 */
-  height: 1900px;
+  height: 1820px;
 
   /* 정렬 */
   margin: 30px 50px;
@@ -104,18 +111,18 @@
 @media screen and (max-width: 1200px) {
   .wrap {
     width: 100vw;
-    min-height: 1950px;
+    height: 1910px;
   }
 
   .wrap .inner {
     width: 100vw;
-    min-height: 1950px;
+    height: 1910px;
   }
 
   .wrap .inner .card {
     /* 기본 */
     width: 100vw;
-    min-height: 1950px;
+    height: 1910px;
 
     /* 정렬 */
     left: 0;
@@ -132,6 +139,7 @@
   .wrap .inner .card .row {
     /* 기본 */
     width: 800px;
+    height: 1820px;
 
     /* 정렬 */
     position: absolute;
@@ -148,17 +156,17 @@
 @media screen and (max-width: 900px) {
   .wrap {
     width: 100vw;
-    min-height: 3600px;
+    height: 4690px;
   }
 
   .wrap .inner {
     width: 100vw;
-    min-height: 3600px;
+    height: 4690px;
   }
 
   .wrap .inner .card {
     width: 100vw;
-    min-height: 3600px;
+    height: 4690px;
   }
 
   .wrap .inner .card .description-area {
@@ -175,6 +183,7 @@
 
     /* 기본 */
     width: 600px;
+    height: 4550px;
 
     /* 정렬 */
     position: absolute;
@@ -183,25 +192,54 @@
     margin: 30px auto;
   }
 
+  .wrap .inner .card .row .column {
+    width: 600px;
+  }
+
+  .wrap .inner .card .row .column .column-left-items {
+    width: 600px;
+    height: 510px;
+  }
+
   .wrap .inner .card .row .column .column-right-items {
+    width: 600px;
+    height: 510px;
+
     margin: 0 0 50px 0;
+  }
+
+  .wrap .inner .card .row .column img {
+    width: 600px;
+    height: 360px;
+  }
+
+  .wrap .inner .card .row .column .item-text {
+    width: 570px;
+  }
+
+  #long-1 {
+    height: 555px;
+  }
+
+  #long-2 {
+    height: 585px;
   }
 }
 
 @media screen and (max-width: 675px) {
   .wrap {
     width: 100vw;
-    min-height: 3600px;
+    height: 3610px;
   }
 
   .wrap .inner {
     width: 100vw;
-    min-height: 3600px;
+    height: 3610px;
   }
 
   .wrap .inner .card {
     width: 100vw;
-    min-height: 3600px;
+    height: 3610px;
   }
 
   .wrap .inner .card .description-area {
@@ -218,6 +256,7 @@
 
     /* 기본 */
     width: 375px;
+    height: 3470px;
 
     /* 정렬 */
     position: absolute;
@@ -226,8 +265,37 @@
     margin: 30px auto;
   }
 
+  .wrap .inner .card .row .column {
+    width: 375px;
+  }
+
+  .wrap .inner .card .row .column .column-left-items {
+    width: 375px;
+    height: 375px;
+  }
+
   .wrap .inner .card .row .column .column-right-items {
+    width: 375px;
+    height: 375px;
+
     margin: 0 0 50px 0;
+  }
+
+  .wrap .inner .card .row .column img {
+    width: 375px;
+    height: 225px;
+  }
+
+  .wrap .inner .card .row .column .item-text {
+    width: 345px;
+  }
+
+  #long-1 {
+    height: 420px;
+  }
+
+  #long-2 {
+    height: 450px;
   }
 }
 
