@@ -145,7 +145,50 @@
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 900px) {
+  .wrap {
+    width: 100vw;
+    min-height: 3600px;
+  }
+
+  .wrap .inner {
+    width: 100vw;
+    min-height: 3600px;
+  }
+
+  .wrap .inner .card {
+    width: 100vw;
+    min-height: 3600px;
+  }
+
+  .wrap .inner .card .description-area {
+    /* 기본 */
+    width: 600px;
+
+    /* 정렬 */
+    margin: 30px auto 0 auto;
+  }
+
+  .wrap .inner .card .row {
+    /* Display */
+    display: block;
+
+    /* 기본 */
+    width: 600px;
+
+    /* 정렬 */
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 30px auto;
+  }
+
+  .wrap .inner .card .row .column .column-right-items {
+    margin: 0 0 50px 0;
+  }
+}
+
+@media screen and (max-width: 675px) {
   .wrap {
     width: 100vw;
     min-height: 3600px;
@@ -188,7 +231,7 @@
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 450px) {
   .wrap .inner .card .description-area {
     /* 기본 */
     width: 250px;
@@ -202,7 +245,7 @@
     display: block;
 
     /* 기본 */
-    width: 250px;
+    width: 240px;
 
     /* 정렬 */
     position: absolute;
@@ -212,16 +255,16 @@
   }
 
   .wrap .inner .card .row .column {
-    width: 250px;
+    width: 240px;
   }
 
   .wrap .inner .card .row .column .column-left-items {
-    width: 250px;
+    width: 240px;
     height: 300px;
   }
 
   .wrap .inner .card .row .column .column-right-items {
-    width: 250px;
+    width: 240px;
     height: 300px;
   }
 
@@ -234,15 +277,25 @@
   }
 
   .wrap .inner .card .row .column img {
-    width: 250px;
+    width: 240px;
     height: 150px;
   }
 
   .wrap .inner .card .row .column .item-text {
     /* 기본 */
-    width: 220px;
+    width: 210px;
 
     /* 기타 */
     overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 225px) {
+  .wrap .inner .card .description-area {
+    display: none;
+  }
+
+  .wrap .inner .card .row {
+    display: none;
   }
 }
