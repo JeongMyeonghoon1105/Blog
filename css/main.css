@@ -229,6 +229,79 @@
 @media screen and (max-width: 675px) {
   .wrap {
     width: 100vw;
+    height: 4150px;
+  }
+
+  .wrap .inner {
+    width: 100vw;
+    height: 4150px;
+  }
+
+  .wrap .inner .card {
+    width: 100vw;
+    height: 4150px;
+  }
+
+  .wrap .inner .card .description-area {
+    /* 기본 */
+    width: 487.5px;
+
+    /* 정렬 */
+    margin: 30px auto 0 auto;
+  }
+
+  .wrap .inner .card .row {
+    /* Display */
+    display: block;
+
+    /* 기본 */
+    width: 487.5px;
+    height: 4010px;
+
+    /* 정렬 */
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 30px auto;
+  }
+
+  .wrap .inner .card .row .column {
+    width: 487.5px;
+  }
+
+  .wrap .inner .card .row .column .column-left-items {
+    width: 487.5px;
+    height: 442.5px;
+  }
+
+  .wrap .inner .card .row .column .column-right-items {
+    width: 487.5px;
+    height: 442.5px;
+
+    margin: 0 0 50px 0;
+  }
+
+  .wrap .inner .card .row .column img {
+    width: 487.5px;
+    height: 292.5px;
+  }
+
+  .wrap .inner .card .row .column .item-text {
+    width: 457.5px;
+  }
+
+  #long-1 {
+    height: 487.5px;
+  }
+
+  #long-2 {
+    height: 517.5px;
+  }
+}
+
+@media screen and (max-width: 562.5px) {
+  .wrap {
+    width: 100vw;
     height: 3610px;
   }
 
@@ -300,9 +373,100 @@
 }
 
 @media screen and (max-width: 450px) {
+  .wrap {
+    width: 100vw;
+    height: 3154px;
+  }
+
+  .wrap .inner {
+    width: 100vw;
+    height: 3154px;
+  }
+
+  .wrap .inner .card {
+    width: 100vw;
+    height: 3154px;
+  }
+
+  .wrap .inner .card .description-area {
+    /* 기본 */
+    width: 280px;
+
+    /* 정렬 */
+    margin: 30px auto 0 auto;
+  }
+
+  .wrap .inner .card .row {
+    /* Display */
+    display: block;
+
+    /* 기본 */
+    width: 280px;
+    height: 3014px;
+
+    /* 정렬 */
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 30px auto;
+  }
+
+  .wrap .inner .card .row .column {
+    width: 280px;
+  }
+
+  .wrap .inner .card .row .column .column-left-items {
+    width: 280px;
+    height: 318px;
+  }
+
+  .wrap .inner .card .row .column .column-right-items {
+    width: 280px;
+    height: 318px;
+
+    margin: 0 0 50px 0;
+  }
+
+  .wrap .inner .card .row .column img {
+    width: 280px;
+    height: 168px;
+  }
+
+  .wrap .inner .card .row .column .item-text {
+    width: 250px;
+  }
+
+  #long-1 {
+    height: 363px;
+  }
+
+  #long-2 {
+    height: 393px;
+  }
+}
+
+@media screen and (max-width: 337.5px) {
+  .wrap {
+    width: 100vw;
+    height: 3010px;
+  }
+
+  .wrap .inner {
+    width: 100vw;
+    height: 3010px;
+  }
+
+  .wrap .inner .card {
+    width: 100vw;
+    height: 3010px;
+  }
+
   .wrap .inner .card .description-area {
     /* 기본 */
     width: 250px;
+    height: 30px;
+
+    line-height: 30px;
 
     /* 정렬 */
     margin: 30px auto 0 auto;
@@ -314,6 +478,7 @@
 
     /* 기본 */
     width: 240px;
+    height: 2870px;
 
     /* 정렬 */
     position: absolute;
@@ -358,7 +523,7 @@
   }
 }
 
-@media screen and (max-width: 225px) {
+@media screen and (max-width: 255px) {
   .wrap .inner .card .description-area {
     display: none;
   }
