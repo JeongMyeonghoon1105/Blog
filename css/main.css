@@ -367,9 +367,11 @@
   }
 
   .wrap .inner .card .row .column .column-right-items {
+    /* 기본 */
     width: 375px;
     height: 375px;
 
+    /* 정렬 */
     margin: 0 0 50px 0;
   }
 
@@ -444,9 +446,11 @@
   }
 
   .wrap .inner .card .row .column .column-right-items {
+    /* 기본 */
     width: 280px;
     height: 318px;
 
+    /* 정렬 */
     margin: 0 0 50px 0;
   }
 

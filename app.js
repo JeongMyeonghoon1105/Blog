@@ -56,6 +56,8 @@ var app = http.createServer((request, response) => {
     else if ((queryData.id == 'Frontend') || (queryData.id == 'Backend') || (queryData.id == 'DevOps') || (queryData.id == 'CS')) {
       style = style + fs.readFileSync('./css/category.css', 'utf8');
       var filelist = fs.readdirSync(`./texts/${queryData.id}`);
+
+      // 페이지 제목
       var card = 
       `
       <div class="description-area">
@@ -105,7 +107,10 @@ var app = http.createServer((request, response) => {
         response.end();
       }
       
+      // Trash 폴더 내부 폴더들의 리스트를 변수에 저장
       var directorylist = fs.readdirSync(`texts/Trash`);
+
+      // 페이지 제목
       var card =
       `
       <div class="description-area">
@@ -118,6 +123,7 @@ var app = http.createServer((request, response) => {
       // 휴지통이 비었는지 확인하는 동시에, 휴지통에 파일이 존재하면 해당 파일의 내용을 변수에 덧붙이기
       var filesInTrash = 0;
 
+      // Trash 폴더 내부 각 폴더들에 속한 파일들을 모두 검사
       directorylist.forEach((elem) => {
         var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
 
@@ -141,6 +147,7 @@ var app = http.createServer((request, response) => {
           </div>
           `;
 
+          // 휴지통이 비었는지 검사
           if (filelist.length != 0) {
             filesInTrash = 1;
           }
@@ -186,6 +193,7 @@ var app = http.createServer((request, response) => {
       style = style + fs.readFileSync('./css/post.css', 'utf8');
       var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
 
+      // 로그인된 상태일 경우 삭제 및 편집 버튼을 게시물 페이지 하단에 추가
       if (signIn == 1) {
         card = card + 
         `
@@ -223,6 +231,7 @@ var app = http.createServer((request, response) => {
         response.end();
       }
       
+      // 페이지 제목
       var card =
       `
       <div class="description-area">
