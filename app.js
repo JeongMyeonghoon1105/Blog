@@ -79,14 +79,7 @@ var app = http.createServer((request, response) => {
     var innerStyle = '/* */';
     var cardStyle = 'background-color: rgb(245, 245, 255);';
     var menuStyle = '/* */';
-  } else if (queryData.id == 'Write') {
-    var bodyStyle = 'height: 1200px;';
-    var headerStyle = '/* */';
-    var wrapStyle = 'height: 1150px;';
-    var innerStyle = 'height: 1150px;';
-    var cardStyle = 'height: 1150px;';
-    var menuStyle = '/* */';
-  } else {
+  }else {
     var bodyStyle = '/* */';
     var headerStyle = '/* */';
     var wrapStyle = '/* */';
@@ -179,7 +172,7 @@ var app = http.createServer((request, response) => {
               ${tabSignIn}
               <ul class="tab-items">${list}</ul>
               <div style="display: inline-block; padding: 20px; height: 22px;">
-                <h2 style="display: ${display}; color: white; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=Write'">
+                <h2 style="display: ${display}; color: white; font-weight: bold; cursor: pointer;" onclick="location.href='/post'">
                   Post
                 </h2>
               </div>
@@ -203,7 +196,7 @@ var app = http.createServer((request, response) => {
               <ul style="list-style-type: none; font-size: 15px;">
                 ${list}
               </ul><br>
-              <h2 style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=Write'">
+              <h2 style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/post'">
                 Post
               </h2>
             </div>
@@ -233,7 +226,6 @@ var app = http.createServer((request, response) => {
       style = style + fs.readFileSync('./css/category.css', 'utf8');
       var filelist = fs.readdirSync(`./texts/${queryData.id}`);
 
-      // 페이지 제목
       var card = descriptionArea();
 
       // 현재 카테고리에 게시물이 없을 때, 안내 메시지 표시
@@ -263,7 +255,6 @@ var app = http.createServer((request, response) => {
       // Trash 폴더 내부 폴더(카테고리)들의 리스트를 변수에 저장
       var directorylist = fs.readdirSync('texts/Trash');
 
-      // 페이지 제목
       var card = descriptionArea();
       
       // 휴지통이 비었는지 확인할 때 사용할 변수
@@ -337,15 +328,6 @@ var app = http.createServer((request, response) => {
         `
       }
     }
-    // CARD(글쓰기 페이지)
-    else {
-      style = style + fs.readFileSync('./css/write.css', 'utf8');
-
-      access_deny();
-      
-      // 페이지 제목
-      var card = descriptionArea() + fs.readFileSync(`./texts/${queryData.id}`, 'utf8');
-    }
 
     // 로드
     response.writeHead(200);
@@ -361,7 +343,7 @@ var app = http.createServer((request, response) => {
     var menuStyle = 'display: none;';
 
     style = style + fs.readFileSync('./css/signin.css', 'utf8');
-    card = fs.readFileSync('./texts/sign-in', 'utf8');
+    var card = fs.readFileSync('./texts/sign-in', 'utf8');
 
     response.writeHead(200);
     response.end(templateHTML(card));
@@ -409,6 +391,24 @@ var app = http.createServer((request, response) => {
       });
       response.end();
     }
+  }
+  // pathname이 '/post'일 때
+  else if (pathname === '/post') {
+    access_deny();
+
+    var bodyStyle = 'height: 1200px;';
+    var headerStyle = '/* */';
+    var wrapStyle = 'height: 1150px;';
+    var innerStyle = 'height: 1150px;';
+    var cardStyle = 'height: 1150px;';
+    var menuStyle = '/* */';
+
+    style = style + fs.readFileSync('./css/write.css', 'utf8');
+    var card = '<div class="description-area"><h1>Post</h1></div>'
+    card = card + fs.readFileSync('./texts/write', 'utf8');
+    
+    response.writeHead(200);
+    response.end(templateHTML(card));
   }
   // pathname이 '/post_process'일 때(폼에서 데이터를 제출했을 때)
   else if (pathname === '/post_process') {
