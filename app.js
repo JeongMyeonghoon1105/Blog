@@ -1,6 +1,5 @@
 /* ******* Tasks ******* */
 
-// Update
 // Search
 // Sort
 // Add Date of Posting
@@ -409,14 +408,38 @@ var app = http.createServer((request, response) => {
       response.end();
     });
   }
-
   // pathname이 '/update'일 때(업데이트 버튼을 눌렀을 때)
   else if (pathname === '/update') {
     access_deny();
 
     style = style + fs.readFileSync('./css/write.css', 'utf8');
-
+    var titleValue = queryData.class;
+    var categoryValue = queryData.id;
     var data = fs.readFileSync(`./texts/${queryData.id}/${queryData.class}`, 'utf8');
+    
+    // 수정할 게시물의 원래 카테고리를 디폴트 값으로 설정
+    if (queryData.id === 'Frontend') {
+      var frontend_select = `selected`;
+      var backend_select = `<!---->`;
+      var devops_select = `<!---->`;
+      var cs_select = `<!---->`;
+    } else if (queryData.id === 'Backend') {
+      var frontend_select = `<!----`;
+      var backend_select = `selected`;
+      var devops_select = `<!----`;
+      var cs_select = `<!----`;
+    } else if (queryData.id === 'DevOps') {
+      var frontend_select = `<!----`;
+      var backend_select = `<!----`;
+      var devops_select = `selected`;
+      var cs_select = `<!----`;
+    } else if (queryData.id === 'CS') {
+      var frontend_select = `<!----`;
+      var backend_select = `<!----`;
+      var devops_select = `<!----`;
+      var cs_select = `selected`;
+    }
+
     var card = descriptionArea() + 
       `
       <!-- Writting Area -->
@@ -424,31 +447,33 @@ var app = http.createServer((request, response) => {
       
         <!-- Form for New Contents -->
         <form action="/update_process" method="post">
-          <input type="hidden" name="id" value="${queryData.class}">
+          <input type="hidden" name="originalFileName" value="${titleValue}">
 
           <!-- Title -->
           <div class="title">
-            <textarea name="title" id="title-input" rows="1" cols="55" placeholder="Title" maxlength="100"
-              value="${queryData.class}" required></textarea>
+            <textarea name="title" id="title-input" rows="1" cols="55" maxlength="100"
+              value="${titleValue}" required></textarea>
           </div>
       
           <div class="border"></div>
       
           <!-- Contents -->
           <div>
-            <textarea name="content" id="contents-input" placeholder="Contents" style="white-space: pre-wrap;" 
+            <textarea name="content" id="contents-input" style="white-space: pre-wrap;" 
             value="${data}" required></textarea>
           </div>
       
           <div class="border"></div>
+
+          <input type="hidden" name="originalCategory" value="${categoryValue}">
       
           <!-- Categoties -->
           <div class="category">
             <select name="category" id="category-input" required>
-              <option value="Frontend">Frontend</option>
-              <option value="Backend">Backend</option>
-              <option value="DevOps">DevOps</option>
-              <option value="CS">CS</option>
+              <option value="Frontend" ${frontend_select}>Frontend</option>
+              <option value="Backend" ${backend_select}>Backend</option>
+              <option value="DevOps" ${devops_select}>DevOps</option>
+              <option value="CS" ${cs_select}>CS</option>
             </select>
           </div>
       
@@ -466,14 +491,63 @@ var app = http.createServer((request, response) => {
         
       </div>
       `;
+    
     response.writeHead(200);
     response.end(templateHTML(card));
   }
 
+
+
   // pathname이 '/update_process'일 때(업데이트할 데이터를 송신했을 때)
   else if (pathname === '/update_process') {
+    var body = ""
 
+    // 포스팅할 데이터를 요청해 변수에 저장
+    request.on('data', (data) => {
+      body = body + data;
+
+      // 포스팅할 게시물 길이가 너무 길어질 경우 커넥션 파괴
+      if (body.length > 1e6) {
+        request.connection.destroy();
+      }
+    });
+
+    // 포스팅 및 기타 처리
+    request.on('end', () => {
+      var post = qs.parse(body);
+      var originalCategory = post.originalCategory;
+      var originalFileName = post.originalFileName;
+      var title = post.title;
+      var content = post.content;
+      var category = post.category;
+
+      fs.renameSync(`./texts/${originalCategory}/${originalFileName}`, `./texts/${category}/${title}`);
+      fs.writeFileSync(`./texts/${category}/${title}`,
+      `
+      <div class="post-container">
+
+        <!-- 게시물 제목 -->
+        <h1 class="post-title">${title}</h1><br>
+
+        <!-- 내용 -->
+        <div class="post-contents">
+          ${content}
+        </div>
+
+      </div>
+      `,
+      'utf8');
+
+      // 포스팅 후 게시물로 리다이렉션
+      response.writeHead(302, {
+        Location: encodeURI(`/?id=${category}&class=${title}`)
+      });
+      response.end();
+    });
   }
+
+
+
 
   // pathname이 '/delete_process'일 때(일반 게시물 삭제 버튼을 눌렀을 때)
   else if (pathname === '/delete_process') {
