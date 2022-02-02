@@ -367,49 +367,48 @@ var app = http.createServer((request, response) => {
     response.end(templateHTML(card));
   }
   // pathname이 '/signin_process'일 때(비밀번호를 입력받았을 때)
-  else if (pathname == '/signin_process' && signIn == 0) {
-    var password = fs.readFileSync('./password', 'utf8');
+  else if (pathname == '/signin_process') {
+    if(signIn == 0) {
+      var password = fs.readFileSync('./password', 'utf8');
+      var body = ""
 
-    var body = ""
+      // 포스팅할 데이터를 요청해 변수에 저장
+      request.on('data', (data) => {
+        body = body + data;
 
-    // 포스팅할 데이터를 요청해 변수에 저장
-    request.on('data', (data) => {
-      body = body + data;
+        // 포스팅할 게시물 길이가 너무 길어질 경우 커넥션 파괴
+        if (body.length > 1e6) {
+          request.connection.destroy();
+        }
+      });
+      
+      // 입력한 비밀번호를 실제 비밀번호와 대조
+      request.on('end', () => {
+        var post = qs.parse(body);
+        var input_password = post.password;
 
-      // 포스팅할 게시물 길이가 너무 길어질 경우 커넥션 파괴
-      if (body.length > 1e6) {
-        request.connection.destroy();
-      }
-    });
-    
-    // 입력한 비밀번호를 실제 비밀번호와 대조
-    request.on('end', () => {
-      var post = qs.parse(body);
-      var input_password = post.password;
-
-      // 입력한 비밀번호가 실제 비밀번호와 일치하면 로그인 처리 진행 및 메인 화면으로 리다이렉트
-      if (password == input_password) {
-        signIn = 1;
-        response.writeHead(302, {
-          Location: encodeURI('/')
-        });
-      }
-      // 입력한 비밀번호가 실제 비밀번호와 일치하지 않으면 로그인 화면으로 리다이렉트
-      else {
-        response.writeHead(302, {
-          Location: encodeURI('/signin')
-        });
-      }
+        // 입력한 비밀번호가 실제 비밀번호와 일치하면 로그인 처리 진행 및 메인 화면으로 리다이렉트
+        if (password == input_password) {
+          signIn = 1;
+          response.writeHead(302, {
+            Location: encodeURI('/')
+          });
+        }
+        // 입력한 비밀번호가 실제 비밀번호와 일치하지 않으면 로그인 화면으로 리다이렉트
+        else {
+          response.writeHead(302, {
+            Location: encodeURI('/signin')
+          });
+        }
+        response.end();
+      });
+    } else {
+      signIn = 0;
+      response.writeHead(302, {
+        Location: encodeURI('/')
+      });
       response.end();
-    });
-  }
-  // pathname이 '/signin_process'일 때(로그아웃 버튼을 눌렀을 때)
-  else if (pathname == '/signin_process' && signIn == 1) {
-    signIn = 0;
-    response.writeHead(302, {
-      Location: encodeURI('/')
-    });
-    response.end();
+    }
   }
   // pathname이 '/post_process'일 때(폼에서 데이터를 제출했을 때)
   else if (pathname === '/post_process') {
