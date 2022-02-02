@@ -543,7 +543,7 @@ var app = http.createServer((request, response) => {
     });
 
     // 휴지통이 비었을 때, 안내 메시지를 출력
-    if (filesInTrash == 0) { card = card + '<div class="notice"><text style="line-height: 0px;">Trash is empty.</text></div>;' }
+    if (filesInTrash == 0) { card = card + '<div class="notice"><text style="line-height: 0px;">Trash is empty.</text></div>' }
 
     response.writeHead(200);
     response.end(templateHTML(card));
