@@ -17,6 +17,16 @@ var url = require('url');
 var qs = require('querystring');
 var signIn = 0;
 
+// 로그인하지 않았을 시 페이지 접속 차단
+function access_deny() {
+  if (signIn == 0) {
+    response.writeHead(302, {
+      Location: encodeURI('/')
+    });
+    response.end();
+  }
+}
+
 // 서버 생성
 var app = http.createServer((request, response) => {
   var requestedURL = request.url;
@@ -98,14 +108,8 @@ var app = http.createServer((request, response) => {
     // CARD(휴지통 내 게시물 목록)
     else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
       style = style + fs.readFileSync('./css/trash.css', 'utf8');
-      
-      // 로그인하지 않았을 시 페이지 접속 차단
-      if (signIn == 0) {
-        response.writeHead(302, {
-          Location: encodeURI('/')
-        });
-        response.end();
-      }
+
+      access_deny();
       
       // Trash 폴더 내부 폴더들의 리스트를 변수에 저장
       var directorylist = fs.readdirSync(`texts/Trash`);
@@ -168,13 +172,7 @@ var app = http.createServer((request, response) => {
     else if (queryData.id == 'Trash'){
       style = style + fs.readFileSync('./css/post.css', 'utf8');
       
-      // 로그인하지 않았을 시 페이지 접속 차단
-      if (signIn == 0) {
-        response.writeHead(302, {
-          Location: encodeURI('/')
-        });
-        response.end();
-      }
+      access_deny();
 
       var card = fs.readFileSync(`./texts/Trash/${queryData.class}/${queryData.title}`, 'utf8');
       card = card + 
@@ -223,13 +221,7 @@ var app = http.createServer((request, response) => {
     else {
       style = style + fs.readFileSync('./css/write.css', 'utf8');
 
-      // 로그인하지 않았을 시 페이지 접속 차단
-      if (signIn == 0) {
-        response.writeHead(302, {
-          Location: encodeURI('/')
-        });
-        response.end();
-      }
+      access_deny();
       
       // 페이지 제목
       var card =
@@ -555,5 +547,5 @@ var app = http.createServer((request, response) => {
   }
 });
 
-// 3000번 포트에서 서버 실행
+// 3000번 포트를 통해 서버 실행
 app.listen(3000);
