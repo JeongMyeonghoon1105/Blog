@@ -113,8 +113,8 @@ var app = http.createServer((request, response) => {
 
       access_deny();
       
-      // Trash 폴더 내부 폴더들의 리스트를 변수에 저장
-      var directorylist = fs.readdirSync(`texts/Trash`);
+      // Trash 폴더 내부 폴더(카테고리)들의 리스트를 변수에 저장
+      var directorylist = fs.readdirSync('texts/Trash');
 
       // 페이지 제목
       var card =
@@ -126,14 +126,14 @@ var app = http.createServer((request, response) => {
       </div>
       `;
       
-      // 휴지통이 비었는지 확인하는 동시에, 휴지통에 파일이 존재하면 해당 파일의 내용을 변수에 덧붙이기
+      // 휴지통이 비었는지 확인할 때 사용할 변수
       var filesInTrash = 0;
 
-      // Trash 폴더 내부 각 폴더들에 속한 파일들을 모두 검사
+      // Trash 폴더 내부 각 카테고리에 속한 파일들을 모두 검사
       directorylist.forEach((elem) => {
         var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
 
-        // 현재 카테고리(휴지통)에 저장된 모든 파일의 내용을 변수에 덧붙이기
+        // 현재 카테고리(휴지통)에 저장된 모든 파일의 제목을 디자인 형식에 대입한 후, card 변수에 덧붙이기
         filelist.forEach((element) => {
           card = card +
           `
