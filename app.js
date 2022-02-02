@@ -5,10 +5,6 @@
 // Sort
 // Add Date of Posting
 
-// Ideas
-// 강좌 수강 후, 게시물 Update 기능 구현 방법 고민하기
-// readdir() 함수 이용한 검색 기능 구현 방법 고민하기
-
 
 // 필요한 모듈을 요청하여 변수에 저장
 var http = require('http');
@@ -34,10 +30,8 @@ var app = http.createServer((request, response) => {
   var pathname = url.parse(requestedURL, true).pathname;
 
   // 로그인 되지 않았을 때, 관리자 전용 기능 숨기기
-  if (signIn == 0)
-    var display = 'none';
-  else
-    var display = 'block';
+  if (signIn == 0) { var display = 'none'; }
+  else { var display = 'block'; }
 
   // 각 카테고리의 게시물 수를 객체에 저장
   var postingCount = {
@@ -59,6 +53,14 @@ var app = http.createServer((request, response) => {
     style = style + fs.readFileSync('./css/menu.css', 'utf8');
     style = style + fs.readFileSync('./css/footer.css', 'utf8');
 
+    function descriptionArea() {
+      return `<div class="description-area"><h1>${queryData.id}</h1></div>`
+    }
+
+    function notice() {
+      return `<div class="notice"><text style="line-height: 0px;">${queryData.id} category is empty.</text></div>`
+    }
+
     // CARD(메인 페이지)
     if (queryData.id === undefined) {
       style = style + fs.readFileSync('./css/main.css', 'utf8');
@@ -70,32 +72,15 @@ var app = http.createServer((request, response) => {
       var filelist = fs.readdirSync(`./texts/${queryData.id}`);
 
       // 페이지 제목
-      var card = 
-      `
-      <div class="description-area">
-        <h1>
-          ${queryData.id}
-        </h1>
-      </div>
-      `;
+      var card = descriptionArea();
 
       // 현재 카테고리에 게시물이 없을 때, 안내 메시지 표시
-      if (filelist.length == 0) {
-        card = card +
-        `
-        <div class="notice">
-          <text style="line-height: 0px;">
-            ${queryData.id} category is empty.
-          </text>
-        </div>
-        `
-      }
+      if (filelist.length == 0) { card = card + notice(); }
       // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
       else {
         filelist.forEach((element) => {
           card = card +
           `
-          <!-- Item -->
           <div class="posting-item">
             <div class="posting-container">
               <a href="/?id=${element}&class=${queryData.id}" class="posting-content">
@@ -117,14 +102,7 @@ var app = http.createServer((request, response) => {
       var directorylist = fs.readdirSync('texts/Trash');
 
       // 페이지 제목
-      var card =
-      `
-      <div class="description-area">
-        <h1>
-          Trash
-        </h1>
-      </div>
-      `;
+      var card = descriptionArea();
       
       // 휴지통이 비었는지 확인할 때 사용할 변수
       var filesInTrash = 0;
@@ -139,16 +117,12 @@ var app = http.createServer((request, response) => {
           `
           <div class="posting-item">
             <div class="posting-container">
-
               <a href="/?id=Trash&class=${elem}&title=${element}" class="posting-content">
                 ${element}
               </a>
-
-              <!-- 삭제 버튼 -->
-              <a class="delete-button" href="http://localhost:3000/clear_process?id=Trash&class=${elem}&title=${element}">
+              <a class="delete-button" href="/clear_process?id=Trash&class=${elem}&title=${element}">
                 DELETE
               </a>
-
             </div>
           </div>
           `;
@@ -161,14 +135,7 @@ var app = http.createServer((request, response) => {
       });
 
       // 휴지통이 비었을 때, 안내 메시지를 출력
-      if (filesInTrash == 0) {
-        card = card +
-        `
-        <div class="notice">
-          <text style="line-height: 0px;">Trash is empty.</text>
-        </div>
-        `
-      }
+      if (filesInTrash == 0) { card = card + notice(); }
     }
     // CARD(휴지통을 통해 접속한 게시물 페이지)
     else if (queryData.id == 'Trash'){
@@ -181,7 +148,7 @@ var app = http.createServer((request, response) => {
         `
         <!-- 삭제 버튼 -->
         <div class="button-container">
-          <a href="http://localhost:3000/clear_process?id=Trash&class=${queryData.class}&title=${queryData.title}"
+          <a href="/clear_process?id=Trash&class=${queryData.class}&title=${queryData.title}"
             class="update-delete-button" style="color: red;">
             DELETE
           </a>
@@ -201,7 +168,7 @@ var app = http.createServer((request, response) => {
         <div class="button-container">
   
           <!-- 삭제 버튼 -->
-          <a href="http://localhost:3000/delete_process?id=${queryData.class}&class=${queryData.id}" class="update-delete-button" style="color: red;">
+          <a href="/delete_process?id=${queryData.class}&class=${queryData.id}" class="update-delete-button" style="color: red;">
             DELETE
           </a>
   
@@ -226,15 +193,7 @@ var app = http.createServer((request, response) => {
       access_deny();
       
       // 페이지 제목
-      var card =
-      `
-      <div class="description-area">
-        <h1>
-          Post
-        </h1>
-      </div>
-      `
-      + fs.readFileSync(`./texts/${queryData.id}`, 'utf8');
+      var card = descriptionArea() + fs.readFileSync(`./texts/${queryData.id}`, 'utf8');
     }
 
     // MENU
@@ -258,7 +217,7 @@ var app = http.createServer((request, response) => {
       var innerStyle = '/* */';
       var cardStyle = 'background-color: rgb(245, 245, 255);';
       var menuStyle = '/* */';
-    } else if (queryData.id == 'write') {
+    } else if (queryData.id == 'Write') {
       var bodyStyle = 'height: 1200px;';
       var headerStyle = '/* */';
       var wrapStyle = 'height: 1150px;';
@@ -385,7 +344,7 @@ var app = http.createServer((request, response) => {
               </ul>
 
               <div style="display: inline-block; padding: 20px; height: 22px;">
-                <h2 style="display: ${display}; color: white; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=write'">
+                <h2 style="display: ${display}; color: white; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=Write'">
                   Post
                 </h2>
               </div>
@@ -412,7 +371,7 @@ var app = http.createServer((request, response) => {
               <ul style="list-style-type: none; font-size: 15px;">
                 ${list}
               </ul><br>
-              <h2 style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=write'">
+              <h2 style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=Write'">
                 Post
               </h2>
             </div>

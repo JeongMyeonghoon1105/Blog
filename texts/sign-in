@@ -9,7 +9,7 @@
       </h1>
     </div>
     
-    <form action="http://localhost:3000/signin_process" method="post" class="sign-in-form">
+    <form action="/signin_process" method="post" class="sign-in-form">
     
       <!-- 암호 입력란 -->
       <div class="password">
