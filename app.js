@@ -50,43 +50,33 @@ var app = http.createServer((request, response) => {
   style = style + fs.readFileSync('./css/menu.css', 'utf8');
   style = style + fs.readFileSync('./css/footer.css', 'utf8');
 
+  var bodyStyle = '/* */';
+  var headerStyle = '/* */';
+  var wrapStyle = '/* */';
+  var innerStyle = '/* */';
+  var cardStyle = '/* */';
+  var menuStyle = '/* */';
+
   function descriptionArea() {
-    return `<div class="description-area"><h1>${queryData.id}</h1></div>`
+    return `<div class="description-area"><h1>${queryData.category}</h1></div>`
   }
 
   function notice() {
-    return `<div class="notice"><text style="line-height: 0px;">${queryData.id} category is empty.</text></div>`
+    return `<div class="notice"><text style="line-height: 0px;">${queryData.category} category is empty.</text></div>`
   }
 
   // MENU
   var list =
   `
-  <li><a href="/?id=Frontend">Frontend(${postingCount.frontend})</a></li>
-  <li><a href="/?id=Backend">Backend(${postingCount.backend})</a></li>
-  <li><a href="/?id=DevOps">DevOps(${postingCount.devops})</a></li>
-  <li><a href="/?id=CS">CS(${postingCount.cs})</a></li>
-  <li><a href="/?id=Trash" style="display: ${display}">Trash</a></li>
+  <li><a href="/?category=Frontend">Frontend(${postingCount.frontend})</a></li>
+  <li><a href="/?category=Backend">Backend(${postingCount.backend})</a></li>
+  <li><a href="/?category=DevOps">DevOps(${postingCount.devops})</a></li>
+  <li><a href="/?category=CS">CS(${postingCount.cs})</a></li>
+  <li><a href="/trash" style="display: ${display}">Trash</a></li>
   `;
 
   // FOOTER
   var footer = fs.readFileSync('./texts/index-footer', 'utf8');
-
-  // 페이지에 따라 스타일을 달리 적용
-  if (queryData.id === undefined) {
-    var bodyStyle = '/* */';
-    var headerStyle = '/* */';
-    var wrapStyle = '/* */';
-    var innerStyle = '/* */';
-    var cardStyle = 'background-color: rgb(245, 245, 255);';
-    var menuStyle = '/* */';
-  }else {
-    var bodyStyle = '/* */';
-    var headerStyle = '/* */';
-    var wrapStyle = '/* */';
-    var innerStyle = '/* */';
-    var cardStyle = '/* */';
-    var menuStyle = '/* */';
-  }
 
   // 로그인 여부에 따라 헤더 및 메뉴(vw가 1200px 미만일 경우)의 스타일을 달리 적용
   if (signIn == 0) {
@@ -217,14 +207,21 @@ var app = http.createServer((request, response) => {
   // pathname이 '/'일 때
   if (pathname === '/') {
     // CARD(메인 페이지)
-    if (queryData.id === undefined) {
+    if (queryData.category === undefined) {
+      var bodyStyle = '/* */';
+      var headerStyle = '/* */';
+      var wrapStyle = '/* */';
+      var innerStyle = '/* */';
+      var cardStyle = 'background-color: rgb(245, 245, 255);';
+      var menuStyle = '/* */';
+
       style = style + fs.readFileSync('./css/main.css', 'utf8');
       var card = fs.readFileSync('./texts/index-card', 'utf8');
     }
     // CARD(카테고리별 게시물 목록)
-    else if ((queryData.id == 'Frontend') || (queryData.id == 'Backend') || (queryData.id == 'DevOps') || (queryData.id == 'CS')) {
+    else if (((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) && queryData.title === undefined) {
       style = style + fs.readFileSync('./css/category.css', 'utf8');
-      var filelist = fs.readdirSync(`./texts/${queryData.id}`);
+      var filelist = fs.readdirSync(`./texts/${queryData.category}`);
 
       var card = descriptionArea();
 
@@ -237,7 +234,7 @@ var app = http.createServer((request, response) => {
           `
           <div class="posting-item">
             <div class="posting-container">
-              <a href="/?id=${element}&class=${queryData.id}" class="posting-content">
+              <a href="/?category=${queryData.category}&title=${element}" class="posting-content">
                 ${element}
               </a>
             </div>
@@ -246,82 +243,20 @@ var app = http.createServer((request, response) => {
         });
       }
     }
-    // CARD(휴지통 내 게시물 목록)
-    else if ((queryData.id == 'Trash') && (queryData.class === undefined) && (queryData.title === undefined)) {
-      style = style + fs.readFileSync('./css/trash.css', 'utf8');
-
-      access_deny();
-      
-      // Trash 폴더 내부 폴더(카테고리)들의 리스트를 변수에 저장
-      var directorylist = fs.readdirSync('texts/Trash');
-
-      var card = descriptionArea();
-      
-      // 휴지통이 비었는지 확인할 때 사용할 변수
-      var filesInTrash = 0;
-
-      // Trash 폴더 내부 각 카테고리에 속한 파일들을 모두 검사
-      directorylist.forEach((elem) => {
-        var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
-
-        // 현재 카테고리(휴지통)에 저장된 모든 파일의 제목을 디자인 형식에 대입한 후, card 변수에 덧붙이기
-        filelist.forEach((element) => {
-          card = card +
-          `
-          <div class="posting-item">
-            <div class="posting-container">
-              <a href="/?id=Trash&class=${elem}&title=${element}" class="posting-content">
-                ${element}
-              </a>
-              <a class="delete-button" href="/clear_process?id=Trash&class=${elem}&title=${element}">
-                DELETE
-              </a>
-            </div>
-          </div>
-          `;
-
-          // 휴지통이 비었는지 검사
-          if (filelist.length != 0) {
-            filesInTrash = 1;
-          }
-        });
-      });
-
-      // 휴지통이 비었을 때, 안내 메시지를 출력
-      if (filesInTrash == 0) { card = card + notice(); }
-    }
-    // CARD(휴지통을 통해 접속한 게시물 페이지)
-    else if (queryData.id == 'Trash'){
+    // CARD(게시물 페이지)
+    else if ((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) {
       style = style + fs.readFileSync('./css/post.css', 'utf8');
-      
-      access_deny();
-
-      var card = fs.readFileSync(`./texts/Trash/${queryData.class}/${queryData.title}`, 'utf8');
-      card = card + 
-        `
-        <!-- 삭제 버튼 -->
-        <div class="button-container">
-          <a href="/clear_process?id=Trash&class=${queryData.class}&title=${queryData.title}"
-            class="update-delete-button" style="color: red;">
-            DELETE
-          </a>
-        </div>
-        `
-    }
-    // CARD(게시물 페이지. 게시물 페이지에서는 id가 게시물 제목, class가 카테고리명)
-    else if ((queryData.class == 'Frontend') || (queryData.class == 'Backend') || (queryData.class == 'DevOps') || (queryData.class == 'CS')) {
-      style = style + fs.readFileSync('./css/post.css', 'utf8');
-      var card = fs.readFileSync(`./texts/${queryData.class}/${queryData.id}`, 'utf8');
+      var card = fs.readFileSync(`./texts/${queryData.category}/${queryData.title}`, 'utf8');
 
       // 로그인된 상태일 경우 삭제 및 편집 버튼을 게시물 페이지 하단에 추가
       if (signIn == 1) {
         card = card + 
         `
         <div class="button-container">
-          <a href="/delete_process?id=${queryData.class}&class=${queryData.id}" class="update-delete-button" style="color: red;">
+          <a href="/delete_process/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: red;">
             DELETE
           </a>
-          <a href="/update?id=${queryData.class}&class=${queryData.id}" class="update-delete-button" style="color: gray;">
+          <a href="/update/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: gray;">
             UPDATE
           </a>
         </div>
@@ -450,37 +385,35 @@ var app = http.createServer((request, response) => {
 
       // 포스팅 후 게시물로 리다이렉션
       response.writeHead(302, {
-        Location: encodeURI(`/?id=${title}&class=${category}`)
+        Location: encodeURI(`/?category=${category}&title=${title}`)
       });
       response.end();
     });
   }
   // pathname이 '/update'일 때(게시물 수정 페이지)
-  else if (pathname === '/update') {
+  else if (pathname === '/update/') {
     access_deny();
 
     style = style + fs.readFileSync('./css/write.css', 'utf8');
-    var titleValue = queryData.class;
-    var categoryValue = queryData.id;
-    var data = fs.readFileSync(`./texts/${queryData.id}/${queryData.class}`, 'utf8');
+    var data = fs.readFileSync(`./texts/${queryData.category}/${queryData.title}`, 'utf8');
     
     // 수정할 게시물의 원래 카테고리를 디폴트 값으로 설정
-    if (queryData.id === 'Frontend') {
+    if (queryData.category === 'Frontend') {
       var frontend_select = `selected`;
       var backend_select = `<!---->`;
       var devops_select = `<!---->`;
       var cs_select = `<!---->`;
-    } else if (queryData.id === 'Backend') {
+    } else if (queryData.category === 'Backend') {
       var frontend_select = `<!----`;
       var backend_select = `selected`;
       var devops_select = `<!----`;
       var cs_select = `<!----`;
-    } else if (queryData.id === 'DevOps') {
+    } else if (queryData.category === 'DevOps') {
       var frontend_select = `<!----`;
       var backend_select = `<!----`;
       var devops_select = `selected`;
       var cs_select = `<!----`;
-    } else if (queryData.id === 'CS') {
+    } else if (queryData.category === 'CS') {
       var frontend_select = `<!----`;
       var backend_select = `<!----`;
       var devops_select = `<!----`;
@@ -494,12 +427,12 @@ var app = http.createServer((request, response) => {
       
         <!-- Form for New Contents -->
         <form action="/update_process" method="post">
-          <input type="hidden" name="originalFileName" value="${titleValue}">
+          <input type="hidden" name="originalFileName" value="${queryData.title}">
 
           <!-- Title -->
           <div class="title">
             <textarea name="title" id="title-input" rows="1" cols="55" maxlength="100"
-              value="${titleValue}" required></textarea>
+              value="${queryData.title}" required></textarea>
           </div>
       
           <div class="border"></div>
@@ -512,7 +445,7 @@ var app = http.createServer((request, response) => {
       
           <div class="border"></div>
 
-          <input type="hidden" name="originalCategory" value="${categoryValue}">
+          <input type="hidden" name="originalCategory" value="${queryData.category}">
       
           <!-- Categoties -->
           <div class="category">
@@ -569,45 +502,107 @@ var app = http.createServer((request, response) => {
       fs.writeFileSync(`./texts/${category}/${title}`,
       `
       <div class="post-container">
-
-        <!-- 게시물 제목 -->
         <h1 class="post-title">${title}</h1><br>
-
-        <!-- 내용 -->
         <div class="post-contents">
           ${content}
         </div>
-
       </div>
       `,
       'utf8');
 
       // 포스팅 후 게시물로 리다이렉션
       response.writeHead(302, {
-        Location: encodeURI(`/?id=${category}&class=${title}`)
+        Location: encodeURI(`/?category=${category}&title=${title}`)
       });
       response.end();
     });
   }
   // pathname이 '/delete_process'일 때(일반 게시물 삭제 버튼을 눌렀을 때)
-  else if (pathname === '/delete_process') {
-    // 파일 삭제 (id == 카테고리명, class == 게시물 제목)
-    fs.renameSync(`./texts/${queryData.id}/${queryData.class}`, `./texts/Trash/${queryData.id}/${queryData.class}`);
+  else if (pathname === '/delete_process/') {
+    console.log('hello world');
+
+    // 파일을 휴지통으로 이동
+    fs.renameSync(`./texts/${queryData.category}/${queryData.title}`, `./texts/Trash/${queryData.category}/${queryData.title}`);
 
     // 카테고리 페이지로 리다이렉트
     response.writeHead(302, {
-      Location: encodeURI(`/?id=${queryData.id}`)
+      Location: encodeURI(`/?category=${queryData.category}`)
     });
     response.end();
   }
+  // pathname이 '/trash'일 때(휴지통에 담긴 게시물의 목록)
+  else if (pathname === '/trash') {
+    access_deny();
+    style = style + fs.readFileSync('./css/trash.css', 'utf8');
+    var card = descriptionArea();
+    
+    var filesInTrash = 0;
+
+    // Trash 폴더 내부 폴더(카테고리)들의 리스트를 변수에 저장
+    var directorylist = fs.readdirSync('texts/Trash');
+
+    // Trash 폴더 내부 각 카테고리에 속한 파일들을 모두 검사
+    directorylist.forEach((elem) => {
+      var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
+
+      // 현재 카테고리(휴지통)에 저장된 모든 파일의 제목을 디자인 형식에 대입한 후, card 변수에 덧붙이기
+      filelist.forEach((element) => {
+        card = card +
+        `
+        <div class="posting-item">
+          <div class="posting-container">
+            <a href="/trash/?category=${elem}&title=${element}" class="posting-content">
+              ${element}
+            </a>
+            <a class="delete-button" href="/clear_process/?category=${elem}&title=${element}">
+              DELETE
+            </a>
+          </div>
+        </div>
+        `;
+
+        // 휴지통이 비었는지 검사
+        if (filelist.length != 0) {
+          filesInTrash = 1;
+        }
+      });
+    });
+
+    // 휴지통이 비었을 때, 안내 메시지를 출력
+    if (filesInTrash == 0) { card = card + notice(); }
+
+    response.writeHead(200);
+    response.end(templateHTML(card));
+  }
+  // 휴지통에 담긴 게시물
+  else if (pathname === '/trash/') {
+    style = style + fs.readFileSync('./css/post.css', 'utf8');
+    
+    access_deny();
+
+    var card = fs.readFileSync(`./texts/Trash/${queryData.category}/${queryData.title}`, 'utf8');
+    card = card + 
+      `
+      <!-- 삭제 버튼 -->
+      <div class="button-container">
+        <a href="/clear_process/?category=${queryData.category}&title=${queryData.title}"
+          class="update-delete-button" style="color: red;">
+          DELETE
+        </a>
+      </div>
+      `
+
+    response.writeHead(200);
+    response.end(templateHTML(card));
+  }
   // pathname이 '/clear_process'일 때(게시물 영구 삭제 버튼을 눌렀을 때)
-  else if (pathname === '/clear_process') {
+  else if (pathname === '/clear_process/') {
     // 파일 영구 삭제
-    fs.unlinkSync(`./texts/Trash/${queryData.class}/${queryData.title}`);
+    fs.unlinkSync(`./texts/Trash/${queryData.category}/${queryData.title}`);
 
     // 카테고리 페이지로 리다이렉트
     response.writeHead(302, {
-      Location: encodeURI(`/?id=Trash`)
+      Location: encodeURI('/trash')
     });
     response.end();
   }
