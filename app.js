@@ -333,7 +333,7 @@ var app = http.createServer((request, response) => {
     response.writeHead(200);
     response.end(templateHTML(card));
   }
-  // pathname이 '/signin'일 때
+  // pathname이 '/signin'일 때(로그인 페이지)
   else if (pathname === '/signin') {
     var bodyStyle = '/* */';
     var headerStyle = 'display: none;';
@@ -348,7 +348,7 @@ var app = http.createServer((request, response) => {
     response.writeHead(200);
     response.end(templateHTML(card));
   }
-  // pathname이 '/signin_process'일 때(비밀번호를 입력받았을 때)
+  // pathname이 '/signin_process'일 때(로그인/아웃 처리)
   else if (pathname == '/signin_process') {
     if(signIn == 0) {
       var password = fs.readFileSync('./password', 'utf8');
@@ -392,7 +392,7 @@ var app = http.createServer((request, response) => {
       response.end();
     }
   }
-  // pathname이 '/post'일 때
+  // pathname이 '/post'일 때(글 작성 페이지)
   else if (pathname === '/post') {
     access_deny();
 
@@ -410,7 +410,7 @@ var app = http.createServer((request, response) => {
     response.writeHead(200);
     response.end(templateHTML(card));
   }
-  // pathname이 '/post_process'일 때(폼에서 데이터를 제출했을 때)
+  // pathname이 '/post_process'일 때(작성된 데이터를 처리하여 게시물 생성)
   else if (pathname === '/post_process') {
     var body = ""
 
@@ -455,7 +455,7 @@ var app = http.createServer((request, response) => {
       response.end();
     });
   }
-  // pathname이 '/update'일 때(업데이트 버튼을 눌렀을 때)
+  // pathname이 '/update'일 때(게시물 수정 페이지)
   else if (pathname === '/update') {
     access_deny();
 
@@ -542,7 +542,7 @@ var app = http.createServer((request, response) => {
     response.writeHead(200);
     response.end(templateHTML(card));
   }
-  // pathname이 '/update_process'일 때(브라우저에서 업데이트할 데이터를 송신했을 때)
+  // pathname이 '/update_process'일 때(브라우저에서 게시물 수정 데이터를 송신했을 때)
   else if (pathname === '/update_process') {
     var body = ""
 
