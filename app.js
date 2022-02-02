@@ -519,8 +519,6 @@ var app = http.createServer((request, response) => {
   }
   // pathname이 '/delete_process'일 때(일반 게시물 삭제 버튼을 눌렀을 때)
   else if (pathname === '/delete_process/') {
-    console.log('hello world');
-
     // 파일을 휴지통으로 이동
     fs.renameSync(`./texts/${queryData.category}/${queryData.title}`, `./texts/Trash/${queryData.category}/${queryData.title}`);
 
@@ -534,7 +532,7 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/trash') {
     access_deny();
     style = style + fs.readFileSync('./css/trash.css', 'utf8');
-    var card = descriptionArea();
+    var card = `<div class="description-area"><h1>Trash</h1></div>`
     
     var filesInTrash = 0;
 
