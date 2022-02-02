@@ -495,10 +495,7 @@ var app = http.createServer((request, response) => {
     response.writeHead(200);
     response.end(templateHTML(card));
   }
-
-
-
-  // pathname이 '/update_process'일 때(업데이트할 데이터를 송신했을 때)
+  // pathname이 '/update_process'일 때(브라우저에서 업데이트할 데이터를 송신했을 때)
   else if (pathname === '/update_process') {
     var body = ""
 
@@ -545,10 +542,6 @@ var app = http.createServer((request, response) => {
       response.end();
     });
   }
-
-
-
-
   // pathname이 '/delete_process'일 때(일반 게시물 삭제 버튼을 눌렀을 때)
   else if (pathname === '/delete_process') {
     // 파일 삭제 (id == 카테고리명, class == 게시물 제목)
@@ -560,7 +553,7 @@ var app = http.createServer((request, response) => {
     });
     response.end();
   }
-  // pathname이 '/clear_process'일 때(휴지통에 담긴 게시물의 삭제 버튼을 눌렀을 때)
+  // pathname이 '/clear_process'일 때(게시물 영구 삭제 버튼을 눌렀을 때)
   else if (pathname === '/clear_process') {
     // 파일 영구 삭제
     fs.unlinkSync(`./texts/Trash/${queryData.class}/${queryData.title}`);
