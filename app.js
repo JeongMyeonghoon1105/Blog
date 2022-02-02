@@ -39,11 +39,13 @@ var app = http.createServer((request, response) => {
   else
     var display = 'block';
 
-  // 각 카테고리의 게시물 수를 변수에 저장
-  var Frontend_Postings = fs.readdirSync('./texts/Frontend/').length;
-  var Backend_Postings = fs.readdirSync('./texts/Backend/').length;
-  var DevOps_Postings = fs.readdirSync('./texts/DevOps/').length;
-  var CS_Postings = fs.readdirSync('./texts/CS/').length;
+  // 각 카테고리의 게시물 수를 객체에 저장
+  var postingCount = {
+    'frontend': fs.readdirSync('./texts/Frontend/').length,
+    'backend': fs.readdirSync('./texts/Backend/').length,
+    'devops': fs.readdirSync('./texts/DevOps/').length,
+    'cs': fs.readdirSync('./texts/CS/').length
+  }
 
   // pathname이 '/'일 때
   if (pathname === '/') {
@@ -238,10 +240,10 @@ var app = http.createServer((request, response) => {
     // MENU
     var list =
     `
-    <li><a href="/?id=Frontend">Frontend(${Frontend_Postings})</a></li>
-    <li><a href="/?id=Backend">Backend(${Backend_Postings})</a></li>
-    <li><a href="/?id=DevOps">DevOps(${DevOps_Postings})</a></li>
-    <li><a href="/?id=CS">CS(${CS_Postings})</a></li>
+    <li><a href="/?id=Frontend">Frontend(${postingCount.frontend})</a></li>
+    <li><a href="/?id=Backend">Backend(${postingCount.backend})</a></li>
+    <li><a href="/?id=DevOps">DevOps(${postingCount.devops})</a></li>
+    <li><a href="/?id=CS">CS(${postingCount.cs})</a></li>
     <li><a href="/?id=Trash" style="display: ${display}">Trash</a></li>
     `;
 
