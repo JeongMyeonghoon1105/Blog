@@ -1,0 +1,21 @@
+
+      <div class="post-container">
+
+        <!-- 게시물 제목 -->
+        <h1 class="post-title">Lorem Ipsum Dolor Sit Amet Lorem Ipsum</h1><br>
+
+        <!-- 내용 -->
+        <div class="post-contents">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet aliquam arcu, a congue ex. Sed placerat neque sed nisl fermentum, in pellentesque risus cursus. Etiam in eros felis. Vivamus sed ligula non urna fermentum venenatis. Nullam eleifend justo et odio commodo euismod. Donec tristique laoreet est vel gravida. Integer facilisis egestas luctus. Nulla augue ligula, sollicitudin non augue at, malesuada interdum leo.
+
+In vulputate aliquam nibh, ac rhoncus ligula dictum vel. Morbi ut urna malesuada, rutrum sem non, imperdiet orci. Nullam non lobortis dolor, rhoncus semper diam. Etiam ac nibh a leo vulputate varius sed eu turpis. Phasellus facilisis feugiat arcu placerat semper. Ut dictum lacus quis metus aliquam, sed auctor elit convallis. Donec dictum, magna et posuere placerat, ligula nibh luctus augue, vitae vehicula nulla erat at quam. Morbi quis porta elit. Integer sagittis, arcu tempus malesuada porttitor, libero orci convallis metus, vitae interdum metus ante quis quam. Morbi semper malesuada nisi eget dictum. Duis fringilla cursus tincidunt. Nam tristique pulvinar consectetur. Donec tempor, neque eu rutrum mollis, est dolor tempor neque, quis commodo urna justo ac nisi. Ut nec justo sodales, feugiat ligula id, tempor nulla.
+
+Phasellus vel erat dapibus, viverra magna sed, commodo mauris. Mauris luctus ante vel libero interdum vestibulum. Mauris lacinia metus non posuere consectetur. Nulla facilisi. In nulla turpis, pretium et ultrices vel, lacinia eu elit. Nulla consectetur fringilla tellus. Morbi vitae nisl ut enim varius lacinia eu sit amet ipsum. Maecenas ante mauris, vestibulum vitae nibh eget, volutpat consectetur mauris. Vivamus congue dui a scelerisque iaculis. Phasellus vel fermentum nunc. Aliquam aliquet hendrerit urna, et condimentum eros accumsan at. Duis varius pulvinar placerat. Mauris id lorem a tortor interdum vulputate.
+
+Proin pretium, neque eget vulputate egestas, justo dui sagittis est, eu malesuada risus urna eget mauris. Duis facilisis, lacus gravida vestibulum volutpat, mi nunc dictum urna, at accumsan ligula sem vel mauris. Etiam laoreet finibus justo, nec pharetra dui porta quis. Cras sapien felis, tempor sed cursus id, lobortis nec orci. Vestibulum pharetra facilisis tempus. Sed nec nisl id lacus sollicitudin dignissim vel id felis. Sed sed posuere sapien.
+
+Phasellus vel magna tincidunt lorem ultricies rutrum. Curabitur gravida nisi at magna convallis ultrices. Integer id est elit. Donec non eleifend quam. Phasellus quis aliquet arcu. Nunc eget venenatis mauris, eget efficitur orci. Quisque et lacus et mauris rutrum porta lobortis vel nunc. Morbi non elit consequat, facilisis nisl finibus, sollicitudin nunc. Curabitur efficitur nisl vel purus pharetra, a pretium dolor sodales. Fusce hendrerit libero in consectetur congue. Vestibulum placerat, ligula id condimentum accumsan, erat dolor ultricies lacus, id fermentum est tellus faucibus leo. Etiam vulputate at diam vitae egestas. Phasellus nunc dolor, dapibus lacinia arcu eu, vestibulum pharetra ex. Praesent fringilla vel velit sit amet biben
+        </div>
+
+      </div>
+      

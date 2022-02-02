@@ -525,12 +525,15 @@ var app = http.createServer((request, response) => {
             <a href="/trash/?category=${elem}&title=${element}" class="posting-content">
               ${element}
             </a>
-            <a class="delete-button" href="/clear_process/?category=${elem}&title=${element}">
-              DELETE
-            </a>
-            <a class="delete-button" href="/recover_process/?category=${elem}&title=${element}" style="color: green;">
-              RECOVER
-            </a>
+            <div style="display: flex; min-width: 90px;">
+              <a class="delete-button" href="/clear_process/?category=${elem}&title=${element}">
+                DELETE
+              </a>
+              <div style="width: 5px;"></div>
+              <a class="delete-button" href="/recover_process/?category=${elem}&title=${element}" style="color: green;">
+                RECOVER
+              </a>
+            </div>
           </div>
         </div>
         `;

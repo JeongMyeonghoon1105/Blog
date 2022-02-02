@@ -102,11 +102,11 @@
   height: 20px;
 
   /* 텍스트 */
-  text-align: justify;
+  text-align: left;
   line-height: 20px;
 
   /* 정렬 */
-  padding: 5px 0;
+  margin: 5px 0;
 
   /* 기타 */
   overflow: hidden;
@@ -147,6 +147,24 @@
 
     /* 정렬 */
     left: 0;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .posting-content {
+    max-width: 60%;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .posting-content {
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 270px) {
+  .posting-content {
+    max-width: 40%;
   }
 }
 
