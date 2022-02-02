@@ -5,14 +5,14 @@
 // Add Date of Posting
 
 
-// 필요한 모듈을 요청하여 변수에 저장
+// 모듈 요청
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
 var signIn = 0;
 
-// 로그인하지 않았을 시 페이지 접속 차단
+// 로그인하지 않은 사용자의 관리자 전용 페이지 접속 시도를 차단
 function access_deny() {
   if (signIn == 0) {
     response.writeHead(302, {
@@ -28,11 +28,11 @@ var app = http.createServer((request, response) => {
   var queryData = url.parse(requestedURL, true).query;
   var pathname = url.parse(requestedURL, true).pathname;
 
-  // 로그인 되지 않았을 때, 관리자 전용 기능 숨기기
+  // 로그인하지 않은 사용자에 대해 관리자 전용 기능 숨기기
   if (signIn == 0) { var display = 'none'; }
   else { var display = 'block'; }
 
-  // 각 카테고리의 게시물 수를 객체에 저장
+  // 카테고리별 게시물 수를 객체에 저장
   var postingCount = {
     'frontend': fs.readdirSync('./texts/Frontend/').length,
     'backend': fs.readdirSync('./texts/Backend/').length,
@@ -41,7 +41,7 @@ var app = http.createServer((request, response) => {
   }
 
   // HEAD
-  var head = fs.readFileSync('./texts/index-head', 'utf8');
+  var head = fs.readFileSync('./texts/head', 'utf8');
 
   // STYLE
   var style = fs.readFileSync('./css/variables.css', 'utf8');
@@ -57,13 +57,18 @@ var app = http.createServer((request, response) => {
   var cardStyle = '/* */';
   var menuStyle = '/* */';
 
+  // 페이지 좌상단 제목 추가
   function descriptionArea() {
     return `<div class="description-area"><h1>${queryData.category}</h1></div>`
   }
 
+  // 카테고리가 비어있음을 안내
   function notice() {
     return `<div class="notice"><text style="line-height: 0px;">${queryData.category} category is empty.</text></div>`
   }
+
+  // HEADER
+  var header = fs.readFileSync('./texts/header', 'utf8');
 
   // MENU
   var list =
@@ -76,9 +81,9 @@ var app = http.createServer((request, response) => {
   `;
 
   // FOOTER
-  var footer = fs.readFileSync('./texts/index-footer', 'utf8');
+  var footer = fs.readFileSync('./texts/footer', 'utf8');
 
-  // 로그인 여부에 따라 헤더 및 메뉴(vw가 1200px 미만일 경우)의 스타일을 달리 적용
+  // 로그인 여부에 따라 헤더 및 메뉴(VW가 1200px 미만일 경우)의 스타일을 달리 적용
   if (signIn == 0) {
     var signInHeader =
     `
@@ -116,47 +121,20 @@ var app = http.createServer((request, response) => {
       <!-- HEADER -->
       <header style="${headerStyle}">
         <div class="inner">
-
           <!-- LOGO -->
           <a href="/" class="logo">
             <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/Logo.png?raw=true" alt="Daniel's Tech Blog">
           </a>
-          
           <!-- SEARCH BAR -->
           <input type="text" id="search-bar" placeholder="Search...">
-          
           <!-- MAIN MENU -->
           <div class="main-menu" id="main-menu">
-          
-            <!-- 1st Item of Menu (Search Button) -->
-            <div class="item" id="search"><i class="fas fa-search"></i></div>
-          
-            <!-- 2nd Item of Menu (Instagram) -->
-            <div class="item" id="instagram">
-              <i class="fab fa-instagram" onclick="window.open('https://www.instagram.com/myeonghoon._.1105')"></i>
-            </div>
-          
-            <!-- 3rd Item of Menu (Facebook Link) -->
-            <div class="item" id="facebook" onclick="window.open('https://www.facebook.com/JeongMyeonghoon')">
-              <i class="fab fa-facebook"></i>
-            </div>
-          
-            <!-- 4th Item of Menu (Github Link) -->
-            <div class="item" id="github" onclick="window.open('https://github.com/JeongMyeonghoon1105')">
-              <i class="fab fa-github"></i>
-            </div>
-          
+            ${header}
             <!-- 5th Item of Menu (Sign In) -->
             ${signInHeader}
-          
-            <!-- SEARCH BAR -->
-            <input type="text" id="search-bar" placeholder="Search...">
-            
           </div>
-        
           <!-- Hidden Item (Menu) -->
           <div class="item" id="hidden-menu"><i class="fas fa-bars"></i></div>
-
           <div id="tab-down">
             <div class="tab-down-inner">
               ${tabSignIn}
@@ -168,17 +146,14 @@ var app = http.createServer((request, response) => {
               </div>
             </div>
           </div>
-
         </div>
       </header>
       
       <!-- WRAP -->
       <div class="wrap" style="${wrapStyle}">
         <div class="inner" style="${innerStyle}">
-
           <!-- CARD -->
           <div class="card" style="${cardStyle}">${card}</div>
-
           <!-- MENU -->
           <div class="menu" style="${menuStyle}">
             <div class="contents">
@@ -191,7 +166,6 @@ var app = http.createServer((request, response) => {
               </h2>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -216,7 +190,7 @@ var app = http.createServer((request, response) => {
       var menuStyle = '/* */';
 
       style = style + fs.readFileSync('./css/main.css', 'utf8');
-      var card = fs.readFileSync('./texts/index-card', 'utf8');
+      var card = fs.readFileSync('./texts/card', 'utf8');
     }
     // 카테고리별 게시물 목록
     else if (((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) && queryData.title === undefined) {
@@ -569,7 +543,7 @@ var app = http.createServer((request, response) => {
     });
 
     // 휴지통이 비었을 때, 안내 메시지를 출력
-    if (filesInTrash == 0) { card = card + notice(); }
+    if (filesInTrash == 0) { card = card + '<div class="notice"><text style="line-height: 0px;">Trash is empty.</text></div>;' }
 
     response.writeHead(200);
     response.end(templateHTML(card));

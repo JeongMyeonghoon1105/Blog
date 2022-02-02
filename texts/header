@@ -1,0 +1,20 @@
+<!-- 1st Item of Menu (Search Button) -->
+<div class="item" id="search"><i class="fas fa-search"></i></div>
+          
+<!-- 2nd Item of Menu (Instagram) -->
+<div class="item" id="instagram">
+  <i class="fab fa-instagram" onclick="window.open('https://www.instagram.com/myeonghoon._.1105')"></i>
+</div>
+
+<!-- 3rd Item of Menu (Facebook Link) -->
+<div class="item" id="facebook" onclick="window.open('https://www.facebook.com/JeongMyeonghoon')">
+  <i class="fab fa-facebook"></i>
+</div>
+
+<!-- 4th Item of Menu (Github Link) -->
+<div class="item" id="github" onclick="window.open('https://github.com/JeongMyeonghoon1105')">
+  <i class="fab fa-github"></i>
+</div>
+
+<!-- SEARCH BAR -->
+<input type="text" id="search-bar" placeholder="Search...">
