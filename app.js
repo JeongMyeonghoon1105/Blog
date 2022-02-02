@@ -41,26 +41,196 @@ var app = http.createServer((request, response) => {
     'cs': fs.readdirSync('./texts/CS/').length
   }
 
+  // HEAD
+  var head = fs.readFileSync('./texts/index-head', 'utf8');
+
+  // STYLE
+  var style = fs.readFileSync('./css/variables.css', 'utf8');
+  style = style + fs.readFileSync('./css/common.css', 'utf8');
+  style = style + fs.readFileSync('./css/header.css', 'utf8');
+  style = style + fs.readFileSync('./css/menu.css', 'utf8');
+  style = style + fs.readFileSync('./css/footer.css', 'utf8');
+
+  function descriptionArea() {
+    return `<div class="description-area"><h1>${queryData.id}</h1></div>`
+  }
+
+  function notice() {
+    return `<div class="notice"><text style="line-height: 0px;">${queryData.id} category is empty.</text></div>`
+  }
+
+  // MENU
+  var list =
+  `
+  <li><a href="/?id=Frontend">Frontend(${postingCount.frontend})</a></li>
+  <li><a href="/?id=Backend">Backend(${postingCount.backend})</a></li>
+  <li><a href="/?id=DevOps">DevOps(${postingCount.devops})</a></li>
+  <li><a href="/?id=CS">CS(${postingCount.cs})</a></li>
+  <li><a href="/?id=Trash" style="display: ${display}">Trash</a></li>
+  `;
+
+  // FOOTER
+  var footer = fs.readFileSync('./texts/index-footer', 'utf8');
+
+  // 페이지에 따라 스타일을 달리 적용
+  if (queryData.id === undefined) {
+    var bodyStyle = '/* */';
+    var headerStyle = '/* */';
+    var wrapStyle = '/* */';
+    var innerStyle = '/* */';
+    var cardStyle = 'background-color: rgb(245, 245, 255);';
+    var menuStyle = '/* */';
+  } else if (queryData.id == 'Write') {
+    var bodyStyle = 'height: 1200px;';
+    var headerStyle = '/* */';
+    var wrapStyle = 'height: 1150px;';
+    var innerStyle = 'height: 1150px;';
+    var cardStyle = 'height: 1150px;';
+    var menuStyle = '/* */';
+  } else if (queryData.id == 'SignIn') {
+    var bodyStyle = '/* */';
+    var headerStyle = 'display: none;';
+    var wrapStyle = '/* */';
+    var innerStyle = '/* */';
+    var cardStyle = 'background-color: rgb(245, 245, 255);';
+    var menuStyle = 'display: none;';
+  } else {
+    var bodyStyle = '/* */';
+    var headerStyle = '/* */';
+    var wrapStyle = '/* */';
+    var innerStyle = '/* */';
+    var cardStyle = '/* */';
+    var menuStyle = '/* */';
+  }
+
+  // 로그인 여부에 따라 헤더 및 메뉴(vw가 1200px 미만일 경우)의 스타일을 달리 적용
+  if (signIn == 0) {
+    var signInHeader =
+    `
+    <div class="item" id="sign-in" onclick="location.href='/?id=SignIn'">
+      <span data-tooltip-text="Sign In"><i class="fas fa-user-circle"></i></span>
+    </div>
+    `
+    var tabSignIn =
+    `<div onclick="location.href='/?id=SignIn'" class="tab-sign">Sign In</div>`
+  } else {
+    var signInHeader =
+    `
+    <div class="item" id="sign-in" onclick="location.href='/signin_process'">
+      <span data-tooltip-text="Sign Out"><i class="fas fa-user-circle"></i></span>
+    </div>
+    `
+    var tabSignIn =
+    `<div onclick="location.href='/signin_process'" class="tab-sign">Sign Out</div>`
+  }
+
+  function templateHTML(card) {
+    return `
+    <html lang="ko">
+
+    <head>
+      ${head}
+      <style>
+        ${style}
+      </style>
+    </head>
+    
+    <body style="${bodyStyle}">
+      <style>${display}</style>
+
+      <!-- HEADER -->
+      <header style="${headerStyle}">
+        <div class="inner">
+
+          <!-- LOGO -->
+          <a href="/" class="logo">
+            <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/Logo.png?raw=true" alt="Daniel's Tech Blog">
+          </a>
+          
+          <!-- SEARCH BAR -->
+          <input type="text" id="search-bar" placeholder="Search...">
+          
+          <!-- MAIN MENU -->
+          <div class="main-menu" id="main-menu">
+          
+            <!-- 1st Item of Menu (Search Button) -->
+            <div class="item" id="search"><i class="fas fa-search"></i></div>
+          
+            <!-- 2nd Item of Menu (Instagram) -->
+            <div class="item" id="instagram">
+              <i class="fab fa-instagram" onclick="window.open('https://www.instagram.com/myeonghoon._.1105')"></i>
+            </div>
+          
+            <!-- 3rd Item of Menu (Facebook Link) -->
+            <div class="item" id="facebook" onclick="window.open('https://www.facebook.com/JeongMyeonghoon')">
+              <i class="fab fa-facebook"></i>
+            </div>
+          
+            <!-- 4th Item of Menu (Github Link) -->
+            <div class="item" id="github" onclick="window.open('https://github.com/JeongMyeonghoon1105')">
+              <i class="fab fa-github"></i>
+            </div>
+          
+            <!-- 5th Item of Menu (Sign In) -->
+            ${signInHeader}
+          
+            <!-- SEARCH BAR -->
+            <input type="text" id="search-bar" placeholder="Search...">
+            
+          </div>
+        
+          <!-- Hidden Item (Menu) -->
+          <div class="item" id="hidden-menu"><i class="fas fa-bars"></i></div>
+
+          <div id="tab-down">
+            <div class="tab-down-inner">
+              ${tabSignIn}
+              <ul class="tab-items">${list}</ul>
+              <div style="display: inline-block; padding: 20px; height: 22px;">
+                <h2 style="display: ${display}; color: white; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=Write'">
+                  Post
+                </h2>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </header>
+      
+      <!-- WRAP -->
+      <div class="wrap" style="${wrapStyle}">
+        <div class="inner" style="${innerStyle}">
+
+          <!-- CARD -->
+          <div class="card" style="${cardStyle}">${card}</div>
+
+          <!-- MENU -->
+          <div class="menu" style="${menuStyle}">
+            <div class="contents">
+              <h1>Menu</h1><br>
+              <ul style="list-style-type: none; font-size: 15px;">
+                ${list}
+              </ul><br>
+              <h2 style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=Write'">
+                Post
+              </h2>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      ${footer}
+
+    </body>
+    
+    </html>
+    `
+  }
+
   // pathname이 '/'일 때
   if (pathname === '/') {
-    // HEAD
-    var head = fs.readFileSync('./texts/index-head', 'utf8');
-
-    // STYLE
-    var style = fs.readFileSync('./css/variables.css', 'utf8');
-    style = style + fs.readFileSync('./css/common.css', 'utf8');
-    style = style + fs.readFileSync('./css/header.css', 'utf8');
-    style = style + fs.readFileSync('./css/menu.css', 'utf8');
-    style = style + fs.readFileSync('./css/footer.css', 'utf8');
-
-    function descriptionArea() {
-      return `<div class="description-area"><h1>${queryData.id}</h1></div>`
-    }
-
-    function notice() {
-      return `<div class="notice"><text style="line-height: 0px;">${queryData.id} category is empty.</text></div>`
-    }
-
     // CARD(메인 페이지)
     if (queryData.id === undefined) {
       style = style + fs.readFileSync('./css/main.css', 'utf8');
@@ -164,19 +334,13 @@ var app = http.createServer((request, response) => {
       if (signIn == 1) {
         card = card + 
         `
-        <!-- 삭제 & 편집 버튼 -->
         <div class="button-container">
-  
-          <!-- 삭제 버튼 -->
           <a href="/delete_process?id=${queryData.class}&class=${queryData.id}" class="update-delete-button" style="color: red;">
             DELETE
           </a>
-  
-          <!-- 편집 버튼 -->
-          <a class="update-delete-button" style="color: gray;">
+          <a href="/update?id=${queryData.class}&class=${queryData.id}" class="update-delete-button" style="color: gray;">
             UPDATE
           </a>
-  
         </div>
         `
       }
@@ -196,201 +360,9 @@ var app = http.createServer((request, response) => {
       var card = descriptionArea() + fs.readFileSync(`./texts/${queryData.id}`, 'utf8');
     }
 
-    // MENU
-    var list =
-    `
-    <li><a href="/?id=Frontend">Frontend(${postingCount.frontend})</a></li>
-    <li><a href="/?id=Backend">Backend(${postingCount.backend})</a></li>
-    <li><a href="/?id=DevOps">DevOps(${postingCount.devops})</a></li>
-    <li><a href="/?id=CS">CS(${postingCount.cs})</a></li>
-    <li><a href="/?id=Trash" style="display: ${display}">Trash</a></li>
-    `;
-
-    // FOOTER
-    var footer = fs.readFileSync('./texts/index-footer', 'utf8');
-
-    // 페이지에 따라 스타일을 달리 적용
-    if (queryData.id === undefined) {
-      var bodyStyle = '/* */';
-      var headerStyle = '/* */';
-      var wrapStyle = '/* */';
-      var innerStyle = '/* */';
-      var cardStyle = 'background-color: rgb(245, 245, 255);';
-      var menuStyle = '/* */';
-    } else if (queryData.id == 'Write') {
-      var bodyStyle = 'height: 1200px;';
-      var headerStyle = '/* */';
-      var wrapStyle = 'height: 1150px;';
-      var innerStyle = 'height: 1150px;';
-      var cardStyle = 'height: 1150px;';
-      var menuStyle = '/* */';
-    } else if (queryData.id == 'SignIn') {
-      var bodyStyle = '/* */';
-      var headerStyle = 'display: none;';
-      var wrapStyle = '/* */';
-      var innerStyle = '/* */';
-      var cardStyle = 'background-color: rgb(245, 245, 255);';
-      var menuStyle = 'display: none;';
-    } else {
-      var bodyStyle = '/* */';
-      var headerStyle = '/* */';
-      var wrapStyle = '/* */';
-      var innerStyle = '/* */';
-      var cardStyle = '/* */';
-      var menuStyle = '/* */';
-    }
-
-    if (signIn == 0) {
-      var signInHeader =
-      `
-      <div class="item" id="sign-in" onclick="location.href='/?id=SignIn'">
-        <span data-tooltip-text="Sign In"><i class="fas fa-user-circle"></i></span>
-      </div>
-      `
-      var tabSignIn =
-      `
-      <div onclick="location.href='/?id=SignIn'" class="tab-sign">
-        Sign In
-      </div>
-      `
-    } else {
-      var signInHeader =
-      `
-      <div class="item" id="sign-in" onclick="location.href='/signin_process'">
-        <span data-tooltip-text="Sign Out"><i class="fas fa-user-circle"></i></span>
-      </div>
-      `
-      var tabSignIn =
-      `
-      <div onclick="location.href='/signin_process'" class="tab-sign">
-        Sign Out
-      </div>
-      `
-    }
-
-    // 로드될 HTML 코드를 변수에 저장
-    var template =
-    `
-    <html lang="ko">
-
-    <head>
-      ${head}
-
-      <style>
-        ${style}
-      </style>
-
-    </head>
-    
-    <body style="${bodyStyle}">
-      <style>
-        ${display}
-      </style>
-
-      <!-- HEADER -->
-      <header style="${headerStyle}">
-        <div class="inner">
-          <!-- LOGO -->
-          <a href="/" class="logo">
-            <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/Logo.png?raw=true" alt="Daniel's Tech Blog">
-          </a>
-          
-          <!-- SEARCH BAR -->
-          <input type="text" id="search-bar" placeholder="Search...">
-          
-          <!-- MAIN MENU -->
-          <div class="main-menu" id="main-menu">
-          
-            <!-- 1st Item of Menu (Search Button) -->
-            <div class="item" id="search">
-              <i class="fas fa-search"></i>
-            </div>
-          
-            <!-- 2nd Item of Menu (Instagram) -->
-            <div class="item" id="instagram">
-              <i class="fab fa-instagram" onclick="window.open('https://www.instagram.com/myeonghoon._.1105')"></i>
-            </div>
-          
-            <!-- 3rd Item of Menu (Facebook Link) -->
-            <div class="item" id="facebook" onclick="window.open('https://www.facebook.com/JeongMyeonghoon')">
-              <i class="fab fa-facebook"></i>
-            </div>
-          
-            <!-- 4th Item of Menu (Github Link) -->
-            <div class="item" id="github" onclick="window.open('https://github.com/JeongMyeonghoon1105')">
-              <i class="fab fa-github"></i>
-            </div>
-          
-            <!-- 5th Item of Menu (Sign In) -->
-            ${signInHeader}
-          
-            <!-- SEARCH BAR -->
-            <input type="text" id="search-bar" placeholder="Search...">
-            
-          </div>
-        
-          <!-- Hidden Item (Menu) -->
-          <div class="item" id="hidden-menu">
-            <i class="fas fa-bars"></i>
-          </div>
-
-          <div id="tab-down">
-            <div class="tab-down-inner">
-
-              ${tabSignIn}
-
-              <ul class="tab-items">
-                ${list}
-              </ul>
-
-              <div style="display: inline-block; padding: 20px; height: 22px;">
-                <h2 style="display: ${display}; color: white; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=Write'">
-                  Post
-                </h2>
-              </div>
-              
-            </div>
-          </div>
-
-        </div>
-      </header>
-      
-      <!-- WRAP -->
-      <div class="wrap" style="${wrapStyle}">
-        <div class="inner" style="${innerStyle}">
-
-          <!-- CARD -->
-          <div class="card" style="${cardStyle}">
-            ${card}
-          </div>
-
-          <!-- MENU -->
-          <div class="menu" style="${menuStyle}">
-            <div class="contents">
-              <h1>Menu</h1><br>
-              <ul style="list-style-type: none; font-size: 15px;">
-                ${list}
-              </ul><br>
-              <h2 style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/?id=Write'">
-                Post
-              </h2>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- FOOTER -->
-      ${footer}
-
-    </body>
-    
-    </html>
-    `
-
     // 로드
     response.writeHead(200);
-    response.end(template);
+    response.end(templateHTML(card));
   }
   // pathname이 '/post_process'일 때(폼에서 데이터를 제출했을 때)
   else if (pathname === '/post_process') {
@@ -437,6 +409,72 @@ var app = http.createServer((request, response) => {
       response.end();
     });
   }
+
+  // pathname이 '/update'일 때(업데이트 버튼을 눌렀을 때)
+  else if (pathname === '/update') {
+    access_deny();
+
+    style = style + fs.readFileSync('./css/write.css', 'utf8');
+
+    var data = fs.readFileSync(`./texts/${queryData.id}/${queryData.class}`, 'utf8');
+    var card = descriptionArea() + 
+      `
+      <!-- Writting Area -->
+      <div class="writting-area">
+      
+        <!-- Form for New Contents -->
+        <form action="/update_process" method="post">
+          <input type="hidden" name="id" value="${queryData.class}">
+
+          <!-- Title -->
+          <div class="title">
+            <textarea name="title" id="title-input" rows="1" cols="55" placeholder="Title" maxlength="100"
+              value="${queryData.class}" required></textarea>
+          </div>
+      
+          <div class="border"></div>
+      
+          <!-- Contents -->
+          <div>
+            <textarea name="content" id="contents-input" placeholder="Contents" style="white-space: pre-wrap;" 
+            value="${data}" required></textarea>
+          </div>
+      
+          <div class="border"></div>
+      
+          <!-- Categoties -->
+          <div class="category">
+            <select name="category" id="category-input" required>
+              <option value="Frontend">Frontend</option>
+              <option value="Backend">Backend</option>
+              <option value="DevOps">DevOps</option>
+              <option value="CS">CS</option>
+            </select>
+          </div>
+      
+          <div class="br"></div>
+          <div class="br"></div>
+          <div class="br"></div>
+      
+          <!-- Post Button -->
+          <div style="position: relative; height: 30px;">
+            <button type="submit" class="post-button">
+              Post
+            </button>
+          </div>
+        </form>
+        
+      </div>
+      `;
+    response.writeHead(200);
+    response.end(templateHTML(card));
+  }
+
+  // pathname이 '/update_process'일 때(업데이트할 데이터를 송신했을 때)
+  else if (pathname === '/update_process') {
+
+  }
+
   // pathname이 '/delete_process'일 때(일반 게시물 삭제 버튼을 눌렀을 때)
   else if (pathname === '/delete_process') {
     // 파일 삭제 (id == 카테고리명, class == 게시물 제목)
