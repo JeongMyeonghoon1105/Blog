@@ -554,6 +554,9 @@ var app = http.createServer((request, response) => {
             <a class="delete-button" href="/clear_process/?category=${elem}&title=${element}">
               DELETE
             </a>
+            <a class="delete-button" href="/recover_process/?category=${elem}&title=${element}" style="color: green;">
+              RECOVER
+            </a>
           </div>
         </div>
         `;
@@ -600,6 +603,16 @@ var app = http.createServer((request, response) => {
     // 카테고리 페이지로 리다이렉트
     response.writeHead(302, {
       Location: encodeURI('/trash')
+    });
+    response.end();
+  }
+  else if (pathname === '/recover_process/') {
+    // 휴지통에 있던 파일을 복구
+    fs.renameSync(`./texts/Trash/${queryData.category}/${queryData.title}`, `./texts/${queryData.category}/${queryData.title}`);
+
+    // 카테고리 페이지로 리다이렉트
+    response.writeHead(302, {
+      Location: encodeURI(`/?category=${queryData.category}`)
     });
     response.end();
   }
