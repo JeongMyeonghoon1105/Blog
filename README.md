@@ -1,7 +1,7 @@
-## Story Mate
+## Tech Log
 
-### Welcome to the source of my diary web page.
+### Welcome to the source of my tech blog.
 
-Story Mate is categorized diary for diligent people.
+I'll introduce interesting stuffs about software in this blog.
 
 <br/>
