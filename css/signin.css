@@ -200,7 +200,7 @@
     width: 450px;
   }
 
-  .wrap .inner .card .sign-in-description-area {
+  .wrap .inner .card .description-area {
     /* 기본 */
     height: 30px;
 
@@ -226,7 +226,7 @@
     width: 100%;
   }
 
-  .wrap .inner .card .sign-in-description-area {
+  .wrap .inner .card .description-area {
     /* 기본 */
     width: 70%;
     height: 30px;
@@ -239,7 +239,7 @@
     padding-top: 60px;
   }
 
-  .sign-in-description-area h1 {
+  .description-area h1 {
     width: 70%;
   }
 
