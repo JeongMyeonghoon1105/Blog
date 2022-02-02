@@ -218,7 +218,7 @@ var app = http.createServer((request, response) => {
       style = style + fs.readFileSync('./css/main.css', 'utf8');
       var card = fs.readFileSync('./texts/index-card', 'utf8');
     }
-    // CARD(카테고리별 게시물 목록)
+    // 카테고리별 게시물 목록
     else if (((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) && queryData.title === undefined) {
       style = style + fs.readFileSync('./css/category.css', 'utf8');
       var filelist = fs.readdirSync(`./texts/${queryData.category}`);
@@ -243,7 +243,7 @@ var app = http.createServer((request, response) => {
         });
       }
     }
-    // CARD(게시물 페이지)
+    // 게시물 페이지
     else if ((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) {
       style = style + fs.readFileSync('./css/post.css', 'utf8');
       var card = fs.readFileSync(`./texts/${queryData.category}/${queryData.title}`, 'utf8');
@@ -264,7 +264,6 @@ var app = http.createServer((request, response) => {
       }
     }
 
-    // 로드
     response.writeHead(200);
     response.end(templateHTML(card));
   }
