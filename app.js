@@ -325,24 +325,19 @@ var app = http.createServer((request, response) => {
       var content = post.content;
       var category = post.category;
 
-      // 게시물 페이지에 해당하는 html 코드 데이터를 텍스트 파일로 저장
+      // 파일 쓰기(새 게시물)
       fs.writeFileSync(`texts/${category}/${title}`,
       `
       <div class="post-container">
-
-        <!-- 게시물 제목 -->
         <h1 class="post-title">${title}</h1><br>
-
-        <!-- 내용 -->
         <div class="post-contents">
           ${content}
         </div>
-
       </div>
       `,
       'utf8');
 
-      // 포스팅 후 게시물로 리다이렉션
+      // 포스팅 후, 방금 작성한 게시물로 리다이렉션
       response.writeHead(302, {
         Location: encodeURI(`/?category=${category}&title=${title}`)
       });
@@ -355,31 +350,25 @@ var app = http.createServer((request, response) => {
 
     style = style + fs.readFileSync('./css/write.css', 'utf8');
     var data = fs.readFileSync(`./texts/${queryData.category}/${queryData.title}`, 'utf8');
+
+    var categorySelect = {
+      'frontend': `<!----`,
+      'backend': `<!----`,
+      'devops': `<!----`,
+      'cs': `<!----`
+    }
     
     // 수정할 게시물의 원래 카테고리를 디폴트 값으로 설정
-    if (queryData.category === 'Frontend') {
-      var frontend_select = `selected`;
-      var backend_select = `<!---->`;
-      var devops_select = `<!---->`;
-      var cs_select = `<!---->`;
-    } else if (queryData.category === 'Backend') {
-      var frontend_select = `<!----`;
-      var backend_select = `selected`;
-      var devops_select = `<!----`;
-      var cs_select = `<!----`;
-    } else if (queryData.category === 'DevOps') {
-      var frontend_select = `<!----`;
-      var backend_select = `<!----`;
-      var devops_select = `selected`;
-      var cs_select = `<!----`;
-    } else if (queryData.category === 'CS') {
-      var frontend_select = `<!----`;
-      var backend_select = `<!----`;
-      var devops_select = `<!----`;
-      var cs_select = `selected`;
-    }
+    if (queryData.category === 'Frontend')
+      categorySelect.frontend = `selected`;
+    else if (queryData.category === 'Backend')
+      categorySelect.backend = `selected`;
+    else if (queryData.category === 'DevOps')
+      categorySelect.devops = `selected`;
+    else if (queryData.category === 'CS')
+      categorySelect.cs = `selected`;
 
-    var card = descriptionArea(queryData.category) + 
+    var card = descriptionArea('Update') + 
       `
       <!-- Writting Area -->
       <div class="writting-area">
