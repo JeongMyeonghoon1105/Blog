@@ -1,10 +1,3 @@
-/* ******* Tasks ******* */
-
-// Search
-// Sort
-// Add Date of Posting
-
-
 // 모듈 요청
 var http = require('http');
 var fs = require('fs');
@@ -58,13 +51,13 @@ var app = http.createServer((request, response) => {
   var menuStyle = '/* */';
 
   // 페이지 좌상단 제목 추가
-  function descriptionArea() {
-    return `<div class="description-area"><h1>${queryData.category}</h1></div>`
+  function descriptionArea(descriptionContent) {
+    return `<div class="description-area"><h1>${descriptionContent}</h1></div>`
   }
 
   // 카테고리가 비어있음을 안내
-  function notice() {
-    return `<div class="notice"><text style="line-height: 0px;">${queryData.category} category is empty.</text></div>`
+  function notice(noticeContent) {
+    return `<div class="notice"><text style="line-height: 0px;">${noticeContent} is empty.</text></div>`
   }
 
   // HEADER
@@ -197,10 +190,10 @@ var app = http.createServer((request, response) => {
       style = style + fs.readFileSync('./css/category.css', 'utf8');
       var filelist = fs.readdirSync(`./texts/${queryData.category}`);
 
-      var card = descriptionArea();
+      var card = descriptionArea(queryData.category);
 
       // 현재 카테고리에 게시물이 없을 때, 안내 메시지 표시
-      if (filelist.length == 0) { card = card + notice(); }
+      if (filelist.length == 0) { card = card + notice(`${queryData.category} category`); }
       // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
       else {
         filelist.forEach((element) => {
@@ -312,7 +305,7 @@ var app = http.createServer((request, response) => {
     var menuStyle = '/* */';
 
     style = style + fs.readFileSync('./css/write.css', 'utf8');
-    var card = '<div class="description-area"><h1>Post</h1></div>'
+    var card = descriptionArea('Post');
     card = card + fs.readFileSync('./texts/write', 'utf8');
     
     response.writeHead(200);
@@ -393,7 +386,7 @@ var app = http.createServer((request, response) => {
       var cs_select = `selected`;
     }
 
-    var card = descriptionArea() + 
+    var card = descriptionArea(queryData.category) + 
       `
       <!-- Writting Area -->
       <div class="writting-area">
@@ -505,7 +498,7 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/trash') {
     access_deny();
     style = style + fs.readFileSync('./css/trash.css', 'utf8');
-    var card = `<div class="description-area"><h1>Trash</h1></div>`
+    var card = descriptionArea('Trash');
     
     var filesInTrash = 0;
 
@@ -546,7 +539,7 @@ var app = http.createServer((request, response) => {
     });
 
     // 휴지통이 비었을 때, 안내 메시지를 출력
-    if (filesInTrash == 0) { card = card + '<div class="notice"><text style="line-height: 0px;">Trash is empty.</text></div>' }
+    if (filesInTrash == 0) { card = card + notice('Trash'); }
 
     response.writeHead(200);
     response.end(templateHTML(card));

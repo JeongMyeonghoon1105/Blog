@@ -490,7 +490,7 @@
 
   .wrap .inner .card .description-area {
     /* 기본 */
-    width: 250px;
+    width: 240px;
     height: 30px;
 
     /* 텍스트 */
@@ -551,7 +551,7 @@
   }
 }
 
-@media screen and (max-width: 255px) {
+@media screen and (max-width: 270px) {
   .wrap .inner .card .description-area {
     display: none;
   }

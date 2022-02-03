@@ -243,14 +243,17 @@ header .inner #hidden-menu i {
 }
 
 .tab-sign {
-  /* 기본 */
-  width: 100px;
+  /* Display */
+  display: inline-block;
 
   /* 텍스트 */
   font-weight: bold;
 
   /* 정렬 */
   padding: 20px;
+
+  /* 기타 */
+  cursor: pointer;
 }
 
 .tab-items {
@@ -265,6 +268,7 @@ header .inner #hidden-menu i {
 }
 
 .tab-items li a {
+  display: block;
   color: white;
 }
 
