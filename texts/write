@@ -1,12 +1,9 @@
-<!-- Writting Area -->
 <div class="writting-area">
-
-  <!-- Form for New Contents -->
+  <!-- 새 게시물 데이터 입력란 -->
   <form action="/post_process" method="post">
     <!-- Title -->
     <div class="title">
-      <textarea name="title" id="title-input" rows="1" cols="55" placeholder="Title" maxlength="100"
-        required></textarea>
+      <textarea name="title" id="title-input" rows="1" cols="55" placeholder="Title" maxlength="100" required></textarea>
     </div>
 
     <div class="border"></div>
@@ -39,5 +36,4 @@
       </button>
     </div>
   </form>
-  
 </div>

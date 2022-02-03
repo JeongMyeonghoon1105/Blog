@@ -219,8 +219,8 @@ var app = http.createServer((request, response) => {
           <a href="/delete_process/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: red;">
             DELETE
           </a>
-          <a href="/update/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: gray;">
-            UPDATE
+          <a href="/recover_process/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: gray;">
+            RECOVER
           </a>
         </div>
         `
@@ -368,16 +368,12 @@ var app = http.createServer((request, response) => {
 
     var card = descriptionArea('Update') + 
       `
-      <!-- Writting Area -->
       <div class="writting-area">
-      
-        <!-- Form for New Contents -->
-        <form action="/update_process" method="post">
-          <input type="hidden" name="originalFileName" value="${queryData.title}">
-
+        <!-- 수정할 데이터 입력란 -->
+        <form action="/update_process/?category=${queryData.category}&title=${queryData.title}" method="post">
           <!-- Title -->
           <div class="title">
-            <textarea name="title" id="title-input" rows="1" cols="55" maxlength="100"
+            <textarea name="title" id="title-input" rows="1" cols="55" maxlength="100" placeholder="Title"
               value="${queryData.title}" required></textarea>
           </div>
       
@@ -390,8 +386,6 @@ var app = http.createServer((request, response) => {
           </div>
       
           <div class="border"></div>
-
-          <input type="hidden" name="originalCategory" value="${queryData.category}">
       
           <!-- Categoties -->
           <div class="category">
@@ -414,7 +408,6 @@ var app = http.createServer((request, response) => {
             </button>
           </div>
         </form>
-        
       </div>
       `;
     
@@ -422,7 +415,7 @@ var app = http.createServer((request, response) => {
     response.end(templateHTML(card));
   }
   // pathname이 '/update_process'일 때(브라우저에서 게시물 수정 데이터를 송신했을 때)
-  else if (pathname === '/update_process') {
+  else if (pathname === '/update_process/') {
     access_deny();
 
     var body = ""
@@ -440,14 +433,12 @@ var app = http.createServer((request, response) => {
     // 포스팅 및 기타 처리
     request.on('end', () => {
       var post = qs.parse(body);
-      var originalCategory = post.originalCategory;
-      var originalFileName = post.originalFileName;
       var title = post.title;
       var content = post.content;
       var category = post.category;
 
       // 파일 영구 삭제
-      fs.unlinkSync(`./texts/${originalCategory}/${originalFileName}`);
+      fs.unlinkSync(`./texts/${queryData.category}/${queryData.title}`);
       // 수정된 내용으로 새 파일 쓰기
       fs.writeFileSync(`./texts/${category}/${title}`,
       `
@@ -539,11 +530,12 @@ var app = http.createServer((request, response) => {
     var card = fs.readFileSync(`./texts/Trash/${queryData.category}/${queryData.title}`, 'utf8');
     card = card + 
       `
-      <!-- 삭제 버튼 -->
       <div class="button-container">
-        <a href="/clear_process/?category=${queryData.category}&title=${queryData.title}"
-          class="update-delete-button" style="color: red;">
+        <a href="/delete_process/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: red;">
           DELETE
+        </a>
+        <a href="/recover_process/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: green;">
+          RECOVER
         </a>
       </div>
       `

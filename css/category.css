@@ -102,11 +102,11 @@
   height: 20px;
 
   /* 텍스트 */
-  text-align: justify;
+  text-align: left;
   line-height: 20px;
 
   /* 정렬 */
-  padding: 5px 0;
+  margin: 5px 0;
 
   /* 기타 */
   overflow: hidden;
