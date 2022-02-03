@@ -28,16 +28,6 @@
       </select>
     </div>
 
-    <!-- File Selection
-    <div class="file-selection">
-      <input class="file-name" id="file-name" value="첨부파일" placeholder="첨부파일">
-      <label for="file" class="file-label" id="file-label">
-        <i class="fas fa-file-upload" style="line-height: 30px;"></i>
-      </label>
-      <input type="file" id="file" class="file-style-reset">
-    </div>
-    -->
-
     <div class="br"></div>
     <div class="br"></div>
     <div class="br"></div>

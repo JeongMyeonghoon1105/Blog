@@ -175,7 +175,7 @@ var app = http.createServer((request, response) => {
 
   // pathname이 '/'일 때
   if (pathname === '/') {
-    // CARD(메인 페이지)
+    // 메인 페이지
     if (queryData.category === undefined) {
       variousStyle.cardStyle = 'background-color: rgb(245, 245, 255);';
       style = style + fs.readFileSync('./css/main.css', 'utf8');
@@ -243,6 +243,8 @@ var app = http.createServer((request, response) => {
   }
   // pathname이 '/signin_process'일 때(로그인/아웃 처리)
   else if (pathname == '/signin_process') {
+    access_deny();
+
     if(signIn == 0) {
       var password = fs.readFileSync('./password', 'utf8');
       var body = ""
@@ -293,7 +295,6 @@ var app = http.createServer((request, response) => {
     variousStyle.wrapStyle = 'height: 1150px;';
     variousStyle.innerStyle = 'height: 1150px;';
     variousStyle.cardStyle = 'height: 1150px;';
-
     style = style + fs.readFileSync('./css/write.css', 'utf8');
     var card = descriptionArea('Post');
     card = card + fs.readFileSync('./texts/write', 'utf8');
@@ -303,6 +304,8 @@ var app = http.createServer((request, response) => {
   }
   // pathname이 '/post_process'일 때(작성된 데이터를 처리하여 게시물 생성)
   else if (pathname === '/post_process') {
+    access_deny();
+
     var body = ""
 
     // 포스팅할 데이터를 요청해 변수에 저장
@@ -433,6 +436,8 @@ var app = http.createServer((request, response) => {
   }
   // pathname이 '/update_process'일 때(브라우저에서 게시물 수정 데이터를 송신했을 때)
   else if (pathname === '/update_process') {
+    access_deny();
+
     var body = ""
 
     // 포스팅할 데이터를 요청해 변수에 저장
@@ -475,6 +480,8 @@ var app = http.createServer((request, response) => {
   }
   // pathname이 '/delete_process'일 때(일반 게시물 삭제 버튼을 눌렀을 때)
   else if (pathname === '/delete_process/') {
+    access_deny();
+
     // 파일을 휴지통으로 이동
     fs.renameSync(`./texts/${queryData.category}/${queryData.title}`, `./texts/Trash/${queryData.category}/${queryData.title}`);
 
@@ -487,6 +494,7 @@ var app = http.createServer((request, response) => {
   // pathname이 '/trash'일 때(휴지통에 담긴 게시물의 목록)
   else if (pathname === '/trash') {
     access_deny();
+
     style = style + fs.readFileSync('./css/trash.css', 'utf8');
     var card = descriptionArea('Trash');
     
@@ -536,10 +544,9 @@ var app = http.createServer((request, response) => {
   }
   // 휴지통에 담긴 게시물
   else if (pathname === '/trash/') {
-    style = style + fs.readFileSync('./css/post.css', 'utf8');
-    
     access_deny();
 
+    style = style + fs.readFileSync('./css/post.css', 'utf8');
     var card = fs.readFileSync(`./texts/Trash/${queryData.category}/${queryData.title}`, 'utf8');
     card = card + 
       `
@@ -557,6 +564,8 @@ var app = http.createServer((request, response) => {
   }
   // pathname이 '/clear_process'일 때(게시물 영구 삭제 버튼을 눌렀을 때)
   else if (pathname === '/clear_process/') {
+    access_deny();
+
     // 파일 영구 삭제
     fs.unlinkSync(`./texts/Trash/${queryData.category}/${queryData.title}`);
 
@@ -567,7 +576,9 @@ var app = http.createServer((request, response) => {
     response.end();
   }
   else if (pathname === '/recover_process/') {
-    // 휴지통에 있던 파일을 복구
+    access_deny();
+
+    // 휴지통에 있던 파일을 원래 위치로 복구
     fs.renameSync(`./texts/Trash/${queryData.category}/${queryData.title}`, `./texts/${queryData.category}/${queryData.title}`);
 
     // 카테고리 페이지로 리다이렉트
