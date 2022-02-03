@@ -78,7 +78,7 @@ var app = http.createServer((request, response) => {
   // FOOTER
   var footer = fs.readFileSync('./texts/footer', 'utf8');
 
-  // 로그인 여부에 따라 헤더 및 메뉴(VW가 1200px 미만일 경우)의 스타일을 달리 적용
+  // 로그인 여부에 따라 헤더의 스타일을 달리 적용
   if (signIn == 0) {
     var signInHeader =
     `
@@ -243,8 +243,6 @@ var app = http.createServer((request, response) => {
   }
   // pathname이 '/signin_process'일 때(로그인/아웃 처리)
   else if (pathname == '/signin_process') {
-    access_deny();
-
     if(signIn == 0) {
       var password = fs.readFileSync('./password', 'utf8');
       var body = ""
@@ -398,10 +396,10 @@ var app = http.createServer((request, response) => {
           <!-- Categoties -->
           <div class="category">
             <select name="category" id="category-input" required>
-              <option value="Frontend" ${frontend_select}>Frontend</option>
-              <option value="Backend" ${backend_select}>Backend</option>
-              <option value="DevOps" ${devops_select}>DevOps</option>
-              <option value="CS" ${cs_select}>CS</option>
+              <option value="Frontend" ${categorySelect.frontend}>Frontend</option>
+              <option value="Backend" ${categorySelect.backend}>Backend</option>
+              <option value="DevOps" ${categorySelect.devops}>DevOps</option>
+              <option value="CS" ${categorySelect.cs}>CS</option>
             </select>
           </div>
       
@@ -448,7 +446,9 @@ var app = http.createServer((request, response) => {
       var content = post.content;
       var category = post.category;
 
-      fs.renameSync(`./texts/${originalCategory}/${originalFileName}`, `./texts/${category}/${title}`);
+      // 파일 영구 삭제
+      fs.unlinkSync(`./texts/${originalCategory}/${originalFileName}`);
+      // 수정된 내용으로 새 파일 쓰기
       fs.writeFileSync(`./texts/${category}/${title}`,
       `
       <div class="post-container">
