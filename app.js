@@ -43,12 +43,14 @@ var app = http.createServer((request, response) => {
   style = style + fs.readFileSync('./css/menu.css', 'utf8');
   style = style + fs.readFileSync('./css/footer.css', 'utf8');
 
-  var bodyStyle = '/* */';
-  var headerStyle = '/* */';
-  var wrapStyle = '/* */';
-  var innerStyle = '/* */';
-  var cardStyle = '/* */';
-  var menuStyle = '/* */';
+  var variousStyle = {
+    'bodyStyle': '/* */',
+    'headerStyle': '/* */',
+    'wrapStyle': '/* */',
+    'innerStyle': '/* */',
+    'cardStyle': '/* */',
+    'menuStyle': '/* */'
+  }
 
   // 페이지 좌상단 제목 추가
   function descriptionArea(descriptionContent) {
@@ -108,11 +110,11 @@ var app = http.createServer((request, response) => {
       </style>
     </head>
     
-    <body style="${bodyStyle}">
+    <body style="${variousStyle.bodyStyle}">
       <style>${display}</style>
 
       <!-- HEADER -->
-      <header style="${headerStyle}">
+      <header style="${variousStyle.headerStyle}">
         <div class="inner">
           <!-- LOGO -->
           <a href="/" class="logo">
@@ -143,12 +145,12 @@ var app = http.createServer((request, response) => {
       </header>
       
       <!-- WRAP -->
-      <div class="wrap" style="${wrapStyle}">
-        <div class="inner" style="${innerStyle}">
+      <div class="wrap" style="${variousStyle.wrapStyle}">
+        <div class="inner" style="${variousStyle.innerStyle}">
           <!-- CARD -->
-          <div class="card" style="${cardStyle}">${card}</div>
+          <div class="card" style="${variousStyle.cardStyle}">${card}</div>
           <!-- MENU -->
-          <div class="menu" style="${menuStyle}">
+          <div class="menu" style="${variousStyle.menuStyle}">
             <div class="contents">
               <h1>Menu</h1><br>
               <ul style="list-style-type: none; font-size: 15px;">
@@ -175,13 +177,7 @@ var app = http.createServer((request, response) => {
   if (pathname === '/') {
     // CARD(메인 페이지)
     if (queryData.category === undefined) {
-      var bodyStyle = '/* */';
-      var headerStyle = '/* */';
-      var wrapStyle = '/* */';
-      var innerStyle = '/* */';
-      var cardStyle = 'background-color: rgb(245, 245, 255);';
-      var menuStyle = '/* */';
-
+      variousStyle.cardStyle = 'background-color: rgb(245, 245, 255);';
       style = style + fs.readFileSync('./css/main.css', 'utf8');
       var card = fs.readFileSync('./texts/card', 'utf8');
     }
@@ -236,13 +232,9 @@ var app = http.createServer((request, response) => {
   }
   // pathname이 '/signin'일 때(로그인 페이지)
   else if (pathname === '/signin') {
-    var bodyStyle = '/* */';
-    var headerStyle = 'display: none;';
-    var wrapStyle = '/* */';
-    var innerStyle = '/* */';
-    var cardStyle = 'background-color: rgb(245, 245, 255);';
-    var menuStyle = 'display: none;';
-
+    variousStyle.headerStyle = 'display: none;';
+    variousStyle.cardStyle = 'background-color: rgb(245, 245, 255);';
+    variousStyle.menuStyle = 'display: none;';
     style = style + fs.readFileSync('./css/signin.css', 'utf8');
     var card = fs.readFileSync('./texts/sign-in', 'utf8');
 
@@ -297,12 +289,10 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/post') {
     access_deny();
 
-    var bodyStyle = 'height: 1200px;';
-    var headerStyle = '/* */';
-    var wrapStyle = 'height: 1150px;';
-    var innerStyle = 'height: 1150px;';
-    var cardStyle = 'height: 1150px;';
-    var menuStyle = '/* */';
+    variousStyle.bodyStyle = 'height: 1200px;';
+    variousStyle.wrapStyle = 'height: 1150px;';
+    variousStyle.innerStyle = 'height: 1150px;';
+    variousStyle.cardStyle = 'height: 1150px;';
 
     style = style + fs.readFileSync('./css/write.css', 'utf8');
     var card = descriptionArea('Post');
