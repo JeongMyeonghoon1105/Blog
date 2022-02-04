@@ -4,6 +4,7 @@ var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
 var signIn = 0;
+var sanitizeHtml = require('sanitize-html');
 
 // 로그인하지 않은 사용자의 관리자 전용 페이지 접속 시도를 차단
 function access_deny() {
@@ -209,7 +210,17 @@ var app = http.createServer((request, response) => {
     // 게시물 페이지
     else if ((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) {
       style = style + fs.readFileSync('./css/post.css', 'utf8');
-      var card = fs.readFileSync(`./texts/${queryData.category}/${queryData.title}`, 'utf8');
+
+      var sanitizedContent = sanitizeHtml(fs.readFileSync(`./texts/${queryData.category}/${queryData.title}`, 'utf8'), {
+        allowedTags: ['div', 'h1', 'h2', 'h3', 'img', 'text', 'i', 'a', 'button', 'input', 'br'],
+        allowedClasses: {
+          'div': ['card', 'post-container', 'post-contents'],
+          'h1': ['post-title']
+        }
+      })
+
+      var card = sanitizedContent;
+
 
       // 로그인된 상태일 경우 삭제 및 편집 버튼을 게시물 페이지 하단에 추가
       if (signIn == 1) {
