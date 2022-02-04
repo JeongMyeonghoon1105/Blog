@@ -219,8 +219,8 @@ var app = http.createServer((request, response) => {
           <a href="/delete_process/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: red;">
             DELETE
           </a>
-          <a href="/recover_process/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: gray;">
-            RECOVER
+          <a href="/update/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: gray;">
+            UPDATE
           </a>
         </div>
         `
@@ -342,7 +342,7 @@ var app = http.createServer((request, response) => {
       response.end();
     });
   }
-  // pathname이 '/update'일 때(게시물 수정 페이지)
+  // pathname이 '/update/'일 때(게시물 수정 페이지)
   else if (pathname === '/update/') {
     access_deny();
 
@@ -414,7 +414,7 @@ var app = http.createServer((request, response) => {
     response.writeHead(200);
     response.end(templateHTML(card));
   }
-  // pathname이 '/update_process'일 때(브라우저에서 게시물 수정 데이터를 송신했을 때)
+  // pathname이 '/update_process/'일 때(브라우저에서 게시물 수정 데이터를 송신했을 때)
   else if (pathname === '/update_process/') {
     access_deny();
 
@@ -531,7 +531,7 @@ var app = http.createServer((request, response) => {
     card = card + 
       `
       <div class="button-container">
-        <a href="/delete_process/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: red;">
+        <a href="/clear_process/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: red;">
           DELETE
         </a>
         <a href="/recover_process/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: green;">

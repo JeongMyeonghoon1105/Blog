@@ -10,7 +10,6 @@
   /* 기본 */
   width: 1200px;
   min-height: var(--contents-height);
-  background-color: var(--bg-color);
 }
 
 .wrap .inner .card {
@@ -134,23 +133,7 @@
 }
 
 @media screen and (max-width: 225px) {
-  .wrap .inner .card .description-area {
-    display: none;
-  }
-
-  .posting-item {
-    display: none;
-  }
-
-  .posting-container {
-    display: none;
-  }
-
-  .posting-content {
-    display: none;
-  }
-
-  .notice {
+  .wrap .inner .card {
     display: none;
   }
 }
