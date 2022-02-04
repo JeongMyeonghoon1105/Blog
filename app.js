@@ -75,23 +75,11 @@ var app = http.createServer((request, response) => {
 
   // 로그인 여부에 따라 헤더의 스타일을 달리 적용
   if (signIn == 0) {
-    var signInHeader =
-    `
-    <div class="item" id="sign-in" onclick="location.href='/signin'">
-      <span data-tooltip-text="Sign In"><i class="fas fa-user-circle"></i></span>
-    </div>
-    `
-    var tabSignIn =
-    `<div onclick="location.href='/signin'" class="tab-sign">Sign In</div>`
+    var signInHeader = template.unSignedHeader();
+    var tabSignIn = template.unSignedTab();
   } else {
-    var signInHeader =
-    `
-    <div class="item" id="sign-in" onclick="location.href='/signin_process'">
-      <span data-tooltip-text="Sign Out"><i class="fas fa-user-circle"></i></span>
-    </div>
-    `
-    var tabSignIn =
-    `<div onclick="location.href='/signin_process'" class="tab-sign">Sign Out</div>`
+    var signInHeader = template.signedHeader();
+    var tabSignIn = template.signedTab();
   }
 
   // pathname이 '/'일 때
@@ -114,16 +102,7 @@ var app = http.createServer((request, response) => {
       // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
       else {
         filelist.forEach((element) => {
-          card = card +
-          `
-          <div class="posting-item">
-            <div class="posting-container">
-              <a href="/?category=${queryData.category}&title=${element}" class="posting-content">
-                ${element}
-              </a>
-            </div>
-          </div>
-          `;
+          card = card + template.postingItem(queryData.category, element);
         });
       }
     }
@@ -144,17 +123,7 @@ var app = http.createServer((request, response) => {
 
       // 로그인된 상태일 경우 삭제 및 편집 버튼을 게시물 페이지 하단에 추가
       if (signIn == 1) {
-        card = card + 
-        `
-        <div class="button-container">
-          <a href="/delete_process/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: red;">
-            DELETE
-          </a>
-          <a href="/update/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: gray;">
-            UPDATE
-          </a>
-        </div>
-        `
+        card = card + template.buttonContainer('delete', 'update', 'UPDATE', queryData.category, queryData.title, 'gray');
       }
     }
 
@@ -255,16 +224,7 @@ var app = http.createServer((request, response) => {
       var category = post.category;
 
       // 파일 쓰기(새 게시물)
-      fs.writeFileSync(`texts/${category}/${title}`,
-      `
-      <div class="post-container">
-        <h1 class="post-title">${title}</h1><br>
-        <div class="post-contents">
-          ${content}
-        </div>
-      </div>
-      `,
-      'utf8');
+      fs.writeFileSync(`texts/${category}/${title}`, template.postContainer(title, content), 'utf8');
 
       // 포스팅 후, 방금 작성한 게시물로 리다이렉션
       response.writeHead(302, {
@@ -328,16 +288,7 @@ var app = http.createServer((request, response) => {
       // 파일 영구 삭제
       fs.unlinkSync(`./texts/${queryData.category}/${queryData.title}`);
       // 수정된 내용으로 새 파일 쓰기
-      fs.writeFileSync(`./texts/${category}/${title}`,
-      `
-      <div class="post-container">
-        <h1 class="post-title">${title}</h1><br>
-        <div class="post-contents">
-          ${content}
-        </div>
-      </div>
-      `,
-      'utf8');
+      fs.writeFileSync(`./texts/${category}/${title}`, template.postContainer(title, content), 'utf8');
 
       // 포스팅 후 게시물로 리다이렉션
       response.writeHead(302, {
@@ -377,25 +328,7 @@ var app = http.createServer((request, response) => {
 
       // 현재 카테고리(휴지통)에 저장된 모든 파일의 제목을 디자인 형식에 대입한 후, card 변수에 덧붙이기
       filelist.forEach((element) => {
-        card = card +
-        `
-        <div class="posting-item">
-          <div class="posting-container">
-            <a href="/trash/?category=${elem}&title=${element}" class="posting-content">
-              ${element}
-            </a>
-            <div style="display: flex; min-width: 90px;">
-              <a class="delete-button" href="/clear_process/?category=${elem}&title=${element}">
-                DELETE
-              </a>
-              <div style="width: 5px;"></div>
-              <a class="delete-button" href="/recover_process/?category=${elem}&title=${element}" style="color: green;">
-                RECOVER
-              </a>
-            </div>
-          </div>
-        </div>
-        `;
+        card = card + template.trashItem(elem, element);
 
         // 휴지통이 비었는지 검사
         if (filelist.length != 0) {
@@ -426,17 +359,7 @@ var app = http.createServer((request, response) => {
 
     var card = sanitizedContent;
 
-    card = card + 
-      `
-      <div class="button-container">
-        <a href="/clear_process/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: red;">
-          DELETE
-        </a>
-        <a href="/recover_process/?category=${queryData.category}&title=${queryData.title}" class="update-delete-button" style="color: green;">
-          RECOVER
-        </a>
-      </div>
-      `
+    card = card + template.buttonContainer('clear', 'recover_process', 'RECOVER', queryData.category, queryData.title, 'green');
 
     response.writeHead(200);
     response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));

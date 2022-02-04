@@ -123,5 +123,80 @@ module.exports = {
       </form>
     </div>
     `;
+  }, unSignedHeader:() => {
+    return `
+    <div class="item" id="sign-in" onclick="location.href='/signin'">
+      <span data-tooltip-text="Sign In"><i class="fas fa-user-circle"></i></span>
+    </div>
+    `
+  }, unSignedTab:() => {
+    return `<div onclick="location.href='/signin'" class="tab-sign">Sign In</div>`
+  }, signedHeader:() => {
+    return `
+    <div class="item" id="sign-in" onclick="location.href='/signin_process'">
+      <span data-tooltip-text="Sign Out"><i class="fas fa-user-circle"></i></span>
+    </div>
+    `
+  }, signedTab:() => {
+    return `<div onclick="location.href='/signin_process'" class="tab-sign">Sign Out</div>`
+  }, postingItem:(category, element) => {
+    return `
+    <div class="posting-item">
+      <div class="posting-container">
+        <a href="/?category=${category}&title=${element}" class="posting-content">
+          ${element}
+        </a>
+      </div>
+    </div>
+    `;
+  }, buttonContainer:(process_1, process_2, btnName, category, title, color) => {
+    return `
+    <div class="button-container">
+      <a href="/${process_1}_process/?category=${category}&title=${title}" class="update-delete-button" style="color: red;">
+        DELETE
+      </a>
+      <a href="/${process_2}/?category=${category}&title=${title}" class="update-delete-button" style="color: ${color};">
+        ${btnName}
+      </a>
+    </div>
+    `;
+  }, postContainer:(title, content) => {
+    return `
+    <div class="post-container">
+      <h1 class="post-title">${title}</h1><br>
+      <div class="post-contents">
+        ${content}
+      </div>
+    </div>
+    `;
+  }, postingItem:(category, element) => {
+    return `
+    <div class="posting-item">
+      <div class="posting-container">
+        <a href="/?category=${category}&title=${element}" class="posting-content">
+          ${element}
+        </a>
+      </div>
+    </div>
+    `;
+  }, trashItem:(elem, element) => {
+    return `
+    <div class="posting-item">
+      <div class="posting-container">
+        <a href="/trash/?category=${elem}&title=${element}" class="posting-content">
+          ${element}
+        </a>
+        <div style="display: flex; min-width: 90px;">
+          <a class="delete-button" href="/clear_process/?category=${elem}&title=${element}">
+            DELETE
+          </a>
+          <div style="width: 5px;"></div>
+          <a class="delete-button" href="/recover_process/?category=${elem}&title=${element}" style="color: green;">
+            RECOVER
+          </a>
+        </div>
+      </div>
+    </div>
+    `;
   }
 }
