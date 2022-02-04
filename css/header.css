@@ -14,7 +14,6 @@ header {
 header .inner {
   /* 기본 */
   height: 60px;
-  background-color: white;
 
   /* 정렬 */
   position: absolute;
@@ -70,8 +69,7 @@ header .inner .logo img {
   width: 200px;
 
   /* 테두리 */
-  border: 2px solid lightgray;
-  border-radius: 50px;
+  border-color: lightgray;
 }
 
 #search-bar:hover {
@@ -79,8 +77,7 @@ header .inner .logo img {
   width: 200px;
 
   /* 테두리 */
-  border: 2px solid lightgray;
-  border-radius: 50px;
+  border-color: lightgray;
 }
 
 /* HEADER - 메인 메뉴 */
@@ -194,7 +191,7 @@ header .inner #hidden-menu {
   margin: auto 0;
 
   /* 기타 */
-  transition: .5s;
+  transition: 0.5s;
 }
 
 header .inner #hidden-menu i {
@@ -298,11 +295,7 @@ header .inner #hidden-menu i {
 }
 
 @media screen and (max-width: 225px) {
-  header .inner .logo img {
-    display: none;
-  }
-
-  header .inner #hidden-menu {
+  header .inner {
     display: none;
   }
 }
