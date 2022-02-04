@@ -190,5 +190,9 @@ module.exports = {
       </div>
     </div>
     `;
+  }, descriptionArea:(descriptionContent) => {
+    return `<div class="description-area"><h1>${descriptionContent}</h1></div>`
+  }, notice:(noticeContent) => {
+    return `<div class="notice"><text style="line-height: 0px;">${noticeContent} is empty.</text></div>`
   }
 }

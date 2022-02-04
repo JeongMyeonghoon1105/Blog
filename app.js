@@ -1,4 +1,3 @@
-// 모듈 요청
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
@@ -7,15 +6,6 @@ var template = require('./template.js');
 var signIn = 0;
 var sanitizeHtml = require('sanitize-html');
 
-// 로그인하지 않은 사용자의 관리자 전용 페이지 접속 시도를 차단
-function access_deny() {
-  if (signIn == 0) {
-    response.writeHead(302, {
-      Location: encodeURI('/')
-    });
-    response.end();
-  }
-}
 
 // 서버 생성
 var app = http.createServer((request, response) => {
@@ -23,9 +13,33 @@ var app = http.createServer((request, response) => {
   var queryData = url.parse(requestedURL, true).query;
   var pathname = url.parse(requestedURL, true).pathname;
 
-  // 로그인하지 않은 사용자에 대해 관리자 전용 기능 숨기기
+
+  /*************************** 미확인 사용자에 대한 처리 **************************/
+
+  // 관리자 전용 기능 숨기기
   if (signIn == 0) { var display = 'none'; }
   else { var display = 'block'; }
+  
+  // 관리자 전용 페이지 접속 시도를 차단
+  function access_deny() {
+    if (signIn == 0) {
+      response.writeHead(302, {
+        Location: encodeURI('/')
+      });
+      response.end();
+    }
+  }
+
+  // 로그인 여부에 따라 헤더의 스타일을 달리 적용
+  if (signIn == 0) {
+    var signInHeader = template.Header('signin', 'In');
+    var tabSignIn = template.Tab('signin', 'In');
+  } else {
+    var signInHeader = template.Header('signin_process', 'Out');
+    var tabSignIn = template.Tab('signin_process', 'Out');
+  }
+
+  /********************** 공통된 성질의 데이터들을 객체로 바인딩 **********************/
 
   // 카테고리별 게시물 수를 객체에 저장
   var postingCount = {
@@ -34,6 +48,18 @@ var app = http.createServer((request, response) => {
     'devops': fs.readdirSync('./texts/DevOps/').length,
     'cs': fs.readdirSync('./texts/CS/').length
   }
+
+  // 각 페이지 별로 달리 적용될 스타일들을 객체로 묶어 초기화
+  var variousStyle = {
+    'bodyStyle': '/* */',
+    'headerStyle': '/* */',
+    'wrapStyle': '/* */',
+    'innerStyle': '/* */',
+    'cardStyle': '/* */',
+    'menuStyle': '/* */'
+  }
+
+  /******************* 스타일 및 뷰포트 각 영역의 소스파일 읽어오기  *******************/
 
   // HEAD
   var head = fs.readFileSync('./texts/head', 'utf8');
@@ -45,25 +71,6 @@ var app = http.createServer((request, response) => {
   style = style + fs.readFileSync('./css/menu.css', 'utf8');
   style = style + fs.readFileSync('./css/footer.css', 'utf8');
 
-  var variousStyle = {
-    'bodyStyle': '/* */',
-    'headerStyle': '/* */',
-    'wrapStyle': '/* */',
-    'innerStyle': '/* */',
-    'cardStyle': '/* */',
-    'menuStyle': '/* */'
-  }
-
-  // 페이지 좌상단 제목 추가
-  function descriptionArea(descriptionContent) {
-    return `<div class="description-area"><h1>${descriptionContent}</h1></div>`
-  }
-
-  // 카테고리가 비어있음을 안내
-  function notice(noticeContent) {
-    return `<div class="notice"><text style="line-height: 0px;">${noticeContent} is empty.</text></div>`
-  }
-
   // HEADER
   var header = fs.readFileSync('./texts/header', 'utf8');
 
@@ -73,14 +80,8 @@ var app = http.createServer((request, response) => {
   // FOOTER
   var footer = fs.readFileSync('./texts/footer', 'utf8');
 
-  // 로그인 여부에 따라 헤더의 스타일을 달리 적용
-  if (signIn == 0) {
-    var signInHeader = template.Header('signin', 'In');
-    var tabSignIn = template.Tab('signin', 'In');
-  } else {
-    var signInHeader = template.Header('signin_process', 'Out');
-    var tabSignIn = template.Tab('signin_process', 'Out');
-  }
+  /**************************************************************************/
+
 
   // pathname이 '/'일 때
   if (pathname === '/') {
@@ -95,10 +96,10 @@ var app = http.createServer((request, response) => {
       style = style + fs.readFileSync('./css/category.css', 'utf8');
       var filelist = fs.readdirSync(`./texts/${queryData.category}`);
 
-      var card = descriptionArea(queryData.category);
+      var card = template.descriptionArea(queryData.category);
 
       // 현재 카테고리에 게시물이 없을 때, 안내 메시지 표시
-      if (filelist.length == 0) { card = card + notice(`${queryData.category} category`); }
+      if (filelist.length == 0) { card = card + template.notice(`${queryData.category} category`); }
       // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
       else {
         filelist.forEach((element) => {
@@ -119,7 +120,6 @@ var app = http.createServer((request, response) => {
       })
 
       var card = sanitizedContent;
-
 
       // 로그인된 상태일 경우 삭제 및 편집 버튼을 게시물 페이지 하단에 추가
       if (signIn == 1) {
@@ -194,7 +194,7 @@ var app = http.createServer((request, response) => {
     variousStyle.innerStyle = 'height: 1150px;';
     variousStyle.cardStyle = 'height: 1150px;';
     style = style + fs.readFileSync('./css/write.css', 'utf8');
-    var card = descriptionArea('Post');
+    var card = template.descriptionArea('Post');
     card = card + fs.readFileSync('./texts/write', 'utf8');
     
     response.writeHead(200);
@@ -257,7 +257,7 @@ var app = http.createServer((request, response) => {
     else if (queryData.category === 'CS')
       categorySelect.cs = `selected`;
 
-    var card = descriptionArea('Update') + template.writtingArea(queryData.category, queryData.title, data, categorySelect);
+    var card = template.descriptionArea('Update') + template.writtingArea(queryData.category, queryData.title, data, categorySelect);
     
     response.writeHead(200);
     response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
@@ -315,7 +315,7 @@ var app = http.createServer((request, response) => {
     access_deny();
 
     style = style + fs.readFileSync('./css/trash.css', 'utf8');
-    var card = descriptionArea('Trash');
+    var card = template.descriptionArea('Trash');
     
     var filesInTrash = 0;
 
@@ -338,7 +338,7 @@ var app = http.createServer((request, response) => {
     });
 
     // 휴지통이 비었을 때, 안내 메시지를 출력
-    if (filesInTrash == 0) { card = card + notice('Trash'); }
+    if (filesInTrash == 0) { card = card + template.notice('Trash'); }
 
     response.writeHead(200);
     response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
