@@ -5,7 +5,15 @@ var qs = require('querystring');
 var template = require('./template.js');
 var signIn = 0;
 var sanitizeHtml = require('sanitize-html');
+var mysql = require('mysql');
+var db = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'audgns9809',
+  database : 'StoryMate'
+});
 
+db.connect();
 
 // 서버 생성
 var app = http.createServer((request, response) => {
