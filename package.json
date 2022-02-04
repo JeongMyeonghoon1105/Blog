@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/JeongMyeonghoon1105/Story-Mate#readme",
   "dependencies": {
-    "sanitize-html": "^1.18.2"
+    "sanitize-html": "^1.27.5"
   }
 }
