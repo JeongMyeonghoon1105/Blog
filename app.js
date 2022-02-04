@@ -75,11 +75,11 @@ var app = http.createServer((request, response) => {
 
   // 로그인 여부에 따라 헤더의 스타일을 달리 적용
   if (signIn == 0) {
-    var signInHeader = template.unSignedHeader();
-    var tabSignIn = template.unSignedTab();
+    var signInHeader = template.Header('signin', 'In');
+    var tabSignIn = template.Tab('signin', 'In');
   } else {
-    var signInHeader = template.signedHeader();
-    var tabSignIn = template.signedTab();
+    var signInHeader = template.Header('signin_process', 'Out');
+    var tabSignIn = template.Tab('signin_process', 'Out');
   }
 
   // pathname이 '/'일 때

@@ -123,22 +123,14 @@ module.exports = {
       </form>
     </div>
     `;
-  }, unSignedHeader:() => {
+  }, Header:(process, InOut) => {
     return `
-    <div class="item" id="sign-in" onclick="location.href='/signin'">
-      <span data-tooltip-text="Sign In"><i class="fas fa-user-circle"></i></span>
+    <div class="item" id="sign-in" onclick="location.href='/${process}'">
+      <span data-tooltip-text="Sign ${InOut}"><i class="fas fa-user-circle"></i></span>
     </div>
     `
-  }, unSignedTab:() => {
-    return `<div onclick="location.href='/signin'" class="tab-sign">Sign In</div>`
-  }, signedHeader:() => {
-    return `
-    <div class="item" id="sign-in" onclick="location.href='/signin_process'">
-      <span data-tooltip-text="Sign Out"><i class="fas fa-user-circle"></i></span>
-    </div>
-    `
-  }, signedTab:() => {
-    return `<div onclick="location.href='/signin_process'" class="tab-sign">Sign Out</div>`
+  }, Tab:(process, InOut) => {
+    return `<div onclick="location.href='/${process}'" class="tab-sign">Sign ${InOut}</div>`
   }, postingItem:(category, element) => {
     return `
     <div class="posting-item">
