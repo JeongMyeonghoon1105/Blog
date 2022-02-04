@@ -3,6 +3,7 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
+var template = require('./template.js');
 var signIn = 0;
 var sanitizeHtml = require('sanitize-html');
 
@@ -67,14 +68,7 @@ var app = http.createServer((request, response) => {
   var header = fs.readFileSync('./texts/header', 'utf8');
 
   // MENU
-  var list =
-  `
-  <li><a href="/?category=Frontend">Frontend(${postingCount.frontend})</a></li>
-  <li><a href="/?category=Backend">Backend(${postingCount.backend})</a></li>
-  <li><a href="/?category=DevOps">DevOps(${postingCount.devops})</a></li>
-  <li><a href="/?category=CS">CS(${postingCount.cs})</a></li>
-  <li><a href="/trash" style="display: ${display}">Trash</a></li>
-  `;
+  var list = template.list(postingCount.frontend, postingCount.backend, postingCount.devops, postingCount.cs, display);
 
   // FOOTER
   var footer = fs.readFileSync('./texts/footer', 'utf8');
@@ -98,80 +92,6 @@ var app = http.createServer((request, response) => {
     `
     var tabSignIn =
     `<div onclick="location.href='/signin_process'" class="tab-sign">Sign Out</div>`
-  }
-
-  function templateHTML(card) {
-    return `
-    <html lang="ko">
-
-    <head>
-      ${head}
-      <style>
-        ${style}
-      </style>
-    </head>
-    
-    <body style="${variousStyle.bodyStyle}">
-      <style>${display}</style>
-
-      <!-- HEADER -->
-      <header style="${variousStyle.headerStyle}">
-        <div class="inner">
-          <!-- LOGO -->
-          <a href="/" class="logo">
-            <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/Logo.png?raw=true" alt="Daniel's Tech Blog">
-          </a>
-          <!-- SEARCH BAR -->
-          <input type="text" id="search-bar" placeholder="Search...">
-          <!-- MAIN MENU -->
-          <div class="main-menu" id="main-menu">
-            ${header}
-            <!-- 5th Item of Menu (Sign In) -->
-            ${signInHeader}
-          </div>
-          <!-- Hidden Item (Menu) -->
-          <div class="item" id="hidden-menu"><i class="fas fa-bars"></i></div>
-          <div id="tab-down">
-            <div class="tab-down-inner">
-              ${tabSignIn}
-              <ul class="tab-items">${list}</ul>
-              <div style="display: inline-block; padding: 20px; height: 22px;">
-                <h2 style="display: ${display}; color: white; font-weight: bold; cursor: pointer;" onclick="location.href='/post'">
-                  Post
-                </h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-      
-      <!-- WRAP -->
-      <div class="wrap" style="${variousStyle.wrapStyle}">
-        <div class="inner" style="${variousStyle.innerStyle}">
-          <!-- CARD -->
-          <div class="card" style="${variousStyle.cardStyle}">${card}</div>
-          <!-- MENU -->
-          <div class="menu" style="${variousStyle.menuStyle}">
-            <div class="contents">
-              <h1>Menu</h1><br>
-              <ul style="list-style-type: none; font-size: 15px;">
-                ${list}
-              </ul><br>
-              <h2 style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/post'">
-                Post
-              </h2>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- FOOTER -->
-      ${footer}
-
-    </body>
-    
-    </html>
-    `
   }
 
   // pathname이 '/'일 때
@@ -239,7 +159,7 @@ var app = http.createServer((request, response) => {
     }
 
     response.writeHead(200);
-    response.end(templateHTML(card));
+    response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
   }
   // pathname이 '/signin'일 때(로그인 페이지)
   else if (pathname === '/signin') {
@@ -250,7 +170,7 @@ var app = http.createServer((request, response) => {
     var card = fs.readFileSync('./texts/sign-in', 'utf8');
 
     response.writeHead(200);
-    response.end(templateHTML(card));
+    response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
   }
   // pathname이 '/signin_process'일 때(로그인/아웃 처리)
   else if (pathname == '/signin_process') {
@@ -309,7 +229,7 @@ var app = http.createServer((request, response) => {
     card = card + fs.readFileSync('./texts/write', 'utf8');
     
     response.writeHead(200);
-    response.end(templateHTML(card));
+    response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
   }
   // pathname이 '/post_process'일 때(작성된 데이터를 처리하여 게시물 생성)
   else if (pathname === '/post_process') {
@@ -423,7 +343,7 @@ var app = http.createServer((request, response) => {
       `;
     
     response.writeHead(200);
-    response.end(templateHTML(card));
+    response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
   }
   // pathname이 '/update_process/'일 때(브라우저에서 게시물 수정 데이터를 송신했을 때)
   else if (pathname === '/update_process/') {
@@ -531,7 +451,7 @@ var app = http.createServer((request, response) => {
     if (filesInTrash == 0) { card = card + notice('Trash'); }
 
     response.writeHead(200);
-    response.end(templateHTML(card));
+    response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
   }
   // 휴지통에 담긴 게시물
   else if (pathname === '/trash/') {
@@ -562,7 +482,7 @@ var app = http.createServer((request, response) => {
       `
 
     response.writeHead(200);
-    response.end(templateHTML(card));
+    response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
   }
   // pathname이 '/clear_process'일 때(게시물 영구 삭제 버튼을 눌렀을 때)
   else if (pathname === '/clear_process/') {
