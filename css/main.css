@@ -10,7 +10,6 @@
   /* 기본 */
   width: 1200px;
   height: 1910px;
-  background-color: var(--bg-color);
 }
 
 .wrap .inner .card {
@@ -112,20 +111,16 @@
 /* MEDIA QUERY */
 
 @media screen and (max-width: 1200px) {
-  .wrap {
-    width: 100vw;
-    height: 1910px;
-  }
 
-  .wrap .inner {
+  .wrap,
+  .wrap .inner,
+  footer .inner {
     width: 100vw;
-    height: 1910px;
   }
 
   .wrap .inner .card {
     /* 기본 */
     width: 100vw;
-    height: 1910px;
 
     /* 정렬 */
     left: 0;
@@ -134,10 +129,6 @@
   .wrap .inner .card .description-area {
     /* 기본 */
     width: 800px;
-    height: 30px;
-
-    /* 텍스트 */
-    line-height: 30px;
 
     /* 정렬 */
     margin: 30px auto 0 auto;
@@ -146,7 +137,6 @@
   .wrap .inner .card .row {
     /* 기본 */
     width: 800px;
-    height: 1820px;
 
     /* 정렬 */
     position: absolute;
@@ -155,34 +145,19 @@
     margin: 30px auto;
   }
 
-  footer .inner {
-    width: 100vw;
-  }
 }
 
 @media screen and (max-width: 900px) {
-  .wrap {
-    width: 100vw;
-    height: 4690px;
-  }
 
-  .wrap .inner {
-    width: 100vw;
-    height: 4690px;
-  }
-
+  .wrap,
+  .wrap .inner,
   .wrap .inner .card {
-    width: 100vw;
     height: 4690px;
   }
 
   .wrap .inner .card .description-area {
     /* 기본 */
     width: 600px;
-    height: 30px;
-
-    /* 텍스트 */
-    line-height: 30px;
 
     /* 정렬 */
     margin: 30px auto 0 auto;
@@ -195,27 +170,19 @@
     /* 기본 */
     width: 600px;
     height: 4550px;
-
-    /* 정렬 */
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 30px auto;
   }
 
   .wrap .inner .card .row .column {
     width: 600px;
   }
 
-  .wrap .inner .card .row .column .column-left-items {
+  .wrap .inner .card .row .column .column-left-items,
+  .wrap .inner .card .row .column .column-right-items {
     width: 600px;
     height: 510px;
   }
 
   .wrap .inner .card .row .column .column-right-items {
-    width: 600px;
-    height: 510px;
-
     margin: 0 0 50px 0;
   }
 
@@ -235,65 +202,34 @@
   #long-2 {
     height: 585px;
   }
+
 }
 
 @media screen and (max-width: 675px) {
-  .wrap {
-    width: 100vw;
-    height: 4150px;
-  }
 
-  .wrap .inner {
-    width: 100vw;
-    height: 4150px;
-  }
-
+  .wrap,
+  .wrap .inner,
   .wrap .inner .card {
-    width: 100vw;
     height: 4150px;
   }
 
   .wrap .inner .card .description-area {
-    /* 기본 */
     width: 487.5px;
-    height: 30px;
-
-    /* 텍스트 */
-    line-height: 30px;
-
-    /* 정렬 */
-    margin: 30px auto 0 auto;
   }
 
   .wrap .inner .card .row {
-    /* Display */
-    display: block;
-
-    /* 기본 */
     width: 487.5px;
     height: 4010px;
-
-    /* 정렬 */
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 30px auto;
   }
 
   .wrap .inner .card .row .column {
     width: 487.5px;
   }
 
-  .wrap .inner .card .row .column .column-left-items {
-    width: 487.5px;
-    height: 442.5px;
-  }
-
+  .wrap .inner .card .row .column .column-left-items,
   .wrap .inner .card .row .column .column-right-items {
     width: 487.5px;
     height: 442.5px;
-
-    margin: 0 0 50px 0;
   }
 
   .wrap .inner .card .row .column img {
@@ -312,67 +248,35 @@
   #long-2 {
     height: 517.5px;
   }
+
 }
 
 @media screen and (max-width: 562.5px) {
-  .wrap {
-    width: 100vw;
-    height: 3610px;
-  }
 
-  .wrap .inner {
-    width: 100vw;
-    height: 3610px;
-  }
-
+  .wrap,
+  .wrap .inner,
   .wrap .inner .card {
-    width: 100vw;
     height: 3610px;
   }
 
   .wrap .inner .card .description-area {
-    /* 기본 */
     width: 375px;
-    height: 30px;
-
-    /* 텍스트 */
-    line-height: 30px;
-
-    /* 정렬 */
-    margin: 30px auto 0 auto;
   }
 
   .wrap .inner .card .row {
-    /* Display */
-    display: block;
-
     /* 기본 */
     width: 375px;
     height: 3470px;
-
-    /* 정렬 */
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 30px auto;
   }
 
   .wrap .inner .card .row .column {
     width: 375px;
   }
 
-  .wrap .inner .card .row .column .column-left-items {
-    width: 375px;
-    height: 375px;
-  }
-
+  .wrap .inner .card .row .column .column-left-items,
   .wrap .inner .card .row .column .column-right-items {
-    /* 기본 */
     width: 375px;
     height: 375px;
-
-    /* 정렬 */
-    margin: 0 0 50px 0;
   }
 
   .wrap .inner .card .row .column img {
@@ -391,19 +295,13 @@
   #long-2 {
     height: 450px;
   }
+
 }
 
 @media screen and (max-width: 450px) {
-  .wrap {
-    width: 100vw;
-    height: 3154px;
-  }
 
-  .wrap .inner {
-    width: 100vw;
-    height: 3154px;
-  }
-
+  .wrap,
+  .wrap .inner,
   .wrap .inner .card {
     width: 100vw;
     height: 3154px;
@@ -412,46 +310,22 @@
   .wrap .inner .card .description-area {
     /* 기본 */
     width: 280px;
-    height: 30px;
-
-    /* 텍스트 */
-    line-height: 30px;
-
-    /* 정렬 */
-    margin: 30px auto 0 auto;
   }
 
   .wrap .inner .card .row {
-    /* Display */
-    display: block;
-
     /* 기본 */
     width: 280px;
     height: 3014px;
-
-    /* 정렬 */
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 30px auto;
   }
 
   .wrap .inner .card .row .column {
     width: 280px;
   }
 
-  .wrap .inner .card .row .column .column-left-items {
-    width: 280px;
-    height: 318px;
-  }
-
+  .wrap .inner .card .row .column .column-left-items,
   .wrap .inner .card .row .column .column-right-items {
-    /* 기본 */
     width: 280px;
     height: 318px;
-
-    /* 정렬 */
-    margin: 0 0 50px 0;
   }
 
   .wrap .inner .card .row .column img {
@@ -470,19 +344,13 @@
   #long-2 {
     height: 393px;
   }
+
 }
 
 @media screen and (max-width: 337.5px) {
-  .wrap {
-    width: 100vw;
-    height: 3010px;
-  }
 
-  .wrap .inner {
-    width: 100vw;
-    height: 3010px;
-  }
-
+  .wrap,
+  .wrap .inner,
   .wrap .inner .card {
     width: 100vw;
     height: 3010px;
@@ -491,39 +359,18 @@
   .wrap .inner .card .description-area {
     /* 기본 */
     width: 240px;
-    height: 30px;
-
-    /* 텍스트 */
-    line-height: 30px;
-
-    /* 정렬 */
-    margin: 30px auto 0 auto;
   }
 
   .wrap .inner .card .row {
-    /* Display */
-    display: block;
-
-    /* 기본 */
     width: 240px;
     height: 2870px;
-
-    /* 정렬 */
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 30px auto;
   }
 
   .wrap .inner .card .row .column {
     width: 240px;
   }
 
-  .wrap .inner .card .row .column .column-left-items {
-    width: 240px;
-    height: 300px;
-  }
-
+  .wrap .inner .card .row .column .column-left-items,
   .wrap .inner .card .row .column .column-right-items {
     width: 240px;
     height: 300px;
@@ -549,14 +396,11 @@
     /* 기타 */
     overflow: hidden;
   }
+
 }
 
 @media screen and (max-width: 270px) {
-  .wrap .inner .card .description-area {
-    display: none;
-  }
-
-  .wrap .inner .card .row {
+  .wrap .inner .card {
     display: none;
   }
 }
