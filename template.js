@@ -130,7 +130,11 @@ module.exports = {
     </div>
     `
   }, Tab:(process, InOut) => {
-    return `<div onclick="location.href='/${process}'" class="tab-sign">Sign ${InOut}</div>`
+    return `
+    <div onclick="location.href='/${process}'" class="tab-sign">
+      Sign ${InOut}
+    </div>
+    `
   }, postingItem:(category, element) => {
     return `
     <div class="posting-item">
@@ -191,8 +195,18 @@ module.exports = {
     </div>
     `;
   }, descriptionArea:(descriptionContent) => {
-    return `<div class="description-area"><h1>${descriptionContent}</h1></div>`
+    return `
+    <div class="description-area">
+      <h1>${descriptionContent}</h1>
+    </div>
+    `;
   }, notice:(noticeContent) => {
-    return `<div class="notice"><text style="line-height: 0px;">${noticeContent} is empty.</text></div>`
+    return `
+    <div class="notice">
+      <text style="line-height: 0px;">
+        ${noticeContent} is empty.
+      </text>
+    </div>
+    `;
   }
 }
