@@ -538,7 +538,17 @@ var app = http.createServer((request, response) => {
     access_deny();
 
     style = style + fs.readFileSync('./css/post.css', 'utf8');
-    var card = fs.readFileSync(`./texts/Trash/${queryData.category}/${queryData.title}`, 'utf8');
+
+    var sanitizedContent = sanitizeHtml(fs.readFileSync(`./texts/Trash/${queryData.category}/${queryData.title}`, 'utf8'), {
+      allowedTags: ['div', 'h1', 'h2', 'h3', 'img', 'text', 'i', 'a', 'button', 'input', 'br'],
+      allowedClasses: {
+        'div': ['card', 'post-container', 'post-contents'],
+        'h1': ['post-title']
+      }
+    })
+
+    var card = sanitizedContent;
+
     card = card + 
       `
       <div class="button-container">
