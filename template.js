@@ -71,13 +71,57 @@ module.exports = {
     
     </html>
     `;
-  }, list:(frontend, backend, devops, cs, display) => {
+  }, list:(postingCount, display) => {
     return `
-    <li><a href="/?category=Frontend">Frontend(${frontend})</a></li>
-    <li><a href="/?category=Backend">Backend(${backend})</a></li>
-    <li><a href="/?category=DevOps">DevOps(${devops})</a></li>
-    <li><a href="/?category=CS">CS(${cs})</a></li>
+    <li><a href="/?category=Frontend">Frontend(${postingCount.frontend})</a></li>
+    <li><a href="/?category=Backend">Backend(${postingCount.backend})</a></li>
+    <li><a href="/?category=DevOps">DevOps(${postingCount.devops})</a></li>
+    <li><a href="/?category=CS">CS(${postingCount.cs})</a></li>
     <li><a href="/trash" style="display: ${display}">Trash</a></li>
+    `;
+  }, writtingArea:(category, title, data, categorySelect) => {
+    return `
+    <div class="writting-area">
+      <!-- 수정할 데이터 입력란 -->
+      <form action="/update_process/?category=${category}&title=${title}" method="post">
+        <!-- Title -->
+        <div class="title">
+          <textarea name="title" id="title-input" rows="1" cols="55" maxlength="100" placeholder="Title"
+            value="${title}" required></textarea>
+        </div>
+    
+        <div class="border"></div>
+    
+        <!-- Contents -->
+        <div>
+          <textarea name="content" id="contents-input" style="white-space: pre-wrap;" 
+          value="${data}" required></textarea>
+        </div>
+    
+        <div class="border"></div>
+    
+        <!-- Categoties -->
+        <div class="category">
+          <select name="category" id="category-input" required>
+            <option value="Frontend" ${categorySelect.frontend}>Frontend</option>
+            <option value="Backend" ${categorySelect.backend}>Backend</option>
+            <option value="DevOps" ${categorySelect.devops}>DevOps</option>
+            <option value="CS" ${categorySelect.cs}>CS</option>
+          </select>
+        </div>
+    
+        <div class="br"></div>
+        <div class="br"></div>
+        <div class="br"></div>
+    
+        <!-- Post Button -->
+        <div style="position: relative; height: 30px;">
+          <button type="submit" class="post-button">
+            Post
+          </button>
+        </div>
+      </form>
+    </div>
     `;
   }
 }

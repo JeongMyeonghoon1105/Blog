@@ -68,7 +68,7 @@ var app = http.createServer((request, response) => {
   var header = fs.readFileSync('./texts/header', 'utf8');
 
   // MENU
-  var list = template.list(postingCount.frontend, postingCount.backend, postingCount.devops, postingCount.cs, display);
+  var list = template.list(postingCount, display);
 
   // FOOTER
   var footer = fs.readFileSync('./texts/footer', 'utf8');
@@ -297,50 +297,7 @@ var app = http.createServer((request, response) => {
     else if (queryData.category === 'CS')
       categorySelect.cs = `selected`;
 
-    var card = descriptionArea('Update') + 
-      `
-      <div class="writting-area">
-        <!-- 수정할 데이터 입력란 -->
-        <form action="/update_process/?category=${queryData.category}&title=${queryData.title}" method="post">
-          <!-- Title -->
-          <div class="title">
-            <textarea name="title" id="title-input" rows="1" cols="55" maxlength="100" placeholder="Title"
-              value="${queryData.title}" required></textarea>
-          </div>
-      
-          <div class="border"></div>
-      
-          <!-- Contents -->
-          <div>
-            <textarea name="content" id="contents-input" style="white-space: pre-wrap;" 
-            value="${data}" required></textarea>
-          </div>
-      
-          <div class="border"></div>
-      
-          <!-- Categoties -->
-          <div class="category">
-            <select name="category" id="category-input" required>
-              <option value="Frontend" ${categorySelect.frontend}>Frontend</option>
-              <option value="Backend" ${categorySelect.backend}>Backend</option>
-              <option value="DevOps" ${categorySelect.devops}>DevOps</option>
-              <option value="CS" ${categorySelect.cs}>CS</option>
-            </select>
-          </div>
-      
-          <div class="br"></div>
-          <div class="br"></div>
-          <div class="br"></div>
-      
-          <!-- Post Button -->
-          <div style="position: relative; height: 30px;">
-            <button type="submit" class="post-button">
-              Post
-            </button>
-          </div>
-        </form>
-      </div>
-      `;
+    var card = descriptionArea('Update') + template.writtingArea(queryData.category, queryData.title, data, categorySelect);
     
     response.writeHead(200);
     response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
