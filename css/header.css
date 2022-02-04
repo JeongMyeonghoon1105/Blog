@@ -27,13 +27,6 @@ header .inner {
 header .inner .logo {
   /* 기본 */
   height: 60px;
-
-  /* 텍스트 */
-  color: black;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  line-height: 60px;
 }
 
 header .inner .logo img {
