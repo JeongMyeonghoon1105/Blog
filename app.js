@@ -153,7 +153,7 @@ var app = http.createServer((request, response) => {
 
       db.query(`SELECT category, id, title, content, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
         topics.forEach((element) => {
-          if ((element.category == queryData.category) && (element.title == queryData.title)) {
+          if ((element.category == queryData.category) && (element.title == queryData.title) && (element.trash != 1)) {
             card = card + sanitizeHtml(template.postContainer(element.title, element.content), {
               allowedTags: ['div', 'h1', 'h2', 'h3', 'img', 'text', 'i', 'a', 'button', 'input', 'br'],
               allowedClasses: {
@@ -176,7 +176,6 @@ var app = http.createServer((request, response) => {
         response.writeHead(200);
         response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, categoryList, display, card, footer));
       })
-
     }
   }
   // pathname이 '/signin'일 때(로그인 페이지)
@@ -396,7 +395,7 @@ var app = http.createServer((request, response) => {
       // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
       topics.forEach((element) => {
         if (element.trash == 1) {
-          card = card + template.trashItem(queryData.category, element.title);
+          card = card + template.trashItem(element.category, element.title);
           trashEmpty = 1;
         }
       });
@@ -420,21 +419,23 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/trash/') {
     access_deny();
 
-    style = style + fs.readFileSync('./css/post.css', 'utf8');
+    var card = '';
 
-    var sanitizedContent = sanitizeHtml(fs.readFileSync(`./texts/Trash/${queryData.category}/${queryData.title}`, 'utf8'), {
-      allowedTags: ['div', 'h1', 'h2', 'h3', 'img', 'text', 'i', 'a', 'button', 'input', 'br'],
-      allowedClasses: {
-        'div': ['card', 'post-container', 'post-contents'],
-        'h1': ['post-title']
-      }
-    })
+    db.query(`SELECT category, id, title, content, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
+      topics.forEach((element) => {
+        if ((element.category == queryData.category) && (element.title == queryData.title) && (element.trash == 1)) {
+          card = card + sanitizeHtml(template.postContainer(element.title, element.content), {
+            allowedTags: ['div', 'h1', 'h2', 'h3', 'img', 'text', 'i', 'a', 'button', 'input', 'br'],
+            allowedClasses: {
+              'div': ['card', 'post-container', 'post-contents'],
+              'h1': ['post-title']
+            }
+          })
+        }
+      })
 
-    var card = sanitizedContent;
+      card = card + template.buttonContainer('clear', 'recover_process', 'RECOVER', queryData.category, queryData.title, 'green');
 
-    card = card + template.buttonContainer('clear', 'recover_process', 'RECOVER', queryData.category, queryData.title, 'green');
-
-    db.query(`SELECT category, trash FROM topic`, (error, topics) => {
       // MENU
       menuCount(topics, postingCount);
       var categoryList = template.list(postingCount, display);
