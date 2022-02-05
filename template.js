@@ -184,19 +184,19 @@ module.exports = {
       </div>
     </div>
     `;
-  }, trashItem:(elem, element) => {
+  }, trashItem:(category, title) => {
     return `
     <div class="posting-item">
       <div class="posting-container">
-        <a href="/trash/?category=${elem}&title=${element}" class="posting-content">
-          ${element}
+        <a href="/trash/?category=${category}&title=${title}" class="posting-content">
+          ${title}
         </a>
         <div style="display: flex; min-width: 90px;">
-          <a class="delete-button" href="/clear_process/?category=${elem}&title=${element}">
+          <a class="delete-button" href="/clear_process/?category=${category}&title=${title}">
             DELETE
           </a>
           <div style="width: 5px;"></div>
-          <a class="delete-button" href="/recover_process/?category=${elem}&title=${element}" style="color: green;">
+          <a class="delete-button" href="/recover_process/?category=${category}&title=${title}" style="color: green;">
             RECOVER
           </a>
         </div>
