@@ -98,6 +98,9 @@ var app = http.createServer((request, response) => {
       variousStyle.cardStyle = 'background-color: rgb(245, 245, 255);';
       style = style + fs.readFileSync('./css/main.css', 'utf8');
       var card = fs.readFileSync('./texts/card', 'utf8');
+
+      response.writeHead(200);
+      response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
     }
     // 카테고리별 게시물 목록
     else if (((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) && queryData.title === undefined) {
@@ -120,6 +123,9 @@ var app = http.createServer((request, response) => {
             }
           });
         }
+
+        response.writeHead(200);
+        response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
       })
     }
     // 게시물 페이지
@@ -140,10 +146,10 @@ var app = http.createServer((request, response) => {
       if (signIn == 1) {
         card = card + template.buttonContainer('delete', 'update', 'UPDATE', queryData.category, queryData.title, 'gray');
       }
-    }
 
-    response.writeHead(200);
-    response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
+      response.writeHead(200);
+      response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
+    }
   }
   // pathname이 '/signin'일 때(로그인 페이지)
   else if (pathname === '/signin') {
