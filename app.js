@@ -79,7 +79,7 @@ var app = http.createServer((request, response) => {
   }
 
   // HEAD
-  var head = fs.readFileSync('./texts/head', 'utf8');
+  var head = fs.readFileSync('./html/head.html', 'utf8');
   // STYLE
   var style = fs.readFileSync('./css/variables.css', 'utf8');
   style = style + fs.readFileSync('./css/common.css', 'utf8');
@@ -87,11 +87,11 @@ var app = http.createServer((request, response) => {
   style = style + fs.readFileSync('./css/menu.css', 'utf8');
   style = style + fs.readFileSync('./css/footer.css', 'utf8');
   // HEADER
-  var header = fs.readFileSync('./texts/header', 'utf8');
+  var header = fs.readFileSync('./html/header.html', 'utf8');
   // MENU
   var categoryList = template.list(postingCount.frontend, postingCount.backend, postingCount.devops, postingCount.cs, display);
   // FOOTER
-  var footer = fs.readFileSync('./texts/footer', 'utf8');
+  var footer = fs.readFileSync('./html/footer.html', 'utf8');
 
   // pathname이 '/'일 때(메인 페이지)
   if (pathname === '/') {
@@ -101,7 +101,7 @@ var app = http.createServer((request, response) => {
       variousStyle.cardStyle = 'background-color: rgb(245, 245, 255);';
       style = style + fs.readFileSync('./css/main.css', 'utf8');
       // CARD
-      var card = fs.readFileSync('./texts/card', 'utf8');
+      var card = fs.readFileSync('./html/card.html', 'utf8');
       // DB SEARCH
       db.query(`SELECT category, trash FROM topic`, (error, topics) => {
         // 예외 처리
@@ -197,7 +197,7 @@ var app = http.createServer((request, response) => {
     variousStyle.menuStyle = 'display: none;';
     style = style + fs.readFileSync('./css/signin.css', 'utf8');
     // CARD
-    var card = fs.readFileSync('./texts/sign-in', 'utf8');
+    var card = fs.readFileSync('./html/sign-in.html', 'utf8');
     // 페이지 로드
     response.writeHead(200);
     response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, categoryList, display, card, footer));
@@ -265,7 +265,7 @@ var app = http.createServer((request, response) => {
     style = style + fs.readFileSync('./css/write.css', 'utf8');
     // CARD
     var card = template.descriptionArea('Post');
-    card = card + fs.readFileSync('./texts/write', 'utf8');
+    card = card + fs.readFileSync('./html/write.html', 'utf8');
     // DB SEARCH
     db.query(`SELECT category, trash FROM topic`, (error, topics) => {
       // 예외 처리
