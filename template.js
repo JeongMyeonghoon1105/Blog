@@ -1,5 +1,5 @@
 module.exports = {
-  HTML:(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer) => {
+  HTML:(head, style, variousStyle, header, signInHeader, tabSignIn, categoryList, display, card, footer) => {
     return `
     <html lang="ko">
 
@@ -33,7 +33,7 @@ module.exports = {
           <div id="tab-down">
             <div class="tab-down-inner">
               ${tabSignIn}
-              <ul class="tab-items">${list}</ul>
+              <ul class="tab-items">${categoryList}</ul>
               <div style="display: inline-block; padding: 20px; height: 22px;">
                 <h2 style="display: ${display}; color: white; font-weight: bold; cursor: pointer;" onclick="location.href='/post'">
                   Post
@@ -54,7 +54,7 @@ module.exports = {
             <div class="contents">
               <h1>Menu</h1><br>
               <ul style="list-style-type: none; font-size: 15px;">
-                ${list}
+                ${categoryList}
               </ul><br>
               <h2 style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/post'">
                 Post
@@ -71,12 +71,12 @@ module.exports = {
     
     </html>
     `;
-  }, list:(postingCount, display) => {
+  }, list:(frontend, backend, devops, cs, display) => {
     return `
-    <li><a href="/?category=Frontend">Frontend(${postingCount.frontend})</a></li>
-    <li><a href="/?category=Backend">Backend(${postingCount.backend})</a></li>
-    <li><a href="/?category=DevOps">DevOps(${postingCount.devops})</a></li>
-    <li><a href="/?category=CS">CS(${postingCount.cs})</a></li>
+    <li><a href="/?category=Frontend">Frontend(${frontend})</a></li>
+    <li><a href="/?category=Backend">Backend(${backend})</a></li>
+    <li><a href="/?category=DevOps">DevOps(${devops})</a></li>
+    <li><a href="/?category=CS">CS(${cs})</a></li>
     <li><a href="/trash" style="display: ${display}">Trash</a></li>
     `;
   }, writtingArea:(category, title, data, categorySelect) => {
@@ -164,6 +164,12 @@ module.exports = {
         ${content}
       </div>
     </div>
+    `;
+  }, writeContainer:(content) => {
+    return `
+      <div class="post-contents">
+        ${content}
+      </div>
     `;
   }, postingItem:(category, title, date) => {
     return `
