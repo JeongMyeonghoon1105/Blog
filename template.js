@@ -165,13 +165,16 @@ module.exports = {
       </div>
     </div>
     `;
-  }, postingItem:(category, element) => {
+  }, postingItem:(category, title, date) => {
     return `
     <div class="posting-item">
       <div class="posting-container">
-        <a href="/?category=${category}&title=${element}" class="posting-content">
-          ${element}
+        <a href="/?category=${category}&title=${title}" class="posting-content">
+          ${title}
         </a>
+        <div class="posting-date">
+          ${date}
+        </div>
       </div>
     </div>
     `;

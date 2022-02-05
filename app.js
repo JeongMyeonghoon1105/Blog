@@ -6,6 +6,7 @@ var template = require('./template.js');
 var signIn = 0;
 var sanitizeHtml = require('sanitize-html');
 var mysql = require('mysql');
+const { postContainer } = require('./template.js');
 var db = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -106,8 +107,7 @@ var app = http.createServer((request, response) => {
     else if (((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) && queryData.title === undefined) {
       style = style + fs.readFileSync('./css/category.css', 'utf8');
 
-      db.query(`SELECT * FROM topic`, (error, topics) => {
-        console.log(topics);
+      db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
         var card = template.descriptionArea(queryData.category);
 
         // 현재 카테고리에 게시물이 없을 때, 안내 메시지 표시
@@ -115,11 +115,8 @@ var app = http.createServer((request, response) => {
         // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
         else {
           topics.forEach((element) => {
-            console.log(element.title);
-
             if (element.category == queryData.category){
-              card = card + template.postingItem(queryData.category, element.title);
-              console.log(card);
+              card = card + template.postingItem(queryData.category, element.title, element.date);
             }
           });
         }
@@ -132,6 +129,7 @@ var app = http.createServer((request, response) => {
     else if ((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) {
       style = style + fs.readFileSync('./css/post.css', 'utf8');
 
+      /*
       var sanitizedContent = sanitizeHtml(fs.readFileSync(`./texts/${queryData.category}/${queryData.title}`, 'utf8'), {
         allowedTags: ['div', 'h1', 'h2', 'h3', 'img', 'text', 'i', 'a', 'button', 'input', 'br'],
         allowedClasses: {
@@ -141,14 +139,32 @@ var app = http.createServer((request, response) => {
       })
 
       var card = sanitizedContent;
+      */
 
-      // 로그인된 상태일 경우 삭제 및 편집 버튼을 게시물 페이지 하단에 추가
-      if (signIn == 1) {
-        card = card + template.buttonContainer('delete', 'update', 'UPDATE', queryData.category, queryData.title, 'gray');
-      }
+      var card = '';
 
-      response.writeHead(200);
-      response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
+      db.query(`SELECT category, id, title, content, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
+        topics.forEach((element) => {
+          if ((element.category == queryData.category) && (element.title == queryData.title)){
+            card = card + sanitizeHtml(postContainer(element.title, element.content), {
+              allowedTags: ['div', 'h1', 'h2', 'h3', 'img', 'text', 'i', 'a', 'button', 'input', 'br'],
+              allowedClasses: {
+                'div': ['card', 'post-container', 'post-contents'],
+                'h1': ['post-title']
+              }
+            })
+          }
+        })
+
+        // 로그인된 상태일 경우 삭제 및 편집 버튼을 게시물 페이지 하단에 추가
+        if (signIn == 1) {
+          card = card + template.buttonContainer('delete', 'update', 'UPDATE', queryData.category, queryData.title, 'gray');
+        }
+
+        response.writeHead(200);
+        response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, list, display, card, footer));
+      })
+      
     }
   }
   // pathname이 '/signin'일 때(로그인 페이지)

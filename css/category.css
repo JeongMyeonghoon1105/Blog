@@ -97,11 +97,30 @@
   display: block;
 
   /* 기본 */
-  width: 100%;
+  width: 60%;
   height: 20px;
 
   /* 텍스트 */
   text-align: left;
+  line-height: 20px;
+
+  /* 정렬 */
+  margin: 5px 0;
+
+  /* 기타 */
+  overflow: hidden;
+}
+
+.wrap .inner .card .posting-item .posting-container .posting-date {
+  /* Display */
+  display: block;
+
+  /* 기본 */
+  width: 40%;
+  height: 20px;
+
+  /* 텍스트 */
+  text-align: right;
   line-height: 20px;
 
   /* 정렬 */
