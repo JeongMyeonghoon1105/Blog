@@ -115,16 +115,19 @@ var app = http.createServer((request, response) => {
 
         db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
           var card = template.descriptionArea(queryData.category);
+          var categoryEmpty = 0;
+
+          // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
+          topics.forEach((element) => {
+            if ((element.category == queryData.category) && (element.trash != 1)){
+              card = card + template.postingItem(queryData.category, element.title, element.date);
+              categoryEmpty = 1;
+            }
+          });
 
           // 현재 카테고리에 게시물이 없을 때, 안내 메시지 표시
-          if (topics.length == 0) { card = card + template.notice(`${queryData.category} category`); }
-          // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
-          else {
-            topics.forEach((element) => {
-              if (element.category == queryData.category){
-                card = card + template.postingItem(queryData.category, element.title, element.date);
-              }
-            });
+          if (categoryEmpty == 0) {
+            card = card + template.notice(`${queryData.category} category`);
           }
 
           response.writeHead(200);
@@ -255,8 +258,6 @@ var app = http.createServer((request, response) => {
         var content = post.content;
         var category = post.category;
 
-        console.log(category);
-
         db.query(`
           INSERT INTO topic (category, title, content, date)
             VALUES(?, ?, ?, NOW())`,
@@ -342,14 +343,18 @@ var app = http.createServer((request, response) => {
     else if (pathname === '/delete_process/') {
       access_deny();
 
-      // 파일을 휴지통으로 이동
-      fs.renameSync(`./texts/${queryData.category}/${queryData.title}`, `./texts/Trash/${queryData.category}/${queryData.title}`);
-
-      // 카테고리 페이지로 리다이렉트
-      response.writeHead(302, {
-        Location: encodeURI(`/?category=${queryData.category}`)
-      });
-      response.end();
+      db.query(`UPDATE topic SET trash='1' WHERE category='${queryData.category}' AND title='${queryData.title}'`,
+        (error, topics) => {
+          if(error) {
+            throw error;
+          }
+          // 카테고리 페이지로 리다이렉트
+          response.writeHead(302, {
+            Location: encodeURI(`/?category=${queryData.category}`)
+          });
+          response.end();
+        }
+      )
     }
     // pathname이 '/trash'일 때(휴지통에 담긴 게시물의 목록)
     else if (pathname === '/trash') {
@@ -357,32 +362,27 @@ var app = http.createServer((request, response) => {
 
       style = style + fs.readFileSync('./css/trash.css', 'utf8');
       var card = template.descriptionArea('Trash');
-      
-      var filesInTrash = 0;
 
-      // Trash 폴더 내부 폴더(카테고리)들의 리스트를 변수에 저장
-      var directorylist = fs.readdirSync('texts/Trash');
+      db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
+        var card = template.descriptionArea(queryData.category);
+        var trashEmpty = 0;
 
-      // Trash 폴더 내부 각 카테고리에 속한 파일들을 모두 검사
-      directorylist.forEach((elem) => {
-        var filelist = fs.readdirSync(`./texts/Trash/${elem}`);
-
-        // 현재 카테고리(휴지통)에 저장된 모든 파일의 제목을 디자인 형식에 대입한 후, card 변수에 덧붙이기
-        filelist.forEach((element) => {
-          card = card + template.trashItem(elem, element);
-
-          // 휴지통이 비었는지 검사
-          if (filelist.length != 0) {
-            filesInTrash = 1;
+        // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
+        topics.forEach((element) => {
+          if ((element.category == queryData.category) && (element.trash == 1)){
+            card = card + template.postingItem(queryData.category, element.title, element.date);
+            trashEmpty = 1;
           }
         });
-      });
+        
+        // 휴지통이 비었을 때, 안내 메시지 표시
+        if (trashEmpty == 0) {
+          card = card + template.notice('Trash'); 
+        }
 
-      // 휴지통이 비었을 때, 안내 메시지를 출력
-      if (filesInTrash == 0) { card = card + template.notice('Trash'); }
-
-      response.writeHead(200);
-      response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, categoryList, display, card, footer));
+        response.writeHead(200);
+        response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabSignIn, categoryList, display, card, footer));
+      })
     }
     // 휴지통에 담긴 게시물
     else if (pathname === '/trash/') {
