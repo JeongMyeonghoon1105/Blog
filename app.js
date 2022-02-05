@@ -300,7 +300,8 @@ var app = http.createServer((request, response) => {
     access_deny();
 
     style = style + fs.readFileSync('./css/write.css', 'utf8');
-    var data = fs.readFileSync(`./texts/${queryData.category}/${queryData.title}`, 'utf8');
+    // var data = fs.readFileSync(`./texts/${queryData.category}/${queryData.title}`, 'utf8');
+    var data = '';
 
     var categorySelect = {
       'frontend': `<!----`,
@@ -319,9 +320,15 @@ var app = http.createServer((request, response) => {
     else if (queryData.category === 'CS')
       categorySelect.cs = `selected`;
 
-    var card = template.descriptionArea('Update') + template.writtingArea(queryData.category, queryData.title, data, categorySelect);
+    db.query(`SELECT category, title, content, trash FROM topic`, (error, topics) => {
+      topics.forEach((element) => {
+        if ((element.category == `${queryData.category}`) && (element.title == `${queryData.title}`) && (element.trash != '1')){
+          data = element.content;
+        }
+      });
 
-    db.query(`SELECT category, trash FROM topic`, (error, topics) => {
+      var card = template.descriptionArea('Update') + template.writtingArea(queryData.category, queryData.title, data, categorySelect);
+
       // MENU
       menuCount(topics, postingCount);
       var categoryList = template.list(postingCount, display);
@@ -353,16 +360,28 @@ var app = http.createServer((request, response) => {
       var content = post.content;
       var category = post.category;
 
-      // 파일 영구 삭제
-      fs.unlinkSync(`./texts/${queryData.category}/${queryData.title}`);
-      // 수정된 내용으로 새 파일 쓰기
-      fs.writeFileSync(`./texts/${category}/${title}`, template.postContainer(title, content), 'utf8');
-
-      // 포스팅 후 게시물로 리다이렉션
-      response.writeHead(302, {
-        Location: encodeURI(`/?category=${category}&title=${title}`)
-      });
-      response.end();
+      db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='0'`,
+        (error, topics) => {
+          if (error) {
+            throw error;
+          }
+          db.query(`
+            INSERT INTO topic (category, title, content, date)
+              VALUES(?, ?, ?, NOW())`,
+            [category, title, template.writeContainer(content)],
+            (error, topics) => {
+              if (error) {
+                throw error;
+              }
+              // 포스팅 후, 방금 작성한 게시물로 리다이렉션
+              response.writeHead(302, {
+                Location: encodeURI(`/?category=${category}&title=${title}`)
+              });
+              response.end();
+            }
+          )
+        }
+      )
     });
   }
   // pathname이 '/delete_process'일 때(일반 게시물 삭제 버튼을 눌렀을 때)
@@ -449,25 +468,35 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/clear_process/') {
     access_deny();
 
-    // 파일 영구 삭제
-    fs.unlinkSync(`./texts/Trash/${queryData.category}/${queryData.title}`);
-
-    // 카테고리 페이지로 리다이렉트
-    response.writeHead(302, {
-      Location: encodeURI('/trash')
-    });
-    response.end();
-  } else if (pathname === '/recover_process/') {
+    db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='1'`,
+      (error, topics) => {
+        if (error) {
+          throw error;
+        }
+        // 카테고리 페이지로 리다이렉트
+        response.writeHead(302, {
+          Location: encodeURI(`/trash`)
+        });
+        response.end();
+      }
+    )
+  }
+  // pathname이 '/recover_process/'일 때(게시물 복구 버튼을 눌렀을 때)
+  else if (pathname === '/recover_process/') {
     access_deny();
 
-    // 휴지통에 있던 파일을 원래 위치로 복구
-    fs.renameSync(`./texts/Trash/${queryData.category}/${queryData.title}`, `./texts/${queryData.category}/${queryData.title}`);
-
-    // 카테고리 페이지로 리다이렉트
-    response.writeHead(302, {
-      Location: encodeURI(`/?category=${queryData.category}`)
-    });
-    response.end();
+    db.query(`UPDATE topic SET trash='0' WHERE category='${queryData.category}' AND title='${queryData.title}'`,
+      (error, topics) => {
+        if (error) {
+          throw error;
+        }
+        // 카테고리 페이지로 리다이렉트
+        response.writeHead(302, {
+          Location: encodeURI(`/?category=${queryData.category}`)
+        });
+        response.end();
+      }
+    )
   }
   // pathname에 잘못된 값이 들어갔을 때 (404 Not Found)
   else {
