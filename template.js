@@ -71,12 +71,12 @@ module.exports = {
     
     </html>
     `;
-  }, list:(frontend, backend, devops, cs, display) => {
+  }, list:(postingCount, display) => {
     return `
-    <li><a href="/?category=Frontend">Frontend(${frontend})</a></li>
-    <li><a href="/?category=Backend">Backend(${backend})</a></li>
-    <li><a href="/?category=DevOps">DevOps(${devops})</a></li>
-    <li><a href="/?category=CS">CS(${cs})</a></li>
+    <li><a href="/?category=Frontend">Frontend(${postingCount.frontend})</a></li>
+    <li><a href="/?category=Backend">Backend(${postingCount.backend})</a></li>
+    <li><a href="/?category=DevOps">DevOps(${postingCount.devops})</a></li>
+    <li><a href="/?category=CS">CS(${postingCount.cs})</a></li>
     <li><a href="/trash" style="display: ${display}">Trash</a></li>
     `;
   }, writtingArea:(category, title, data, categorySelect) => {
