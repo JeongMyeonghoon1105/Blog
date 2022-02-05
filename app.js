@@ -419,6 +419,7 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/trash/') {
     access_deny();
 
+    style = style + fs.readFileSync('./css/post.css', 'utf8');
     var card = '';
 
     db.query(`SELECT category, id, title, content, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
