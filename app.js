@@ -395,8 +395,8 @@ var app = http.createServer((request, response) => {
 
       // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
       topics.forEach((element) => {
-        if ((element.category == queryData.category) && (element.trash == 1)) {
-          card = card + template.postingItem(queryData.category, element.title, element.date);
+        if (element.trash == 1) {
+          card = card + template.trashItem(queryData.category, element.title);
           trashEmpty = 1;
         }
       });
