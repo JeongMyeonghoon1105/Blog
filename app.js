@@ -102,18 +102,25 @@ var app = http.createServer((request, response) => {
     // 카테고리별 게시물 목록
     else if (((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) && queryData.title === undefined) {
       style = style + fs.readFileSync('./css/category.css', 'utf8');
-      var filelist = fs.readdirSync(`./texts/${queryData.category}`);
 
-      var card = template.descriptionArea(queryData.category);
+      db.query(`SELECT * FROM topic`, (error, topics) => {
+        console.log(topics);
+        var card = template.descriptionArea(queryData.category);
 
-      // 현재 카테고리에 게시물이 없을 때, 안내 메시지 표시
-      if (filelist.length == 0) { card = card + template.notice(`${queryData.category} category`); }
-      // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
-      else {
-        filelist.forEach((element) => {
-          card = card + template.postingItem(queryData.category, element);
-        });
-      }
+        // 현재 카테고리에 게시물이 없을 때, 안내 메시지 표시
+        if (topics.length == 0) { card = card + template.notice(`${queryData.category} category`); }
+        // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
+        else {
+          topics.forEach((element) => {
+            console.log(element.title);
+
+            if (element.category == queryData.category){
+              card = card + template.postingItem(queryData.category, element.title);
+              console.log(card);
+            }
+          });
+        }
+      })
     }
     // 게시물 페이지
     else if ((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) {
