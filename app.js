@@ -303,10 +303,19 @@ var app = http.createServer((request, response) => {
       var content = post.content;
       var category = post.category;
       // DB SEARCH
-      db.query(`
-        INSERT INTO topic (category, title, content, date)
-          VALUES(?, ?, ?, NOW())`,
-        [category, title, template.writeContainer(content)],
+      db.query(`SELECT category, title, content, trash FROM topic`, (error, topics) => {
+        // 예외 처리
+        if (error) {
+          throw error;
+        }
+        // 카테고리와 제목이 같은 게시물이 이미 존재하는지 검사
+        topics.forEach((element) => {
+          if ((element.category == category) && (element.title == title) && (element.trash != '1')) {
+            throw error;
+          }
+        });
+        // 포스팅할 데이터를 DB에 입력
+        db.query(`INSERT INTO topic (category, title, content, date) VALUES(?, ?, ?, NOW())`, [category, title, template.writeContainer(content)],
         // 예외 처리
         (error) => {
           if (error) {
@@ -317,8 +326,8 @@ var app = http.createServer((request, response) => {
             Location: encodeURI(`/?category=${category}&title=${title}`)
           });
           response.end();
-        }
-      )
+        })
+      })
     });
   }
   // pathname이 '/update/'일 때(게시물 수정 페이지)
@@ -353,7 +362,7 @@ var app = http.createServer((request, response) => {
       var data = '';
       // 수정할 게시물을 DB에서 찾기
       topics.forEach((element) => {
-        if ((element.category == `${queryData.category}`) && (element.title == `${queryData.title}`) && (element.trash != '1')){
+        if ((element.category == queryData.category) && (element.title == queryData.title) && (element.trash != '1')) {
           data = element.content;
         }
       });
@@ -397,10 +406,7 @@ var app = http.createServer((request, response) => {
             throw error;
           }
           // 수정할 데이터를 DB에 입력
-          db.query(`
-            INSERT INTO topic (category, title, content, date)
-              VALUES(?, ?, ?, NOW())`,
-            [category, title, template.writeContainer(content)],
+          db.query(`INSERT INTO topic (category, title, content, date) VALUES(?, ?, ?, NOW())`, [category, title, template.writeContainer(content)],
             (error) => {
               // 예외 처리
               if (error) {
