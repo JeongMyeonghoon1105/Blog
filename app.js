@@ -316,7 +316,7 @@ var app = http.createServer((request, response) => {
         });
         // 포스팅할 데이터를 DB에 입력
         db.query(`INSERT INTO topic (category, title, content, date) VALUES(?, ?, ?, NOW())`, [category, title, template.writeContainer(content)],
-        // 예외 처리
+        // 작성한 게시물의 카테고리와 제목이 기존 게시물과 중복되면 강제로 에러를 발생시키기
         (error) => {
           if (error) {
             throw error;
