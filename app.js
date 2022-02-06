@@ -327,16 +327,13 @@ var app = http.createServer((request, response) => {
     access_deny();
     // STYLE
     style = style + fs.readFileSync('./css/write.css', 'utf8');
-    
-    var data = '';
-
+    // 카테고리 선택란의 디폴트 값을 설정하는데 사용되는 객체
     var categorySelect = {
       'frontend': `<!----`,
       'backend': `<!----`,
       'devops': `<!----`,
       'cs': `<!----`
     }
-
     // 수정할 게시물의 원래 카테고리를 디폴트 값으로 설정
     if (queryData.category === 'Frontend')
       categorySelect.frontend = `selected`;
@@ -352,6 +349,8 @@ var app = http.createServer((request, response) => {
       if (error) {
         throw error;
       }
+      // 게시물의 내용을 저장할 변수
+      var data = '';
       // 수정할 게시물을 DB에서 찾기
       topics.forEach((element) => {
         if ((element.category == `${queryData.category}`) && (element.title == `${queryData.title}`) && (element.trash != '1')){
@@ -390,13 +389,14 @@ var app = http.createServer((request, response) => {
       var title = post.title;
       var content = post.content;
       var category = post.category;
-      // DB SEARCH
+      // 기존 게시물(수정 전 게시물)을 삭제
       db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='0'`,
         (error) => {
           // 예외 처리
           if (error) {
             throw error;
           }
+          // 수정할 데이터를 DB에 입력
           db.query(`
             INSERT INTO topic (category, title, content, date)
               VALUES(?, ?, ?, NOW())`,
