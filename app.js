@@ -102,7 +102,7 @@ var app = http.createServer((request, response) => {
       style = style + fs.readFileSync('./css/main.css', 'utf8');
       // CARD
       var card = fs.readFileSync('./html/card.html', 'utf8');
-      // DB SEARCH
+      // DB에서 데이터 불러오기
       db.query(`SELECT category, trash FROM topic`, (error, topics) => {
         // 예외 처리
         if (error) {
@@ -120,7 +120,7 @@ var app = http.createServer((request, response) => {
     else if (((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) && queryData.title === undefined) {
       // STYLE
       style = style + fs.readFileSync('./css/category.css', 'utf8');
-      // DB SEARCH
+      // DB에서 데이터 불러오기
       db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
         // 예외 처리
         if (error) {
@@ -152,7 +152,7 @@ var app = http.createServer((request, response) => {
     else if ((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) {
       // STYLE
       style = style + fs.readFileSync('./css/post.css', 'utf8');
-      // DB SEARCH
+      // DB에서 데이터 불러오기
       db.query(`SELECT category, id, title, content, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
         // 예외 처리
         if (error) {
@@ -266,7 +266,7 @@ var app = http.createServer((request, response) => {
     // CARD
     var card = template.descriptionArea('Post');
     card = card + fs.readFileSync('./html/write.html', 'utf8');
-    // DB SEARCH
+    // DB에서 데이터 불러오기
     db.query(`SELECT category, trash FROM topic`, (error, topics) => {
       // 예외 처리
       if (error) {
@@ -302,7 +302,7 @@ var app = http.createServer((request, response) => {
       var title = post.title;
       var content = post.content;
       var category = post.category;
-      // DB SEARCH
+      // DB에서 데이터 불러오기
       db.query(`SELECT category, title, content, trash FROM topic`, (error, topics) => {
         // 예외 처리
         if (error) {
@@ -352,7 +352,7 @@ var app = http.createServer((request, response) => {
       categorySelect.devops = `selected`;
     else if (queryData.category === 'CS')
       categorySelect.cs = `selected`;
-    // DB SEARCH
+    // DB에서 데이터 불러오기
     db.query(`SELECT category, title, content, trash FROM topic`, (error, topics) => {
       // 예외 처리
       if (error) {
@@ -427,7 +427,7 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/delete_process/') {
     // 미확인 사용자의 접속 시도 차단
     access_deny();
-    // DB SEARCH
+    // DB UPDATE
     db.query(`UPDATE topic SET trash='1' WHERE category='${queryData.category}' AND title='${queryData.title}'`,
       (error) => {
         // 예외 처리
@@ -450,7 +450,7 @@ var app = http.createServer((request, response) => {
     style = style + fs.readFileSync('./css/trash.css', 'utf8');
     // CARD
     var card = template.descriptionArea('Trash');
-    // DB SEARCH
+    // DB에서 데이터 불러오기
     db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
       // 예외 처리
       if (error) {
@@ -469,7 +469,7 @@ var app = http.createServer((request, response) => {
       if (trashEmpty == 0) {
         card = card + template.notice('Trash');
       }
-      // DB SEARCH
+      // DB에서 데이터 불러오기
       db.query(`SELECT category, trash FROM topic`, (error, topics) => {
         // 예외 처리
         if (error) {
@@ -492,7 +492,7 @@ var app = http.createServer((request, response) => {
     style = style + fs.readFileSync('./css/post.css', 'utf8');
     // CARD
     var card = '';
-    // DB SEARCH
+    // DB에서 데이터 불러오기
     db.query(`SELECT category, id, title, content, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
       // 예외 처리
       if (error) {
@@ -525,7 +525,7 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/clear_process/') {
     // 미확인 사용자의 접속 시도 차단
     access_deny();
-    // DB SEARCH
+    // 삭제할 게시물을 DB에서 찾아 영구삭제
     db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='1'`,
       (error) => {
         if (error) {
@@ -543,7 +543,7 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/recover_process/') {
     // 미확인 사용자의 접속 시도 차단
     access_deny();
-    // DB SEARCH
+    // DB UPDATE
     db.query(`UPDATE topic SET trash='0' WHERE category='${queryData.category}' AND title='${queryData.title}'`,
       (error) => {
         if (error) {
