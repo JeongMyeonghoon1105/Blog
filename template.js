@@ -1,4 +1,5 @@
 module.exports = {
+  // 로드될 페이지의 html 소스
   HTML:(head, style, variousStyle, header, signInHeader, tabSignIn, categoryList, display, card, footer) => {
     return `
     <html lang="ko">
@@ -71,7 +72,9 @@ module.exports = {
     
     </html>
     `;
-  }, list:(postingCount, display) => {
+  },
+  // 메뉴바
+  list:(postingCount, display) => {
     return `
     <li><a href="/?category=Frontend">Frontend(${postingCount.frontend})</a></li>
     <li><a href="/?category=Backend">Backend(${postingCount.backend})</a></li>
@@ -79,28 +82,23 @@ module.exports = {
     <li><a href="/?category=CS">CS(${postingCount.cs})</a></li>
     <li><a href="/trash" style="display: ${display}">Trash</a></li>
     `;
-  }, writtingArea:(category, title, data, categorySelect) => {
+  },
+  // 글 작성 페이지의 내용
+  writtingArea:(category, title, data, categorySelect) => {
     return `
     <div class="writting-area">
-      <!-- 수정할 데이터 입력란 -->
       <form action="/update_process/?category=${category}&title=${title}" method="post">
         <!-- Title -->
         <div class="title">
           <textarea name="title" id="title-input" rows="1" cols="55" maxlength="100" placeholder="Title"
             value="${title}" required></textarea>
         </div>
-    
         <div class="border"></div>
-    
-        <!-- Contents -->
         <div>
           <textarea name="content" id="contents-input" style="white-space: pre-wrap;" 
           value="${data}" required></textarea>
         </div>
-    
         <div class="border"></div>
-    
-        <!-- Categoties -->
         <div class="category">
           <select name="category" id="category-input" required>
             <option value="Frontend" ${categorySelect.frontend}>Frontend</option>
@@ -109,43 +107,34 @@ module.exports = {
             <option value="CS" ${categorySelect.cs}>CS</option>
           </select>
         </div>
-    
         <div class="br"></div>
         <div class="br"></div>
         <div class="br"></div>
-    
-        <!-- Post Button -->
         <div style="position: relative; height: 30px;">
-          <button type="submit" class="post-button">
-            Post
-          </button>
+          <button type="submit" class="post-button">Post</button>
         </div>
       </form>
     </div>
     `;
-  }, Header:(process, InOut) => {
+  },
+  // 헤더 내부 Sign In/Out 버튼
+  Header:(process, InOut) => {
     return `
     <div class="item" id="sign-in" onclick="location.href='/${process}'">
       <span data-tooltip-text="Sign ${InOut}"><i class="fas fa-user-circle"></i></span>
     </div>
     `
-  }, Tab:(process, InOut) => {
+  },
+  // 탭바 내부 Sign In/Out 버튼
+  Tab:(process, InOut) => {
     return `
     <div onclick="location.href='/${process}'" class="tab-sign">
       Sign ${InOut}
     </div>
     `
-  }, postingItem:(category, element) => {
-    return `
-    <div class="posting-item">
-      <div class="posting-container">
-        <a href="/?category=${category}&title=${element}" class="posting-content">
-          ${element}
-        </a>
-      </div>
-    </div>
-    `;
-  }, buttonContainer:(process_1, process_2, btnName, category, title, color) => {
+  },
+  // 게시물 페이지 하단 삭제/수정(복구) 버튼
+  buttonContainer:(process_1, process_2, btnName, category, title, color) => {
     return `
     <div class="button-container">
       <a href="/${process_1}_process/?category=${category}&title=${title}" class="update-delete-button" style="color: red;">
@@ -156,35 +145,39 @@ module.exports = {
       </a>
     </div>
     `;
-  }, postContainer:(title, content) => {
+  },
+  // 게시물 제목 및 내용
+  postContainer:(title, content) => {
     return `
     <div class="post-container">
       <h1 class="post-title">${title}</h1><br>
-      <div class="post-contents">
-        ${content}
-      </div>
+      <div class="post-contents">${content}</div>
     </div>
     `;
-  }, writeContainer:(content) => {
+  },
+  // 게시물 생성/수정시 DB에 저장할 컨텐츠 형식
+  writeContainer:(content) => {
     return `
       <div class="post-contents">
         ${content}
       </div>
     `;
-  }, postingItem:(category, title, date) => {
+  },
+  // 카테고리 페이지 내부 각 아이템(각 게시물로 연결되는 링크)
+  postingItem:(category, title, date) => {
     return `
     <div class="posting-item">
       <div class="posting-container">
         <a href="/?category=${category}&title=${title}" class="posting-content">
           ${title}
         </a>
-        <div class="posting-date">
-          ${date}
-        </div>
+        <div class="posting-date">${date}</div>
       </div>
     </div>
     `;
-  }, trashItem:(category, title) => {
+  },
+  // 휴지통 페이지 내부 각 아이템(각 게시물로 연결되는 링크)
+  trashItem:(category, title) => {
     return `
     <div class="posting-item">
       <div class="posting-container">
@@ -203,13 +196,17 @@ module.exports = {
       </div>
     </div>
     `;
-  }, descriptionArea:(descriptionContent) => {
+  },
+  // 페이지 제목란
+  descriptionArea:(descriptionContent) => {
     return `
     <div class="description-area">
       <h1>${descriptionContent}</h1>
     </div>
     `;
-  }, notice:(noticeContent) => {
+  },
+  // 카테고리/휴지통에 게시물이 없음을 알리는 문구
+  notice:(noticeContent) => {
     return `
     <div class="notice">
       <text style="line-height: 0px;">
