@@ -18,7 +18,7 @@ module.exports = {
         <div class="inner">
           <!-- LOGO -->
           <a href="/" class="logo">
-            <img src="https://github.com/JeongMyeonghoon1105/Story-Mate/blob/master/images/Logo.png?raw=true" alt="Daniel's Tech Blog">
+            <img src="https://github.com/JeongMyeonghoon1105/Images/blob/main/Logo.png?raw=true" alt="Daniel's Tech Blog">
           </a>
           <!-- SEARCH BAR -->
           <input type="text" id="search-bar" placeholder="Search...">
