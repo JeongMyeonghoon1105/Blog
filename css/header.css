@@ -195,6 +195,8 @@ header .inner #hidden-menu {
 }
 
 header .inner #hidden-menu i {
+  font-size: 23px;
+  color: black;
   line-height: 60px;
 }
 

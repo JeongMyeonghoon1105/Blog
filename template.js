@@ -70,12 +70,14 @@ module.exports = {
 
       <!-- JS -->
       <script>
-        var menuIcon = document.getElementById("menu-icon");
+        var menuIcon = document.getElementById('menu-icon');
         menuIcon.addEventListener("mouseover", () => {
-          if (menuIcon.className == "fas fa-bars"){
-            menuIcon.setAttribute("class", "fa-solid fa-x");
+          if (menuIcon.className === 'fas fa-bars'){
+            menuIcon.className = "fas fa-times";
+            menuIcon.setAttribute('style', 'font-size: 25px;');
           } else {
-            menuIcon.setAttribute("class", "fas fa-bars");
+            menuIcon.className = "fas fa-bars";
+            menuIcon.setAttribute('style', 'font-size: 23px;');
           }
         })
       </script>
