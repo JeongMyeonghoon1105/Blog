@@ -213,6 +213,7 @@ header .inner #hidden-menu i {
   left: 0;
   z-index: 1;
   transition: 0.5s;
+  pointer-events: none;
 }
 
 #hidden-menu:hover i {
@@ -231,6 +232,8 @@ header .inner #hidden-menu i {
 
   /* 텍스트 */
   color: white;
+
+  pointer-events: none;
 }
 
 .tab-sign {
@@ -247,6 +250,7 @@ header .inner #hidden-menu i {
   cursor: pointer;
   transition: 0.5s;
   opacity: 0;
+  pointer-events: none;
 }
 
 .tab-items {
@@ -260,6 +264,7 @@ header .inner #hidden-menu i {
   list-style-type: none;
   transition: 0.5s;
   opacity: 0;
+  pointer-events: none;
 }
 
 .tab-items li a {
@@ -273,6 +278,7 @@ header .inner #hidden-menu i {
   height: 22px;
   transition: 0.5s;
   opacity: 0;
+  pointer-events: none;
 }
 
 .tab-post-button {
@@ -303,22 +309,26 @@ header .inner #hidden-menu i {
   #hidden-menu:hover~#tab-down,
   #tab-down:hover,
   #hidden-menu:hover~#tab-down .tab-down-inner {
+    pointer-events: auto;
     height: 230px;
   }
 
   #hidden-menu:hover~#tab-down .tab-down-inner .tab-sign,
   #tab-down:hover .tab-down-inner .tab-sign {
     opacity: 1;
+    pointer-events: auto;
   }
 
   #hidden-menu:hover~#tab-down .tab-down-inner .tab-items,
   #tab-down:hover .tab-down-inner .tab-items {
     opacity: 1;
+    pointer-events: auto;
   }
 
   #hidden-menu:hover~#tab-down .tab-down-inner .tab-list,
   #tab-down:hover .tab-down-inner .tab-list {
     opacity: 1;
+    pointer-events: auto;
   }
 }
 
