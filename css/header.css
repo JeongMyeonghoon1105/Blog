@@ -212,7 +212,7 @@ header .inner #hidden-menu i {
   top: 60px;
   left: 0;
   z-index: 1;
-  transition: 1s;
+  transition: 0.5s;
 }
 
 #hidden-menu:hover i {
@@ -316,8 +316,8 @@ header .inner #hidden-menu i {
     opacity: 1;
   }
 
-  #hidden-menu:hover~#tab-down .tab-down-inner .tab-items .tab-list,
-  #tab-down:hover .tab-down-inner .tab-items .tab-list {
+  #hidden-menu:hover~#tab-down .tab-down-inner .tab-list,
+  #tab-down:hover .tab-down-inner .tab-list {
     opacity: 1;
   }
 }
