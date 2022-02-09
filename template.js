@@ -30,7 +30,7 @@ module.exports = {
             ${signInHeader}
           </div>
           <!-- Hidden Item (Menu) -->
-          <div class="item" id="hidden-menu"><i class="fas fa-bars"></i></div>
+          <div class="item" id="hidden-menu"><i class="fas fa-bars" id="menu-icon"></i></div>
           <div id="tab-down">
             <div class="tab-down-inner">
               ${tabSignIn}
@@ -68,6 +68,17 @@ module.exports = {
       <!-- FOOTER -->
       ${footer}
 
+      <!-- JS -->
+      <script>
+        var menuIcon = document.getElementById("menu-icon");
+        menuIcon.addEventListener("mouseover", () => {
+          if (menuIcon.className == "fas fa-bars"){
+            menuIcon.setAttribute("class", "fa-solid fa-x");
+          } else {
+            menuIcon.setAttribute("class", "fas fa-bars");
+          }
+        })
+      </script>
     </body>
     
     </html>

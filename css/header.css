@@ -216,6 +216,7 @@ header .inner #hidden-menu i {
   pointer-events: none;
 }
 
+/*
 #hidden-menu:hover i {
   transform: rotate(90deg);
   transition: 0.5s;
@@ -224,6 +225,7 @@ header .inner #hidden-menu i {
 #hidden-menu:not(:hover) i {
   transition: 0.5s;
 }
+*/
 
 .tab-down-inner {
   /* 기본 */
