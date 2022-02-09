@@ -238,13 +238,13 @@ header .inner #hidden-menu i {
 
 .tab-sign {
   /* Display */
-  display: inline-block;
+  display: block;
 
   /* 텍스트 */
   font-weight: bold;
 
   /* 정렬 */
-  padding: 20px;
+  margin: 20px;
 
   /* 기타 */
   cursor: pointer;
@@ -273,7 +273,7 @@ header .inner #hidden-menu i {
 }
 
 .tab-list {
-  display: inline-block;
+  display: block;
   padding: 20px;
   height: 22px;
   transition: 0.5s;
@@ -282,6 +282,7 @@ header .inner #hidden-menu i {
 }
 
 .tab-post-button {
+  width: 100%;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -314,17 +315,9 @@ header .inner #hidden-menu i {
   }
 
   #hidden-menu:hover~#tab-down .tab-down-inner .tab-sign,
-  #tab-down:hover .tab-down-inner .tab-sign {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
+  #tab-down:hover .tab-down-inner .tab-sign,
   #hidden-menu:hover~#tab-down .tab-down-inner .tab-items,
-  #tab-down:hover .tab-down-inner .tab-items {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
+  #tab-down:hover .tab-down-inner .tab-items,
   #hidden-menu:hover~#tab-down .tab-down-inner .tab-list,
   #tab-down:hover .tab-down-inner .tab-list {
     opacity: 1;
