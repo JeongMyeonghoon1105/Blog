@@ -35,8 +35,8 @@ module.exports = {
             <div class="tab-down-inner">
               ${tabSignIn}
               <ul class="tab-items">${categoryList}</ul>
-              <div style="display: inline-block; padding: 20px; height: 22px;">
-                <h2 style="display: ${display}; color: white; font-weight: bold; cursor: pointer;" onclick="location.href='/post'">
+              <div class="tab-list">
+                <h2 class="tab-post-button" style="display: ${display};" onclick="location.href='/post'">
                   Post
                 </h2>
               </div>

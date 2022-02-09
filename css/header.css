@@ -237,30 +237,49 @@ header .inner #hidden-menu i {
   /* Display */
   display: inline-block;
 
+  height: 0;
+
   /* 텍스트 */
+  font-size: 0;
   font-weight: bold;
+  line-height: 0;
 
   /* 정렬 */
-  padding: 20px;
+  padding: 0;
 
   /* 기타 */
   cursor: pointer;
+  transition: 1s;
 }
 
 .tab-items {
   /* 텍스트 */
-  font-size: 15px;
+  font-size: 0;
+  line-height: 0;
 
   /* 정렬 */
-  padding: 0 20px;
+  padding: 0;
 
   /* 기타 */
   list-style-type: none;
+  transition: 0;
 }
 
 .tab-items li a {
   display: block;
   color: white;
+}
+
+.tab-list {
+  display: inline-block;
+  padding: 0;
+  height: 0;
+}
+
+.tab-post-button {
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 /* MEDIA QUERY */
@@ -282,12 +301,43 @@ header .inner #hidden-menu i {
     display: block;
   }
 
-  #hidden-menu:hover~#tab-down {
+  #hidden-menu:hover~#tab-down,
+  #tab-down:hover,
+  #hidden-menu:hover~#tab-down .tab-down-inner {
     height: 230px;
   }
 
-  #tab-down:hover {
-    height: 230px;
+  #hidden-menu:hover~#tab-down .tab-down-inner .tab-sign,
+  #tab-down:hover .tab-down-inner .tab-sign {
+    height: 17px;
+
+    /* 텍스트 */
+    font-size: 17px;
+    line-height: 17px;
+
+    /* 정렬 */
+    padding: 20px;
+  }
+
+  #hidden-menu:hover~#tab-down .tab-down-inner .tab-items,
+  #tab-down:hover .tab-down-inner .tab-items {
+    /* 텍스트 */
+    font-size: 15px;
+    line-height: 15px;
+
+    /* 정렬 */
+    padding: 0 20px;
+  }
+
+  .tab-items li a {
+    display: block;
+    color: white;
+  }
+
+  #hidden-menu:hover~#tab-down .tab-down-inner .tab-items .tab-list,
+  #tab-down:hover .tab-down-inner .tab-items .tab-list {
+    padding: 20px;
+    height: 22px;
   }
 }
 
