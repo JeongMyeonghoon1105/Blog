@@ -200,11 +200,11 @@ header .inner #hidden-menu i {
 
 #tab-down {
   /* Display */
-  display: none;
+  display: block;
 
   /* 기본 */
   width: 100vw;
-  height: 230px;
+  height: 0;
   background-color: rgb(57, 57, 57);
 
   /* 정렬 */
@@ -212,6 +212,7 @@ header .inner #hidden-menu i {
   top: 60px;
   left: 0;
   z-index: 1;
+  transition: 1s;
 }
 
 #hidden-menu:hover i {
@@ -226,7 +227,7 @@ header .inner #hidden-menu i {
 .tab-down-inner {
   /* 기본 */
   width: 100vw;
-  height: 230px;
+  height: 0;
 
   /* 텍스트 */
   color: white;
@@ -282,14 +283,10 @@ header .inner #hidden-menu i {
   }
 
   #hidden-menu:hover~#tab-down {
-    display: block;
+    height: 230px;
   }
 
   #tab-down:hover {
-    /* Display */
-    display: block;
-
-    /* 기본 */
     height: 230px;
   }
 }
