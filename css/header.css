@@ -248,7 +248,6 @@ header .inner #hidden-menu i {
 
   /* 기타 */
   cursor: pointer;
-  transition: 0.5s;
   opacity: 0;
   pointer-events: none;
 }
@@ -262,7 +261,6 @@ header .inner #hidden-menu i {
 
   /* 기타 */
   list-style-type: none;
-  transition: 0.5s;
   opacity: 0;
   pointer-events: none;
 }
@@ -276,7 +274,6 @@ header .inner #hidden-menu i {
   display: block;
   padding: 20px;
   height: 22px;
-  transition: 0.5s;
   opacity: 0;
   pointer-events: none;
 }
@@ -302,6 +299,7 @@ header .inner #hidden-menu i {
     width: 1200px;
     margin-right: 0;
   }
+
 }
 
 @media screen and (max-width: 1200px) {
@@ -336,6 +334,7 @@ header .inner #hidden-menu i {
   #tab-down:hover .tab-down-inner .tab-list {
     opacity: 1;
     pointer-events: auto;
+    transition: 1.5s;
   }
 }
 
