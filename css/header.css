@@ -237,10 +237,34 @@ header .inner #hidden-menu i {
   font-weight: bold;
 
   /* 정렬 */
-  margin: 20px;
+  padding: 20px;
 
   /* 기타 */
   cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#tab-search-container {
+  width: 100%;
+  padding: 0 20px 20px 20px;
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+#tab-search {
+  /* 기본 */
+  width: 200px;
+  height: 30px;
+  background-color: rgb(83, 81, 81);
+
+  /* 테두리 */
+  border: none;
+  border-radius: 10px;
+
+  /* 기타 */
+  transition: 1s;
   opacity: 0;
   pointer-events: none;
 }
@@ -263,7 +287,7 @@ header .inner #hidden-menu i {
   color: white;
 }
 
-#tab-list {
+#tab-post-container {
   display: block;
   padding: 20px;
   height: 22px;
@@ -288,7 +312,7 @@ header .inner #hidden-menu i {
   #tab-items,
   #tab-items li,
   #tab-items li a,
-  #tab-list {
+  #tab-post-container {
     width: 1200px;
     margin-right: 0;
   }

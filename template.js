@@ -35,10 +35,13 @@ module.exports = {
             <div id="tab-down-inner">
               ${tabSignIn}
               <ul id="tab-items">${categoryList}</ul>
-              <div id="tab-list">
+              <div id="tab-post-container">
                 <h2 class="tab-post-button" style="display: ${display};" onclick="location.href='/post'">
                   Post
                 </h2>
+              </div>
+              <div id="tab-search-container">
+                <input type="text" id="tab-search" placeholder="Search...">
               </div>
             </div>
           </div>
@@ -74,18 +77,22 @@ module.exports = {
         var hiddenMenu = document.getElementById('hidden-menu');
         var tabDown = document.getElementById('tab-down');
         var tabDownInner = document.getElementById('tab-down-inner');
+        var tabSearchContainer = document.getElementById('tab-search-container');
+        var tabSearch = document.getElementById('tab-search');
         var tabSign = document.getElementById('tab-sign');
         var tabItems = document.getElementById('tab-items');
-        var tabList = document.getElementById('tab-list');
+        var tabList = document.getElementById('tab-post-container');
         
         hiddenMenu.addEventListener('click', () => {
           if (menuIcon.className === 'fas fa-bars'){
             menuIcon.className = "fas fa-times";
             menuIcon.setAttribute('style', 'font-size: 25px;');
         
-            tabDown.setAttribute('style', 'pointer-events: auto; height: 230px;');
-            tabDownInner.setAttribute('style', 'pointer-events: auto; height: 230px;');
+            tabDown.setAttribute('style', 'pointer-events: auto; height: 280px;');
+            tabDownInner.setAttribute('style', 'pointer-events: auto; height: 280px;');
         
+            tabSearchContainer.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
+            tabSearch.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
             tabSign.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
             tabItems.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
             tabList.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
@@ -96,6 +103,8 @@ module.exports = {
             tabDown.setAttribute('style', 'pointer-events: none; height: 0;');
             tabDownInner.setAttribute('style', 'pointer-events: none; height: 0;');
         
+            tabSearchContainer.setAttribute('style', 'opacity: 0; pointer-events: auto; transition: 0;');
+            tabSearch.setAttribute('style', 'opacity: 0; pointer-events: auto; transition: 0;');
             tabSign.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
             tabItems.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
             tabList.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
