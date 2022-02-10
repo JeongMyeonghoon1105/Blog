@@ -1,6 +1,6 @@
 module.exports = {
   // 로드될 페이지의 html 소스
-  HTML:(head, style, variousStyle, header, signInHeader, tabSignIn, categoryList, display, card, footer) => {
+  HTML:(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer) => {
     return `
     <html lang="ko">
 
@@ -88,8 +88,8 @@ module.exports = {
             menuIcon.className = "fas fa-times";
             menuIcon.setAttribute('style', 'font-size: 25px;');
         
-            tabDown.setAttribute('style', 'pointer-events: auto; height: 280px;');
-            tabDownInner.setAttribute('style', 'pointer-events: auto; height: 280px;');
+            tabDown.setAttribute('style', 'pointer-events: auto; ${tabDownHeight}');
+            tabDownInner.setAttribute('style', 'pointer-events: auto; ${tabDownHeight}');
         
             tabSearchContainer.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
             tabSearch.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
