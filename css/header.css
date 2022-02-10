@@ -24,7 +24,6 @@ header .inner {
 }
 
 header .inner .logo {
-  /* 기본 */
   height: 60px;
 }
 
@@ -195,8 +194,8 @@ header .inner #hidden-menu {
 }
 
 header .inner #hidden-menu i {
-  font-size: 23px;
   color: black;
+  font-size: 23px;
   line-height: 60px;
 }
 
@@ -246,9 +245,13 @@ header .inner #hidden-menu i {
 }
 
 #tab-search-container {
+  /* 기본 */
   width: 100%;
+
+  /* 정렬 */
   padding: 0 20px 20px 20px;
 
+  /* 기타 */
   opacity: 0;
   pointer-events: none;
 }
@@ -283,22 +286,37 @@ header .inner #hidden-menu i {
 }
 
 #tab-items li a {
+  /* Display */
   display: block;
+
+  /* 텍스트 */
   color: white;
 }
 
 #tab-post-container {
+  /* Display */
   display: block;
-  padding: 20px;
+
+  /* 기본 */
   height: 22px;
+
+  /* 정렬 */
+  padding: 20px;
+
+  /* 기타 */
   opacity: 0;
   pointer-events: none;
 }
 
 .tab-post-button {
+  /* 기본 */
   width: 100%;
+
+  /* 텍스트 */
   color: white;
   font-weight: bold;
+
+  /* 기타 */
   cursor: pointer;
 }
 
@@ -313,7 +331,10 @@ header .inner #hidden-menu i {
   #tab-items li,
   #tab-items li a,
   #tab-post-container {
+    /* 기본 */
     width: 1200px;
+
+    /* 정렬 */
     margin-right: 0;
   }
 
