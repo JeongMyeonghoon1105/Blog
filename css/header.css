@@ -222,6 +222,7 @@ header .inner #hidden-menu i {
   /* 텍스트 */
   color: white;
 
+  /* 기타 */
   pointer-events: none;
 }
 
