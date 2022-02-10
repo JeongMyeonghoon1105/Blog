@@ -311,26 +311,6 @@ header .inner #hidden-menu i {
   header .inner #hidden-menu {
     display: block;
   }
-
-  /*
-  #hidden-menu:hover~#tab-down,
-  #tab-down:hover,
-  #hidden-menu:hover~#tab-down .tab-down-inner {
-    pointer-events: auto;
-    height: 230px;
-  }
-
-  #hidden-menu:hover~#tab-down .tab-down-inner .tab-sign,
-  #tab-down:hover .tab-down-inner .tab-sign,
-  #hidden-menu:hover~#tab-down .tab-down-inner .tab-items,
-  #tab-down:hover .tab-down-inner .tab-items,
-  #hidden-menu:hover~#tab-down .tab-down-inner .tab-list,
-  #tab-down:hover .tab-down-inner .tab-list {
-    opacity: 1;
-    pointer-events: auto;
-    transition: 1.5s;
-  }
-  */
 }
 
 @media screen and (max-width: 225px) {
