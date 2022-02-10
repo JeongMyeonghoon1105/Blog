@@ -36,7 +36,7 @@ module.exports = {
               ${tabSignIn}
               <ul id="tab-items">${categoryList}</ul>
               <div id="tab-post-container">
-                <h2 class="tab-post-button" style="display: ${display};" onclick="location.href='/post'">
+                <h2 class="tab-post-button" onclick="location.href='/post'">
                   Post
                 </h2>
               </div>
@@ -95,7 +95,7 @@ module.exports = {
             tabSearch.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
             tabSign.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
             tabItems.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
-            tabList.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
+            tabList.setAttribute('style', 'display: ${display}; opacity: 1; pointer-events: auto; transition: 1.5s;');
           } else {
             menuIcon.className = 'fas fa-bars';
             menuIcon.setAttribute('style', 'font-size: 23px;');

@@ -188,9 +188,6 @@ header .inner #hidden-menu {
   bottom: 0;
   right: 0;
   margin: auto 0;
-
-  /* 기타 */
-  transition: 0.5s;
 }
 
 header .inner #hidden-menu i {
@@ -249,7 +246,7 @@ header .inner #hidden-menu i {
   width: 100%;
 
   /* 정렬 */
-  padding: 0 20px 20px 20px;
+  padding: 20px;
 
   /* 기타 */
   opacity: 0;
@@ -301,7 +298,7 @@ header .inner #hidden-menu i {
   height: 22px;
 
   /* 정렬 */
-  padding: 20px;
+  padding: 20px 20px 0 20px;
 
   /* 기타 */
   opacity: 0;
