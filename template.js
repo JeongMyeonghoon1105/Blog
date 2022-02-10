@@ -36,9 +36,7 @@ module.exports = {
               ${tabSignIn}
               <ul id="tab-items">${categoryList}</ul>
               <div id="tab-post-container">
-                <h2 class="tab-post-button" onclick="location.href='/post'">
-                  Post
-                </h2>
+                <h2 class="tab-post-button" onclick="location.href='/post'">Post</h2>
               </div>
               <div id="tab-search-container">
                 <input type="text" id="tab-search" placeholder="Search...">
@@ -73,36 +71,45 @@ module.exports = {
 
       <!-- JS -->
       <script>
+        /* Menu Icon */
         var menuIcon = document.getElementById('menu-icon');
+        /* Menu Icon Container */
         var hiddenMenu = document.getElementById('hidden-menu');
+        /* Tab-Down */
         var tabDown = document.getElementById('tab-down');
         var tabDownInner = document.getElementById('tab-down-inner');
+        /* Tab-Down Search Bar */
         var tabSearchContainer = document.getElementById('tab-search-container');
         var tabSearch = document.getElementById('tab-search');
+        /* Tab-Down Sign In Button */
         var tabSign = document.getElementById('tab-sign');
+        /* Tab-Down Menu List */
         var tabItems = document.getElementById('tab-items');
+        /* Tab-Down Post Button */
         var tabList = document.getElementById('tab-post-container');
         
         hiddenMenu.addEventListener('click', () => {
           if (menuIcon.className === 'fas fa-bars'){
+            /* Menu Icon 바꾸기 */
             menuIcon.className = "fas fa-times";
             menuIcon.setAttribute('style', 'font-size: 25px;');
-        
+
+            /* Tab Down 표출 */
             tabDown.setAttribute('style', 'pointer-events: auto; ${tabDownHeight}');
             tabDownInner.setAttribute('style', 'pointer-events: auto; ${tabDownHeight}');
-        
             tabSearchContainer.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.8s;');
             tabSearch.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.8s;');
             tabSign.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.7s;');
             tabItems.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.7s;');
             tabList.setAttribute('style', 'display: ${display}; opacity: 1; pointer-events: auto; transition: 1.7s;');
           } else {
+            /* Menu Icon 복구 */
             menuIcon.className = 'fas fa-bars';
             menuIcon.setAttribute('style', 'font-size: 23px;');
-        
+
+            /* Tab Down 가리기 */
             tabDown.setAttribute('style', 'pointer-events: none; height: 0;');
             tabDownInner.setAttribute('style', 'pointer-events: none; height: 0;');
-        
             tabSearchContainer.setAttribute('style', 'opacity: 0; pointer-events: auto; transition: 0;');
             tabSearch.setAttribute('style', 'opacity: 0; pointer-events: auto; transition: 0;');
             tabSign.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
