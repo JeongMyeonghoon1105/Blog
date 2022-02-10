@@ -167,13 +167,14 @@ var app = http.createServer((request, response) => {
           if ((element.category == queryData.category) && (element.title == queryData.title) && (element.trash != 1)) {
             // 게시물의 소스코드를 소독
             card = card + sanitizeHtml(template.postContainer(element.title, element.content), {
-              allowedTags: ['div', 'h1', 'h2', 'h3', 'img', 'text', 'i', 'a', 'button', 'input', 'br'],
+              allowedTags: ['div', 'h1', 'h2', 'h3', 'img', 'text', 'i', 'a', 'button', 'input', 'br', 'iframe'],
               allowedClasses: {
                 'div': ['card', 'post-container', 'post-contents'],
                 'h1': ['post-title']
               },
               allowedAttributes: {
-                'img': ['src', 'alt']
+                'img': ['src', 'alt'],
+                'iframe': ['src']
               }
             })
           }
