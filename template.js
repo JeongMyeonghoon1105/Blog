@@ -32,10 +32,10 @@ module.exports = {
           <!-- Hidden Item (Menu) -->
           <div class="item" id="hidden-menu"><i class="fas fa-bars" id="menu-icon"></i></div>
           <div id="tab-down">
-            <div class="tab-down-inner">
+            <div id="tab-down-inner">
               ${tabSignIn}
-              <ul class="tab-items">${categoryList}</ul>
-              <div class="tab-list">
+              <ul id="tab-items">${categoryList}</ul>
+              <div id="tab-list">
                 <h2 class="tab-post-button" style="display: ${display};" onclick="location.href='/post'">
                   Post
                 </h2>
@@ -71,13 +71,34 @@ module.exports = {
       <!-- JS -->
       <script>
         var menuIcon = document.getElementById('menu-icon');
-        menuIcon.addEventListener("mouseover", () => {
+        var hiddenMenu = document.getElementById('hidden-menu');
+        var tabDown = document.getElementById('tab-down');
+        var tabDownInner = document.getElementById('tab-down-inner');
+        var tabSign = document.getElementById('tab-sign');
+        var tabItems = document.getElementById('tab-items');
+        var tabList = document.getElementById('tab-list');
+        
+        hiddenMenu.addEventListener('click', () => {
           if (menuIcon.className === 'fas fa-bars'){
             menuIcon.className = "fas fa-times";
             menuIcon.setAttribute('style', 'font-size: 25px;');
+        
+            tabDown.setAttribute('style', 'pointer-events: auto; height: 230px;');
+            tabDownInner.setAttribute('style', 'pointer-events: auto; height: 230px;');
+        
+            tabSign.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
+            tabItems.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
+            tabList.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
           } else {
-            menuIcon.className = "fas fa-bars";
+            menuIcon.className = 'fas fa-bars';
             menuIcon.setAttribute('style', 'font-size: 23px;');
+        
+            tabDown.setAttribute('style', 'pointer-events: none; height: 0;');
+            tabDownInner.setAttribute('style', 'pointer-events: none; height: 0;');
+        
+            tabSign.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
+            tabItems.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
+            tabList.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
           }
         })
       </script>
@@ -141,7 +162,7 @@ module.exports = {
   // 탭바 내부 Sign In/Out 버튼
   Tab:(process, InOut) => {
     return `
-    <div onclick="location.href='/${process}'" class="tab-sign">
+    <div onclick="location.href='/${process}'" id="tab-sign">
       Sign ${InOut}
     </div>
     `

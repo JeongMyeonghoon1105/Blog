@@ -218,18 +218,7 @@ header .inner #hidden-menu i {
   pointer-events: none;
 }
 
-/*
-#hidden-menu:hover i {
-  transform: rotate(90deg);
-  transition: 0.5s;
-}
-
-#hidden-menu:not(:hover) i {
-  transition: 0.5s;
-}
-*/
-
-.tab-down-inner {
+#tab-down-inner {
   /* 기본 */
   width: 100vw;
   height: 230px;
@@ -240,7 +229,7 @@ header .inner #hidden-menu i {
   pointer-events: none;
 }
 
-.tab-sign {
+#tab-sign {
   /* Display */
   display: block;
 
@@ -256,7 +245,7 @@ header .inner #hidden-menu i {
   pointer-events: none;
 }
 
-.tab-items {
+#tab-items {
   /* 텍스트 */
   font-size: 15px;
 
@@ -269,12 +258,12 @@ header .inner #hidden-menu i {
   pointer-events: none;
 }
 
-.tab-items li a {
+#tab-items li a {
   display: block;
   color: white;
 }
 
-.tab-list {
+#tab-list {
   display: block;
   padding: 20px;
   height: 22px;
@@ -294,12 +283,12 @@ header .inner #hidden-menu i {
 @media screen and (min-width: 1200px) {
 
   #tab-down,
-  .tab-down-inner,
-  .tab-sign,
-  .tab-items,
-  .tab-items li,
-  .tab-items li a,
-  .tab-list {
+  #tab-down-inner,
+  #tab-sign,
+  #tab-items,
+  #tab-items li,
+  #tab-items li a,
+  #tab-list {
     width: 1200px;
     margin-right: 0;
   }
@@ -323,6 +312,7 @@ header .inner #hidden-menu i {
     display: block;
   }
 
+  /*
   #hidden-menu:hover~#tab-down,
   #tab-down:hover,
   #hidden-menu:hover~#tab-down .tab-down-inner {
@@ -340,6 +330,7 @@ header .inner #hidden-menu i {
     pointer-events: auto;
     transition: 1.5s;
   }
+  */
 }
 
 @media screen and (max-width: 225px) {
