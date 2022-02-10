@@ -91,11 +91,11 @@ module.exports = {
             tabDown.setAttribute('style', 'pointer-events: auto; ${tabDownHeight}');
             tabDownInner.setAttribute('style', 'pointer-events: auto; ${tabDownHeight}');
         
-            tabSearchContainer.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
-            tabSearch.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
-            tabSign.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
-            tabItems.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.5s;');
-            tabList.setAttribute('style', 'display: ${display}; opacity: 1; pointer-events: auto; transition: 1.5s;');
+            tabSearchContainer.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.8s;');
+            tabSearch.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.8s;');
+            tabSign.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.7s;');
+            tabItems.setAttribute('style', 'opacity: 1; pointer-events: auto; transition: 1.7s;');
+            tabList.setAttribute('style', 'display: ${display}; opacity: 1; pointer-events: auto; transition: 1.7s;');
           } else {
             menuIcon.className = 'fas fa-bars';
             menuIcon.setAttribute('style', 'font-size: 23px;');
