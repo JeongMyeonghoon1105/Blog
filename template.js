@@ -38,9 +38,12 @@ module.exports = {
               <div id="tab-post-container">
                 <h2 class="tab-post-button" onclick="location.href='/post'">Post</h2>
               </div>
-              <div id="tab-search-container">
-                <input type="text" id="tab-search" placeholder="Search...">
-              </div>
+
+              <form action="/search/" method="post" id="tab-search-container">
+                <input type="text" name="title" id="tab-search" placeholder="Search...">
+                <button type="submit" class="tab-search-button"><i class="fas fa-search"></i></button>
+              </form>
+              
             </div>
           </div>
         </div>

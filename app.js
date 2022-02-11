@@ -560,6 +560,57 @@ var app = http.createServer((request, response) => {
       }
     )
   }
+  // pathname이 '/search/'일 때(게시물 검색)
+  else if (pathname === '/search/') {
+    // STYLE
+    style = style + fs.readFileSync('./css/category.css', 'utf8');
+    // 폼에서 제출한 데이터를 분석하여 저장할 변수
+    var body = ""
+    // 포스팅할 데이터를 요청해 변수에 저장
+    request.on('data', (data) => {
+      // 요청한 데이터를 변수에 덧붙이기
+      body = body + data;
+      // 포스팅할 게시물 길이가 너무 길어질 경우 커넥션 파괴
+      if (body.length > 1e6) {
+        request.connection.destroy();
+      }
+    });
+    // 포스팅 및 기타 처리
+    request.on('end', () => {
+      // 폼에서 제출한 데이터를 분석
+      var post = qs.parse(body);
+      var title = post.title;
+      var content = post.content;
+      var category = post.category;
+      // DB에서 데이터 불러오기
+      db.query(`SELECT category, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic WHERE title LIKE '%${title}%' ORDER BY id DESC`, (error, topics) => {
+        // 예외 처리
+        if (error) {
+          throw error;
+        }
+        // CARD
+        var card = template.descriptionArea('Search Results');
+        // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
+        var categoryEmpty = 0;
+        topics.forEach((element) => {
+          if (element.trash != 1) {
+            card = card + template.postingItem(element.category, element.title, element.date);
+            categoryEmpty = 1;
+          }
+        });
+        // 카테고리에 게시물이 존재하지 않을 경우, 안내 메시지 표시
+        if (categoryEmpty == 0) {
+          card = card + template.notice('Search Result');
+        }
+        // MENU
+        menuCount(topics, postingCount);
+        var categoryList = template.list(postingCount, display);
+        // 페이지 로드
+        response.writeHead(200);
+        response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer));
+      })
+    })
+  }
   // pathname에 잘못된 값이 들어갔을 때 (404 Not Found)
   else {
     response.writeHead(404);
