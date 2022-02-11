@@ -263,7 +263,7 @@ module.exports = {
     return `
     <div class="notice">
       <text style="line-height: 0px;">
-        ${noticeContent} is empty.
+        ${noticeContent}
       </text>
     </div>
     `;

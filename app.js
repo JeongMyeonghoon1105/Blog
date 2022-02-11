@@ -140,7 +140,7 @@ var app = http.createServer((request, response) => {
         });
         // 카테고리에 게시물이 존재하지 않을 경우, 안내 메시지 표시
         if (categoryEmpty == 0) {
-          card = card + template.notice(`${queryData.category} category`);
+          card = card + template.notice(`No Results in ${queryData.category} Category`);
         }
         // MENU
         menuCount(topics, postingCount);
@@ -470,7 +470,7 @@ var app = http.createServer((request, response) => {
       });
       // 휴지통이 비었을 때, 안내 메시지 표시
       if (trashEmpty == 0) {
-        card = card + template.notice('Trash');
+        card = card + template.notice('No Results in Trash');
       }
       // DB에서 데이터 불러오기
       db.query(`SELECT category, trash FROM topic`, (error, topics) => {
@@ -600,7 +600,7 @@ var app = http.createServer((request, response) => {
         });
         // 카테고리에 게시물이 존재하지 않을 경우, 안내 메시지 표시
         if (categoryEmpty == 0) {
-          card = card + template.notice('Search Result');
+          card = card + template.notice('No Results');
         }
         // MENU
         menuCount(topics, postingCount);
