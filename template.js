@@ -22,7 +22,10 @@ module.exports = {
             <img src="https://github.com/JeongMyeonghoon1105/Images/blob/main/Logo.png?raw=true" alt="Daniel's Tech Blog">
           </a>
           <!-- SEARCH BAR -->
-          <input type="text" id="search-bar" placeholder="Search...">
+          <form action="/search/" method="post" id="search-container">
+            <input type="text" name="title" id="search-bar" placeholder="Search...">
+            <button type="submit" class="tab-search-button" id="tab-search-button"><i class="fas fa-search"></i></button>
+          </form>
           <!-- MAIN MENU -->
           <div class="main-menu" id="main-menu">
             ${header}
@@ -90,6 +93,10 @@ module.exports = {
         var tabItems = document.getElementById('tab-items');
         /* Tab-Down Post Button */
         var tabList = document.getElementById('tab-post-container');
+
+        var mainMenu = document.getElementById('main-menu');
+        var searchToggle = document.getElementById('search');
+        var searchContainer = document.getElementById('search-container');
         
         hiddenMenu.addEventListener('click', () => {
           if (menuIcon.className === 'fas fa-bars'){
@@ -119,6 +126,12 @@ module.exports = {
             tabItems.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
             tabList.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
           }
+        })
+
+        searchToggle.addEventListener('click', () => {
+          mainMenu.style.width = '240px';
+          searchToggle.setAttribute('style', 'display: none;');
+          searchContainer.setAttribute('style', 'display: block;');
         })
       </script>
     </body>
