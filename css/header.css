@@ -245,9 +245,6 @@ header .inner #hidden-menu i {
 #tab-search-container {
   display: flex;
 
-  /* 기본 */
-  width: 100%;
-
   /* 정렬 */
   padding: 20px;
 
