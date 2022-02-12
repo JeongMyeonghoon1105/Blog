@@ -133,6 +133,23 @@ module.exports = {
           searchToggle.setAttribute('style', 'display: none;');
           searchContainer.setAttribute('style', 'display: block;');
         })
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 1200) {
+            /* Menu Icon 복구 */
+            menuIcon.className = 'fas fa-bars';
+            menuIcon.setAttribute('style', 'font-size: 23px;');
+
+            /* Tab Down 가리기 */
+            tabDown.setAttribute('style', 'pointer-events: none; height: 0; transition: 0;');
+            tabDownInner.setAttribute('style', 'pointer-events: none; height: 0; transition: 0;');
+            tabSearchContainer.setAttribute('style', 'opacity: 0; pointer-events: auto; transition: 0;');
+            tabSearch.setAttribute('style', 'opacity: 0; pointer-events: auto; transition: 0;');
+            tabSign.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
+            tabItems.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
+            tabList.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
+          }
+        })
       </script>
     </body>
     
