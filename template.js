@@ -24,7 +24,7 @@ module.exports = {
           <!-- SEARCH BAR -->
           <form action="/search/" method="post" id="search-container">
             <input type="text" name="title" id="search-bar" placeholder="Search...">
-            <button type="submit" class="tab-search-button" id="tab-search-button"><i class="fas fa-search"></i></button>
+            <button type="submit" class="tab-search-button" id="tab-search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
           <!-- MAIN MENU -->
           <div class="main-menu" id="main-menu">
