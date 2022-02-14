@@ -98,6 +98,7 @@ module.exports = {
         var searchToggle = document.getElementById('search');
         var searchContainer = document.getElementById('search-container');
         
+        /* Menu 버튼 눌렀을 때 */
         hiddenMenu.addEventListener('click', () => {
           if (menuIcon.className === 'fas fa-bars'){
             /* Menu Icon 바꾸기 */
@@ -128,12 +129,14 @@ module.exports = {
           }
         })
 
+        /* Search 버튼을 눌렀을 때 */
         searchToggle.addEventListener('click', () => {
           mainMenu.style.width = '240px';
           searchToggle.setAttribute('style', 'display: none;');
           searchContainer.setAttribute('style', 'display: block;');
         })
 
+        /* Tab Down 표출된 상황에서 VW를 1200px 이상으로 늘릴 시 Tab Down 숨기기 */
         window.addEventListener('resize', () => {
           if (window.innerWidth > 1200) {
             /* Menu Icon 복구 */
