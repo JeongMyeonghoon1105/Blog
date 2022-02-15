@@ -261,10 +261,10 @@ module.exports = {
         <img src="https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true" alt="" style="width: 100px; height: 96px; border-radius: 50px;">
       </div>
       <div style="width: 80%; margin-left: 25px;">
-        <div style="width: 100%; border-bottom: 2px solid lightgray; padding: 10px 0;">
+        <div style="width: 100%; border-bottom: 2px solid lightgray; padding: 14px 0;">
           ${title}
         </div>
-        <div style="width: 100%; padding: 10px 0;">
+        <div style="width: 100%; padding: 10px 0; font-size: 10px;">
           ${date}
         </div>
       </div>
