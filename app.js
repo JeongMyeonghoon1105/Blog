@@ -135,7 +135,7 @@ var app = http.createServer((request, response) => {
         topics.forEach((element) => {
           if ((element.category == queryData.category) && (element.trash != 1)) {
             if (element.subcategory == '-') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/basicLogo.png?raw=true';
             } else if (element.subcategory == 'React') {
               logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
             } else if (element.subcategory == 'Python') {
@@ -143,9 +143,9 @@ var app = http.createServer((request, response) => {
             } else if (element.subcategory == 'github') {
               logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
             } else if (element.subcategory == 'DS') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/basicLogo.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/DS.png?raw=true';
             } else {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/basicLogo.png?raw=true';
             }
             card = card + template.postingItem(queryData.category, element.title, element.date, logoImage);
             categoryEmpty = 1;
