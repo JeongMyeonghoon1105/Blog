@@ -245,6 +245,7 @@ module.exports = {
   // 카테고리 페이지 내부 각 아이템(각 게시물로 연결되는 링크)
   postingItem:(category, title, date) => {
     return `
+    <!-- 
     <div class="posting-item">
       <div class="posting-container">
         <a href="/?category=${category}&title=${title}" class="posting-content">
@@ -253,6 +254,21 @@ module.exports = {
         <div class="posting-date">${date}</div>
       </div>
     </div>
+    -->
+
+    <a href="/?category=${category}&title=${title}" style="display: flex; width: 70%; height: 100px; margin: 30px auto;">
+      <div style="width: 100px; background-color: lightcyan; border: 2px solid lightgray; border-radius: 50px; text-align: center; line-height: 100px;">
+        Logo Image
+      </div>
+      <div style="width: 80%; margin-left: 25px;">
+        <div style="width: 100%; border-bottom: 2px solid lightgray; padding: 10px 0;">
+          ${title}
+        </div>
+        <div style="width: 100%;">
+          ${date}
+        </div>
+      </div>
+    </a>
     `;
   },
   // 휴지통 페이지 내부 각 아이템(각 게시물로 연결되는 링크)
