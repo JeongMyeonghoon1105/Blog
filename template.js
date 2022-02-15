@@ -21,11 +21,6 @@ module.exports = {
           <a href="/" class="logo">
             <img src="https://github.com/JeongMyeonghoon1105/Images/blob/main/Logo.png?raw=true" alt="Daniel's Tech Blog">
           </a>
-          <!-- SEARCH BAR -->
-          <form action="/search/" method="post" id="search-container">
-            <input type="text" name="title" id="search-bar" placeholder="Search...">
-            <button type="submit" class="tab-search-button" id="tab-search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-          </form>
           <!-- MAIN MENU -->
           <div class="main-menu" id="main-menu">
             ${header}
@@ -60,6 +55,11 @@ module.exports = {
           <!-- MENU -->
           <div class="menu" style="${variousStyle.menuStyle}">
             <div class="contents">
+              <!-- SEARCH BAR -->
+              <form action="/search/" method="post" id="search-container">
+                <input type="text" name="title" id="search-bar" placeholder="Search...">
+                <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+              </form>
               <h1>Menu</h1><br>
               <ul style="list-style-type: none; font-size: 15px;">
                 ${categoryList}
@@ -127,13 +127,6 @@ module.exports = {
             tabItems.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
             tabList.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
           }
-        })
-
-        /* Search 버튼을 눌렀을 때 */
-        searchToggle.addEventListener('click', () => {
-          mainMenu.style.width = '240px';
-          searchToggle.setAttribute('style', 'display: none;');
-          searchContainer.setAttribute('style', 'display: block;');
         })
 
         /* Tab Down 표출된 상황에서 VW를 1200px 이상으로 늘릴 시 Tab Down 숨기기 */
