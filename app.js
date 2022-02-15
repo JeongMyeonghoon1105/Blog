@@ -123,7 +123,7 @@ var app = http.createServer((request, response) => {
       // STYLE
       style = style + fs.readFileSync('./css/category.css', 'utf8');
       // DB에서 데이터 불러오기
-      db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
+      db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
         // 예외 처리
         if (error) {
           throw error;
@@ -134,7 +134,20 @@ var app = http.createServer((request, response) => {
         var categoryEmpty = 0;
         topics.forEach((element) => {
           if ((element.category == queryData.category) && (element.trash != 1)) {
-            card = card + template.postingItem(queryData.category, element.title, element.date);
+            if (element.subcategory == '-') {
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+            } else if (element.subcategory == 'React') {
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+            } else if (element.subcategory == 'Python') {
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+            } else if (element.subcategory == 'github') {
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+            } else if (element.subcategory == 'DS') {
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/basicLogo.png?raw=true';
+            } else {
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+            }
+            card = card + template.postingItem(queryData.category, element.title, element.date, logoImage);
             categoryEmpty = 1;
           }
         });
@@ -583,7 +596,7 @@ var app = http.createServer((request, response) => {
       var content = post.content;
       var category = post.category;
       // DB에서 데이터 불러오기
-      db.query(`SELECT category, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic WHERE title LIKE '%${title}%' ORDER BY id DESC`, (error, topics) => {
+      db.query(`SELECT category, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic WHERE title LIKE '%${title}%' ORDER BY id DESC`, (error, topics) => {
         // 예외 처리
         if (error) {
           throw error;
@@ -594,7 +607,21 @@ var app = http.createServer((request, response) => {
         var categoryEmpty = 0;
         topics.forEach((element) => {
           if (element.trash != 1) {
-            card = card + template.postingItem(element.category, element.title, element.date);
+            if (element.subcategory == '-') {
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+            } else if (element.subcategory == 'React') {
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+            } else if (element.subcategory == 'Python') {
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+            } else if (element.subcategory == 'github') {
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+            } else if (element.subcategory == 'DS') {
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/basicLogo.png?raw=true';
+            } else {
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+            }
+            
+            card = card + template.postingItem(element.category, element.title, element.date, logoImage);
             categoryEmpty = 1;
           }
         });

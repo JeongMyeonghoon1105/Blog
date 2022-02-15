@@ -243,7 +243,7 @@ module.exports = {
     `;
   },
   // 카테고리 페이지 내부 각 아이템(각 게시물로 연결되는 링크)
-  postingItem:(category, title, date) => {
+  postingItem:(category, title, date, logoImage) => {
     return `
     <!-- 
     <div class="posting-item">
@@ -257,8 +257,8 @@ module.exports = {
     -->
 
     <a href="/?category=${category}&title=${title}" style="display: flex; width: 70%; height: 100px; margin: 30px auto;">
-      <div style="width: 100px; border: 2px solid lightgray; border-radius: 50px;">
-        <img src="https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true" alt="" style="width: 100px; height: 96px; border-radius: 50px;">
+      <div style="width: 100px; background-color: white; border: none; border-radius: 50px;">
+        <img src="${logoImage}" alt="" style="width: 100px; height: 97px; border-radius: 50px;">
       </div>
       <div style="width: 80%; margin-left: 25px;">
         <div style="width: 100%; border-bottom: 2px solid lightgray; padding: 14px 0;">
