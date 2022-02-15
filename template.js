@@ -38,7 +38,7 @@ module.exports = {
               </div>
 
               <form action="/search/" method="post" id="tab-search-container">
-                <input type="text" name="title" id="tab-search" placeholder="Search...">
+                <input type="text" name="title" id="tab-search" placeholder="Search">
                 <button type="submit" class="tab-search-button"><i class="fas fa-search"></i></button>
               </form>
               
@@ -54,7 +54,7 @@ module.exports = {
           <div class="card" style="${variousStyle.cardStyle}">${card}</div>
           <!-- SEARCH BAR -->
           <form action="/search/" method="post" id="search-container" style="${variousStyle.menuStyle}">
-            <input type="text" name="title" id="search-bar" placeholder="Search...">
+            <input type="text" name="title" id="search-bar" placeholder="Search">
             <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
           <!-- MENU -->
