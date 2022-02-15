@@ -258,13 +258,13 @@ module.exports = {
 
     <a href="/?category=${category}&title=${title}" style="display: flex; width: 70%; height: 100px; margin: 30px auto;">
       <div style="width: 100px; background-color: lightcyan; border: 2px solid lightgray; border-radius: 50px; text-align: center; line-height: 100px;">
-        Logo Image
+        <img src="https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true" alt="" style="width: 100px; height: 96px; border-radius: 50px;">
       </div>
       <div style="width: 80%; margin-left: 25px;">
         <div style="width: 100%; border-bottom: 2px solid lightgray; padding: 10px 0;">
           ${title}
         </div>
-        <div style="width: 100%;">
+        <div style="width: 100%; padding: 10px 0;">
           ${date}
         </div>
       </div>
