@@ -52,14 +52,14 @@ module.exports = {
         <div class="inner" style="${variousStyle.innerStyle}">
           <!-- CARD -->
           <div class="card" style="${variousStyle.cardStyle}">${card}</div>
+          <!-- SEARCH BAR -->
+          <form action="/search/" method="post" id="search-container">
+            <input type="text" name="title" id="search-bar" placeholder="Search...">
+            <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </form>
           <!-- MENU -->
           <div class="menu" style="${variousStyle.menuStyle}">
             <div class="contents">
-              <!-- SEARCH BAR -->
-              <form action="/search/" method="post" id="search-container">
-                <input type="text" name="title" id="search-bar" placeholder="Search...">
-                <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-              </form>
               <h1>Menu</h1><br>
               <ul style="list-style-type: none; font-size: 15px;">
                 ${categoryList}

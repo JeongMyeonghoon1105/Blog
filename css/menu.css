@@ -1,29 +1,28 @@
 .menu {
   /* 기본 */
-  width: 150px;
+  width: 200px;
   height: 400px;
   background-color: var(--bg-color);
 
   /* 정렬 */
   position: absolute;
-  top: 40px;
+  top: 120px;
   left: 1050px;
 }
 
 .menu .contents {
   /* 기본 */
-  width: 100px;
+  width: 150px;
   height: 450px;
   background-color: var(--bg-color);
 
   /* 정렬 */
   margin: 10px 50px 10px 10px;
-  padding: 10px;
 }
 
 #search-container {
   /* 기본 */
-  width: 120px;
+  width: 150px;
   height: 20px;
   background-color: rgb(202, 202, 202);
 
@@ -31,16 +30,15 @@
   border: 1px solid lightgray;
   border-radius: 20px;
 
-  /* 기타 */
-  transition: 1s;
-
-  margin-bottom: 20px;
-  position: relative;
+  /* 정렬 */
+  position: absolute;
+  top: 80px;
+  left: 1050px;
 }
 
 #search-bar {
   /* 기본 */
-  width: 100px;
+  width: 130px;
   height: 20px;
   background-color: rgb(202, 202, 202);
 
