@@ -23,8 +23,8 @@
 #search-container {
   /* 기본 */
   width: 150px;
-  height: 20px;
-  background-color: rgb(202, 202, 202);
+  height: 25px;
+  background-color: white;
 
   /* 테두리 */
   border: 1px solid lightgray;
@@ -39,8 +39,8 @@
 #search-bar {
   /* 기본 */
   width: 130px;
-  height: 20px;
-  background-color: rgb(202, 202, 202);
+  height: 25px;
+  background-color: white;
 
   font-size: 10px;
 
@@ -56,8 +56,8 @@
 #search-button {
   /* 기본 */
   width: 20px;
-  height: 20px;
-  background-color: rgb(202, 202, 202);
+  height: 25px;
+  background-color: white;
 
   /* 테두리 */
   border: none;
@@ -77,7 +77,7 @@
 
 #search-button i {
   font-size: 10px;
-  line-height: 20px;
+  line-height: 25px;
 }
 
 .menu .contents h1 {
