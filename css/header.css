@@ -36,7 +36,7 @@ header .inner .logo img {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 18px;
+  left: 19px;
   margin: auto;
 }
 
@@ -175,6 +175,7 @@ header .inner #hidden-menu i {
   z-index: 1;
   transition: 0.4s;
   pointer-events: none;
+  opacity: 0.95;
 }
 
 #tab-down-inner {

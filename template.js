@@ -257,8 +257,8 @@ module.exports = {
     -->
 
     <a href="/?category=${category}&title=${title}" style="display: flex; width: 70%; height: 100px; margin: 30px auto;">
-      <div style="width: 100px; background-color: white; border: none; border-radius: 50px;">
-        <img src="${logoImage}" alt="" style="width: 100px; height: 97px; border-radius: 50px;">
+      <div style="width: 100px; background-color: white; border: none;">
+        <img src="${logoImage}" alt="" style="width: 100px; height: 97px; border: none; border-radius: 50px;">
       </div>
       <div style="width: 80%; margin-left: 25px;">
         <div style="width: 100%; border-bottom: 2px solid lightgray; padding: 14px 0;">

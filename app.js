@@ -137,15 +137,15 @@ var app = http.createServer((request, response) => {
             if (element.subcategory == '-') {
               logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/basicLogo.png?raw=true';
             } else if (element.subcategory == 'React') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/React_sub.png?raw=true';
             } else if (element.subcategory == 'Python') {
               logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
             } else if (element.subcategory == 'github') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/github_sub.png?raw=true';
             } else if (element.subcategory == 'DS') {
               logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Data_Structure.png?raw=true';
             } else if (element.subcategory == 'Algorithm') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/basicLogo.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Algorithm_sub.png?raw=true';
             } else {
               logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/basicLogo.png?raw=true';
             }
