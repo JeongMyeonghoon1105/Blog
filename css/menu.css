@@ -24,7 +24,7 @@
   /* 기본 */
   width: 133px;
   height: 25px;
-  background-color: white;
+  background-color: var(--search-color);
 
   /* 테두리 */
   border: 1px solid lightgray;
@@ -40,7 +40,7 @@
   /* 기본 */
   width: 107px;
   height: 20px;
-  background-color: white;
+  background-color: var(--search-color);
 
   font-size: 10px;
 
@@ -60,7 +60,7 @@
   /* 기본 */
   width: 20px;
   height: 20px;
-  background-color: white;
+  background-color: var(--search-color);
 
   /* 테두리 */
   border: none;

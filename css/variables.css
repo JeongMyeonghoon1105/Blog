@@ -1,8 +1,7 @@
-/* VARIABLES */
-
 :root {
   --bg-color: rgb(245, 245, 255);
   --card-color: white;
   --border-color: #E9E9E9;
+  --search-color: white;
   --contents-height: 100vh;
 }
