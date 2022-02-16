@@ -140,7 +140,7 @@ var app = http.createServer((request, response) => {
               logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/React_sub.png?raw=true';
             } else if (element.subcategory == 'Python') {
               logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
-            } else if (element.subcategory == 'github') {
+            } else if (element.subcategory == 'Github') {
               logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/github_sub.png?raw=true';
             } else if (element.subcategory == 'DS') {
               logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Data_Structure.png?raw=true';

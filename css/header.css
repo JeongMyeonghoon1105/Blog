@@ -175,7 +175,7 @@ header .inner #hidden-menu i {
   z-index: 1;
   transition: 0.4s;
   pointer-events: none;
-  opacity: 0.95;
+  opacity: 0.97;
 }
 
 #tab-down-inner {
