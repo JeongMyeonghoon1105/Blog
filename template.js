@@ -165,19 +165,48 @@ module.exports = {
   // 글 작성 페이지의 내용
   writtingArea:(category, title, data, categorySelect) => {
     return `
-    <div class="writting-area">
-      <form action="/update_process/?category=${category}&title=${title}" method="post">
-        <!-- Title -->
-        <div class="title">
-          <textarea name="title" id="title-input" rows="1" cols="55" maxlength="100" placeholder="Title"
-            value="${title}" required></textarea>
-        </div>
-        <div class="border"></div>
-        <div>
-          <textarea name="content" id="contents-input" style="white-space: pre-wrap;" 
-          value="${data}" required></textarea>
-        </div>
-        <div class="border"></div>
+    <div style="width: 100%; height: 1070px; position: relative;">
+      <form action="/update_process/?category=${category}&title=${title}" method="post" style="width: 70%; height: 950px; position: absolute; left: 0; right: 0; margin: 30px auto 90px auto;">
+        <textarea name="title" rows="1" cols="55" placeholder="Title" maxlength="100" style="width: 100%; height: 50px; background-color: white; border: none; font-size: 20px;
+        line-height: 30px;
+        padding: 10px;
+        overflow: hidden;" value="${title}" required></textarea>
+
+        <div style="width: 100%;
+        height: 1px;
+        background-color: lightgray;
+        left: 0;
+        right: 0;
+        margin: 0 auto;"></div>
+
+        <textarea name="content" placeholder="Contents" style="white-space: pre-wrap;
+        width: 100%;
+        height: 700px;
+        background-color: white;
+        border: none;
+        font-size: 15px;
+        padding: 10px;" value="${data}" required></textarea>
+
+        <div style="width: 100%;
+        height: 1px;
+        background-color: lightgray;
+        left: 0;
+        right: 0;
+        margin: 0 auto;"></div>
+
+        <textarea name="subcategory" id="title-input" rows="1" cols="55" placeholder="Sub-Category" maxlength="100" style="width: 100%; height: 50px; background-color: white; border: none; font-size: 15px;
+        line-height: 30px;
+        padding: 10px;
+        overflow: hidden;"></textarea>
+
+        <div style="width: 100%;
+        height: 1px;
+        background-color: lightgray;
+        left: 0;
+        right: 0;
+        margin: 0 auto;"></div>
+
+        <!-- Categoties -->
         <div class="category">
           <select name="category" id="category-input" required>
             <option value="Frontend" ${categorySelect.frontend}>Frontend</option>
@@ -186,12 +215,11 @@ module.exports = {
             <option value="CS" ${categorySelect.cs}>CS</option>
           </select>
         </div>
-        <div class="br"></div>
-        <div class="br"></div>
-        <div class="br"></div>
-        <div style="position: relative; height: 30px;">
-          <button type="submit" class="post-button">Post</button>
-        </div>
+
+        <!-- Post Button -->
+        <button type="submit" class="post-button">
+          Post
+        </button>
       </form>
     </div>
     `;

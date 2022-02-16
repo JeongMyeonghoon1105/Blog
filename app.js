@@ -320,6 +320,7 @@ var app = http.createServer((request, response) => {
       var title = post.title;
       var content = post.content;
       var category = post.category;
+      var subcategory = post.subcategory;
       // DB에서 데이터 불러오기
       db.query(`SELECT category, title, content, trash FROM topic`, (error, topics) => {
         // 예외 처리
@@ -333,7 +334,7 @@ var app = http.createServer((request, response) => {
           }
         });
         // 포스팅할 데이터를 DB에 입력
-        db.query(`INSERT INTO topic (category, title, content, date) VALUES(?, ?, ?, NOW())`, [category, title, template.writeContainer(content)],
+        db.query(`INSERT INTO topic (category, title, content, date, subcategory) VALUES(?, ?, ?, NOW(), ?)`, [category, title, template.writeContainer(content), subcategory],
         // 작성한 게시물의 카테고리와 제목이 기존 게시물과 중복되면 강제로 에러를 발생시키기
         (error) => {
           if (error) {
@@ -416,6 +417,7 @@ var app = http.createServer((request, response) => {
       var title = post.title;
       var content = post.content;
       var category = post.category;
+      var subcategory = post.subcategory;
       // 기존 게시물(수정 전 게시물)을 삭제
       db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='0'`,
         (error) => {
@@ -424,7 +426,7 @@ var app = http.createServer((request, response) => {
             throw error;
           }
           // 수정할 데이터를 DB에 입력
-          db.query(`INSERT INTO topic (category, title, content, date) VALUES(?, ?, ?, NOW())`, [category, title, template.writeContainer(content)],
+          db.query(`INSERT INTO topic (category, title, content, date, subcategory) VALUES(?, ?, ?, NOW(), ?)`, [category, title, template.writeContainer(content), subcategory],
             (error) => {
               // 예외 처리
               if (error) {
