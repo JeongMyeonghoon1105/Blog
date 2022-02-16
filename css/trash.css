@@ -169,27 +169,7 @@
 }
 
 @media screen and (max-width: 225px) {
-  .wrap .inner .card .description-area {
-    display: none;
-  }
-
-  .posting-item {
-    display: none;
-  }
-
-  .posting-container {
-    display: none;
-  }
-
-  .posting-content {
-    display: none;
-  }
-
-  .delete_button {
-    display: none;
-  }
-
-  .notice {
+  .wrap .inner .card {
     display: none;
   }
 }

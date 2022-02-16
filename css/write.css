@@ -49,7 +49,7 @@ textarea {
 }
 
 .category {
-  width: 100%;
+  width: 98%;
   height: 40px;
   background-color: white;
 
@@ -122,11 +122,7 @@ textarea {
 }
 
 @media screen and (max-width: 225px) {
-  .wrap .inner .card .description-area {
-    display: none;
-  }
-
-  .wrap .inner .card .writting-area {
+  .wrap .inner .card {
     display: none;
   }
 }
