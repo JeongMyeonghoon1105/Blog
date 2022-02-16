@@ -161,7 +161,7 @@
 
 /* MEDIA QUERY */
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1250px) {
   .wrap {
     width: 100vw;
   }

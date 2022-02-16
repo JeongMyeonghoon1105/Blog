@@ -129,9 +129,9 @@ module.exports = {
           }
         })
 
-        /* Tab Down 표출된 상황에서 VW를 1200px 이상으로 늘릴 시 Tab Down 숨기기 */
+        /* Tab Down 표출된 상황에서 VW를 1250px 이상으로 늘릴 시 Tab Down 숨기기 */
         window.addEventListener('resize', () => {
-          if (window.innerWidth > 1200) {
+          if (window.innerWidth > 1250) {
             /* Menu Icon 복구 */
             menuIcon.className = 'fas fa-bars';
             menuIcon.setAttribute('style', 'font-size: 23px;');

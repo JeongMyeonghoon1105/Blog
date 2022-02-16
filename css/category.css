@@ -8,7 +8,7 @@
   display: flex;
 
   /* 기본 */
-  width: 1200px;
+  width: 1250px;
   min-height: var(--contents-height);
 }
 
@@ -133,7 +133,7 @@
 
 /* MEDIA QUERY */
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1250px) {
   .wrap {
     width: 100vw;
   }

@@ -1,28 +1,28 @@
 .menu {
   /* 기본 */
-  width: 170px;
+  width: 145px;
   height: 400px;
   background-color: var(--bg-color);
 
   /* 정렬 */
   position: absolute;
   top: 120px;
-  left: 1070px;
+  left: 1095px;
 }
 
 .menu .contents {
   /* 기본 */
-  width: 140px;
+  width: 125px;
   height: 450px;
   background-color: var(--bg-color);
 
   /* 정렬 */
-  margin: 10px 50px 10px 10px;
+  margin: 10px;
 }
 
 #search-container {
   /* 기본 */
-  width: 148px;
+  width: 133px;
   height: 25px;
   background-color: white;
 
@@ -33,12 +33,12 @@
   /* 정렬 */
   position: absolute;
   top: 80px;
-  left: 1075px;
+  left: 1100px;
 }
 
 #search-bar {
   /* 기본 */
-  width: 122px;
+  width: 107px;
   height: 20px;
   background-color: white;
 
@@ -113,7 +113,7 @@
   font-weight: bold;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1250px) {
   .menu {
     display: none;
   }

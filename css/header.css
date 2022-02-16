@@ -36,7 +36,7 @@ header .inner .logo img {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 19px;
+  left: 15px;
   margin: auto;
 }
 
@@ -317,7 +317,7 @@ header .inner #hidden-menu i {
 
 /* MEDIA QUERY */
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1250px) {
 
   #tab-down,
   #tab-down-inner,
@@ -327,7 +327,7 @@ header .inner #hidden-menu i {
   #tab-items li a,
   #tab-post-container {
     /* 기본 */
-    width: 1200px;
+    width: 1250px;
 
     /* 정렬 */
     margin-right: 0;
@@ -335,7 +335,7 @@ header .inner #hidden-menu i {
 
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1250px) {
   header .inner {
     width: 100vw;
   }
