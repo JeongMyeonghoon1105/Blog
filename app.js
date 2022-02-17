@@ -224,40 +224,48 @@ var app = http.createServer((request, response) => {
   else if (pathname == '/signin_process') {
     // 로그인
     if (signIn == 0) {
-      // 비밀번호가 저장된 파일 읽어오기
-      var password = fs.readFileSync('./password', 'utf8');
-      // 폼에서 제출한 데이터를 분석하여 저장할 변수
-      var body = ""
-      // 포스팅할 데이터를 요청해 변수에 저장
-      request.on('data', (data) => {
-        // 요청한 데이터를 변수에 덧붙이기
-        body = body + data;
-        // 포스팅할 게시물 길이가 너무 길어질 경우 커넥션 파괴
-        if (body.length > 1e6) {
-          request.connection.destroy();
-        }
-      });
-      // 입력한 비밀번호를 실제 비밀번호와 대조
-      request.on('end', () => {
-        // 폼에서 제출한 데이터를 분석
-        var post = qs.parse(body);
-        var input_password = post.password;
-        // 입력한 비밀번호가 실제 비밀번호와 일치하면 로그인 처리 진행 및 메인 화면으로 리다이렉트
-        if (password == input_password) {
-          // 로그인 처리
-          signIn = 1;
-          // 메인 페이지로 리다이렉트
-          response.writeHead(302, {
-            Location: encodeURI('/')
-          });
-        }
-        // 입력한 비밀번호가 실제 비밀번호와 일치하지 않으면 로그인 화면으로 리다이렉트
-        else {
-          response.writeHead(302, {
-            Location: encodeURI('/signin')
-          });
-        }
-        response.end();
+      var password = '';
+      // 비밀번호를 DB에서 읽어오기
+      db.query(`SELECT name, password FROM user`, (error, topics) => {
+        topics.forEach((element) => {
+          if (element.name == 'Daniel') {
+            password = element.password;
+          }
+        });
+
+        // 폼에서 제출한 데이터를 분석하여 저장할 변수
+        var body = ""
+        // 포스팅할 데이터를 요청해 변수에 저장
+        request.on('data', (data) => {
+          // 요청한 데이터를 변수에 덧붙이기
+          body = body + data;
+          // 포스팅할 게시물 길이가 너무 길어질 경우 커넥션 파괴
+          if (body.length > 1e6) {
+            request.connection.destroy();
+          }
+        });
+        // 입력한 비밀번호를 실제 비밀번호와 대조
+        request.on('end', () => {
+          // 폼에서 제출한 데이터를 분석
+          var post = qs.parse(body);
+          var input_password = post.password;
+          // 입력한 비밀번호가 실제 비밀번호와 일치하면 로그인 처리 진행 및 메인 화면으로 리다이렉트
+          if (password == input_password) {
+            // 로그인 처리
+            signIn = 1;
+            // 메인 페이지로 리다이렉트
+            response.writeHead(302, {
+              Location: encodeURI('/')
+            });
+          }
+          // 입력한 비밀번호가 실제 비밀번호와 일치하지 않으면 로그인 화면으로 리다이렉트
+          else {
+            response.writeHead(302, {
+              Location: encodeURI('/signin')
+            });
+          }
+          response.end();
+        });
       });
     }
     // 로그아웃
