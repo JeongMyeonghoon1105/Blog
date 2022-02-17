@@ -53,7 +53,7 @@ module.exports = {
           <!-- CARD -->
           <div class="card" style="${variousStyle.cardStyle}">${card}</div>
           <!-- SEARCH BAR -->
-          <h1 id="search-title">Search</h1><br>
+          <h1 id="search-title" style="${variousStyle.menuStyle}">Search</h1><br>
           <form action="/search/" method="post" id="search-container" style="${variousStyle.menuStyle}">
             <input type="text" name="title" id="search-bar" placeholder="Search">
             <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
