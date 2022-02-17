@@ -199,28 +199,12 @@ module.exports = {
   // 카테고리 페이지 내부 각 아이템(각 게시물로 연결되는 링크)
   postingItem:(category, title, date, logoImage) => {
     return `
-    <!-- 
-    <div class="posting-item">
-      <div class="posting-container">
-        <a href="/?category=${category}&title=${title}" class="posting-content">
-          ${title}
-        </a>
-        <div class="posting-date">${date}</div>
-      </div>
-    </div>
-    -->
-
-    <a href="/?category=${category}&title=${title}" style="display: flex; width: 70%; height: 100px; margin: 30px auto;">
-      <div style="width: 100px; background-color: white; border: none;">
-        <img src="${logoImage}" alt="" style="width: 100px; height: 97px; border: none; border-radius: 50px;">
-      </div>
-      <div style="width: 80%; margin-left: 25px;">
-        <div style="width: 100%; border-bottom: 2px solid lightgray; padding: 14px 0;">
-          ${title}
-        </div>
-        <div style="width: 100%; padding: 10px 0; font-size: 10px;">
-          ${date}
-        </div>
+    <a href="/?category=${category}&title=${title}" style="margin: 0 0 50px 0;">
+      <img src="${logoImage}" alt="" style="width: 375px; height: 225px;">
+      <div class="item-text">
+        <text class="item-text-title">${title}</text>
+        <div class="between-padding"></div>
+        ${date}
       </div>
     </a>
     `;

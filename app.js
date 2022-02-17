@@ -131,33 +131,44 @@ var app = http.createServer((request, response) => {
           throw error;
         }
         // CARD
-        var card = template.descriptionArea(queryData.category);
+        var card = `
+        <div class="description-area">
+          <h1 style="font-size: 20px; font-weight: bold; font-family: 'Nanum Gothic', 'sans-serif';">
+            ${queryData.category}
+          </h1>
+        </div>`
+        card = card + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">'
         // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
-        var categoryEmpty = 0;
+        var categoryItems = 0;
         topics.forEach((element) => {
           if ((element.category == queryData.category) && (element.trash != 1)) {
+            categoryItems = categoryItems + 1;
             if (element.subcategory == '-') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/basicLogo.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
             } else if (element.subcategory == 'React') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/React_sub.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/React_alter.png?raw=true';
             } else if (element.subcategory == 'Python') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
             } else if (element.subcategory == 'Github') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/github_sub.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
             } else if (element.subcategory == 'DS') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Data_Structure.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
             } else if (element.subcategory == 'Algorithm') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Algorithm_sub.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
             } else {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/basicLogo.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
             }
             card = card + template.postingItem(queryData.category, element.title, element.date, logoImage);
-            categoryEmpty = 1;
           }
         });
-        // 카테고리에 게시물이 존재하지 않을 경우, 안내 메시지 표시
-        if (categoryEmpty == 0) {
+        card = card + '</div>'
+        // Card Height 계산 및 게시물 없을 시 안내 메시지 출력
+        if (categoryItems == 0) {
           card = card + template.notice(`No Results in ${queryData.category} Category`);
+        } else if (categoryItems%2 == 0) {
+          variousStyle.cardStyle = `height: ${categoryItems/2*385+90}px`;
+        } else {
+          variousStyle.cardStyle = `height: ${(parseInt(categoryItems/2)+1)*385+90}px`;
         }
         // MENU
         menuCount(topics, postingCount);
@@ -617,30 +628,31 @@ var app = http.createServer((request, response) => {
         }
         // CARD
         var card = template.descriptionArea('Search Results');
+        card = card + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">'
         // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
         var categoryEmpty = 0;
         topics.forEach((element) => {
           if (element.trash != 1) {
             if (element.subcategory == '-') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/basicLogo.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
             } else if (element.subcategory == 'React') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/React_sub.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/React_alter.png?raw=true';
             } else if (element.subcategory == 'Python') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/python.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
             } else if (element.subcategory == 'Github') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/github_sub.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
             } else if (element.subcategory == 'DS') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Data_Structure.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
             } else if (element.subcategory == 'Algorithm') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Algorithm_sub.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
             } else {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/basicLogo.png?raw=true';
+              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
             }
-            
             card = card + template.postingItem(element.category, element.title, element.date, logoImage);
             categoryEmpty = 1;
           }
         });
+        card = card + '</div>'
         // 카테고리에 게시물이 존재하지 않을 경우, 안내 메시지 표시
         if (categoryEmpty == 0) {
           card = card + template.notice('No Results');
