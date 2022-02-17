@@ -152,9 +152,12 @@
 
   /* 정렬 */
   padding: 15px;
+
+  position: relative;
 }
 
 .item-text .item-text-title {
+  display: inline-block;
   font-size: 19px;
   line-height: 35px;
 }
@@ -178,7 +181,6 @@
   line-height: 20px;
 
   /* 정렬 */
-  justify-content: flex-end;
   margin: 0;
 }
 

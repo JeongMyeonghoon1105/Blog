@@ -216,9 +216,9 @@ module.exports = {
       <a href="/?category=${category}&title=${title}">
         <img src="${logoImage}" alt="" style="width: 375px; height: 225px;">
       </a>
-      <div class="item-text">
-        <text class="item-text-title">${title}</text>
-        <div style="display: flex;">
+      <div class="item-text" style="height: 50px;">
+        <a href="/?category=${category}&title=${title}" class="item-text-title">${title}</a>
+        <div style="display: flex; position: absolute; bottom: 0; padding-bottom: 10px;">
           <a class="delete-button" href="/clear_process/?category=${category}&title=${title}">
             DELETE
           </a>
