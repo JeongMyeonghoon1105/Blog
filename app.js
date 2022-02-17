@@ -131,12 +131,7 @@ var app = http.createServer((request, response) => {
           throw error;
         }
         // CARD
-        var card = `
-        <div class="description-area">
-          <h1 style="font-size: 20px; font-weight: bold; font-family: 'Nanum Gothic', 'sans-serif';">
-            ${queryData.category}
-          </h1>
-        </div>`
+        var card = template.descriptionArea(queryData.category);
         card = card + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">'
         // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
         var categoryItems = 0;
@@ -192,7 +187,7 @@ var app = http.createServer((request, response) => {
         var card = '';
         // 선택한 게시물을 DB에서 찾기
         topics.forEach((element) => {
-          if ((element.category == queryData.category) && (element.title == queryData.title) && (element.trash != 1)) {
+          if ((element.category == queryData.category) && (element.title == queryData.title)) {
             // 게시물의 소스코드를 소독
             card = card + sanitizeHtml(template.postContainer(element.title, element.content), {
               allowedTags: ['div', 'h1', 'h2', 'h3', 'img', 'text', 'i', 'a', 'button', 'input', 'br', 'iframe'],
@@ -488,41 +483,56 @@ var app = http.createServer((request, response) => {
     // 미확인 사용자의 접속 시도 차단
     access_deny();
     // STYLE
-    style = style + fs.readFileSync('./css/trash.css', 'utf8');
+    style = style + fs.readFileSync('./css/category.css', 'utf8');
     // CARD
     var card = template.descriptionArea('Trash');
     // DB에서 데이터 불러오기
-    db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
+    db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
       // 예외 처리
       if (error) {
         throw error;
       }
-      // 휴지통이 비었는지 검사할 때 사용할 변수
-      var trashEmpty = 0;
-      // 현재 카테고리에 이미 게시물이 존재할 때, 게시물 목록 표시
+      // CARD
+      var card = template.descriptionArea('Trash');
+      card = card + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">'
+      // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
+      var categoryItems = 0;
       topics.forEach((element) => {
         if (element.trash == 1) {
-          card = card + template.trashItem(element.category, element.title);
-          trashEmpty = 1;
+          categoryItems = categoryItems + 1;
+          if (element.subcategory == '-') {
+            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
+          } else if (element.subcategory == 'React') {
+            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/React_alter.png?raw=true';
+          } else if (element.subcategory == 'Python') {
+            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
+          } else if (element.subcategory == 'Github') {
+            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
+          } else if (element.subcategory == 'DS') {
+            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
+          } else if (element.subcategory == 'Algorithm') {
+            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
+          } else {
+            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
+          }
+          card = card + template.trashItem(element.category, element.title, logoImage);
         }
       });
-      // 휴지통이 비었을 때, 안내 메시지 표시
-      if (trashEmpty == 0) {
+      card = card + '</div>'
+      // Card Height 계산 및 게시물 없을 시 안내 메시지 출력
+      if (categoryItems == 0) {
         card = card + template.notice('No Results in Trash');
+      } else if (categoryItems%2 == 0) {
+        variousStyle.cardStyle = `height: ${categoryItems/2*385+90}px`;
+      } else {
+        variousStyle.cardStyle = `height: ${(parseInt(categoryItems/2)+1)*385+90}px`;
       }
-      // DB에서 데이터 불러오기
-      db.query(`SELECT category, trash FROM topic`, (error, topics) => {
-        // 예외 처리
-        if (error) {
-          throw error;
-        }
-        // MENU
-        menuCount(topics, postingCount);
-        var categoryList = template.list(postingCount, display);
-        // 페이지 로드
-        response.writeHead(200);
-        response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js));
-      })
+      // MENU
+      menuCount(topics, postingCount);
+      var categoryList = template.list(postingCount, display);
+      // 페이지 로드
+      response.writeHead(200);
+      response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js));
     })
   }
   // 휴지통에 담긴 게시물
@@ -630,9 +640,10 @@ var app = http.createServer((request, response) => {
         var card = template.descriptionArea('Search Results');
         card = card + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">'
         // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
-        var categoryEmpty = 0;
+        var categoryItems = 0;
         topics.forEach((element) => {
           if (element.trash != 1) {
+            categoryItems = categoryItems + 1;
             if (element.subcategory == '-') {
               logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
             } else if (element.subcategory == 'React') {
@@ -653,9 +664,13 @@ var app = http.createServer((request, response) => {
           }
         });
         card = card + '</div>'
-        // 카테고리에 게시물이 존재하지 않을 경우, 안내 메시지 표시
-        if (categoryEmpty == 0) {
+        // Card Height 계산 및 게시물 없을 시 안내 메시지 출력
+        if (categoryItems == 0) {
           card = card + template.notice('No Results');
+        } else if (categoryItems%2 == 0) {
+          variousStyle.cardStyle = `height: ${categoryItems/2*385+90}px`;
+        } else {
+          variousStyle.cardStyle = `height: ${(parseInt(categoryItems/2)+1)*385+90}px`;
         }
         // MENU
         menuCount(topics, postingCount);

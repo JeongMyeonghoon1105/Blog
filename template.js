@@ -210,14 +210,15 @@ module.exports = {
     `;
   },
   // 휴지통 페이지 내부 각 아이템(각 게시물로 연결되는 링크)
-  trashItem:(category, title) => {
+  trashItem:(category, title, logoImage) => {
     return `
-    <div class="posting-item">
-      <div class="posting-container">
-        <a href="/trash/?category=${category}&title=${title}" class="posting-content">
-          ${title}
-        </a>
-        <div style="display: flex; min-width: 90px;">
+    <div style="margin: 0 0 50px 0;">
+      <a href="/?category=${category}&title=${title}">
+        <img src="${logoImage}" alt="" style="width: 375px; height: 225px;">
+      </a>
+      <div class="item-text">
+        <text class="item-text-title">${title}</text>
+        <div style="display: flex;">
           <a class="delete-button" href="/clear_process/?category=${category}&title=${title}">
             DELETE
           </a>
