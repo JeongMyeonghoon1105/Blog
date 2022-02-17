@@ -53,6 +53,7 @@ module.exports = {
           <!-- CARD -->
           <div class="card" style="${variousStyle.cardStyle}">${card}</div>
           <!-- SEARCH BAR -->
+          <h1 id="search-title">Search</h1><br>
           <form action="/search/" method="post" id="search-container" style="${variousStyle.menuStyle}">
             <input type="text" name="title" id="search-bar" placeholder="Search">
             <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -60,8 +61,8 @@ module.exports = {
           <!-- MENU -->
           <div class="menu" style="${variousStyle.menuStyle}">
             <div class="contents">
-              <h1>Menu</h1><br>
-              <ul style="list-style-type: none; font-size: 15px;">
+              <h1>Menu</h1>
+              <ul style="list-style-type: none; font-size: 14px; padding-top: 10px;">
                 ${categoryList}
               </ul><br>
               <h2 style="display: ${display}; font-weight: bold; cursor: pointer;" onclick="location.href='/post'">
