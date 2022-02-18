@@ -4,22 +4,18 @@
 }
 
 .wrap .inner {
-  /* Display */
   display: flex;
 
-  /* 기본 */
   width: 1250px;
   min-height: var(--contents-height);
   background-color: var(--bg-color);
 }
 
 .wrap .inner .card {
-  /* 기본 */
   width: 900px;
   min-height: var(--contents-height);
   background-color: var(--card-color);
 
-  /* 정렬 */
   position: relative;
   top: 0;
   margin: 0 auto;
@@ -30,11 +26,9 @@
 }
 
 .post-title {
-  /* 텍스트 */
   font-size: 30px;
   font-weight: bold;
 
-  /* 기타 */
   overflow-x: hidden;
 }
 
@@ -45,10 +39,8 @@
 }
 
 .post-contents {
-  /* 텍스트 */
   font-size: 20px;
 
-  /* 기타 */
   overflow-x: hidden;
 }
 
@@ -57,25 +49,20 @@
 }
 
 .button-container {
-  /* Display */
   display: flex;
 
-  /* 기본 */
   width: 800px;
   height: 20px;
 
-  /* 정렬 */
   left: 0;
   bottom: 0;
   margin: 50px;
 }
 
 .update-delete-button {
-  /* 기본 */
   width: 60px;
   height: 20px;
 
-  /* 텍스트 */
   font-size: 15px;
   text-align: center;
 }
@@ -92,10 +79,8 @@
   }
 
   .wrap .inner .card {
-    /* 기본 */
     width: 100vw;
 
-    /* 정렬 */
     left: 0;
   }
 

@@ -4,36 +4,29 @@
 }
 
 .wrap .inner {
-  /* Display */
   display: flex;
 
-  /* 기본 */
   width: 1250px;
   min-height: var(--contents-height);
   background-color: var(--bg-color);
 }
 
 .wrap .inner .card {
-  /* 기본 */
   width: 900px;
   min-height: var(--contents-height);
   background-color: var(--card-color);
 
-  /* 정렬 */
   position: relative;
   top: 0;
   margin: 0 auto;
 }
 
 .wrap .inner .card .description-area {
-  /* 기본 */
   width: 70%;
   height: 30px;
 
-  /* 텍스트 */
   line-height: 30px;
 
-  /* 정렬 */
   margin: 50px auto 0 auto;
   padding-left: 10px;
 }
@@ -168,10 +161,8 @@ textarea {
   }
 
   .wrap .inner .card {
-    /* 기본 */
     width: 100vw;
 
-    /* 정렬 */
     left: 0;
   }
 }

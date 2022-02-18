@@ -4,38 +4,31 @@
 }
 
 .wrap .inner {
-  /* Display */
   display: flex;
 
-  /* 기본 */
   width: 100vw;
   min-height: var(--contents-height);
   background-color: var(--bg-color);
 }
 
 .wrap .inner .card {
-  /* 기본 */
   width: 100vw;
   min-height: var(--contents-height);
   background-color: var(--card-color);
 
-  /* 정렬 */
   position: relative;
   top: 0;
   margin: 0 auto;
 }
 
 .wrap .wrap-deco {
-  /* 기본 */
   width: 0px;
   height: 0px;
 
-  /* 테두리 */
   border-bottom: 500px solid rgb(220, 220, 245);
   border-right: 0px solid transparent;
   border-left: 1000px solid transparent;
 
-  /* 정렬 */
   position: absolute;
   bottom: 0;
   right: 0;
@@ -43,14 +36,11 @@
 }
 
 .signin-container {
-  /* Display */
   display: flex;
 
-  /* 기본 */
   width: 900px;
   height: 500px;
 
-  /* 정렬 */
   position: absolute;
   top: 0;
   bottom: 0;
@@ -71,24 +61,19 @@
 }
 
 .signin-main {
-  /* 기본 */
   width: 50%;
   height: 100%;
   background-color: white;
 
-  /* 정렬 */
   position: relative;
 }
 
 .wrap .inner .card .description-area {
-  /* 기본 */
   width: 350px;
   height: 30px;
 
-  /* 텍스트 */
   line-height: 30px;
 
-  /* 정렬 */
   margin: 60px auto 0 auto;
 }
 
@@ -99,12 +84,10 @@
 }
 
 .sign-in-form {
-  /* 기본 */
   width: 375px;
   height: 230px;
   background-color: white;
 
-  /* 정렬 */
   position: absolute;
   left: 0;
   right: 0;
@@ -112,50 +95,38 @@
 }
 
 .password {
-  /* 기본 */
   width: 350px;
   height: 50px;
   background-color: white;
 
-  /* 테두리 */
   border-bottom: 2px solid gray;
 
-  /* 정렬 */
   margin: 50px auto;
 }
 
 .password-textarea {
-  /* 기본 */
   width: 350px;
   height: 50px;
 
-  /* 테두리 */
   border: none;
 
-  /* 텍스트 */
   line-height: 50px;
 
-  /* 기타 */
   overflow: hidden;
 }
 
 .sign-in-button {
-  /* 기본 */
   width: 85px;
   height: 30px;
   background-color: rgb(100, 100, 220);
 
-  /* 테두리 */
   border: none;
   border-radius: 5px;
 
-  /* 텍스트 */
   color: white;
 
-  /* 정렬 */
   margin-left: 12px;
 
-  /* 기타 */
   cursor: pointer;
 }
 
@@ -171,10 +142,8 @@
   }
 
   .wrap .inner .card {
-    /* 기본 */
     width: 100vw;
 
-    /* 정렬 */
     left: 0;
   }
 
@@ -185,10 +154,8 @@
   }
 
   .signin-container {
-    /* Display */
     display: block;
 
-    /* 기본 */
     width: 450px;
   }
 
@@ -201,13 +168,10 @@
   }
 
   .wrap .inner .card .description-area {
-    /* 기본 */
     height: 30px;
 
-    /* 텍스트 */
     line-height: 30px;
 
-    /* 정렬 */
     margin: 0 auto;
     padding-top: 60px;
   }
@@ -215,10 +179,8 @@
 
 @media screen and (max-width: 600px) {
   .signin-container {
-    /* Display */
     display: block;
 
-    /* 기본 */
     width: 70%;
   }
 
@@ -227,14 +189,11 @@
   }
 
   .wrap .inner .card .description-area {
-    /* 기본 */
     width: 70%;
     height: 30px;
 
-    /* 텍스트 */
     line-height: 30px;
 
-    /* 정렬 */
     margin: 0 auto;
     padding-top: 60px;
   }
