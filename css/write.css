@@ -110,7 +110,7 @@ textarea {
   left: 0;
   right: 0;
   bottom: 100px;
-  margin: 0 7px;
+  margin: 0;
 }
 
 #category-input {
@@ -122,6 +122,8 @@ textarea {
 
   color: gray;
   font-size: 15px;
+
+  margin: 0;
 }
 
 .post-button {
