@@ -1,19 +1,23 @@
 .menu {
   width: 145px;
-  height: 400px;
+  height: 50vh;
   background-color: var(--bg-color);
 
   position: absolute;
   top: 160px;
   left: 1095px;
+
+  overflow: hidden;
 }
 
 .menu .contents {
   width: 125px;
-  height: 450px;
+  height: 50vh;
   background-color: var(--bg-color);
 
   margin: 10px;
+
+  overflow: hidden;
 }
 
 #search-title {
@@ -112,9 +116,13 @@
 }
 
 @media screen and (max-width: 1250px) {
-  .menu {
+
+  .menu,
+  #search-title,
+  #search-container {
     display: none;
   }
+
 }
 
 @media screen and (max-width: 850px) {
