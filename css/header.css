@@ -1,21 +1,16 @@
 header {
-  /* 기본 */
   width: 100vw;
   height: 60px;
   background-color: white;
 
-  /* 테두리 */
   border-bottom: 2px solid var(--bg-color);
 
-  /* 정렬 */
   position: relative;
 }
 
 header .inner {
-  /* 기본 */
   height: 60px;
 
-  /* 정렬 */
   position: absolute;
   top: 0;
   left: 0;
@@ -28,11 +23,9 @@ header .inner .logo {
 }
 
 header .inner .logo img {
-  /* 기본 */
   width: 123px;
   height: 30px;
 
-  /* 정렬 */
   position: absolute;
   top: 0;
   bottom: 0;
@@ -40,17 +33,12 @@ header .inner .logo img {
   margin: auto;
 }
 
-/* HEADER - 메인 메뉴 */
-
 header .inner .main-menu {
-  /* Display */
   display: flex;
 
-  /* 기본 */
   width: 240px;
   height: 60px;
 
-  /* 정렬 */
   position: absolute;
   top: 0;
   bottom: 0;
@@ -59,19 +47,16 @@ header .inner .main-menu {
 }
 
 header .inner .item {
-  /* 기본 */
   width: 60px;
   height: 60px;
   background-color: white;
 
-  /* 텍스트 */
   color: gray;
   font-size: 23px;
   text-align: center;
 
   right: 0;
 
-  /* 기타 */
   transition: 0.05s;
   cursor: pointer;
 }
@@ -81,10 +66,8 @@ header .inner .main-menu .item i {
 }
 
 header .inner .main-menu #search {
-  /* 기본 */
   background-color: white;
 
-  /* 텍스트 */
   font-size: 16px;
 }
 
@@ -142,10 +125,8 @@ header .inner .main-menu #sign-in:hover {
 }
 
 header .inner #hidden-menu {
-  /* Display */
   display: none;
 
-  /* 정렬 */
   position: absolute;
   top: 0;
   bottom: 0;
@@ -160,15 +141,12 @@ header .inner #hidden-menu i {
 }
 
 #tab-down {
-  /* Display */
   display: block;
 
-  /* 기본 */
   width: 100vw;
   height: 0;
   background-color: rgb(57, 57, 57);
 
-  /* 정렬 */
   position: absolute;
   top: 60px;
   left: 0;
@@ -179,28 +157,21 @@ header .inner #hidden-menu i {
 }
 
 #tab-down-inner {
-  /* 기본 */
   width: 100vw;
   height: 230px;
 
-  /* 텍스트 */
   color: white;
 
-  /* 기타 */
   pointer-events: none;
 }
 
 #tab-sign {
-  /* Display */
   display: block;
 
-  /* 텍스트 */
   font-weight: bold;
 
-  /* 정렬 */
   padding: 20px;
 
-  /* 기타 */
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
@@ -209,96 +180,74 @@ header .inner #hidden-menu i {
 #tab-search-container {
   display: flex;
 
-  /* 정렬 */
   padding: 20px;
 
-  /* 기타 */
   opacity: 0;
   pointer-events: none;
 }
 
 #tab-search {
-  /* 기본 */
   width: 200px;
   height: 30px;
   background-color: rgb(83, 81, 81);
 
   color: white;
 
-  /* 테두리 */
   border: none;
   border-radius: 10px;
 
-  /* 기타 */
   opacity: 0;
   pointer-events: none;
 }
 
 #tab-items {
-  /* 텍스트 */
   font-size: 15px;
 
-  /* 정렬 */
   padding: 0 20px;
 
-  /* 기타 */
   list-style-type: none;
   opacity: 0;
   pointer-events: none;
 }
 
 #tab-items li a {
-  /* Display */
   display: block;
 
-  /* 텍스트 */
   color: white;
 }
 
 #tab-post-container {
-  /* Display */
   display: block;
 
-  /* 기본 */
   height: 22px;
 
-  /* 정렬 */
   padding: 20px 20px 0 20px;
 
-  /* 기타 */
   opacity: 0;
   pointer-events: none;
 }
 
 .tab-post-button {
-  /* 기본 */
   width: 100%;
 
-  /* 텍스트 */
   color: white;
   font-weight: bold;
 
-  /* 기타 */
   cursor: pointer;
 }
 
 .tab-search-button {
-  /* 기본 */
   width: 30px;
   height: 30px;
   background-color: rgb(122, 121, 121);
 
-  /* 테두리 */
   border: none;
   border-radius: 50px;
 
-  /* 정렬 */
   margin-left: 10px;
 
-  /* 텍스트 */
   color: white;
 
-  /* 기타 */
   cursor: pointer;
 }
 
@@ -326,10 +275,8 @@ header .inner #hidden-menu i {
   #tab-items li,
   #tab-items li a,
   #tab-post-container {
-    /* 기본 */
     width: 1200px;
 
-    /* 정렬 */
     margin-right: 0;
   }
 

@@ -4,34 +4,27 @@
 }
 
 .wrap .inner {
-  /* Display */
   display: flex;
 
-  /* 기본 */
   width: 1250px;
   height: 1910px;
 }
 
 .wrap .inner .card {
-  /* 기본 */
   width: 900px;
   height: 1910px;
   background-color: var(--card-color);
 
-  /* 정렬 */
   position: relative;
   top: 0;
   margin: 0 auto;
 }
 
 .wrap .inner .card .description-area {
-  /* 기본 */
   height: 30px;
 
-  /* 텍스트 */
   line-height: 30px;
 
-  /* 정렬 */
   margin: 30px 50px 0 50px;
 }
 
@@ -42,13 +35,10 @@
 }
 
 .wrap .inner .card .row {
-  /* Display */
   display: flex;
 
-  /* 기본 */
   height: 1820px;
 
-  /* 정렬 */
   margin: 30px 50px;
 }
 
@@ -57,20 +47,16 @@
 }
 
 .wrap .inner .card .row .column .column-left-items {
-  /* 기본 */
   width: 375px;
   height: 375px;
 
-  /* 정렬 */
   margin: 0 25px 50px 0;
 }
 
 .wrap .inner .card .row .column .column-right-items {
-  /* 기본 */
   width: 375px;
   height: 375px;
 
-  /* 정렬 */
   margin: 0 0 50px 25px;
 }
 
@@ -88,12 +74,10 @@
 }
 
 .wrap .inner .card .row .column .item-text {
-  /* 기본 */
   width: 345px;
   height: 120px;
   background-color: white;
 
-  /* 정렬 */
   padding: 15px;
 }
 
@@ -119,26 +103,23 @@
   }
 
   .wrap .inner .card {
-    /* 기본 */
     width: 100vw;
 
-    /* 정렬 */
+
     left: 0;
   }
 
   .wrap .inner .card .description-area {
-    /* 기본 */
     width: 800px;
 
-    /* 정렬 */
+
     margin: 30px auto 0 auto;
   }
 
   .wrap .inner .card .row {
-    /* 기본 */
     width: 800px;
 
-    /* 정렬 */
+
     position: absolute;
     left: 0;
     right: 0;
@@ -156,18 +137,15 @@
   }
 
   .wrap .inner .card .description-area {
-    /* 기본 */
     width: 600px;
 
-    /* 정렬 */
+
     margin: 30px auto 0 auto;
   }
 
   .wrap .inner .card .row {
-    /* Display */
     display: block;
 
-    /* 기본 */
     width: 600px;
     height: 4550px;
   }
@@ -264,7 +242,6 @@
   }
 
   .wrap .inner .card .row {
-    /* 기본 */
     width: 375px;
     height: 3470px;
   }
@@ -308,12 +285,10 @@
   }
 
   .wrap .inner .card .description-area {
-    /* 기본 */
     width: 280px;
   }
 
   .wrap .inner .card .row {
-    /* 기본 */
     width: 280px;
     height: 3014px;
   }
@@ -357,7 +332,6 @@
   }
 
   .wrap .inner .card .description-area {
-    /* 기본 */
     width: 240px;
   }
 
@@ -390,10 +364,8 @@
   }
 
   .wrap .inner .card .row .column .item-text {
-    /* 기본 */
     width: 210px;
 
-    /* 기타 */
     overflow: hidden;
   }
 

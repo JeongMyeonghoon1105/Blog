@@ -1,15 +1,12 @@
 body {
-  /* 기본 */
   width: 100vw;
 
-  /* 텍스트 */
   color: #333;
   font-size: 16px;
   font-weight: 400;
   font-family: "Nanum Gothic", sans-serif;
   line-height: 1.4;
 
-  /* 기타 */
   overflow-x: hidden;
 }
 
@@ -18,11 +15,9 @@ img {
 }
 
 a {
-  /* 텍스트 */
   color: #5C5B5B;
   text-decoration: none;
 
-  /* 기타 */
   cursor: pointer;
 }
 
@@ -31,10 +26,8 @@ i {
 }
 
 .inner {
-  /* 기본 */
   width: 1250px;
 
-  /* 정렬 */
   position: relative;
   margin: 0 auto;
 }
