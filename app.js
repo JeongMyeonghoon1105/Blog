@@ -124,11 +124,46 @@ var app = http.createServer((request, response) => {
     }
     return logoImage;
   }
-  // 예외 처리 함수
   function throwError(error) {
     if (error) {
       throw error;
     }
+  }
+  function showCategory(error,topics, card, queryData, postingOrTrash) {
+    throwError(error);
+    // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
+    var categoryItems = 0;
+    topics.forEach((element) => {
+      if (postingOrTrash == 'trash') {
+        if (element.trash == 1) {
+          categoryItems = categoryItems + 1;
+          var logoImage = selectImage(element, logoImage);
+          card = card + template.trashItem(element.category, element.title, logoImage);
+        }
+      } else if (postingOrTrash == 'posting') {
+        if ((element.category == queryData.category) && (element.trash != 1)) {
+          categoryItems = categoryItems + 1;
+          var logoImage = selectImage(element, logoImage);
+          card = card + template.postingItem(queryData.category, element.title, element.date, logoImage);
+        }
+      } else {
+        if (element.trash != 1) {
+          categoryItems = categoryItems + 1;
+          var logoImage = selectImage(element, logoImage);
+          card = card + template.postingItem(element.category, element.title, element.date, logoImage);
+        }
+      }
+    });
+    card = card + '</div>'
+    // Card Height 계산 및 게시물 없을 시 안내 메시지 출력
+    if (categoryItems == 0) {
+      card = card + template.notice('No Results');
+    } else if (categoryItems%2 == 0) {
+      variousStyle.cardStyle = `height: ${categoryItems/2*385+90}px`;
+    } else {
+      variousStyle.cardStyle = `height: ${(parseInt(categoryItems/2)+1)*385+90}px`;
+    }
+    return card;
   }
 
   // pathname이 '/'일 때(메인 페이지)
@@ -159,24 +194,7 @@ var app = http.createServer((request, response) => {
       // DB에서 데이터 불러오기
       db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
         throwError(error);
-        // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
-        var categoryItems = 0;
-        topics.forEach((element) => {
-          if ((element.category == queryData.category) && (element.trash != 1)) {
-            categoryItems = categoryItems + 1;
-            var logoImage = selectImage(element, logoImage);
-            card = card + template.postingItem(queryData.category, element.title, element.date, logoImage);
-          }
-        });
-        card = card + '</div>'
-        // Card Height 계산 및 게시물 없을 시 안내 메시지 출력
-        if (categoryItems == 0) {
-          card = card + template.notice('No Results');
-        } else if (categoryItems%2 == 0) {
-          variousStyle.cardStyle = `height: ${categoryItems/2*385+90}px`;
-        } else {
-          variousStyle.cardStyle = `height: ${(parseInt(categoryItems/2)+1)*385+90}px`;
-        }
+        card = showCategory(error, topics, card, queryData, 'posting');
         // MENU
         menuCount(topics, postingCount);
         var categoryList = template.list(postingCount, display);
@@ -470,25 +488,7 @@ var app = http.createServer((request, response) => {
     var card = template.descriptionArea('Trash') + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">';
     // DB에서 데이터 불러오기
     db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
-      throwError(error);
-      // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
-      var categoryItems = 0;
-      topics.forEach((element) => {
-        if (element.trash == 1) {
-          categoryItems = categoryItems + 1;
-          var logoImage = selectImage(element, logoImage);
-          card = card + template.trashItem(element.category, element.title, logoImage);
-        }
-      });
-      card = card + '</div>'
-      // Card Height 계산 및 게시물 없을 시 안내 메시지 출력
-      if (categoryItems == 0) {
-        card = card + template.notice('No Results');
-      } else if (categoryItems%2 == 0) {
-        variousStyle.cardStyle = `height: ${categoryItems/2*385+90}px`;
-      } else {
-        variousStyle.cardStyle = `height: ${(parseInt(categoryItems/2)+1)*385+90}px`;
-      }
+      card = showCategory(error, topics, card, queryData, 'trash');
       // MENU
       menuCount(topics, postingCount);
       var categoryList = template.list(postingCount, display);
@@ -587,25 +587,7 @@ var app = http.createServer((request, response) => {
       var card = template.descriptionArea('Search Results') + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">';
       // DB에서 데이터 불러오기
       db.query(`SELECT category, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic WHERE title LIKE '%${title}%' ORDER BY id DESC`, (error, topics) => {
-        throwError(error);
-        // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
-        var categoryItems = 0;
-        topics.forEach((element) => {
-          if (element.trash != 1) {
-            categoryItems = categoryItems + 1;
-            var logoImage = selectImage(element, logoImage);
-            card = card + template.postingItem(element.category, element.title, element.date, logoImage);
-          }
-        });
-        card = card + '</div>'
-        // Card Height 계산 및 게시물 없을 시 안내 메시지 출력
-        if (categoryItems == 0) {
-          card = card + template.notice('No Results');
-        } else if (categoryItems%2 == 0) {
-          variousStyle.cardStyle = `height: ${categoryItems/2*385+90}px`;
-        } else {
-          variousStyle.cardStyle = `height: ${(parseInt(categoryItems/2)+1)*385+90}px`;
-        }
+        card = showCategory(error, topics, card, queryData, 'search');
         // MENU
         menuCount(topics, postingCount);
         var categoryList = template.list(postingCount, display);
