@@ -56,7 +56,6 @@
 }
 
 #posting-item {
-
   position: absolute;
   left: 0;
   right: 0;
@@ -115,9 +114,31 @@
 
     left: 0;
   }
+
+  .wrap .inner .card .description-area {
+    width: 800px;
+
+    margin: 30px auto 0 auto;
+  }
+
+  #posting-item {
+    width: 800px;
+
+    margin: 0 auto;
+  }
 }
 
-@media screen and (max-width: 225px) {
+@media screen and (max-width: 900px) {}
+
+@media screen and (max-width: 675px) {}
+
+@media screen and (max-width: 562.5px) {}
+
+@media screen and (max-width: 450px) {}
+
+@media screen and (max-width: 337.5px) {}
+
+@media screen and (max-width: 270px) {
   .wrap .inner .card {
     display: none;
   }
