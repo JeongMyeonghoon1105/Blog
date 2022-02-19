@@ -2,7 +2,7 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
-var template = require('./template.js');
+var template = require('./js/template.js');
 var signIn = 0;
 var sanitizeHtml = require('sanitize-html');
 var mysql = require('mysql');
@@ -22,7 +22,6 @@ var app = http.createServer((request, response) => {
   var requestedURL = request.url;
   var queryData = url.parse(requestedURL, true).query;
   var pathname = url.parse(requestedURL, true).pathname;
-
   // 미확인 사용자로부터 관리자 전용 기능 숨기기
   if (signIn == 0) {
     var display = 'none';
@@ -38,7 +37,6 @@ var app = http.createServer((request, response) => {
       response.end();
     }
   }
-
   // 로그인 여부에 따라 헤더의 스타일을 달리 적용
   if (signIn == 0) {
     var signInHeader = template.Header('signin', 'In');
@@ -58,7 +56,6 @@ var app = http.createServer((request, response) => {
     'cardStyle': '/* */',
     'menuStyle': '/* */'
   }
-
   // 카테고리별 게시물 수를 저장할 객체 선언
   var postingCount = {
     'frontend': 0,
@@ -79,7 +76,6 @@ var app = http.createServer((request, response) => {
         postingCount.cs = parseInt(postingCount.cs + 1);
     })
   }
-
   // HEAD
   var head = fs.readFileSync('./html/head.html', 'utf8');
   // STYLE
@@ -95,7 +91,7 @@ var app = http.createServer((request, response) => {
   // FOOTER
   var footer = fs.readFileSync('./html/footer.html', 'utf8');
   // JS
-  var js = fs.readFileSync('./header.js', 'utf8');
+  var js = fs.readFileSync('./js/header.js', 'utf8');
 
   function selectImage(element, logoImage) {
     if (element.subcategory == '-') {
@@ -249,7 +245,6 @@ var app = http.createServer((request, response) => {
             password = element.password;
           }
         });
-
         // 폼에서 제출한 데이터를 분석하여 저장할 변수
         var body = ""
         // 포스팅할 데이터를 요청해 변수에 저장
