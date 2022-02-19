@@ -210,7 +210,7 @@ module.exports = {
   trashItem:(category, title, logoImage) => {
     return `
     <div style="margin: 0 0 50px 0;">
-      <a href="/?category=${category}&title=${title}">
+      <a href="/trash/?category=${category}&title=${title}">
         <img src="${logoImage}" alt="" style="width: 375px; height: 225px;">
       </a>
       <div class="item-text" style="height: 50px;">

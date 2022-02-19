@@ -165,6 +165,11 @@ var app = http.createServer((request, response) => {
     }
     return card;
   }
+  function showMenu(topics, postingCount, display) {
+    menuCount(topics, postingCount);
+    var categoryList = template.list(postingCount, display);
+    return categoryList;
+  }
 
   // pathname이 '/'일 때(메인 페이지)
   if (pathname === '/') {
@@ -195,9 +200,7 @@ var app = http.createServer((request, response) => {
       db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
         throwError(error);
         card = showCategory(error, topics, card, queryData, 'posting');
-        // MENU
-        menuCount(topics, postingCount);
-        var categoryList = template.list(postingCount, display);
+        var categoryList = showMenu(topics, postingCount, display);
         // 페이지 로드
         response.writeHead(200);
         response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js));
@@ -489,9 +492,7 @@ var app = http.createServer((request, response) => {
     // DB에서 데이터 불러오기
     db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
       card = showCategory(error, topics, card, queryData, 'trash');
-      // MENU
-      menuCount(topics, postingCount);
-      var categoryList = template.list(postingCount, display);
+      var categoryList = showMenu(topics, postingCount, display);
       // 페이지 로드
       response.writeHead(200);
       response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js));
@@ -588,9 +589,7 @@ var app = http.createServer((request, response) => {
       // DB에서 데이터 불러오기
       db.query(`SELECT category, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic WHERE title LIKE '%${title}%' ORDER BY id DESC`, (error, topics) => {
         card = showCategory(error, topics, card, queryData, 'search');
-        // MENU
-        menuCount(topics, postingCount);
-        var categoryList = template.list(postingCount, display);
+        var categoryList = showMenu(topics, postingCount, display);
         // 페이지 로드
         response.writeHead(200);
         response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js));
