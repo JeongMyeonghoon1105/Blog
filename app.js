@@ -537,8 +537,7 @@ var app = http.createServer((request, response) => {
     // 미확인 사용자의 접속 시도 차단
     access_deny();
     // 삭제할 게시물을 DB에서 찾아 영구삭제
-    db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='1'`,
-      (error) => {
+    db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='1'`, (error) => {
         throwError(error);
         // 카테고리 페이지로 리다이렉트
         response.writeHead(302, {
@@ -553,8 +552,7 @@ var app = http.createServer((request, response) => {
     // 미확인 사용자의 접속 시도 차단
     access_deny();
     // DB UPDATE
-    db.query(`UPDATE topic SET trash='0' WHERE category='${queryData.category}' AND title='${queryData.title}'`,
-      (error) => {
+    db.query(`UPDATE topic SET trash='0' WHERE category='${queryData.category}' AND title='${queryData.title}'`, (error) => {
         throwError(error);
         // 카테고리 페이지로 리다이렉트
         response.writeHead(302, {
