@@ -97,6 +97,25 @@ var app = http.createServer((request, response) => {
   // JS
   var js = fs.readFileSync('./header.js', 'utf8');
 
+  function selectImage(element, logoImage) {
+    if (element.subcategory == '-') {
+      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
+    } else if (element.subcategory == 'React') {
+      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/React_alter.png?raw=true';
+    } else if (element.subcategory == 'Python') {
+      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
+    } else if (element.subcategory == 'Github') {
+      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/github.png?raw=true';
+    } else if (element.subcategory == 'DS') {
+      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Data_Structure.png?raw=true';
+    } else if (element.subcategory == 'Algorithm') {
+      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Algorithms.png?raw=true';
+    } else {
+      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
+    }
+    return logoImage;
+  }
+
   // pathname이 '/'일 때(메인 페이지)
   if (pathname === '/') {
     // 메인 페이지
@@ -138,21 +157,7 @@ var app = http.createServer((request, response) => {
         topics.forEach((element) => {
           if ((element.category == queryData.category) && (element.trash != 1)) {
             categoryItems = categoryItems + 1;
-            if (element.subcategory == '-') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
-            } else if (element.subcategory == 'React') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/React_alter.png?raw=true';
-            } else if (element.subcategory == 'Python') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
-            } else if (element.subcategory == 'Github') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/github.png?raw=true';
-            } else if (element.subcategory == 'DS') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Data_Structure.png?raw=true';
-            } else if (element.subcategory == 'Algorithm') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Algorithms.png?raw=true';
-            } else {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
-            }
+            var logoImage = selectImage(element, logoImage);
             card = card + template.postingItem(queryData.category, element.title, element.date, logoImage);
           }
         });
@@ -500,21 +505,7 @@ var app = http.createServer((request, response) => {
       topics.forEach((element) => {
         if (element.trash == 1) {
           categoryItems = categoryItems + 1;
-          if (element.subcategory == '-') {
-            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
-          } else if (element.subcategory == 'React') {
-            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/React_alter.png?raw=true';
-          } else if (element.subcategory == 'Python') {
-            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
-          } else if (element.subcategory == 'Github') {
-            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/github.png?raw=true';
-          } else if (element.subcategory == 'DS') {
-            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Data_Structure.png?raw=true';
-          } else if (element.subcategory == 'Algorithm') {
-            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Algorithms.png?raw=true';
-          } else {
-            logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
-          }
+          var logoImage = selectImage(element, logoImage);
           card = card + template.trashItem(element.category, element.title, logoImage);
         }
       });
@@ -644,21 +635,7 @@ var app = http.createServer((request, response) => {
         topics.forEach((element) => {
           if (element.trash != 1) {
             categoryItems = categoryItems + 1;
-            if (element.subcategory == '-') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
-            } else if (element.subcategory == 'React') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/React_alter.png?raw=true';
-            } else if (element.subcategory == 'Python') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
-            } else if (element.subcategory == 'Github') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/github.png?raw=true';
-            } else if (element.subcategory == 'DS') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Data_Structure.png?raw=true';
-            } else if (element.subcategory == 'Algorithm') {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Algorithms.png?raw=true';
-            } else {
-              logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
-            }
+            var logoImage = selectImage(element, logoImage);
             card = card + template.postingItem(element.category, element.title, element.date, logoImage);
             categoryEmpty = 1;
           }
