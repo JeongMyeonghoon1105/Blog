@@ -126,15 +126,15 @@ module.exports = {
     `;
   },
   // 글 작성 페이지의 내용
-  writtingArea:(category, title, data, categorySelect) => {
+  writtingArea:(category, title, data, sub, categorySelect) => {
     return `
     <div style="width: 100%; height: 1070px; position: relative;">
 
       <form action="/update_process/?category=${category}&title=${title}" method="post" style="width: 70%; height: 950px; position: absolute; left: 0; right: 0; margin: 30px auto 90px auto;">
-        <textarea name="title" value="${title}" rows="1" cols="55" placeholder="Title" maxlength="100" style="width: 100%; height: 50px; background-color: white; border: none; font-size: 20px;
+        <textarea name="title" rows="1" cols="55" placeholder="Title" maxlength="100" style="width: 100%; height: 50px; background-color: white; border: none; font-size: 20px;
         line-height: 30px;
         padding: 10px;
-        overflow: hidden;" required></textarea>
+        overflow: hidden;" required>${title}</textarea>
 
         <div style="width: 100%;
         height: 1px;
@@ -149,7 +149,7 @@ module.exports = {
         background-color: white;
         border: none;
         font-size: 15px;
-        padding: 10px;" value=${data} required></textarea>
+        padding: 10px;" required>${data}</textarea>
 
         <div style="width: 100%;
         height: 1px;
@@ -161,7 +161,7 @@ module.exports = {
         <textarea name="subcategory" id="title-input" rows="1" cols="55" placeholder="Sub-Category" maxlength="100" style="width: 100%; height: 50px; background-color: white; border: none; font-size: 15px;
         line-height: 30px;
         padding: 10px;
-        overflow: hidden;"></textarea>
+        overflow: hidden;">${sub}</textarea>
 
         <div style="width: 100%;
         height: 1px;

@@ -397,21 +397,23 @@ var app = http.createServer((request, response) => {
     else if (queryData.category === 'CS')
       categorySelect.cs = `selected`;
     // DB에서 데이터 불러오기
-    db.query(`SELECT category, title, content, trash FROM topic`, (error, topics) => {
+    db.query(`SELECT category, title, content, subcategory, trash FROM topic`, (error, topics) => {
       // 예외 처리
       if (error) {
         throw error;
       }
       // 게시물의 내용을 저장할 변수
       var data = '';
+      var sub = '';
       // 수정할 게시물을 DB에서 찾기
       topics.forEach((element) => {
         if ((element.category == queryData.category) && (element.title == queryData.title) && (element.trash != '1')) {
           data = element.content;
+          sub = element.subcategory;
         }
       });
       // CARD
-      var card = template.descriptionArea('Update') + template.writtingArea(queryData.category, queryData.title, data, categorySelect);
+      var card = template.descriptionArea('Update') + template.writtingArea(queryData.category, queryData.title, data, sub, categorySelect);
       // MENU
       menuCount(topics, postingCount);
       var categoryList = template.list(postingCount, display);
