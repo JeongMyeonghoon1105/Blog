@@ -143,7 +143,13 @@ module.exports = {
         right: 0;
         margin: 0 auto;"></div>
 
-        <textarea name="content" value="${data}" placeholder="Contents" style="width: 100%; height: 700px; background-color: white; border: none; font-size: 15px; padding: 10px;" required></textarea>
+        <textarea name="content" placeholder="Contents" style="white-space: pre-wrap;
+        width: 100%;
+        height: 700px;
+        background-color: white;
+        border: none;
+        font-size: 15px;
+        padding: 10px;" value=${data} required></textarea>
 
         <div style="width: 100%;
         height: 1px;
