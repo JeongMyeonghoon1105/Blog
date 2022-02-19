@@ -99,7 +99,7 @@ var app = http.createServer((request, response) => {
 
   function selectImage(element, logoImage) {
     if (element.subcategory == '-') {
-      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
+      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Logo_post.png?raw=true';
     } else if (element.subcategory == 'React') {
       logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/React_alter.png?raw=true';
     } else if (element.subcategory == 'Python') {
@@ -115,7 +115,7 @@ var app = http.createServer((request, response) => {
     } else if (element.subcategory == 'MySQL') {
       logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/MySQL.png?raw=true';
     } else {
-      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
+      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Logo_post.png?raw=true';
     }
     return logoImage;
   }
