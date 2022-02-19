@@ -301,8 +301,7 @@ var app = http.createServer((request, response) => {
     variousStyle.innerStyle = 'height: 1150px;'; variousStyle.cardStyle = 'height: 1150px;';
     style = style + fs.readFileSync('./css/write.css', 'utf8');
     // CARD
-    var card = template.descriptionArea('Post');
-    card = card + fs.readFileSync('./html/write.html', 'utf8');
+    var card = template.descriptionArea('Post') + template.writtingArea(queryData.category, '<!---->', '<!---->', '<!---->', categorySelect);
     // DB에서 데이터 불러오기
     db.query(`SELECT category, trash FROM topic`, (error, topics) => {
       // 예외 처리
