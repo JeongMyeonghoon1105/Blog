@@ -197,7 +197,7 @@ module.exports = {
   postingItem:(category, title, date, logoImage) => {
     return `
     <a href="/?category=${category}&title=${title}" style="margin: 0 0 50px 0;">
-      <img src="${logoImage}" alt="" style="width: 375px; height: 225px;">
+      <img src="${logoImage}" alt="">
       <div class="item-text">
         <text class="item-text-title">${title}</text>
         <div class="between-padding"></div>
@@ -211,7 +211,7 @@ module.exports = {
     return `
     <div style="margin: 0 0 50px 0;">
       <a href="/trash/?category=${category}&title=${title}">
-        <img src="${logoImage}" alt="" style="width: 375px; height: 225px;">
+        <img src="${logoImage}" alt="">
       </a>
       <div class="item-text" style="height: 50px;">
         <a href="/?category=${category}&title=${title}" class="item-text-title">${title}</a>

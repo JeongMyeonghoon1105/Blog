@@ -19,6 +19,8 @@ var mainMenu = document.getElementById('main-menu');
 var searchToggle = document.getElementById('search');
 var searchContainer = document.getElementById('search-container');
 
+var card = document.getElementsByClassName('card');
+
 /* Tab Down 표출된 상황에서 VW를 1250px 이상으로 늘릴 시 Tab Down 숨기기 */
 window.addEventListener('resize', () => {
   if (window.innerWidth > 1250) {
