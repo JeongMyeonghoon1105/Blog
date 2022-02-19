@@ -45,64 +45,72 @@
   font-family: 'Nanum Gothic', 'sans-serif';
 }
 
-#writting-area {
-  width: 100%;
-  height: 1070px;
-  position: relative;
+textarea {
+  resize: none;
 }
 
-#writting-form {
+#write-form {
   width: 70%;
   height: 950px;
+
   position: absolute;
   left: 0;
   right: 0;
   margin: 30px auto 90px auto;
 }
 
-#title-area {
+#title-text {
   width: 100%;
   height: 50px;
   background-color: white;
-  border-top: none;
+
+  border: none;
+
   font-size: 20px;
   line-height: 30px;
+
   padding: 10px;
+
   overflow: hidden;
 }
 
-#dividing-line {
+#between-line {
   width: 100%;
   height: 1px;
   background-color: lightgray;
+
   left: 0;
   right: 0;
   margin: 0 auto;
 }
 
-#content-area {
+#content-text {
   width: 100%;
   height: 700px;
   background-color: white;
+
   border: none;
+
   font-size: 15px;
+
   padding: 10px;
+
   white-space: pre-wrap;
 }
 
-#subcategory-area {
+#subcategory-text {
   width: 100%;
   height: 50px;
   background-color: white;
+
   border: none;
+
   font-size: 15px;
   line-height: 30px;
-  padding: 10px;
-  overflow: hidden;
-}
 
-textarea {
-  resize: none;
+  padding: 10px;
+
+  overflow: hidden;
 }
 
 .category {
