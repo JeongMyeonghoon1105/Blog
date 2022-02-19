@@ -114,6 +114,8 @@ var app = http.createServer((request, response) => {
       logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/NodeJS.png?raw=true';
     } else if (element.subcategory == 'MySQL') {
       logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/MySQL.png?raw=true';
+    } else if (element.subcategory == 'JS') {
+      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/JS.jpg?raw=true';
     } else {
       logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Logo_post.png?raw=true';
     }
@@ -125,7 +127,6 @@ var app = http.createServer((request, response) => {
     // 메인 페이지
     if (queryData.category === undefined) {
       // STYLE
-      variousStyle.cardStyle = 'background-color: rgb(245, 245, 255);';
       style = style + fs.readFileSync('./css/main.css', 'utf8');
       // CARD
       var card = fs.readFileSync('./html/card.html', 'utf8');
@@ -228,7 +229,6 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/signin') {
     // STYLE
     variousStyle.headerStyle = 'display: none;';
-    variousStyle.cardStyle = 'background-color: rgb(245, 245, 255);';
     variousStyle.menuStyle = 'display: none;';
     style = style + fs.readFileSync('./css/signin.css', 'utf8');
     // CARD
