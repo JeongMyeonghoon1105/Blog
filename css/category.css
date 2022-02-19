@@ -55,56 +55,6 @@
   margin: auto;
 }
 
-.wrap .inner .card .posting-item {
-  width: 70%;
-  height: 30px;
-
-  border-bottom: 0.5px solid lightgray;
-
-  font-size: 13px;
-
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-}
-
-.wrap .inner .card .posting-item .posting-container {
-  display: flex;
-
-  width: 100%;
-  height: 30px;
-
-  justify-content: space-between;
-}
-
-.wrap .inner .card .posting-item .posting-container .posting-content {
-  display: block;
-
-  width: 60%;
-  height: 20px;
-
-  text-align: left;
-  line-height: 20px;
-
-  margin: 5px 0;
-
-  overflow: hidden;
-}
-
-.wrap .inner .card .posting-item .posting-container .posting-date {
-  display: block;
-
-  width: 40%;
-  height: 20px;
-
-  text-align: right;
-  line-height: 20px;
-
-  margin: 5px 0;
-
-  overflow: hidden;
-}
-
 #posting-item {
 
   position: absolute;
