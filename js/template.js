@@ -126,10 +126,10 @@ module.exports = {
     `;
   },
   // 글 작성 페이지의 내용
-  writtingArea:(category, title, data, sub, categorySelect) => {
+  writtingArea:(action, title, data, sub, categorySelect) => {
     return `
     <div style="width: 100%; height: 1070px; position: relative;">
-      <form action="/update_process/?category=${category}&title=${title}" method="post" id="write-form">
+      <form action="${action}" method="post" id="write-form">
         <textarea name="title" rows="1" cols="55" placeholder="Title" maxlength="100" id="title-text" required>${title}</textarea>
         <div id="between-line"></div>
         <textarea name="content" placeholder="Contents" id="content-text" required>${data}</textarea>

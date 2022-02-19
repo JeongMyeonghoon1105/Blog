@@ -63,6 +63,13 @@ var app = http.createServer((request, response) => {
     'devops': 0,
     'cs': 0
   }
+  // 카테고리 선택란의 디폴트 값을 설정하는데 사용되는 객체
+  var categorySelect = {
+    'frontend': `<!----`,
+    'backend': `<!----`,
+    'devops': `<!----`,
+    'cs': `<!----`
+  }
   // 카테고리별 게시물 수를 객체에 저장
   function menuCount(topics, postingCount) {
     topics.forEach((element) => {
@@ -301,7 +308,8 @@ var app = http.createServer((request, response) => {
     variousStyle.innerStyle = 'height: 1150px;'; variousStyle.cardStyle = 'height: 1150px;';
     style = style + fs.readFileSync('./css/write.css', 'utf8');
     // CARD
-    var card = template.descriptionArea('Post') + template.writtingArea(queryData.category, '<!---->', '<!---->', '<!---->', categorySelect);
+    var action = `/post_process`
+    var card = template.descriptionArea('Post') + template.writtingArea(action, '', '', '', categorySelect);
     // DB에서 데이터 불러오기
     db.query(`SELECT category, trash FROM topic`, (error, topics) => {
       // 예외 처리
@@ -373,13 +381,6 @@ var app = http.createServer((request, response) => {
     access_deny();
     // STYLE
     style = style + fs.readFileSync('./css/write.css', 'utf8');
-    // 카테고리 선택란의 디폴트 값을 설정하는데 사용되는 객체
-    var categorySelect = {
-      'frontend': `<!----`,
-      'backend': `<!----`,
-      'devops': `<!----`,
-      'cs': `<!----`
-    }
     // 수정할 게시물의 원래 카테고리를 디폴트 값으로 설정
     if (queryData.category === 'Frontend')
       categorySelect.frontend = `selected`;
@@ -406,7 +407,8 @@ var app = http.createServer((request, response) => {
         }
       });
       // CARD
-      var card = template.descriptionArea('Update') + template.writtingArea(queryData.category, queryData.title, data, sub, categorySelect);
+      var action = `/update_process/?category=${queryData.category}&title=${queryData.title}`
+      var card = template.descriptionArea('Update') + template.writtingArea(action, queryData.title, data, sub, categorySelect);
       // MENU
       menuCount(topics, postingCount);
       var categoryList = template.list(postingCount, display);
