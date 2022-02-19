@@ -110,6 +110,10 @@ var app = http.createServer((request, response) => {
       logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Data_Structure.png?raw=true';
     } else if (element.subcategory == 'Algorithm') {
       logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Algorithms.png?raw=true';
+    } else if (element.subcategory == 'Node.js') {
+      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/NodeJS.png?raw=true';
+    } else if (element.subcategory == 'MySQL') {
+      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/MySQL.png?raw=true';
     } else {
       logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
     }
