@@ -92,7 +92,7 @@ var app = http.createServer((request, response) => {
   var footer = fs.readFileSync('./html/footer.html', 'utf8');
   // JS
   var js = fs.readFileSync('./js/header.js', 'utf8');
-
+  // 각 Sub Category별 Image 지정
   function selectImage(element, logoImage) {
     if (element.subcategory == '-') {
       logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Logo_post.png?raw=true';
@@ -296,10 +296,8 @@ var app = http.createServer((request, response) => {
     // 미확인 사용자의 페이지 접속 시도 차단
     access_deny();
     // STYLE
-    variousStyle.bodyStyle = 'height: 1200px;';
-    variousStyle.wrapStyle = 'height: 1150px;';
-    variousStyle.innerStyle = 'height: 1150px;';
-    variousStyle.cardStyle = 'height: 1150px;';
+    variousStyle.bodyStyle = 'height: 1200px;'; variousStyle.wrapStyle = 'height: 1150px;';
+    variousStyle.innerStyle = 'height: 1150px;'; variousStyle.cardStyle = 'height: 1150px;';
     style = style + fs.readFileSync('./css/write.css', 'utf8');
     // CARD
     var card = template.descriptionArea('Post');
@@ -620,8 +618,6 @@ var app = http.createServer((request, response) => {
       // 폼에서 제출한 데이터를 분석
       var post = qs.parse(body);
       var title = post.title;
-      var content = post.content;
-      var category = post.category;
       // DB에서 데이터 불러오기
       db.query(`SELECT category, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic WHERE title LIKE '%${title}%' ORDER BY id DESC`, (error, topics) => {
         // 예외 처리
