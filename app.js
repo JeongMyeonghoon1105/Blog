@@ -240,6 +240,7 @@ var app = http.createServer((request, response) => {
       var password = '';
       // 비밀번호를 DB에서 읽어오기
       db.query(`SELECT name, password FROM user`, (error, topics) => {
+        // User Name이 'Dainel'인 사용자를 찾아 해당 사용자의 비밀번호를 불러오기
         topics.forEach((element) => {
           if (element.name == 'Daniel') {
             password = element.password;
