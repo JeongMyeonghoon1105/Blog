@@ -154,12 +154,11 @@ var app = http.createServer((request, response) => {
     else if (((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) && queryData.title === undefined) {
       // STYLE
       style = style + fs.readFileSync('./css/category.css', 'utf8');
+      // CARD
+      var card = template.descriptionArea(queryData.category) + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">';
       // DB에서 데이터 불러오기
       db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
         throwError(error);
-        // CARD
-        var card = template.descriptionArea(queryData.category);
-        card = card + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">'
         // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
         var categoryItems = 0;
         topics.forEach((element) => {
@@ -468,13 +467,10 @@ var app = http.createServer((request, response) => {
     // STYLE
     style = style + fs.readFileSync('./css/category.css', 'utf8');
     // CARD
-    var card = template.descriptionArea('Trash');
+    var card = template.descriptionArea('Trash') + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">';
     // DB에서 데이터 불러오기
     db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
       throwError(error);
-      // CARD
-      var card = template.descriptionArea('Trash');
-      card = card + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">'
       // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
       var categoryItems = 0;
       topics.forEach((element) => {
@@ -587,13 +583,12 @@ var app = http.createServer((request, response) => {
       // 폼에서 제출한 데이터를 분석
       var post = qs.parse(body);
       var title = post.title;
+      // CARD
+      var card = template.descriptionArea('Search Results') + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">';
       // DB에서 데이터 불러오기
       db.query(`SELECT category, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic WHERE title LIKE '%${title}%' ORDER BY id DESC`, (error, topics) => {
         // 예외 처리
         throwError(error);
-        // CARD
-        var card = template.descriptionArea('Search Results');
-        card = card + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">'
         // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
         var categoryItems = 0;
         topics.forEach((element) => {
