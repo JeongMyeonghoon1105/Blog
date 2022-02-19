@@ -124,6 +124,12 @@ var app = http.createServer((request, response) => {
     }
     return logoImage;
   }
+  // 예외 처리 함수
+  function throwError(error) {
+    if (error) {
+      throw error;
+    }
+  }
 
   // pathname이 '/'일 때(메인 페이지)
   if (pathname === '/') {
@@ -135,10 +141,7 @@ var app = http.createServer((request, response) => {
       var card = fs.readFileSync('./html/card.html', 'utf8');
       // DB에서 데이터 불러오기
       db.query(`SELECT category, trash FROM topic`, (error, topics) => {
-        // 예외 처리
-        if (error) {
-          throw error;
-        }
+        throwError(error);
         // MENU
         menuCount(topics, postingCount);
         var categoryList = template.list(postingCount, display);
@@ -153,10 +156,7 @@ var app = http.createServer((request, response) => {
       style = style + fs.readFileSync('./css/category.css', 'utf8');
       // DB에서 데이터 불러오기
       db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
-        // 예외 처리
-        if (error) {
-          throw error;
-        }
+        throwError(error);
         // CARD
         var card = template.descriptionArea(queryData.category);
         card = card + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">'
@@ -192,10 +192,7 @@ var app = http.createServer((request, response) => {
       style = style + fs.readFileSync('./css/post.css', 'utf8');
       // DB에서 데이터 불러오기
       db.query(`SELECT category, id, title, content, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
-        // 예외 처리
-        if (error) {
-          throw error;
-        }
+        throwError(error);
         // CARD
         var card = '';
         // 선택한 게시물을 DB에서 찾기
@@ -312,10 +309,7 @@ var app = http.createServer((request, response) => {
     var card = template.descriptionArea('Post') + template.writtingArea(action, '', '', '', categorySelect);
     // DB에서 데이터 불러오기
     db.query(`SELECT category, trash FROM topic`, (error, topics) => {
-      // 예외 처리
-      if (error) {
-        throw error;
-      }
+      throwError(error);
       // MENU
       menuCount(topics, postingCount);
       var categoryList = template.list(postingCount, display);
@@ -349,10 +343,7 @@ var app = http.createServer((request, response) => {
       var subcategory = post.subcategory;
       // DB에서 데이터 불러오기
       db.query(`SELECT category, title, content, trash FROM topic`, (error, topics) => {
-        // 예외 처리
-        if (error) {
-          throw error;
-        }
+        throwError(error);
         // 카테고리와 제목이 같은 게시물이 이미 존재하는지 검사
         topics.forEach((element) => {
           if ((element.category == category) && (element.title == title) && (element.trash != '1')) {
@@ -363,9 +354,7 @@ var app = http.createServer((request, response) => {
         db.query(`INSERT INTO topic (category, title, content, date, subcategory) VALUES(?, ?, ?, NOW(), ?)`, [category, title, template.writeContainer(content), subcategory],
         // 작성한 게시물의 카테고리와 제목이 기존 게시물과 중복되면 강제로 에러를 발생시키기
         (error) => {
-          if (error) {
-            throw error;
-          }
+          throwError(error);
           // 포스팅 후, 방금 작성한 게시물로 리다이렉션
           response.writeHead(302, {
             Location: encodeURI(`/?category=${category}&title=${title}`)
@@ -392,10 +381,7 @@ var app = http.createServer((request, response) => {
       categorySelect.cs = `selected`;
     // DB에서 데이터 불러오기
     db.query(`SELECT category, title, content, subcategory, trash FROM topic`, (error, topics) => {
-      // 예외 처리
-      if (error) {
-        throw error;
-      }
+      throwError(error);
       // 게시물의 내용을 저장할 변수
       var data = '';
       var sub = '';
@@ -443,17 +429,11 @@ var app = http.createServer((request, response) => {
       // 기존 게시물(수정 전 게시물)을 삭제
       db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='0'`,
         (error) => {
-          // 예외 처리
-          if (error) {
-            throw error;
-          }
+          throwError(error);
           // 수정할 데이터를 DB에 입력
           db.query(`INSERT INTO topic (category, title, content, date, subcategory) VALUES(?, ?, ?, NOW(), ?)`, [category, title, template.writeContainer(content), subcategory],
             (error) => {
-              // 예외 처리
-              if (error) {
-                throw error;
-              }
+              throwError(error);
               // 포스팅 후, 방금 작성한 게시물로 리다이렉션
               response.writeHead(302, {
                 Location: encodeURI(`/?category=${category}&title=${title}`)
@@ -472,10 +452,7 @@ var app = http.createServer((request, response) => {
     // DB UPDATE
     db.query(`UPDATE topic SET trash='1' WHERE category='${queryData.category}' AND title='${queryData.title}'`,
       (error) => {
-        // 예외 처리
-        if (error) {
-          throw error;
-        }
+        throwError(error);
         // 카테고리 페이지로 리다이렉트
         response.writeHead(302, {
           Location: encodeURI(`/?category=${queryData.category}`)
@@ -494,10 +471,7 @@ var app = http.createServer((request, response) => {
     var card = template.descriptionArea('Trash');
     // DB에서 데이터 불러오기
     db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
-      // 예외 처리
-      if (error) {
-        throw error;
-      }
+      throwError(error);
       // CARD
       var card = template.descriptionArea('Trash');
       card = card + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">'
@@ -537,10 +511,7 @@ var app = http.createServer((request, response) => {
     var card = '';
     // DB에서 데이터 불러오기
     db.query(`SELECT category, id, title, content, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
-      // 예외 처리
-      if (error) {
-        throw error;
-      }
+      throwError(error);
       // 선택한 게시물을 DB에서 찾기
       topics.forEach((element) => {
         if ((element.category == queryData.category) && (element.title == queryData.title) && (element.trash == 1)) {
@@ -571,9 +542,7 @@ var app = http.createServer((request, response) => {
     // 삭제할 게시물을 DB에서 찾아 영구삭제
     db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='1'`,
       (error) => {
-        if (error) {
-          throw error;
-        }
+        throwError(error);
         // 카테고리 페이지로 리다이렉트
         response.writeHead(302, {
           Location: encodeURI(`/trash`)
@@ -589,9 +558,7 @@ var app = http.createServer((request, response) => {
     // DB UPDATE
     db.query(`UPDATE topic SET trash='0' WHERE category='${queryData.category}' AND title='${queryData.title}'`,
       (error) => {
-        if (error) {
-          throw error;
-        }
+        throwError(error);
         // 카테고리 페이지로 리다이렉트
         response.writeHead(302, {
           Location: encodeURI(`/?category=${queryData.category}`)
@@ -623,9 +590,7 @@ var app = http.createServer((request, response) => {
       // DB에서 데이터 불러오기
       db.query(`SELECT category, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic WHERE title LIKE '%${title}%' ORDER BY id DESC`, (error, topics) => {
         // 예외 처리
-        if (error) {
-          throw error;
-        }
+        throwError(error);
         // CARD
         var card = template.descriptionArea('Search Results');
         card = card + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">'

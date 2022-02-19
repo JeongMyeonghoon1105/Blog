@@ -3,17 +3,14 @@ module.exports = {
   HTML:(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js) => {
     return `
     <html lang="ko">
-
     <head>
       ${head}
       <style>
         ${style}
       </style>
     </head>
-    
     <body style="${variousStyle.bodyStyle}">
       <style>${display}</style>
-
       <!-- HEADER -->
       <header style="${variousStyle.headerStyle}">
         <div class="inner">
@@ -46,7 +43,6 @@ module.exports = {
           </div>
         </div>
       </header>
-      
       <!-- WRAP -->
       <div class="wrap" style="${variousStyle.wrapStyle}">
         <div class="inner" style="${variousStyle.innerStyle}">
@@ -72,10 +68,8 @@ module.exports = {
           </div>
         </div>
       </div>
-
       <!-- FOOTER -->
       ${footer}
-
       <!-- JS -->
       <script>
         ${js}
