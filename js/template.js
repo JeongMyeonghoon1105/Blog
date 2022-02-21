@@ -1,6 +1,6 @@
 module.exports = {
   // 로드될 페이지의 html 소스
-  HTML:(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js) => {
+  HTML:(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems) => {
     return `
     <html lang="ko">
     <head>
@@ -47,7 +47,7 @@ module.exports = {
       <div class="wrap" style="${variousStyle.wrapStyle}">
         <div class="inner" style="${variousStyle.innerStyle}">
           <!-- CARD -->
-          <div class="card" style="${variousStyle.cardStyle}">${card}</div>
+          <div class="card" style="${variousStyle.cardStyle}" id="${categoryItems}">${card}</div>
           <!-- SEARCH BAR -->
           <h1 id="search-title" style="${variousStyle.menuStyle}">Search</h1><br>
           <form action="/search/" method="post" id="search-container" style="${variousStyle.menuStyle}">

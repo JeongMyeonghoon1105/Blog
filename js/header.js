@@ -20,9 +20,32 @@ var searchToggle = document.getElementById('search');
 var searchContainer = document.getElementById('search-container');
 
 var card = document.getElementsByClassName('card');
+var id = parseInt(card[0].id);
+
+function changeHeight() {
+  if (window.innerWidth > 900) {
+    if (id%2==0) {
+      card[0].setAttribute('style', `height: ${id/2*385+90}px`);
+    } else {
+      card[0].setAttribute('style', `height: ${(parseInt(id/2)+1)*385+90}px`);
+    }
+  } else if (window.innerWidth > 675) {
+    card[0].setAttribute('style', `height: ${id*520+90}px`);
+  } else if (window.innerWidth > 562.5) {
+    card[0].setAttribute('style', `height: ${id*452.5+90}px`);
+  } else if (window.innerWidth > 450) {
+    card[0].setAttribute('style', `height: ${id*385+90}px`);
+  } else if (window.innerWidth > 337.5) {
+    card[0].setAttribute('style', `height: ${id*328+90}px`);
+  } else if (window.innerWidth > 270) {
+    card[0].setAttribute('style', `height: ${id*286+90}px`);
+  }
+}
 
 /* Tab Down 표출된 상황에서 VW를 1250px 이상으로 늘릴 시 Tab Down 숨기기 */
 window.addEventListener('resize', () => {
+  changeHeight();
+  
   if (window.innerWidth > 1250) {
     /* Menu Icon 복구 */
     menuIcon.className = 'fas fa-bars';
@@ -37,4 +60,8 @@ window.addEventListener('resize', () => {
     tabItems.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
     tabList.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
   }
+})
+
+window.addEventListener('load', () => {
+  changeHeight();
 })
