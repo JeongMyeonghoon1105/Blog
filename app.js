@@ -231,10 +231,6 @@ var app = http.createServer((request, response) => {
         request.on('data', (data) => {
           // 요청한 데이터를 변수에 덧붙이기
           body = body + data;
-          // 포스팅할 게시물 길이가 너무 길어질 경우 커넥션 파괴
-          if (body.length > 1e6) {
-            request.connection.destroy();
-          }
         });
         // 입력한 비밀번호를 실제 비밀번호와 대조
         request.on('end', () => {
@@ -303,10 +299,6 @@ var app = http.createServer((request, response) => {
     request.on('data', (data) => {
       // 요청한 데이터를 변수에 덧붙이기
       body = body + data;
-      // 포스팅할 게시물 길이가 너무 길어질 경우 커넥션 파괴
-      if (body.length > 1e6) {
-        request.connection.destroy();
-      }
     });
     // 포스팅 및 기타 처리
     request.on('end', () => {
@@ -388,10 +380,6 @@ var app = http.createServer((request, response) => {
     request.on('data', (data) => {
       // 요청한 데이터를 변수에 덧붙이기
       body = body + data;
-      // 포스팅할 게시물 길이가 너무 길어질 경우 커넥션 파괴
-      if (body.length > 1e6) {
-        request.connection.destroy();
-      }
     });
     // 포스팅 및 기타 처리
     request.on('end', () => {
@@ -527,10 +515,6 @@ var app = http.createServer((request, response) => {
     request.on('data', (data) => {
       // 요청한 데이터를 변수에 덧붙이기
       body = body + data;
-      // 포스팅할 게시물 길이가 너무 길어질 경우 커넥션 파괴
-      if (body.length > 1e6) {
-        request.connection.destroy();
-      }
     });
     // 포스팅 및 기타 처리
     request.on('end', () => {
