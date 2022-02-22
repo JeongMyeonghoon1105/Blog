@@ -124,6 +124,7 @@ var app = http.createServer((request, response) => {
     }
     return logoImage;
   }
+  // 예외 처리
   function throwError(error) {
     if (error) {
       throw error;
@@ -159,23 +160,7 @@ var app = http.createServer((request, response) => {
     // Card Height 계산 및 게시물 없을 시 안내 메시지 출력
     if (categoryItems == 0) {
       card = card + template.notice('No Results');
-    } /* else if (categoryItems%2 == 0) {
-      if (screen.width > 900)
-        variousStyle.cardStyle = `height: ${categoryItems/2*385+90}px`;
-      else if (screen.width > 675)
-        variousStyle.cardStyle = `height: ${categoryItems*520+90}px`;
-      else if (screen.width > 562.5)
-        variousStyle.cardStyle = `height: ${categoryItems*452.5+90}px`;
-      else if (screen.width > 450)
-        variousStyle.cardStyle = `height: ${categoryItems*385+90}px`;
-      else if (screen.width > 337.5)
-        variousStyle.cardStyle = `height: ${categoryItems*328+90}px`;
-      else if (screen.width > 270)
-        variousStyle.cardStyle = `height: ${categoryItems*286+90}px`;
-    } else {
-      variousStyle.cardStyle = `height: ${(parseInt(categoryItems/2)+1)*385+90}px`;
     }
-    */
     return card;
   }
   function showMenu(topics, postingCount, display) {
