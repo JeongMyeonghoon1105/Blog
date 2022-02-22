@@ -1,5 +1,4 @@
 module.exports = {
-  // 로드될 페이지의 html 소스
   HTML:(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems) => {
     return `
     <html lang="ko">

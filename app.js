@@ -3,6 +3,7 @@ var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
 var template = require('./js/template.js');
+var functions = require('./js/functions.js');
 var signIn = 0;
 var sanitizeHtml = require('sanitize-html');
 var mysql = require('mysql');
@@ -99,31 +100,6 @@ var app = http.createServer((request, response) => {
   var footer = fs.readFileSync('./html/footer.html', 'utf8');
   // JS
   var js = fs.readFileSync('./js/header.js', 'utf8');
-  // 각 Sub Category별 Image 지정
-  function selectImage(element, logoImage) {
-    if (element.subcategory == '-') {
-      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Logo_post.png?raw=true';
-    } else if (element.subcategory == 'React') {
-      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/React_alter.png?raw=true';
-    } else if (element.subcategory == 'Python') {
-      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Vue.jpg?raw=true';
-    } else if (element.subcategory == 'Github') {
-      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/github.png?raw=true';
-    } else if (element.subcategory == 'DS') {
-      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Data_Structure.png?raw=true';
-    } else if (element.subcategory == 'Algorithm') {
-      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Algorithms.png?raw=true';
-    } else if (element.subcategory == 'Node.js') {
-      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/NodeJS.png?raw=true';
-    } else if (element.subcategory == 'MySQL') {
-      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/MySQL.png?raw=true';
-    } else if (element.subcategory == 'JS') {
-      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/JS.jpg?raw=true';
-    } else {
-      logoImage = 'https://github.com/JeongMyeonghoon1105/Images/blob/main/Logo_post.png?raw=true';
-    }
-    return logoImage;
-  }
   // 예외 처리
   function throwError(error) {
     if (error) {
@@ -139,19 +115,19 @@ var app = http.createServer((request, response) => {
       if (postingOrTrash == 'trash') {
         if (element.trash == 1) {
           categoryItems = categoryItems + 1;
-          var logoImage = selectImage(element, logoImage);
+          var logoImage = functions.selectImage(element, logoImage);
           card = card + template.trashItem(element.category, element.title, logoImage);
         }
       } else if (postingOrTrash == 'posting') {
         if ((element.category == queryData.category) && (element.trash != 1)) {
           categoryItems = categoryItems + 1;
-          var logoImage = selectImage(element, logoImage);
+          var logoImage = functions.selectImage(element, logoImage);
           card = card + template.postingItem(queryData.category, element.title, element.date, logoImage);
         }
       } else {
         if (element.trash != 1) {
           categoryItems = categoryItems + 1;
-          var logoImage = selectImage(element, logoImage);
+          var logoImage = functions.selectImage(element, logoImage);
           card = card + template.postingItem(element.category, element.title, element.date, logoImage);
         }
       }
