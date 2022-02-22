@@ -71,19 +71,6 @@ var app = http.createServer((request, response) => {
     'devops': `<!----`,
     'cs': `<!----`
   }
-  // 카테고리별 게시물 수를 객체에 저장
-  function menuCount(topics, postingCount) {
-    topics.forEach((element) => {
-      if ((element.category == 'Frontend') && (element.trash != 1))
-        postingCount.frontend = parseInt(postingCount.frontend + 1);
-      else if ((element.category == 'Backend') && (element.trash != 1))
-        postingCount.backend = parseInt(postingCount.backend + 1);
-      else if ((element.category == 'DevOps') && (element.trash != 1))
-        postingCount.devops = parseInt(postingCount.devops + 1);
-      else if ((element.category == 'CS') && (element.trash != 1))
-        postingCount.cs = parseInt(postingCount.cs + 1);
-    })
-  }
   // HEAD
   var head = fs.readFileSync('./html/head.html', 'utf8');
   // STYLE
@@ -100,15 +87,9 @@ var app = http.createServer((request, response) => {
   var footer = fs.readFileSync('./html/footer.html', 'utf8');
   // JS
   var js = fs.readFileSync('./js/header.js', 'utf8');
-  // 예외 처리
-  function throwError(error) {
-    if (error) {
-      throw error;
-    }
-  }
   var categoryItems = 0;
   function showCategory(error,topics, card, queryData, postingOrTrash) {
-    throwError(error);
+    functions.throwError(error);
     categoryItems = 0;
     // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
     topics.forEach((element) => {
@@ -140,7 +121,7 @@ var app = http.createServer((request, response) => {
     return card;
   }
   function showMenu(topics, postingCount, display) {
-    menuCount(topics, postingCount);
+    functions.menuCount(topics, postingCount);
     var categoryList = template.list(postingCount, display);
     return categoryList;
   }
@@ -155,9 +136,9 @@ var app = http.createServer((request, response) => {
       var card = fs.readFileSync('./html/card.html', 'utf8');
       // DB에서 데이터 불러오기
       db.query(`SELECT category, trash FROM topic`, (error, topics) => {
-        throwError(error);
+        functions.throwError(error);
         // MENU
-        menuCount(topics, postingCount);
+        functions.menuCount(topics, postingCount);
         var categoryList = template.list(postingCount, display);
         // 페이지 로드
         response.writeHead(200);
@@ -172,7 +153,7 @@ var app = http.createServer((request, response) => {
       var card = template.descriptionArea(queryData.category) + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">';
       // DB에서 데이터 불러오기
       db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
-        throwError(error);
+        functions.throwError(error);
         card = showCategory(error, topics, card, queryData, 'posting');
         var categoryList = showMenu(topics, postingCount, display);
         // 페이지 로드
@@ -186,7 +167,7 @@ var app = http.createServer((request, response) => {
       style = style + fs.readFileSync('./css/post.css', 'utf8');
       // DB에서 데이터 불러오기
       db.query(`SELECT category, id, title, content, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
-        throwError(error);
+        functions.throwError(error);
         // CARD
         var card = '';
         // 선택한 게시물을 DB에서 찾기
@@ -211,7 +192,7 @@ var app = http.createServer((request, response) => {
           card = card + template.buttonContainer('delete', 'update', 'UPDATE', queryData.category, queryData.title, 'gray');
         }
         // MENU
-        menuCount(topics, postingCount);
+        functions.menuCount(topics, postingCount);
         var categoryList = template.list(postingCount, display);
         // 페이지 로드
         response.writeHead(200);
@@ -303,9 +284,9 @@ var app = http.createServer((request, response) => {
     var card = template.descriptionArea('Post') + template.writtingArea(action, '', '', '', categorySelect);
     // DB에서 데이터 불러오기
     db.query(`SELECT category, trash FROM topic`, (error, topics) => {
-      throwError(error);
+      functions.throwError(error);
       // MENU
-      menuCount(topics, postingCount);
+      functions.menuCount(topics, postingCount);
       var categoryList = template.list(postingCount, display);
       // 페이지 로드
       response.writeHead(200);
@@ -337,7 +318,7 @@ var app = http.createServer((request, response) => {
       var subcategory = post.subcategory;
       // DB에서 데이터 불러오기
       db.query(`SELECT category, title, content, trash FROM topic`, (error, topics) => {
-        throwError(error);
+        functions.throwError(error);
         // 카테고리와 제목이 같은 게시물이 이미 존재하는지 검사
         topics.forEach((element) => {
           if ((element.category == category) && (element.title == title) && (element.trash != '1')) {
@@ -348,7 +329,7 @@ var app = http.createServer((request, response) => {
         db.query(`INSERT INTO topic (category, title, content, date, subcategory) VALUES(?, ?, ?, NOW(), ?)`, [category, title, template.writeContainer(content), subcategory],
         // 작성한 게시물의 카테고리와 제목이 기존 게시물과 중복되면 강제로 에러를 발생시키기
         (error) => {
-          throwError(error);
+          functions.throwError(error);
           // 포스팅 후, 방금 작성한 게시물로 리다이렉션
           response.writeHead(302, {
             Location: encodeURI(`/?category=${category}&title=${title}`)
@@ -375,7 +356,7 @@ var app = http.createServer((request, response) => {
       categorySelect.cs = `selected`;
     // DB에서 데이터 불러오기
     db.query(`SELECT category, title, content, subcategory, trash FROM topic`, (error, topics) => {
-      throwError(error);
+      functions.throwError(error);
       // 게시물의 내용을 저장할 변수
       var data = '';
       var sub = '';
@@ -390,7 +371,7 @@ var app = http.createServer((request, response) => {
       var action = `/update_process/?category=${queryData.category}&title=${queryData.title}`
       var card = template.descriptionArea('Update') + template.writtingArea(action, queryData.title, data, sub, categorySelect);
       // MENU
-      menuCount(topics, postingCount);
+      functions.menuCount(topics, postingCount);
       var categoryList = template.list(postingCount, display);
       // 페이지 로드
       response.writeHead(200);
@@ -423,11 +404,11 @@ var app = http.createServer((request, response) => {
       // 기존 게시물(수정 전 게시물)을 삭제
       db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='0'`,
         (error) => {
-          throwError(error);
+          functions.throwError(error);
           // 수정할 데이터를 DB에 입력
           db.query(`INSERT INTO topic (category, title, content, date, subcategory) VALUES(?, ?, ?, NOW(), ?)`, [category, title, template.writeContainer(content), subcategory],
             (error) => {
-              throwError(error);
+              functions.throwError(error);
               // 포스팅 후, 방금 작성한 게시물로 리다이렉션
               response.writeHead(302, {
                 Location: encodeURI(`/?category=${category}&title=${title}`)
@@ -446,7 +427,7 @@ var app = http.createServer((request, response) => {
     // DB UPDATE
     db.query(`UPDATE topic SET trash='1' WHERE category='${queryData.category}' AND title='${queryData.title}'`,
       (error) => {
-        throwError(error);
+        functions.throwError(error);
         // 카테고리 페이지로 리다이렉트
         response.writeHead(302, {
           Location: encodeURI(`/?category=${queryData.category}`)
@@ -482,7 +463,7 @@ var app = http.createServer((request, response) => {
     var card = '';
     // DB에서 데이터 불러오기
     db.query(`SELECT category, id, title, content, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
-      throwError(error);
+      functions.throwError(error);
       // 선택한 게시물을 DB에서 찾기
       topics.forEach((element) => {
         if ((element.category == queryData.category) && (element.title == queryData.title) && (element.trash == 1)) {
@@ -499,7 +480,7 @@ var app = http.createServer((request, response) => {
       // CARD
       card = card + template.buttonContainer('clear', 'recover_process', 'RECOVER', queryData.category, queryData.title, 'green');
       // MENU
-      menuCount(topics, postingCount);
+      functions.menuCount(topics, postingCount);
       var categoryList = template.list(postingCount, display);
       // 페이지 로드
       response.writeHead(200);
@@ -512,7 +493,7 @@ var app = http.createServer((request, response) => {
     access_deny();
     // 삭제할 게시물을 DB에서 찾아 영구삭제
     db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='1'`, (error) => {
-        throwError(error);
+        functions.throwError(error);
         // 카테고리 페이지로 리다이렉트
         response.writeHead(302, {
           Location: encodeURI(`/trash`)
@@ -527,7 +508,7 @@ var app = http.createServer((request, response) => {
     access_deny();
     // DB UPDATE
     db.query(`UPDATE topic SET trash='0' WHERE category='${queryData.category}' AND title='${queryData.title}'`, (error) => {
-        throwError(error);
+        functions.throwError(error);
         // 카테고리 페이지로 리다이렉트
         response.writeHead(302, {
           Location: encodeURI(`/?category=${queryData.category}`)
