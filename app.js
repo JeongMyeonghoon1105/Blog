@@ -88,7 +88,8 @@ var app = http.createServer((request, response) => {
   // JS
   var js = fs.readFileSync('./js/header.js', 'utf8');
   var categoryItems = 0;
-  function showCategory(error,topics, card, queryData, postingOrTrash) {
+  function showCategory(description, error,topics, card, queryData, postingOrTrash) {
+    card = template.descriptionArea(description) + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">'
     functions.throwError(error);
     categoryItems = 0;
     // 카테고리에 게시물이 존재하는지 검사. 존재할 경우, 게시물 목록 표시
@@ -149,12 +150,12 @@ var app = http.createServer((request, response) => {
     else if (((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) && queryData.title === undefined) {
       // STYLE
       style = style + fs.readFileSync('./css/category.css', 'utf8');
-      // CARD
-      var card = template.descriptionArea(queryData.category) + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">';
       // DB에서 데이터 불러오기
       db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
         functions.throwError(error);
-        card = showCategory(error, topics, card, queryData, 'posting');
+        // CARD
+        var card = showCategory(queryData.category, error, topics, card, queryData, 'posting');
+        // MENU
         var categoryList = showMenu(topics, postingCount, display);
         // 페이지 로드
         response.writeHead(200);
@@ -430,11 +431,11 @@ var app = http.createServer((request, response) => {
     access_deny();
     // STYLE
     style = style + fs.readFileSync('./css/category.css', 'utf8');
-    // CARD
-    var card = template.descriptionArea('Trash') + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">';
     // DB에서 데이터 불러오기
     db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
-      card = showCategory(error, topics, card, queryData, 'trash');
+      // CARD
+      var card = showCategory('Trash', error, topics, card, queryData, 'trash');
+      // MENU
       var categoryList = showMenu(topics, postingCount, display);
       // 페이지 로드
       response.writeHead(200);
@@ -521,11 +522,11 @@ var app = http.createServer((request, response) => {
       // 폼에서 제출한 데이터를 분석
       var post = qs.parse(body);
       var title = post.title;
-      // CARD
-      var card = template.descriptionArea('Search Results') + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">';
       // DB에서 데이터 불러오기
       db.query(`SELECT category, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic WHERE title LIKE '%${title}%' ORDER BY id DESC`, (error, topics) => {
-        card = showCategory(error, topics, card, queryData, 'search');
+        // CARD
+        var card = showCategory('Search Results', error, topics, card, queryData, 'search');
+        // MENU
         var categoryList = showMenu(topics, postingCount, display);
         // 페이지 로드
         response.writeHead(200);
