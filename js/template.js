@@ -8,7 +8,7 @@ module.exports = {
         ${style}
       </style>
     </head>
-    <body style="${variousStyle.bodyStyle}">
+    <body>
       <style>${display}</style>
       <!-- HEADER -->
       <header style="${variousStyle.headerStyle}">
@@ -43,10 +43,10 @@ module.exports = {
         </div>
       </header>
       <!-- WRAP -->
-      <div class="wrap" style="${variousStyle.wrapStyle}">
-        <div class="inner" style="${variousStyle.innerStyle}">
+      <div class="wrap">
+        <div class="inner">
           <!-- CARD -->
-          <div class="card" style="${variousStyle.cardStyle}" id="${categoryItems}">${card}</div>
+          <div class="card" id="${categoryItems}">${card}</div>
           <!-- SEARCH BAR -->
           <h1 id="search-title" style="${variousStyle.menuStyle}">Search</h1><br>
           <form action="/search/" method="post" id="search-container" style="${variousStyle.menuStyle}">

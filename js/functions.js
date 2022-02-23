@@ -32,6 +32,10 @@ module.exports = {
   },
   // 카테고리별 게시물 수를 객체에 저장
   menuCount:(topics, postingCount) => {
+    postingCount.frontend = 0;
+    postingCount.backend = 0;
+    postingCount.devops = 0;
+    postingCount.cs = 0;
     topics.forEach((element) => {
       if ((element.category == 'Frontend') && (element.trash != 1))
         postingCount.frontend = parseInt(postingCount.frontend + 1);

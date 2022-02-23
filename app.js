@@ -4,6 +4,7 @@ var url = require('url');
 var qs = require('query-string');
 var template = require('./js/template.js');
 var functions = require('./js/functions.js');
+var objects = require('./js/objects.js');
 var signIn = 0;
 var sanitizeHtml = require('sanitize-html');
 var mysql = require('mysql');
@@ -48,29 +49,6 @@ var app = http.createServer((request, response) => {
     var tabSignIn = template.Tab('signin_process', 'Out');
     var tabDownHeight = 'height: 280px;';
   }
-  // 각 페이지 별로 달리 적용될 스타일들을 객체로 묶어 초기화
-  var variousStyle = {
-    'bodyStyle': '/* */',
-    'headerStyle': '/* */',
-    'wrapStyle': '/* */',
-    'innerStyle': '/* */',
-    'cardStyle': '/* */',
-    'menuStyle': '/* */'
-  }
-  // 카테고리별 게시물 수를 저장할 객체 선언
-  var postingCount = {
-    'frontend': 0,
-    'backend': 0,
-    'devops': 0,
-    'cs': 0
-  }
-  // 카테고리 선택란의 디폴트 값을 설정하는데 사용되는 객체
-  var categorySelect = {
-    'frontend': '<!----',
-    'backend': '<!----',
-    'devops': '<!----',
-    'cs': '<!----'
-  }
   // HEAD
   var head = fs.readFileSync('./html/head.html', 'utf8');
   // STYLE
@@ -82,7 +60,7 @@ var app = http.createServer((request, response) => {
   // HEADER
   var header = fs.readFileSync('./html/header.html', 'utf8');
   // MENU
-  var categoryList = template.list(postingCount.frontend, postingCount.backend, postingCount.devops, postingCount.cs, display);
+  var categoryList = template.list(objects.postingCount.frontend, objects.postingCount.backend, objects.postingCount.devops, objects.postingCount.cs, display);
   // FOOTER
   var footer = fs.readFileSync('./html/footer.html', 'utf8');
   // JS
@@ -127,6 +105,12 @@ var app = http.createServer((request, response) => {
     return categoryList;
   }
 
+  if (pathname != '/signin') {
+    // STYLE
+    objects.variousStyle.headerStyle = '/* */';
+    objects.variousStyle.menuStyle = '/* */';
+  }
+
   // pathname이 '/'일 때(메인 페이지)
   if (pathname === '/') {
     // 메인 페이지
@@ -139,11 +123,11 @@ var app = http.createServer((request, response) => {
       db.query(`SELECT category, trash FROM topic`, (error, topics) => {
         functions.throwError(error);
         // MENU
-        functions.menuCount(topics, postingCount);
-        var categoryList = template.list(postingCount, display);
+        functions.menuCount(topics, objects.postingCount);
+        var categoryList = template.list(objects.postingCount, display);
         // 페이지 로드
         response.writeHead(200);
-        response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
+        response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
       })
     }
     // 카테고리별 게시물 목록
@@ -156,10 +140,10 @@ var app = http.createServer((request, response) => {
         // CARD
         var card = showCategory(queryData.category, error, topics, card, queryData, 'posting');
         // MENU
-        var categoryList = showMenu(topics, postingCount, display);
+        var categoryList = showMenu(topics, objects.postingCount, display);
         // 페이지 로드
         response.writeHead(200);
-        response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems));
+        response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems));
       })
     }
     // 게시물 페이지
@@ -193,25 +177,25 @@ var app = http.createServer((request, response) => {
           card = card + template.buttonContainer('delete', 'update', 'UPDATE', queryData.category, queryData.title, 'gray');
         }
         // MENU
-        functions.menuCount(topics, postingCount);
-        var categoryList = template.list(postingCount, display);
+        functions.menuCount(topics, objects.postingCount);
+        var categoryList = template.list(objects.postingCount, display);
         // 페이지 로드
         response.writeHead(200);
-        response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
+        response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
       })
     }
   }
   // pathname이 '/signin'일 때(로그인 페이지)
   else if (pathname === '/signin') {
     // STYLE
-    variousStyle.headerStyle = 'display: none;';
-    variousStyle.menuStyle = 'display: none;';
+    objects.variousStyle.headerStyle = 'display: none;';
+    objects.variousStyle.menuStyle = 'display: none;';
     style = style + fs.readFileSync('./css/signin.css', 'utf8');
     // CARD
     var card = fs.readFileSync('./html/sign-in.html', 'utf8');
     // 페이지 로드
     response.writeHead(200);
-    response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
+    response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
   }
   // pathname이 '/signin_process'일 때(로그인/아웃 처리)
   else if (pathname == '/signin_process') {
@@ -272,22 +256,19 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/post') {
     // 미확인 사용자의 페이지 접속 시도 차단
     access_deny();
-    // STYLE
-    variousStyle.bodyStyle = 'height: 1200px;'; variousStyle.wrapStyle = 'height: 1150px;';
-    variousStyle.innerStyle = 'height: 1150px;'; variousStyle.cardStyle = 'height: 1150px;';
     style = style + fs.readFileSync('./css/write.css', 'utf8');
     // CARD
     var action = '/post_process'
-    var card = template.descriptionArea('Post') + template.writtingArea(action, '', '', '', categorySelect);
+    var card = template.descriptionArea('Post') + template.writtingArea(action, '', '', '', objects.categorySelect);
     // DB에서 데이터 불러오기
     db.query(`SELECT category, trash FROM topic`, (error, topics) => {
       functions.throwError(error);
       // MENU
-      functions.menuCount(topics, postingCount);
-      var categoryList = template.list(postingCount, display);
+      functions.menuCount(topics, objects.postingCount);
+      var categoryList = template.list(objects.postingCount, display);
       // 페이지 로드
       response.writeHead(200);
-      response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
+      response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
     })
   }
   // pathname이 '/post_process'일 때(작성된 데이터를 처리하여 게시물 생성)
@@ -340,13 +321,13 @@ var app = http.createServer((request, response) => {
     style = style + fs.readFileSync('./css/write.css', 'utf8');
     // 수정할 게시물의 원래 카테고리를 디폴트 값으로 설정
     if (queryData.category === 'Frontend')
-      categorySelect.frontend = 'selected';
+      objects.categorySelect.frontend = 'selected';
     else if (queryData.category === 'Backend')
-      categorySelect.backend = 'selected';
+      objects.categorySelect.backend = 'selected';
     else if (queryData.category === 'DevOps')
-      categorySelect.devops = 'selected';
+      objects.categorySelect.devops = 'selected';
     else if (queryData.category === 'CS')
-      categorySelect.cs = 'selected';
+      objects.categorySelect.cs = 'selected';
     // DB에서 데이터 불러오기
     db.query(`SELECT category, title, content, subcategory, trash FROM topic`, (error, topics) => {
       functions.throwError(error);
@@ -362,13 +343,13 @@ var app = http.createServer((request, response) => {
       });
       // CARD
       var action = `/update_process/?category=${queryData.category}&title=${queryData.title}`
-      var card = template.descriptionArea('Update') + template.writtingArea(action, queryData.title, data, sub, categorySelect);
+      var card = template.descriptionArea('Update') + template.writtingArea(action, queryData.title, data, sub, objects.categorySelect);
       // MENU
-      functions.menuCount(topics, postingCount);
-      var categoryList = template.list(postingCount, display);
+      functions.menuCount(topics, objects.postingCount);
+      var categoryList = template.list(objects.postingCount, display);
       // 페이지 로드
       response.writeHead(200);
-      response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
+      response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
     })
   }
   // pathname이 '/update_process/'일 때(브라우저에서 게시물 수정 데이터를 송신했을 때)
@@ -436,10 +417,10 @@ var app = http.createServer((request, response) => {
       // CARD
       var card = showCategory('Trash', error, topics, card, queryData, 'trash');
       // MENU
-      var categoryList = showMenu(topics, postingCount, display);
+      var categoryList = showMenu(topics, objects.postingCount, display);
       // 페이지 로드
       response.writeHead(200);
-      response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems));
+      response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems));
     })
   }
   // 휴지통에 담긴 게시물
@@ -469,11 +450,11 @@ var app = http.createServer((request, response) => {
       // CARD
       card = card + template.buttonContainer('clear', 'recover_process', 'RECOVER', queryData.category, queryData.title, 'green');
       // MENU
-      functions.menuCount(topics, postingCount);
-      var categoryList = template.list(postingCount, display);
+      functions.menuCount(topics, objects.postingCount);
+      var categoryList = template.list(objects.postingCount, display);
       // 페이지 로드
       response.writeHead(200);
-      response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
+      response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
     })
   }
   // pathname이 '/clear_process'일 때(게시물 영구 삭제 버튼을 눌렀을 때)
@@ -527,10 +508,10 @@ var app = http.createServer((request, response) => {
         // CARD
         var card = showCategory('Search Results', error, topics, card, queryData, 'search');
         // MENU
-        var categoryList = showMenu(topics, postingCount, display);
+        var categoryList = showMenu(topics, objects.postingCount, display);
         // 페이지 로드
         response.writeHead(200);
-        response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems));
+        response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems));
       })
     })
   }
