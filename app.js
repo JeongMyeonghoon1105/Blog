@@ -66,10 +66,10 @@ var app = http.createServer((request, response) => {
   }
   // 카테고리 선택란의 디폴트 값을 설정하는데 사용되는 객체
   var categorySelect = {
-    'frontend': `<!----`,
-    'backend': `<!----`,
-    'devops': `<!----`,
-    'cs': `<!----`
+    'frontend': '<!----',
+    'backend': '<!----',
+    'devops': '<!----',
+    'cs': '<!----'
   }
   // HEAD
   var head = fs.readFileSync('./html/head.html', 'utf8');
@@ -277,7 +277,7 @@ var app = http.createServer((request, response) => {
     variousStyle.innerStyle = 'height: 1150px;'; variousStyle.cardStyle = 'height: 1150px;';
     style = style + fs.readFileSync('./css/write.css', 'utf8');
     // CARD
-    var action = `/post_process`
+    var action = '/post_process'
     var card = template.descriptionArea('Post') + template.writtingArea(action, '', '', '', categorySelect);
     // DB에서 데이터 불러오기
     db.query(`SELECT category, trash FROM topic`, (error, topics) => {
@@ -340,13 +340,13 @@ var app = http.createServer((request, response) => {
     style = style + fs.readFileSync('./css/write.css', 'utf8');
     // 수정할 게시물의 원래 카테고리를 디폴트 값으로 설정
     if (queryData.category === 'Frontend')
-      categorySelect.frontend = `selected`;
+      categorySelect.frontend = 'selected';
     else if (queryData.category === 'Backend')
-      categorySelect.backend = `selected`;
+      categorySelect.backend = 'selected';
     else if (queryData.category === 'DevOps')
-      categorySelect.devops = `selected`;
+      categorySelect.devops = 'selected';
     else if (queryData.category === 'CS')
-      categorySelect.cs = `selected`;
+      categorySelect.cs = 'selected';
     // DB에서 데이터 불러오기
     db.query(`SELECT category, title, content, subcategory, trash FROM topic`, (error, topics) => {
       functions.throwError(error);
@@ -485,7 +485,7 @@ var app = http.createServer((request, response) => {
         functions.throwError(error);
         // 카테고리 페이지로 리다이렉트
         response.writeHead(302, {
-          Location: encodeURI(`/trash`)
+          Location: encodeURI('/trash')
         });
         response.end();
       }
