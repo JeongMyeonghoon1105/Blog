@@ -30,15 +30,6 @@ var app = http.createServer((request, response) => {
   } else {
     var display = 'block';
   }
-  // 미확인 사용자의 관리자 전용 페이지 접속 시도 차단
-  function access_deny() {
-    if (signIn == 0) {
-      response.writeHead(302, {
-        Location: encodeURI('/')
-      });
-      response.end();
-    }
-  }
   // 로그인 여부에 따라 헤더의 스타일을 달리 적용
   if (signIn == 0) {
     var signInHeader = template.Header('signin', 'In');
@@ -255,7 +246,7 @@ var app = http.createServer((request, response) => {
   // pathname이 '/post'일 때(글 작성 페이지)
   else if (pathname === '/post') {
     // 미확인 사용자의 페이지 접속 시도 차단
-    access_deny();
+    functions.access_deny(signIn);
     style = style + fs.readFileSync('./css/write.css', 'utf8');
     // CARD
     var action = '/post_process'
@@ -274,7 +265,7 @@ var app = http.createServer((request, response) => {
   // pathname이 '/post_process'일 때(작성된 데이터를 처리하여 게시물 생성)
   else if (pathname === '/post_process') {
     // 미확인 사용자의 페이지 접속 시도 차단
-    access_deny();
+    functions.access_deny(signIn);
     // 폼에서 제출한 데이터를 분석하여 저장할 변수
     var body = ""
     // 포스팅할 데이터를 요청해 변수에 저장
@@ -316,7 +307,7 @@ var app = http.createServer((request, response) => {
   // pathname이 '/update/'일 때(게시물 수정 페이지)
   else if (pathname === '/update/') {
     // 미확인 사용자의 접속 시도 차단
-    access_deny();
+    functions.access_deny(signIn);
     // STYLE
     style = style + fs.readFileSync('./css/write.css', 'utf8');
     // 수정할 게시물의 원래 카테고리를 디폴트 값으로 설정
@@ -355,7 +346,7 @@ var app = http.createServer((request, response) => {
   // pathname이 '/update_process/'일 때(브라우저에서 게시물 수정 데이터를 송신했을 때)
   else if (pathname === '/update_process/') {
     // 미확인 사용자의 접속 시도 차단
-    access_deny();
+    functions.access_deny(signIn);
     // 폼에서 제출한 데이터를 분석하여 저장할 변수
     var body = ""
     // 포스팅할 데이터를 요청해 변수에 저장
@@ -393,7 +384,7 @@ var app = http.createServer((request, response) => {
   // pathname이 '/delete_process'일 때(일반 게시물 삭제 버튼을 눌렀을 때)
   else if (pathname === '/delete_process/') {
     // 미확인 사용자의 접속 시도 차단
-    access_deny();
+    functions.access_deny(signIn);
     // DB UPDATE
     db.query(`UPDATE topic SET trash='1' WHERE category='${queryData.category}' AND title='${queryData.title}'`,
       (error) => {
@@ -409,7 +400,7 @@ var app = http.createServer((request, response) => {
   // pathname이 '/trash'일 때(휴지통에 담긴 게시물의 목록)
   else if (pathname === '/trash') {
     // 미확인 사용자의 접속 시도 차단
-    access_deny();
+    functions.access_deny(signIn);
     // STYLE
     style = style + fs.readFileSync('./css/category.css', 'utf8');
     // DB에서 데이터 불러오기
@@ -426,7 +417,7 @@ var app = http.createServer((request, response) => {
   // 휴지통에 담긴 게시물
   else if (pathname === '/trash/') {
     // 미확인 사용자의 접속 시도 차단
-    access_deny();
+    functions.access_deny(signIn);
     // STYLE
     style = style + fs.readFileSync('./css/post.css', 'utf8');
     // CARD
@@ -460,7 +451,7 @@ var app = http.createServer((request, response) => {
   // pathname이 '/clear_process'일 때(게시물 영구 삭제 버튼을 눌렀을 때)
   else if (pathname === '/clear_process/') {
     // 미확인 사용자의 접속 시도 차단
-    access_deny();
+    functions.access_deny(signIn);
     // 삭제할 게시물을 DB에서 찾아 영구삭제
     db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='1'`, (error) => {
         functions.throwError(error);
@@ -475,7 +466,7 @@ var app = http.createServer((request, response) => {
   // pathname이 '/recover_process/'일 때(게시물 복구 버튼을 눌렀을 때)
   else if (pathname === '/recover_process/') {
     // 미확인 사용자의 접속 시도 차단
-    access_deny();
+    functions.access_deny(signIn);
     // DB UPDATE
     db.query(`UPDATE topic SET trash='0' WHERE category='${queryData.category}' AND title='${queryData.title}'`, (error) => {
         functions.throwError(error);

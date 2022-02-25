@@ -46,5 +46,14 @@ module.exports = {
       else if ((element.category == 'CS') && (element.trash != 1))
         postingCount.cs = parseInt(postingCount.cs + 1);
     })
+  },
+  // 미확인 사용자의 관리자 전용 페이지 접속 시도 차단
+  access_deny:(signIn) => {
+    if (signIn == 0) {
+      response.writeHead(302, {
+        Location: encodeURI('/')
+      });
+      response.end();
+    }
   }
 }
