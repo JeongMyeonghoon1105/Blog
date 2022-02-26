@@ -150,17 +150,7 @@ var app = http.createServer((request, response) => {
         topics.forEach((element) => {
           if ((element.category == queryData.category) && (element.title == queryData.title)) {
             // 게시물의 소스코드를 소독
-            card = card + sanitizeHtml(template.postContainer(element.title, element.content), {
-              allowedTags: ['div', 'h1', 'h2', 'h3', 'img', 'text', 'i', 'a', 'button', 'input', 'br', 'iframe'],
-              allowedClasses: {
-                'div': ['card', 'post-container', 'post-contents'],
-                'h1': ['post-title']
-              },
-              allowedAttributes: {
-                'img': ['src', 'alt'],
-                'iframe': ['src']
-              }
-            })
+            card = card + sanitizeHtml(template.postContainer(element.title, element.content), objects.allow);
           }
         })
         // 로그인된 상태일 경우 삭제 및 편집 버튼을 게시물 페이지 하단에 추가
@@ -403,13 +393,7 @@ var app = http.createServer((request, response) => {
       topics.forEach((element) => {
         if ((element.category == queryData.category) && (element.title == queryData.title) && (element.trash == 1)) {
           // 게시물의 소스코드를 소독
-          card = card + sanitizeHtml(template.postContainer(element.title, element.content), {
-            allowedTags: ['div', 'h1', 'h2', 'h3', 'img', 'text', 'i', 'a', 'button', 'input', 'br'],
-            allowedClasses: {
-              'div': ['card', 'post-container', 'post-contents'],
-              'h1': ['post-title']
-            }
-          })
+          card = card + sanitizeHtml(template.postContainer(element.title, element.content), objects.allow);
         }
       })
       // CARD

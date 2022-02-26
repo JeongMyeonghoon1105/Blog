@@ -17,5 +17,16 @@ module.exports = {
     'backend': '<!----',
     'devops': '<!----',
     'cs': '<!----'
+  },
+  allow:{
+    allowedTags: ['div', 'h1', 'h2', 'h3', 'img', 'text', 'i', 'a', 'button', 'input', 'br', 'iframe'],
+    allowedClasses: {
+      'div': ['card', 'post-container', 'post-contents'],
+      'h1': ['post-title']
+    },
+    allowedAttributes: {
+      'img': ['src', 'alt'],
+      'iframe': ['src']
+    }
   }
 }
