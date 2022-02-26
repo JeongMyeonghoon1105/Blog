@@ -92,12 +92,12 @@ var app = http.createServer((request, response) => {
     return categoryList;
   }
 
+  // pathname이 '/signin'이 아닐 경우
   if (pathname != '/signin') {
     // STYLE
     objects.variousStyle.headerStyle = '/* */';
     objects.variousStyle.menuStyle = '/* */';
   }
-
   // pathname이 '/'일 때(메인 페이지)
   if (pathname === '/') {
     // 메인 페이지
@@ -272,10 +272,8 @@ var app = http.createServer((request, response) => {
     // 포스팅 및 기타 처리
     request.on('end', () => {
       // 폼에서 제출한 데이터를 분석
-      var post = qs.parse(body);
-      var title = post.title;
-      var content = post.content;
-      var category = post.category;
+      var post = qs.parse(body); var title = post.title;
+      var content = post.content; var category = post.category;
       var subcategory = post.subcategory;
       // DB에서 데이터 불러오기
       db.query(`SELECT category, title, content, trash FROM topic`, (error, topics) => {
@@ -353,10 +351,8 @@ var app = http.createServer((request, response) => {
     // 포스팅 및 기타 처리
     request.on('end', () => {
       // 폼에서 제출한 데이터를 분석
-      var post = qs.parse(body);
-      var title = post.title;
-      var content = post.content;
-      var category = post.category;
+      var post = qs.parse(body); var title = post.title;
+      var content = post.content; var category = post.category;
       var subcategory = post.subcategory;
       // 기존 게시물(수정 전 게시물)을 삭제
       db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='0'`,
