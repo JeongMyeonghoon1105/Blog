@@ -116,8 +116,7 @@ var app = http.createServer((request, response) => {
       db.query(`SELECT category, trash FROM topic`, (error, topics) => {
         functions.throwError(error);
         // MENU
-        functions.menuCount(topics, objects.postingCount);
-        var categoryList = template.list(objects.postingCount, display);
+        var categoryList = showMenu(topics, objects.postingCount, display);
         // 페이지 로드
         pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
       })
@@ -158,8 +157,7 @@ var app = http.createServer((request, response) => {
           card = card + template.buttonContainer('delete', 'update', 'UPDATE', queryData.category, queryData.title, 'gray');
         }
         // MENU
-        functions.menuCount(topics, objects.postingCount);
-        var categoryList = template.list(objects.postingCount, display);
+        var categoryList = showMenu(topics, objects.postingCount, display);
         // 페이지 로드
         pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
       })
@@ -235,8 +233,7 @@ var app = http.createServer((request, response) => {
     db.query(`SELECT category, trash FROM topic`, (error, topics) => {
       functions.throwError(error);
       // MENU
-      functions.menuCount(topics, objects.postingCount);
-      var categoryList = template.list(objects.postingCount, display);
+      var categoryList = showMenu(topics, objects.postingCount, display);
       // 페이지 로드
       pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
     })
@@ -310,8 +307,7 @@ var app = http.createServer((request, response) => {
       var action = `/update_process/?category=${queryData.category}&title=${queryData.title}`
       var card = template.descriptionArea('Update') + template.writtingArea(action, queryData.title, data, sub, objects.categorySelect);
       // MENU
-      functions.menuCount(topics, objects.postingCount);
-      var categoryList = template.list(objects.postingCount, display);
+      var categoryList = showMenu(topics, objects.postingCount, display);
       // 페이지 로드
       pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
     })
@@ -399,8 +395,7 @@ var app = http.createServer((request, response) => {
       // CARD
       card = card + template.buttonContainer('clear', 'recover_process', 'RECOVER', queryData.category, queryData.title, 'green');
       // MENU
-      functions.menuCount(topics, objects.postingCount);
-      var categoryList = template.list(objects.postingCount, display);
+      var categoryList = showMenu(topics, objects.postingCount, display);
       // 페이지 로드
       pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
     })
