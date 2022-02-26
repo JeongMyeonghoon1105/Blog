@@ -98,6 +98,13 @@ var app = http.createServer((request, response) => {
     response.writeHead(200);
     response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems));
   }
+  // 리다이렉션 함수
+  function pageRedirection(response, num, url) {
+    response.writeHead(num, {
+      Location: encodeURI(url)
+    });
+    response.end();
+  }
 
   // pathname이 '/signin'이 아닐 경우
   if (pathname != '/signin') {
@@ -216,17 +223,12 @@ var app = http.createServer((request, response) => {
             // 로그인 처리
             signIn = 1;
             // 메인 페이지로 리다이렉트
-            response.writeHead(302, {
-              Location: encodeURI('/')
-            });
+            pageRedirection(response, 302, '/');
           }
           // 입력한 비밀번호가 실제 비밀번호와 일치하지 않으면 로그인 화면으로 리다이렉트
           else {
-            response.writeHead(302, {
-              Location: encodeURI('/signin')
-            });
+            pageRedirection(response, 302, '/signin');
           }
-          response.end();
         });
       });
     }
@@ -235,10 +237,7 @@ var app = http.createServer((request, response) => {
       // 로그아웃 처리
       signIn = 0;
       // 메인 페이지로 리다이렉트
-      response.writeHead(302, {
-        Location: encodeURI('/')
-      });
-      response.end();
+      pageRedirection(response, 302, '/');
     }
   }
   // pathname이 '/post'일 때(글 작성 페이지)
@@ -291,10 +290,7 @@ var app = http.createServer((request, response) => {
         (error) => {
           functions.throwError(error);
           // 포스팅 후, 방금 작성한 게시물로 리다이렉션
-          response.writeHead(302, {
-            Location: encodeURI(`/?category=${category}&title=${title}`)
-          });
-          response.end();
+          pageRedirection(response, 302, `/?category=${category}&title=${title}`);
         })
       })
     });
@@ -363,10 +359,7 @@ var app = http.createServer((request, response) => {
             (error) => {
               functions.throwError(error);
               // 포스팅 후, 방금 작성한 게시물로 리다이렉션
-              response.writeHead(302, {
-                Location: encodeURI(`/?category=${category}&title=${title}`)
-              });
-              response.end();
+              pageRedirection(response, 302, `/?category=${category}&title=${title}`);
             }
           )
         }
@@ -382,10 +375,7 @@ var app = http.createServer((request, response) => {
       (error) => {
         functions.throwError(error);
         // 카테고리 페이지로 리다이렉트
-        response.writeHead(302, {
-          Location: encodeURI(`/?category=${queryData.category}`)
-        });
-        response.end();
+        pageRedirection(response, 302, `/?category=${queryData.category}`);
       }
     )
   }
@@ -446,10 +436,7 @@ var app = http.createServer((request, response) => {
     db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='1'`, (error) => {
         functions.throwError(error);
         // 카테고리 페이지로 리다이렉트
-        response.writeHead(302, {
-          Location: encodeURI('/trash')
-        });
-        response.end();
+        pageRedirection(response, 302, '/trash');
       }
     )
   }
@@ -461,10 +448,7 @@ var app = http.createServer((request, response) => {
     db.query(`UPDATE topic SET trash='0' WHERE category='${queryData.category}' AND title='${queryData.title}'`, (error) => {
         functions.throwError(error);
         // 카테고리 페이지로 리다이렉트
-        response.writeHead(302, {
-          Location: encodeURI(`/?category=${queryData.category}`)
-        });
-        response.end();
+        pageRedirection(response, 302, `/?category=${queryData.category}`);
       }
     )
   }
