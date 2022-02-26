@@ -25,11 +25,7 @@ var app = http.createServer((request, response) => {
   var queryData = url.parse(requestedURL, true).query;
   var pathname = url.parse(requestedURL, true).pathname;
   // 미확인 사용자로부터 관리자 전용 기능 숨기기
-  if (signIn == 0) {
-    var display = 'none';
-  } else {
-    var display = 'block';
-  }
+  var display = functions.changeDisplayStatus(signIn);
   // 로그인 여부에 따라 헤더의 스타일을 달리 적용
   if (signIn == 0) {
     var signInHeader = template.Header('signin', 'In');

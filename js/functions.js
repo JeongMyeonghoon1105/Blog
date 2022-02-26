@@ -55,5 +55,14 @@ module.exports = {
       });
       response.end();
     }
+  },
+  // 미확인 사용자로부터 관리자 전용 기능 숨기기
+  changeDisplayStatus:(signIn) => {
+    if (signIn == 0) {
+      var display = 'none';
+    } else {
+      var display = 'block';
+    }
+    return display;
   }
 }
