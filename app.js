@@ -53,6 +53,7 @@ var app = http.createServer((request, response) => {
   // JS
   var js = fs.readFileSync('./js/header.js', 'utf8');
   var categoryItems = 0;
+  // 게시물 목록 출력 함수
   function showCategory(description, error,topics, card, queryData, postingOrTrash) {
     card = template.descriptionArea(description) + '<div id="posting-item" style="display: flex; flex-wrap: wrap;">'
     functions.throwError(error);
@@ -86,19 +87,24 @@ var app = http.createServer((request, response) => {
     }
     return card;
   }
+  // 메뉴 출력 함수
   function showMenu(topics, postingCount, display) {
     functions.menuCount(topics, postingCount);
     var categoryList = template.list(postingCount, display);
     return categoryList;
   }
+  // 화면 표출 함수
+  function pageResponse(response, head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems) {
+    response.writeHead(200);
+    response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems));
+  }
 
   // pathname이 '/signin'이 아닐 경우
   if (pathname != '/signin') {
-    // STYLE
     objects.variousStyle.headerStyle = '/* */';
     objects.variousStyle.menuStyle = '/* */';
   }
-  // pathname이 '/'일 때(메인 페이지)
+  // pathname이 '/'일 때
   if (pathname === '/') {
     // 메인 페이지
     if (queryData.category === undefined) {
@@ -113,8 +119,7 @@ var app = http.createServer((request, response) => {
         functions.menuCount(topics, objects.postingCount);
         var categoryList = template.list(objects.postingCount, display);
         // 페이지 로드
-        response.writeHead(200);
-        response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
+        pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
       })
     }
     // 카테고리별 게시물 목록
@@ -129,8 +134,7 @@ var app = http.createServer((request, response) => {
         // MENU
         var categoryList = showMenu(topics, objects.postingCount, display);
         // 페이지 로드
-        response.writeHead(200);
-        response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems));
+        pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems);
       })
     }
     // 게시물 페이지
@@ -167,8 +171,7 @@ var app = http.createServer((request, response) => {
         functions.menuCount(topics, objects.postingCount);
         var categoryList = template.list(objects.postingCount, display);
         // 페이지 로드
-        response.writeHead(200);
-        response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
+        pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
       })
     }
   }
@@ -181,8 +184,7 @@ var app = http.createServer((request, response) => {
     // CARD
     var card = fs.readFileSync('./html/sign-in.html', 'utf8');
     // 페이지 로드
-    response.writeHead(200);
-    response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
+    pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
   }
   // pathname이 '/signin_process'일 때(로그인/아웃 처리)
   else if (pathname == '/signin_process') {
@@ -254,8 +256,7 @@ var app = http.createServer((request, response) => {
       functions.menuCount(topics, objects.postingCount);
       var categoryList = template.list(objects.postingCount, display);
       // 페이지 로드
-      response.writeHead(200);
-      response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
+      pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
     })
   }
   // pathname이 '/post_process'일 때(작성된 데이터를 처리하여 게시물 생성)
@@ -333,8 +334,7 @@ var app = http.createServer((request, response) => {
       functions.menuCount(topics, objects.postingCount);
       var categoryList = template.list(objects.postingCount, display);
       // 페이지 로드
-      response.writeHead(200);
-      response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
+      pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
     })
   }
   // pathname이 '/update_process/'일 때(브라우저에서 게시물 수정 데이터를 송신했을 때)
@@ -402,8 +402,7 @@ var app = http.createServer((request, response) => {
       // MENU
       var categoryList = showMenu(topics, objects.postingCount, display);
       // 페이지 로드
-      response.writeHead(200);
-      response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems));
+      pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems);
     })
   }
   // 휴지통에 담긴 게시물
@@ -436,8 +435,7 @@ var app = http.createServer((request, response) => {
       functions.menuCount(topics, objects.postingCount);
       var categoryList = template.list(objects.postingCount, display);
       // 페이지 로드
-      response.writeHead(200);
-      response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined));
+      pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
     })
   }
   // pathname이 '/clear_process'일 때(게시물 영구 삭제 버튼을 눌렀을 때)
@@ -493,8 +491,7 @@ var app = http.createServer((request, response) => {
         // MENU
         var categoryList = showMenu(topics, objects.postingCount, display);
         // 페이지 로드
-        response.writeHead(200);
-        response.end(template.HTML(head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems));
+        pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems);
       })
     })
   }
