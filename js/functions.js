@@ -64,5 +64,12 @@ module.exports = {
       var display = 'block';
     }
     return display;
+  },
+  // 리다이렉션 함수
+  pageRedirection: (response, num, url) => {
+    response.writeHead(num, {
+      Location: encodeURI(url)
+    });
+    response.end();
   }
 }
