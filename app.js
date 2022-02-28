@@ -87,16 +87,16 @@ var app = http.createServer((request, response) => {
     }
     return card;
   }
-  // 메뉴 출력 함수
-  function showMenu(topics, postingCount, display) {
-    functions.menuCount(topics, postingCount);
-    var categoryList = template.list(postingCount, display);
-    return categoryList;
-  }
   // 화면 표출 함수
   function pageResponse(response, head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems) {
     response.writeHead(200);
     response.end(template.HTML(head, style, variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems));
+  }
+  function styleAndMenu(topics, css) {
+    style = style + fs.readFileSync(css, 'utf8');
+    functions.menuCount(topics, objects.postingCount);
+    var categoryList = template.list(objects.postingCount, display);
+    return categoryList;
   }
 
   // pathname이 '/signin'이 아닐 경우
@@ -108,42 +108,30 @@ var app = http.createServer((request, response) => {
   if (pathname === '/') {
     // 메인 페이지
     if (queryData.category === undefined) {
-      // STYLE
-      style = style + fs.readFileSync('./css/main.css', 'utf8');
       // CARD
       var card = fs.readFileSync('./html/card.html', 'utf8');
       // DB에서 데이터 불러오기
       db.query(`SELECT category, trash FROM topic`, (error, topics) => {
         functions.throwError(error);
-        // MENU
-        var categoryList = showMenu(topics, objects.postingCount, display);
-        // 페이지 로드
+        var categoryList = styleAndMenu(topics, './css/main.css');
         pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
       })
     }
     // 카테고리별 게시물 목록
     else if (((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) && queryData.title === undefined) {
-      // STYLE
-      style = style + fs.readFileSync('./css/category.css', 'utf8');
       // DB에서 데이터 불러오기
       db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
         functions.throwError(error);
-        // CARD
         var card = showCategory(queryData.category, error, topics, card, queryData, 'posting');
-        // MENU
-        var categoryList = showMenu(topics, objects.postingCount, display);
-        // 페이지 로드
+        var categoryList = styleAndMenu(topics, './css/category.css');
         pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems);
       })
     }
     // 게시물 페이지
     else if ((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) {
-      // STYLE
-      style = style + fs.readFileSync('./css/post.css', 'utf8');
       // DB에서 데이터 불러오기
       db.query(`SELECT category, id, title, content, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
         functions.throwError(error);
-        // CARD
         var card = '';
         // 선택한 게시물을 DB에서 찾기
         topics.forEach((element) => {
@@ -156,9 +144,7 @@ var app = http.createServer((request, response) => {
         if (signIn == 1) {
           card = card + template.buttonContainer('delete', 'update', 'UPDATE', queryData.category, queryData.title, 'gray');
         }
-        // MENU
-        var categoryList = showMenu(topics, objects.postingCount, display);
-        // 페이지 로드
+        var categoryList = styleAndMenu(topics, './css/post.css');
         pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
       })
     }
@@ -225,15 +211,13 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/post') {
     // 미확인 사용자의 페이지 접속 시도 차단
     functions.access_deny(signIn);
-    style = style + fs.readFileSync('./css/write.css', 'utf8');
     // CARD
     var action = '/post_process'
     var card = template.descriptionArea('Post') + template.writtingArea(action, '', '', '', objects.categorySelect);
     // DB에서 데이터 불러오기
     db.query(`SELECT category, trash FROM topic`, (error, topics) => {
       functions.throwError(error);
-      // MENU
-      var categoryList = showMenu(topics, objects.postingCount, display);
+      var categoryList = styleAndMenu(topics, './css/write.css');
       // 페이지 로드
       pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
     })
@@ -279,8 +263,6 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/update/') {
     // 미확인 사용자의 접속 시도 차단
     functions.access_deny(signIn);
-    // STYLE
-    style = style + fs.readFileSync('./css/write.css', 'utf8');
     // 수정할 게시물의 원래 카테고리를 디폴트 값으로 설정
     if (queryData.category === 'Frontend')
       objects.categorySelect.frontend = 'selected';
@@ -303,12 +285,9 @@ var app = http.createServer((request, response) => {
           sub = element.subcategory;
         }
       });
-      // CARD
       var action = `/update_process/?category=${queryData.category}&title=${queryData.title}`
       var card = template.descriptionArea('Update') + template.writtingArea(action, queryData.title, data, sub, objects.categorySelect);
-      // MENU
-      var categoryList = showMenu(topics, objects.postingCount, display);
-      // 페이지 로드
+      var categoryList = styleAndMenu(topics, './css/write.css');
       pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
     })
   }
@@ -362,15 +341,11 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/trash') {
     // 미확인 사용자의 접속 시도 차단
     functions.access_deny(signIn);
-    // STYLE
-    style = style + fs.readFileSync('./css/category.css', 'utf8');
     // DB에서 데이터 불러오기
     db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
       // CARD
       var card = showCategory('Trash', error, topics, card, queryData, 'trash');
-      // MENU
-      var categoryList = showMenu(topics, objects.postingCount, display);
-      // 페이지 로드
+      var categoryList = styleAndMenu(topics, './css/category.css');
       pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems);
     })
   }
@@ -378,8 +353,6 @@ var app = http.createServer((request, response) => {
   else if (pathname === '/trash/') {
     // 미확인 사용자의 접속 시도 차단
     functions.access_deny(signIn);
-    // STYLE
-    style = style + fs.readFileSync('./css/post.css', 'utf8');
     // CARD
     var card = '';
     // DB에서 데이터 불러오기
@@ -392,11 +365,8 @@ var app = http.createServer((request, response) => {
           card = card + sanitizeHtml(template.postContainer(element.title, element.content), objects.allow);
         }
       })
-      // CARD
       card = card + template.buttonContainer('clear', 'recover_process', 'RECOVER', queryData.category, queryData.title, 'green');
-      // MENU
-      var categoryList = showMenu(topics, objects.postingCount, display);
-      // 페이지 로드
+      var categoryList = styleAndMenu(topics, './css/post.css');
       pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
     })
   }
@@ -426,8 +396,6 @@ var app = http.createServer((request, response) => {
   }
   // pathname이 '/search/'일 때(게시물 검색)
   else if (pathname === '/search/') {
-    // STYLE
-    style = style + fs.readFileSync('./css/category.css', 'utf8');
     // 폼에서 제출한 데이터를 분석하여 저장할 변수
     var body = ""
     // 포스팅할 데이터를 요청해 변수에 저장
@@ -442,11 +410,8 @@ var app = http.createServer((request, response) => {
       var title = post.title;
       // DB에서 데이터 불러오기
       db.query(`SELECT category, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic WHERE title LIKE '%${title}%' ORDER BY id DESC`, (error, topics) => {
-        // CARD
         var card = showCategory('Search Results', error, topics, card, queryData, 'search');
-        // MENU
-        var categoryList = showMenu(topics, objects.postingCount, display);
-        // 페이지 로드
+        var categoryList = styleAndMenu(topics, './css/category.css');
         pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, categoryItems);
       })
     })
