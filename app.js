@@ -100,7 +100,7 @@ var app = http.createServer((request, response) => {
     return categoryList;
   }
 
-  // pathname이 '/signin'이 아닐 경우
+  // 로그인 페이지가 아닌 모든 페이지
   if (pathname != '/signin') {
     objects.variousStyle.headerStyle = '/* */';
     objects.variousStyle.menuStyle = '/* */';
@@ -116,7 +116,7 @@ var app = http.createServer((request, response) => {
         pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
       })
     }
-    // 카테고리별 게시물 목록
+    // 카테고리별 게시물 목록 페이지
     else if (((queryData.category == 'Frontend') || (queryData.category == 'Backend') || (queryData.category == 'DevOps') || (queryData.category == 'CS')) && queryData.title === undefined) {
       db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
         functions.throwError(error);
@@ -143,7 +143,7 @@ var app = http.createServer((request, response) => {
       })
     }
   }
-  // pathname이 '/signin'일 때(로그인 페이지)
+  // 로그인 페이지
   else if (pathname === '/signin') {
     objects.variousStyle.headerStyle = 'display: none;';
     objects.variousStyle.menuStyle = 'display: none;';
@@ -151,7 +151,7 @@ var app = http.createServer((request, response) => {
     var card = fs.readFileSync('./html/sign-in.html', 'utf8');
     pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
   }
-  // pathname이 '/signin_process'일 때(로그인/아웃 처리)
+  // 로그인/아웃 처리
   else if (pathname == '/signin_process') {
     // 로그인
     if (signIn == 0) {
@@ -184,7 +184,7 @@ var app = http.createServer((request, response) => {
       functions.pageRedirection(response, 302, '/');
     }
   }
-  // pathname이 '/post'일 때(글 작성 페이지)
+  // 새 게시물 작성 페이지
   else if (pathname === '/post') {
     functions.access_deny(signIn);
     var action = '/post_process'
@@ -195,7 +195,7 @@ var app = http.createServer((request, response) => {
       pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
     })
   }
-  // pathname이 '/post_process'일 때(작성된 데이터를 처리하여 게시물 생성)
+  // 작성된 데이터를 처리하여 게시물 생성
   else if (pathname === '/post_process') {
     functions.access_deny(signIn);
     var body = "";
@@ -220,7 +220,7 @@ var app = http.createServer((request, response) => {
       })
     });
   }
-  // pathname이 '/update/'일 때(게시물 수정 페이지)
+  // 게시물 수정 페이지
   else if (pathname === '/update/') {
     functions.access_deny(signIn);
     if (queryData.category === 'Frontend')
@@ -246,14 +246,13 @@ var app = http.createServer((request, response) => {
       pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
     })
   }
-  // pathname이 '/update_process/'일 때(브라우저에서 게시물 수정 데이터를 송신했을 때)
+  // 브라우저로부터 게시물 수정 데이터를 수신했을 때
   else if (pathname === '/update_process/') {
     functions.access_deny(signIn);
     var body = ""
     request.on('data', (data) => {
       body = body + data;
     });
-    // 포스팅 및 기타 처리
     request.on('end', () => {
       var post = qs.parse(body); var title = post.title;
       var content = post.content; var category = post.category;
@@ -271,7 +270,7 @@ var app = http.createServer((request, response) => {
       )
     });
   }
-  // pathname이 '/delete_process'일 때(일반 게시물 삭제 버튼을 눌렀을 때)
+  // 게시물 삭제 버튼을 눌렀을 때
   else if (pathname === '/delete_process/') {
     functions.access_deny(signIn);
     db.query(`UPDATE topic SET trash='1' WHERE category='${queryData.category}' AND title='${queryData.title}'`,
@@ -281,7 +280,7 @@ var app = http.createServer((request, response) => {
       }
     )
   }
-  // pathname이 '/trash'일 때(휴지통에 담긴 게시물의 목록)
+  // 휴지통에 담긴 게시물 목록
   else if (pathname === '/trash') {
     functions.access_deny(signIn);
     db.query(`SELECT category, id, title, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash, subcategory FROM topic ORDER BY id DESC`, (error, topics) => {
@@ -306,7 +305,7 @@ var app = http.createServer((request, response) => {
       pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
     })
   }
-  // pathname이 '/clear_process'일 때(게시물 영구 삭제 버튼을 눌렀을 때)
+  // 게시물 영구 삭제 버튼을 눌렀을 때
   else if (pathname === '/clear_process/') {
     functions.access_deny(signIn);
     db.query(`DELETE FROM topic WHERE category='${queryData.category}' AND title='${queryData.title}' AND trash='1'`, (error) => {
@@ -315,7 +314,7 @@ var app = http.createServer((request, response) => {
       }
     )
   }
-  // pathname이 '/recover_process/'일 때(게시물 복구 버튼을 눌렀을 때)
+  // 게시물 복구 버튼을 눌렀을 때
   else if (pathname === '/recover_process/') {
     functions.access_deny(signIn);
     db.query(`UPDATE topic SET trash='0' WHERE category='${queryData.category}' AND title='${queryData.title}'`, (error) => {
@@ -324,7 +323,7 @@ var app = http.createServer((request, response) => {
       }
     )
   }
-  // pathname이 '/search/'일 때(게시물 검색)
+  // 검색 결과
   else if (pathname === '/search/') {
     var body = "";
     request.on('data', (data) => {
