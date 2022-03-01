@@ -82,9 +82,8 @@ var app = http.createServer((request, response) => {
     });
     card = card + '</div>';
     // Card Height 계산 및 게시물 없을 시 안내 메시지 출력
-    if (categoryItems == 0) {
+    if (categoryItems == 0)
       card = card + template.notice('No Results');
-    }
     return card;
   }
   // 화면 표출 함수
@@ -131,13 +130,11 @@ var app = http.createServer((request, response) => {
         functions.throwError(error);
         var card = '';
         topics.forEach((element) => {
-          if ((element.category == queryData.category) && (element.title == queryData.title)) {
+          if ((element.category == queryData.category) && (element.title == queryData.title))
             card = card + sanitizeHtml(template.postContainer(element.title, element.content), objects.allow);
-          }
         })
-        if (signIn == 1) {
+        if (signIn == 1)
           card = card + template.buttonContainer('delete', 'update', 'UPDATE', queryData.category, queryData.title, 'gray');
-        }
         var categoryList = styleAndMenu(topics, './css/post.css');
         pageResponse(response, head, style, objects.variousStyle, header, signInHeader, tabDownHeight, tabSignIn, categoryList, display, card, footer, js, undefined);
       })
@@ -158,9 +155,8 @@ var app = http.createServer((request, response) => {
       var password = '';
       db.query(`SELECT name, password FROM user`, (error, topics) => {
         topics.forEach((element) => {
-          if (element.name == 'Daniel') {
+          if (element.name == 'Daniel')
             password = element.password;
-          }
         });
         var body = ""
         request.on('data', (data) => {
@@ -296,9 +292,8 @@ var app = http.createServer((request, response) => {
     db.query(`SELECT category, id, title, content, date, DATE_FORMAT(date, "%Y-%m-%d") AS date, trash FROM topic ORDER BY id DESC`, (error, topics) => {
       functions.throwError(error);
       topics.forEach((element) => {
-        if ((element.category == queryData.category) && (element.title == queryData.title) && (element.trash == 1)) {
+        if ((element.category == queryData.category) && (element.title == queryData.title) && (element.trash == 1))
           card = card + sanitizeHtml(template.postContainer(element.title, element.content), objects.allow);
-        }
       })
       card = card + template.buttonContainer('clear', 'recover_process', 'RECOVER', queryData.category, queryData.title, 'green');
       var categoryList = styleAndMenu(topics, './css/post.css');
@@ -339,7 +334,7 @@ var app = http.createServer((request, response) => {
       })
     })
   }
-  // pathname에 잘못된 값이 들어갔을 때 (404 Not Found)
+  // 404 Not Found
   else {
     response.writeHead(404);
     response.end('Not Found');
