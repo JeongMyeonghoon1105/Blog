@@ -51,7 +51,7 @@ var app = http.createServer((request, response) => {
   // FOOTER
   var footer = fs.readFileSync('./html/footer.html', 'utf8');
   // JS
-  var js = fs.readFileSync('./js/header.js', 'utf8');
+  var js = fs.readFileSync('./js/style.js', 'utf8');
   var categoryItems = 0;
   // 게시물 목록 출력 함수
   function showCategory(description, error,topics, card, queryData, postingOrTrash) {

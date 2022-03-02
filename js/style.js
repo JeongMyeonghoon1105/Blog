@@ -1,5 +1,8 @@
 var card = document.getElementsByClassName('card');
 var id = parseInt(card[0].id);
+var signInContainer = document.getElementsByClassName('signin-container');
+var signInMain = document.getElementsByClassName('signin-main');
+var signInForm = document.getElementsByClassName('signin-form');
 
 function changeHeight() {
   if (window.innerWidth > 900) {
@@ -19,8 +22,12 @@ function changeHeight() {
   } else if (window.innerWidth > 270) {
     card[0].setAttribute('style', `height: ${id*286+90}px`);
   }
-  if (id==0) {
+  if (id==0)
     card[0].setAttribute('style', 'height: 100vh');
+  if (window.innerHeight < 500) {
+    signInContainer.setAttribute('style', 'height: 350px;');
+    signInMain.setAttribute('style', 'height: 350px;');
+    signInForm.setAttribute('style', 'height: 260px;');
   }
 }
 
@@ -69,3 +76,4 @@ window.addEventListener('resize', () => {
     tabList.setAttribute('style', 'opacity: 0; pointer-events: none; transition: 0;');
   }
 })
+
