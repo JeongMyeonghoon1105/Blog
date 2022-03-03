@@ -22,8 +22,10 @@ function changeHeight() {
   } else if (window.innerWidth > 270) {
     card[0].setAttribute('style', `height: ${id*286+90}px`);
   }
+
   if (id==0)
     card[0].setAttribute('style', 'height: 100vh');
+  
   if (window.innerHeight < 500) {
     signInContainer.setAttribute('style', 'height: 350px;');
     signInMain.setAttribute('style', 'height: 350px;');
