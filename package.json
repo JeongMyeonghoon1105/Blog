@@ -19,7 +19,6 @@
   "dependencies": {
     "mysql": "^2.18.1",
     "query-string": "^7.1.1",
-    "sanitize-html": "^1.27.5",
-    "screen-size-detector": "^1.0.4"
+    "sanitize-html": "^1.27.5"
   }
 }
