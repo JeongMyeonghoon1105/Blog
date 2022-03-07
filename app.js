@@ -11,7 +11,7 @@ var db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'audgns9809',
-  database: 'StoryMate'
+  database: 'TechLog'
 });
 var signIn = 0;
 
