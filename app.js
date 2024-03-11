@@ -8,10 +8,10 @@ var objects = require('./js/objects.js');
 var sanitizeHtml = require('sanitize-html');
 var mysql = require('mysql');
 var db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'audgns9809',
-  database: 'TechLog'
+  host: '',
+  user: '',
+  password: '',
+  database: ''
 });
 var signIn = 0;
 
